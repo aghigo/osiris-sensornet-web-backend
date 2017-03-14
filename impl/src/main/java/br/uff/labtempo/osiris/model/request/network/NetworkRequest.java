@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.request;
+package br.uff.labtempo.osiris.model.request.network;
 
 import lombok.*;
 

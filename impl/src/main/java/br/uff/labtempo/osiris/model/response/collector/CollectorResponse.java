@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.response;
+package br.uff.labtempo.osiris.model.response.collector;
 
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import lombok.Builder;

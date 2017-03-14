@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.domain;
+package br.uff.labtempo.osiris.model.domain.sensor;
 
 import lombok.*;
 

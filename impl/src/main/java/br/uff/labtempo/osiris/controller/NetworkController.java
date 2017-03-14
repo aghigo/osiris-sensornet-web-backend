@@ -1,7 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.osiris.model.generator.NetworkGenerator;
-import br.uff.labtempo.osiris.model.request.NetworkRequest;
+import br.uff.labtempo.osiris.model.generator.network.NetworkGenerator;
+import br.uff.labtempo.osiris.model.request.network.NetworkRequest;
 import br.uff.labtempo.osiris.service.NetworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

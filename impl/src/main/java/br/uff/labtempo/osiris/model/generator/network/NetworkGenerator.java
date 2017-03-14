@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.generator;
+package br.uff.labtempo.osiris.model.generator.network;
 
 
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;

@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
-import br.uff.labtempo.osiris.model.request.NetworkRequest;
+import br.uff.labtempo.osiris.model.request.network.NetworkRequest;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.http.HttpStatus;
