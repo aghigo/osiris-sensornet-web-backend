@@ -1,14 +1,12 @@
 package br.uff.labtempo.osiris.model.domain.sensor;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode
 public class SensorValue {
     private String name;
     private long value;

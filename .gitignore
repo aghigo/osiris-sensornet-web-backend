@@ -12,5 +12,6 @@
 hs_err_pid*
 
 # InteliJ
-.idea
+.idea/
+*/.idea/
 *.iml

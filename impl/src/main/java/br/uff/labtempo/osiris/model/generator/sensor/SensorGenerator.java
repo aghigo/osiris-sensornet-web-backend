@@ -1,125 +1,51 @@
 package br.uff.labtempo.osiris.model.generator.sensor;
 
-
+import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
+import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
+import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
-import br.uff.labtempo.osiris.to.common.definitions.LogicalOperator;
-import br.uff.labtempo.osiris.to.common.definitions.State;
 
-import java.util.*;
+import java.util.Set;
 
 public class SensorGenerator {
 
-    private final int VALUE_RANGE = 10;
-    private Map<String, List<String>> values;
+    private final int INFO_RANGE = 5;
+    private final int VALUE_RANGE = 4;
+    private final int ID_RANGE = 99999;
+
+    private SensorInfoGenerator sensorInfoGenerator;
+    private SensorValueGenerator sensorValueGenerator;
+    private SensorConsumableRuleGenerator sensorConsumableRuleGenerator;
 
     public SensorGenerator() {
-        this.values = new LinkedHashMap<String, List<String>>();
-        this.values.put("temperature", Arrays.asList(""));
-        this.values.put("", Arrays.asList(""));
-        this.values.put("", Arrays.asList(""));
-        this.values.put("", Arrays.asList(""));
+        this.sensorInfoGenerator = new SensorInfoGenerator();
+        this.sensorValueGenerator = new SensorValueGenerator();
+        this.sensorConsumableRuleGenerator = new SensorConsumableRuleGenerator();
     }
 
-    private String[] names = {"temperature", "light", "voltage"};
-    private String[] units = {"celsius", "candela", "volt"};
-    private String[] symbols = {"Cº", "C", "V"};
-
-    private final int INFO_RANGE = 7;
-    private String[] infokeysNames = {"sendCount", "parent", "metric", "moteModel"};
-    private String[] infoDescriptions = {"Total of sent values", "parent sensor", "millimeter", "motor"};
-
-    private final int CONSUMABLE_RANGE = 7;
-    private String[] consumableNames = {"battery", "signal"};
-
-    private final int CONSUMABLE_RULE_RANGE = 4;
-    private String[] consumableRuleName = {"Low Battery", "Full Battery", "Empty Battery", "Good Battery"};
-    private LogicalOperator[] logicalOperators = LogicalOperator.values();
-    private String[] messages = {"Battery level is too low!", "Battery is full.", "Battery level is normal.", "Battery is empty."};
-    private State[] states = State.values();
-
     public SensorCoTo generate() {
-        SensorCoTo sensorCoTo = new SensorCoTo(getId(), getState(), getCaptureTimestampInMillis(), getCapturePrecisionInNano(), getAcquisitionTimestampInMillis());
-        for(int i = 0; i < (int) (Math.random() * VALUE_RANGE + 1); i++) {
-            sensorCoTo.addValue(getName(), getValue(), getUnit(), getSymbols());
+        SensorCoTo sensorCoTo = new SensorCoTo(randomLong(ID_RANGE));
+
+        Set<SensorInfo> sensorInfo = this.sensorInfoGenerator.generate();
+        for(SensorInfo i : sensorInfo) {
+            sensorCoTo.addInfo(i.getInfoName(), i.getInfoDescription());
         }
-        for(int i = 0; i < (int) (Math.random() * INFO_RANGE + 1); i++) {
-            sensorCoTo.addInfo(getinfoKeyName(), getinfoDescriptions());
+
+        Set<SensorValue> sensorValue = this.sensorValueGenerator.generate();
+        for(SensorValue s : sensorValue) {
+            sensorCoTo.addValue(s.getName(), s.getValue(), s.getUnit(), s.getSymbol());
         }
-        for(int i = 0; i < (int) (Math.random() * CONSUMABLE_RANGE + 1); i++) {
-            sensorCoTo.addConsumable(getConsumableName(), getCurrentValue());
+
+        Set<SensorConsumableRule> consumableRules = this.sensorConsumableRuleGenerator.generate();
+        for(SensorConsumableRule c : consumableRules) {
+            sensorCoTo.addConsumable(c.getName(), (int) randomLong(100));
+            sensorCoTo.addConsumableRule(c.getName(), c.getConsumableRule(), c.getLogicalOperator(), c.getLimitValue(), c.getMessage());
         }
-        for(int i = 0; i < (int) (Math.random() * CONSUMABLE_RULE_RANGE + 1); i++) {
-            sensorCoTo.addConsumableRule(getConsumableRuleName(), getConsumableName(), getLogicalOperator(), getLimitValue(), getMessage());
-        }
+
         return sensorCoTo;
     }
 
-    public String getMessage() {
-        return this.messages[(int) (Math.random() * this.messages.length)];
-    }
-
-    public int getLimitValue() {
-        return (int) (Math.random() * 9999);
-    }
-
-    public LogicalOperator getLogicalOperator() {
-        return this.logicalOperators[(int) (Math.random() * this.logicalOperators.length)];
-    }
-
-    public String getConsumableRuleName() {
-        return this.consumableRuleName[(int) (Math.random() * this.consumableRuleName.length)];
-    }
-
-    public String getConsumableName() {
-        return this.consumableNames[(int) (Math.random() * this.consumableNames.length)];
-    }
-
-    public int getCurrentValue() {
-        return (int) (Math.random() * 9999);
-    }
-
-    public String getinfoKeyName() {
-        return this.infokeysNames[(int) (Math.random() * this.infokeysNames.length)];
-    }
-
-    public String getinfoDescriptions() {
-        return this.infoDescriptions[(int) (Math.random() * this.infoDescriptions.length)];
-    }
-
-    public String getName() {
-        return this.names[(int) (Math.random() * this.names.length)];
-    }
-
-    public int getValue() {
-        return (int) (Math.random() * 9999);
-    }
-
-    public String getUnit() {
-        return this.units[(int) (Math.random() * this.units.length)];
-    }
-
-    public String getSymbols() {
-        return this.symbols[(int) (Math.random() * this.symbols.length)];
-    }
-
-
-    public String getId() {
-        return "sensorId" + (long) (Math.random() * 99999);
-    }
-
-    public State getState() {
-        return this.states[(int) (Math.random() * this.states.length)];
-    }
-
-    public long getCaptureTimestampInMillis() {
-        return new Date().getTime();
-    }
-
-    public int getCapturePrecisionInNano() {
-        return (int) (Math.random() * 9999);
-    }
-
-    public long getAcquisitionTimestampInMillis() {
-        return (long) (Math.random() * 9999);
+    private long randomLong(int maxRange) {
+        return (long) (Math.random() * (maxRange + 1));
     }
 }

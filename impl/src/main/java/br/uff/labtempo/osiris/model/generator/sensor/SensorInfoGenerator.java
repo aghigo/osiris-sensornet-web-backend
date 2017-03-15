@@ -5,10 +5,13 @@ import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class SensorInfoGenerator {
+
     private List<SensorInfo> sensorInfos;
 
     public SensorInfoGenerator() {
@@ -19,8 +22,16 @@ public class SensorInfoGenerator {
         this.sensorInfos.add(SensorInfo.builder().infoName("motelMode").infoDescription("automatic").build());
     }
 
-    public SensorInfo generate() {
-        return this.sensorInfos.get((int)(Math.random() * this.sensorInfos.size()));
+    public Set<SensorInfo> generate() {
+        Set<SensorInfo> sensorInfos = new HashSet<>();
+        for(int i = 0; i < randomSizedRange(); i++){
+            sensorInfos.add(this.sensorInfos.get(randomSizedRange()));
+        }
+        return sensorInfos;
+    }
+
+    public int randomSizedRange() {
+        return (int) (Math.random() * this.sensorInfos.size());
     }
 }
 
