@@ -4,14 +4,17 @@ import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import br.uff.labtempo.osiris.to.common.definitions.State;
 
+import java.util.Date;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class SensorGenerator {
 
     private final int INFO_RANGE = 5;
     private final int VALUE_RANGE = 4;
-    private final int ID_RANGE = 99999;
+    private final int ID_RANGE = 999999;
 
     private SensorInfoGenerator sensorInfoGenerator;
     private SensorValueGenerator sensorValueGenerator;
@@ -24,7 +27,13 @@ public class SensorGenerator {
     }
 
     public SensorCoTo generate() {
-        SensorCoTo sensorCoTo = new SensorCoTo(randomLong(ID_RANGE));
+        String id = "sensorId" + randomLong(ID_RANGE);
+        State state = State.values()[(int) (Math.random() * State.values().length)];
+        long captureDateInMillis = new Date().getTime();
+        int captureDateInNano = (int) TimeUnit.MILLISECONDS.convert(captureDateInMillis, TimeUnit.NANOSECONDS);
+        long acquisitionDateInMillis = captureDateInMillis + randomLong(99999) + 1;
+
+        SensorCoTo sensorCoTo = new SensorCoTo(id, state, captureDateInMillis, captureDateInNano, acquisitionDateInMillis);
 
         Set<SensorInfo> sensorInfo = this.sensorInfoGenerator.generate();
         for(SensorInfo i : sensorInfo) {

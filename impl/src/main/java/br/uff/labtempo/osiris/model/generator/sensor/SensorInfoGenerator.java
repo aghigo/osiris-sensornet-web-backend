@@ -24,7 +24,7 @@ public class SensorInfoGenerator {
 
     public Set<SensorInfo> generate() {
         Set<SensorInfo> sensorInfos = new HashSet<>();
-        for(int i = 0; i < randomSizedRange(); i++){
+        for(int i = 0; i < randomSizedRange() + 1; i++){
             sensorInfos.add(this.sensorInfos.get(randomSizedRange()));
         }
         return sensorInfos;

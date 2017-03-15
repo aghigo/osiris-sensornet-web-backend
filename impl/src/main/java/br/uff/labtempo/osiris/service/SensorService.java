@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SensorService {
     public SensorCoTo getAll(){
-        SensorGenerator sensorGenerator = new SensorGenerator();
-        return sensorGenerator.generate();
-    }
-
-    public void post(CollectorCoTo collectorCoTo) {
-
+        return new SensorGenerator().generate();
     }
 }
