@@ -1,7 +1,9 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.service.SensorService;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +18,10 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(){
-        return ResponseEntity.ok(this.sensorService.getAll());
-    }
-
-    @RequestMapping(value= "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(@PathVariable(value = "id") String id){
-        return ResponseEntity.ok(this.sensorService.getAll());
+    @RequestMapping(value = "/random", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<SensorCoTo> getRandom() {
+        SensorCoTo sensorCoTo = this.sensorService.getRandom();
+        return ResponseEntity.ok(sensorCoTo);
     }
 }

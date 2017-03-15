@@ -5,11 +5,14 @@ import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class SensorGenerator {
 
     private final int INFO_RANGE = 5;
@@ -28,7 +31,7 @@ public class SensorGenerator {
 
     public SensorCoTo generate() {
         String id = "sensorId" + randomLong(ID_RANGE);
-        State state = State.values()[(int) (Math.random() * State.values().length)];
+        State state = State.NEW;
         long captureDateInMillis = new Date().getTime();
         int captureDateInNano = (int) TimeUnit.MILLISECONDS.convert(captureDateInMillis, TimeUnit.NANOSECONDS);
         long acquisitionDateInMillis = captureDateInMillis + randomLong(99999) + 1;
@@ -45,13 +48,19 @@ public class SensorGenerator {
             sensorCoTo.addValue(s.getName(), s.getValue(), s.getUnit(), s.getSymbol());
         }
 
-        Set<SensorConsumableRule> consumableRules = this.sensorConsumableRuleGenerator.generate();
-        for(SensorConsumableRule c : consumableRules) {
-            sensorCoTo.addConsumable(c.getName(), (int) randomLong(100));
-            sensorCoTo.addConsumableRule(c.getName(), c.getConsumableRule(), c.getLogicalOperator(), c.getLimitValue(), c.getMessage());
+        Set<List<SensorConsumableRule>> consumableRulesList = this.sensorConsumableRuleGenerator.generate();
+        for(List<SensorConsumableRule> cl : consumableRulesList) {
+            for(SensorConsumableRule c : cl){
+                sensorCoTo.addConsumable(c.getName(), (int) randomLong(100));
+                sensorCoTo.addConsumableRule(c.getName(), c.getConsumableRule(), c.getLogicalOperator(), c.getLimitValue(), c.getMessage());
+            }
         }
 
         return sensorCoTo;
+    }
+
+    private State getState() {
+        return State.values()[(int) (Math.random() * State.values().length)];
     }
 
     private long randomLong(int maxRange) {

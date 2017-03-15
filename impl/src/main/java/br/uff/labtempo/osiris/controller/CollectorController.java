@@ -1,12 +1,15 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.service.CollectorService;
+import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
+import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/collector")
@@ -19,18 +22,10 @@ public class CollectorController {
         this.collectorService = collectorService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(this.collectorService.getAll());
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getById(@PathVariable(value = "id") String id) {
-        return ResponseEntity.ok(this.collectorService.getAll());
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> post() {
-        return null;
+    @RequestMapping(value = "/random", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<CollectorCoTo> getRandom() {
+        CollectorCoTo collectorCoTo = this.collectorService.getRandom();
+        return ResponseEntity.ok().body(collectorCoTo);
     }
 }
