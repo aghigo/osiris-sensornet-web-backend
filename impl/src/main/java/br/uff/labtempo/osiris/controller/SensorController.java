@@ -18,7 +18,7 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    @RequestMapping(value = "/random", method = RequestMethod.GET)
+    @RequestMapping(value = "/mock", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<SensorCoTo> getRandom() {
         SensorCoTo sensorCoTo = this.sensorService.getRandom();

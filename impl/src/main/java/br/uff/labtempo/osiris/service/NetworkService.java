@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 public class NetworkService {
-    private final String RESOURCE_URI = "omcp://sensornet.osiris/";
+    private final String RESOURCE_URI = "omcp://collector.messagegroup/";
     private final String SENSORNET_IP = "127.0.0.1";
     private final int SENSORNET_PORT = 8090;
     private final String RABBITMQ_USER = "guest";
