@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.response.collector.sensor;
+package br.uff.labtempo.osiris.model.response.sensor;
 
 
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;

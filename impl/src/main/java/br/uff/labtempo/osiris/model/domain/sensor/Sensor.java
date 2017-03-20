@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.domain;
+package br.uff.labtempo.osiris.model.domain.sensor;
 
 import lombok.*;
 
@@ -19,6 +19,6 @@ public class Sensor {
     private long acquisitionDateInMillis;
     private Map<String, String> info;
     private List<SensorValue> values;
-    private Map<String, Integer> consumable;
-    private List<SensorConsumableRule> consumableRule;
+    private Map<String, Integer> consumables;
+    private List<SensorConsumableRule> rules;
 }

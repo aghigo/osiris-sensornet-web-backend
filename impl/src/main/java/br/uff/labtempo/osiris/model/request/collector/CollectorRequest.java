@@ -17,10 +17,4 @@ public class CollectorRequest {
     private long captureInterval;
     private TimeUnit captureIntervalTimeUnit;
     private Map<String, String> info;
-
-    private boolean isValid() {
-        return this.id != null && !this.id.isEmpty()
-                && this.captureInterval > 0
-                && this.captureIntervalTimeUnit != null;
-    }
 }

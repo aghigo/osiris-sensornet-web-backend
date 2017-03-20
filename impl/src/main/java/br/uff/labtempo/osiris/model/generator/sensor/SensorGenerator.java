@@ -1,8 +1,8 @@
 package br.uff.labtempo.osiris.model.generator.sensor;
 
-import br.uff.labtempo.osiris.model.domain.SensorConsumableRule;
-import br.uff.labtempo.osiris.model.domain.SensorInfo;
-import br.uff.labtempo.osiris.model.domain.SensorValue;
+import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
+import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
+import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
 import org.springframework.stereotype.Component;

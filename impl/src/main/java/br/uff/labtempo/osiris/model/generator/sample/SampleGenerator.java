@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.generator;
+package br.uff.labtempo.osiris.model.generator.sample;
 
 import br.uff.labtempo.osiris.model.generator.collector.CollectorGenerator;
 import br.uff.labtempo.osiris.model.generator.network.NetworkGenerator;

@@ -7,15 +7,17 @@ import br.uff.labtempo.osiris.service.NetworkService;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/network")
+@RequestMapping(value = "/network", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class NetworkController {
 
     private NetworkService networkService;
@@ -26,9 +28,21 @@ public class NetworkController {
     }
 
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<NetworkCoTo> getRandom() {
+    public ResponseEntity<?> getRandom() {
         NetworkCoTo networkCoTo = this.networkService.getRandom();
         return ResponseEntity.ok(networkCoTo);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getAll() throws BadRequestException {
+        List<NetworkCoTo> networkCoTos = this.networkService.getAll();
+        return ResponseEntity.ok(networkCoTos);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(@PathVariable(value = "id") String id) throws BadRequestException {
+        NetworkCoTo networkCoTo = this.networkService.getById(id);
+        return ResponseEntity.ok(networkCoTo);
+    }
+
 }

@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.request;
+package br.uff.labtempo.osiris.model.request.sample;
 
 import br.uff.labtempo.osiris.model.request.collector.CollectorRequest;
 import br.uff.labtempo.osiris.model.request.network.NetworkRequest;

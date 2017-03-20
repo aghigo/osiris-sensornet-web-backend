@@ -14,9 +14,4 @@ import java.util.Map;
 public class NetworkRequest {
     private String id;
     private Map<String, String> info;
-
-    public boolean isValid() {
-        return this.id != null && !this.id.isEmpty()
-                && this.info != null && !this.info.isEmpty();
-    }
 }
