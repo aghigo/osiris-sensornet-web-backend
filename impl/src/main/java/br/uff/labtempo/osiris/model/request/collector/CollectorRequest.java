@@ -1,9 +1,9 @@
 package br.uff.labtempo.osiris.model.request.collector;
 
-import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import lombok.*;
 
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Builder
 @Getter
@@ -13,5 +13,14 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 public class CollectorRequest {
-    private CollectorCoTo collectorCoToList;
+    private String id;
+    private long captureInterval;
+    private TimeUnit captureIntervalTimeUnit;
+    private Map<String, String> info;
+
+    private boolean isValid() {
+        return this.id != null && !this.id.isEmpty()
+                && this.captureInterval > 0
+                && this.captureIntervalTimeUnit != null;
+    }
 }

@@ -1,7 +1,7 @@
 package br.uff.labtempo.osiris.model.generator.sensor;
 
 
-import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
+import br.uff.labtempo.osiris.model.domain.SensorInfo;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 @Builder
 public class CollectorResponse {
-    private List<CollectorCoTo> collectorCoTo;
+    private List<CollectorCoTo> collectors;
 }

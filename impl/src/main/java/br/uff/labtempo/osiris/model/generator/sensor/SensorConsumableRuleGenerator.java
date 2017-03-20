@@ -1,6 +1,6 @@
 package br.uff.labtempo.osiris.model.generator.sensor;
 
-import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
+import br.uff.labtempo.osiris.model.domain.SensorConsumableRule;
 import br.uff.labtempo.osiris.to.common.definitions.LogicalOperator;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.domain.sensor;
+package br.uff.labtempo.osiris.model.domain;
 
 import br.uff.labtempo.osiris.to.common.definitions.LogicalOperator;
 import lombok.*;
