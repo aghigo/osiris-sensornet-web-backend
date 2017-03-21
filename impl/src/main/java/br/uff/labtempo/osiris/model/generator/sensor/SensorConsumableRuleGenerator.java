@@ -17,29 +17,29 @@ public class SensorConsumableRuleGenerator {
 
         List<SensorConsumableRule> batteryRules = new ArrayList<>();
 
-        batteryRules.add(SensorConsumableRule.builder().name("Low battery").consumableRule("battery")
-        .logicalOperator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 61)).message("Battery is low.").build());
+        batteryRules.add(SensorConsumableRule.builder().name("Low battery").consumableName("battery")
+        .operator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 61)).message("Battery is low.").build());
 
-        batteryRules.add(SensorConsumableRule.builder().name("Full battery").consumableRule("battery")
-                .logicalOperator(LogicalOperator.EQUAL).limitValue(100).message("Battery is full.").build());
+        batteryRules.add(SensorConsumableRule.builder().name("Full battery").consumableName("battery")
+                .operator(LogicalOperator.EQUAL).limitValue(100).message("Battery is full.").build());
 
-        batteryRules.add(SensorConsumableRule.builder().name("Normal battery").consumableRule("battery")
-                .logicalOperator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 15)).message("Battery is normal.").build());
+        batteryRules.add(SensorConsumableRule.builder().name("Normal battery").consumableName("battery")
+                .operator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 15)).message("Battery is normal.").build());
 
         this.sensorConsumableRules.put("battery", batteryRules);
 
         List<SensorConsumableRule> signalRules = new ArrayList<>();
 
-        signalRules.add(SensorConsumableRule.builder().name("Low Signal").consumableRule("signal")
-        .logicalOperator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 15))
+        signalRules.add(SensorConsumableRule.builder().name("Low Signal").consumableName("signal")
+        .operator(LogicalOperator.LESS_THAN).limitValue((int)(Math.random() * 15))
         .message("Signal is low.").build());
 
-        signalRules.add(SensorConsumableRule.builder().name("Normal Signal").consumableRule("signal")
-                .logicalOperator(LogicalOperator.GREATER_THAN).limitValue((int)(Math.random() * 61))
+        signalRules.add(SensorConsumableRule.builder().name("Normal Signal").consumableName("signal")
+                .operator(LogicalOperator.GREATER_THAN).limitValue((int)(Math.random() * 61))
                 .message("Signal is normal.").build());
 
-        signalRules.add(SensorConsumableRule.builder().name("Good Signal").consumableRule("signal")
-                .logicalOperator(LogicalOperator.EQUAL).limitValue(100)
+        signalRules.add(SensorConsumableRule.builder().name("Good Signal").consumableName("signal")
+                .operator(LogicalOperator.EQUAL).limitValue(100)
                 .message("Signal is good.").build());
 
         this.sensorConsumableRules.put("signal", signalRules);

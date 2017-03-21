@@ -52,7 +52,7 @@ public class SensorGenerator {
         for(List<SensorConsumableRule> cl : consumableRulesList) {
             for(SensorConsumableRule c : cl){
                 sensorCoTo.addConsumable(c.getName(), (int) randomLong(100));
-                sensorCoTo.addConsumableRule(c.getName(), c.getConsumableRule(), c.getLogicalOperator(), c.getLimitValue(), c.getMessage());
+                sensorCoTo.addConsumableRule(c.getName(), c.getConsumableName(), c.getOperator(), c.getLimitValue(), c.getMessage());
             }
         }
 

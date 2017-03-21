@@ -16,9 +16,9 @@ import java.util.Map;
 @NoArgsConstructor
 public class SensorRequest {
     private String id;
-    private long captureDateInMillis;
-    private int captureDateInNano;
-    private long acquisitionDateInMillis;
+    private long captureTimestampInMillis;
+    private int capturePrecisionInNano;
+    private long acquisitionTimestampInMillis;
     private Map<String, String> info;
     private List<SensorValue> values;
     private Map<String, Integer> consumables;

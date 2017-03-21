@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class SensorNetConfig {
+
+    @org.springframework.beans.factory.annotation.Value("${osiris.module.sensornet.messagegroup.collector}")
+    private String collectorMessageGroup;
+
     @org.springframework.beans.factory.annotation.Value("${osiris.module.sensornet.uri}")
     private String uri;
 

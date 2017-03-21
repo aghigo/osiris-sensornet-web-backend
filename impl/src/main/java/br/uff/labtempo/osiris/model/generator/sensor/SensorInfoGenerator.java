@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.model.generator.sensor;
 
-
 import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;
 import lombok.Data;
 

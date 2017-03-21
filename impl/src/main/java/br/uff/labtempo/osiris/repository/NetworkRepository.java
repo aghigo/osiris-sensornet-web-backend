@@ -1,7 +1,7 @@
 package br.uff.labtempo.osiris.repository;
 
-
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
