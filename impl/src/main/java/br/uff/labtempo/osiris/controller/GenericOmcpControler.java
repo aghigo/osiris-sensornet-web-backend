@@ -3,6 +3,7 @@ package br.uff.labtempo.osiris.controller;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/generic", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GenericOmcpControler {
 
     @Autowired
     private SensorNetConfig sensorNetConfig;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> doGet(@RequestHeader(value = "url") String url) {
+    @RequestMapping(value = "/omcp", method = RequestMethod.GET)
+    public ResponseEntity<?> doGet(@RequestHeader(value = "url") String url) throws BadRequestException {
+        if(url == null || url.isEmpty()) {
+            throw new BadRequestException("Error: Header parameter 'url' must be provided.");
+        }
         String ip = this.sensorNetConfig.getIp();
         String username = this.sensorNetConfig.getUsername();
         String password = this.sensorNetConfig.getPassword();

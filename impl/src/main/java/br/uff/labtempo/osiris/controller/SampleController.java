@@ -16,7 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping(value = "/sample", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SampleController {
 
     private SampleService sampleService;
@@ -26,13 +26,13 @@ public class SampleController {
         this.sampleService = sampleService;
     }
 
-    @RequestMapping(value ="/mock", method = RequestMethod.GET)
+    @RequestMapping(value ="/samples/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
         SampleCoTo sampleCoTo = this.sampleService.getRandom();
         return ResponseEntity.ok(sampleCoTo);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/samples", method = RequestMethod.POST)
     public ResponseEntity<?> post(@RequestBody SampleRequest sampleRequest) throws URISyntaxException {
         if(sampleRequest == null) {
             return ResponseEntity.badRequest().body(new BadRequestException("Error: SampleCoTo provided is null."));

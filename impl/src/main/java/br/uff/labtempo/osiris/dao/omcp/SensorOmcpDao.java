@@ -4,46 +4,42 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
-import br.uff.labtempo.osiris.repository.NetworkRepository;
-import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import br.uff.labtempo.osiris.repository.SensorRepository;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
-public class NetworkOmcpDao implements NetworkRepository {
+@Component("sensorOmcpDao")
+public class SensorOmcpDao implements SensorRepository {
 
     @Autowired
     private SensorNetConfig sensorNetConfig;
 
-    public NetworkOmcpDao(SensorNetConfig sensorNetConfig) {
-        this.sensorNetConfig = sensorNetConfig;
-    }
-
     @Override
-    public NetworkCoTo getById(String id) {
+    public SensorCoTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
         String ip = this.sensorNetConfig.getIp();
         String username = this.sensorNetConfig.getUsername();
         String password = this.sensorNetConfig.getPassword();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdUri(), id);
+        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId, sensorId);
         OmcpClient omcpClient = new RabbitClient(ip, username, password);
         Response response = omcpClient.doGet(uri);
-        NetworkCoTo networkCoto = response.getContent(NetworkCoTo.class);
-        return networkCoto;
+        SensorCoTo sensorCoTo = response.getContent(SensorCoTo.class);
+        return sensorCoTo;
     }
 
     @Override
-    public List<NetworkCoTo> getAll() {
+    public List<SensorCoTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
         String ip = this.sensorNetConfig.getIp();
         String username = this.sensorNetConfig.getUsername();
         String password = this.sensorNetConfig.getPassword();
-        String uri = this.sensorNetConfig.getNetworksUri();
+        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
         OmcpClient omcpClient = new RabbitClient(ip, username, password);
         Response response = omcpClient.doGet(uri);
-        NetworkCoTo[] networkCotoArray = response.getContent(NetworkCoTo[].class);
-        List<NetworkCoTo> networkCotoList = Arrays.asList(networkCotoArray);
-        return networkCotoList;
+        SensorCoTo[] sensorCoToArray = response.getContent(SensorCoTo[].class);
+        List<SensorCoTo> sensorCoToList = Arrays.asList(sensorCoToArray);
+        return sensorCoToList;
     }
 }

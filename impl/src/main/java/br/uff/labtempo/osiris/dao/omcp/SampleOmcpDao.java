@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
-@Component(value = "test")
+@Component(value = "sampleOmcpDao")
 public class SampleOmcpDao implements SampleRepository {
 
     @Autowired
@@ -40,7 +40,7 @@ public class SampleOmcpDao implements SampleRepository {
 
     @Override
     public void notify(SampleCoTo sample) {
-        String uri = sensorNetConfig.getCollectorMessageGroup();
+        String uri = sensorNetConfig.getCollectorMessageGroupUri();
         String ip = sensorNetConfig.getIp();
         String username = sensorNetConfig.getUsername();
         String password = sensorNetConfig.getPassword();

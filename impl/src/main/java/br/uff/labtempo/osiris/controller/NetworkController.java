@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/network", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class NetworkController {
 
     private NetworkService networkService;
@@ -27,21 +27,21 @@ public class NetworkController {
         this.networkService = networkService;
     }
 
-    @RequestMapping(value = "/mock", method = RequestMethod.GET)
+    @RequestMapping(value = "/networks/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
         NetworkCoTo networkCoTo = this.networkService.getRandom();
         return ResponseEntity.ok(networkCoTo);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/networks", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() throws BadRequestException {
         List<NetworkCoTo> networkCoTos = this.networkService.getAll();
         return ResponseEntity.ok(networkCoTos);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(@PathVariable(value = "id") String id) throws BadRequestException {
-        NetworkCoTo networkCoTo = this.networkService.getById(id);
+    @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(@PathVariable String networkId) throws BadRequestException {
+        NetworkCoTo networkCoTo = this.networkService.getById(networkId);
         return ResponseEntity.ok(networkCoTo);
     }
 
