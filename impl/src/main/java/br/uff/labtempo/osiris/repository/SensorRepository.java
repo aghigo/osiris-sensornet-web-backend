@@ -7,4 +7,5 @@ import java.util.List;
 public interface SensorRepository {
     SensorCoTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId);
     List<SensorCoTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId);
+    List<SensorCoTo> getAllByNetworkId(String networkId);
 }

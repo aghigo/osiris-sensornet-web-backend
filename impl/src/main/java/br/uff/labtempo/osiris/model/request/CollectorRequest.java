@@ -1,17 +1,17 @@
-package br.uff.labtempo.osiris.model.request.collector;
+package br.uff.labtempo.osiris.model.request;
 
 import lombok.*;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Builder
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
+@Builder
 public class CollectorRequest {
     private String id;
     private long captureInterval;

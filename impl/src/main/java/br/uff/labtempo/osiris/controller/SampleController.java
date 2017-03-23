@@ -1,7 +1,6 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
-import br.uff.labtempo.osiris.model.request.sample.SampleRequest;
+import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.service.SampleService;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
@@ -32,12 +30,11 @@ public class SampleController {
         return ResponseEntity.ok(sampleCoTo);
     }
 
-    @RequestMapping(value = "/samples", method = RequestMethod.POST)
+    @RequestMapping(value ="/samples", method = RequestMethod.POST)
     public ResponseEntity<?> post(@RequestBody SampleRequest sampleRequest) throws URISyntaxException {
-        if(sampleRequest == null) {
-            return ResponseEntity.badRequest().body(new BadRequestException("Error: SampleCoTo provided is null."));
-        }
-        URI uri = this.sampleService.notify(sampleRequest);
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok(sampleRequest);
+//        URI uri = this.sampleService.create(sampleCoTo);
+//        return ResponseEntity.created(uri).build();
     }
+
 }

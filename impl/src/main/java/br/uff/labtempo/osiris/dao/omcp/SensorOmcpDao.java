@@ -23,7 +23,7 @@ public class SensorOmcpDao implements SensorRepository {
         String ip = this.sensorNetConfig.getIp();
         String username = this.sensorNetConfig.getUsername();
         String password = this.sensorNetConfig.getPassword();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId, sensorId);
+        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
         OmcpClient omcpClient = new RabbitClient(ip, username, password);
         Response response = omcpClient.doGet(uri);
         SensorCoTo sensorCoTo = response.getContent(SensorCoTo.class);
@@ -35,7 +35,20 @@ public class SensorOmcpDao implements SensorRepository {
         String ip = this.sensorNetConfig.getIp();
         String username = this.sensorNetConfig.getUsername();
         String password = this.sensorNetConfig.getPassword();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
+        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId);
+        OmcpClient omcpClient = new RabbitClient(ip, username, password);
+        Response response = omcpClient.doGet(uri);
+        SensorCoTo[] sensorCoToArray = response.getContent(SensorCoTo[].class);
+        List<SensorCoTo> sensorCoToList = Arrays.asList(sensorCoToArray);
+        return sensorCoToList;
+    }
+
+    @Override
+    public List<SensorCoTo> getAllByNetworkId(String networkId) {
+        String ip = this.sensorNetConfig.getIp();
+        String username = this.sensorNetConfig.getUsername();
+        String password = this.sensorNetConfig.getPassword();
+        String uri = String.format(this.sensorNetConfig.getNetworkIdSensorsUri(), networkId);
         OmcpClient omcpClient = new RabbitClient(ip, username, password);
         Response response = omcpClient.doGet(uri);
         SensorCoTo[] sensorCoToArray = response.getContent(SensorCoTo[].class);

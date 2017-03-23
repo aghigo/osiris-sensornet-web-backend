@@ -27,12 +27,12 @@ public class SampleService {
         return this.sampleGenerator.generate();
     }
 
-    public URI notify(SampleRequest sampleRequest) throws URISyntaxException {
-        SampleCoTo sampleCoTo = SampleMapper.toCoTo(sampleRequest);
+    public URI create(SampleCoTo sampleCoTo) throws URISyntaxException {
         this.sampleRepository.notify(sampleCoTo);
 
         URI uri = new URI(String.format("http://localhost:8080/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),
                 sampleCoTo.getCollector().getId(), sampleCoTo.getSensor().getId()));
+
         return uri;
     }
 }

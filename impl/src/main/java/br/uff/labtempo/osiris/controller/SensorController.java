@@ -3,7 +3,6 @@ package br.uff.labtempo.osiris.controller;
 import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,12 @@ public class SensorController {
     public ResponseEntity<?> getRandom() {
         SensorCoTo sensorCoTo = this.sensorService.getRandom();
         return ResponseEntity.ok(sensorCoTo);
+    }
+
+    @RequestMapping(value = "/networks/{networkId}/sensors", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
+        List<SensorCoTo> sensorCoToList = this.sensorService.getAllByNetworkId(networkId);
+        return ResponseEntity.ok(sensorCoToList);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}/sensors", method = RequestMethod.GET)

@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GenericOmcpControler {
 
     @Autowired
     private SensorNetConfig sensorNetConfig;
 
-    @RequestMapping(value = "/omcp", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> doGet(@RequestHeader(value = "url") String url) throws BadRequestException {
         if(url == null || url.isEmpty()) {
             throw new BadRequestException("Error: Header parameter 'url' must be provided.");

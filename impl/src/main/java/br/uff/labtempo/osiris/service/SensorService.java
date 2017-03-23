@@ -32,4 +32,8 @@ public class SensorService {
     public List<SensorCoTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
         return this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId);
     }
+
+    public List<SensorCoTo> getAllByNetworkId(String networkId) {
+        return this.sensorRepository.getAllByNetworkId(networkId);
+    }
 }
