@@ -41,18 +41,18 @@ public class SensorNetConfig {
     @Value("${sensornet.uri.networkId:omcp://sensornet.osiris/%1$s/}")
     private String networkIdUri;
 
-    @Value("${sensornet.uri.networkId.collectors:omcp://sensornet.osiris/{%1$s}/collector/}")
+    @Value("${sensornet.uri.networkId.collectors:omcp://sensornet.osiris/%1$s/collector/}")
     private String networkIdCollectorsUri;
 
-    @Value("${sensornet.uri.networkId.sensors:omcp://sensornet.osiris/{%1$s}/sensor/}")
+    @Value("${sensornet.uri.networkId.sensors:omcp://sensornet.osiris/%1$s/sensor/}")
     private String networkIdSensorsUri;
 
-    @Value("${sensornet.uri.networkId.collectorId:omcp://sensornet.osiris/{%1$s}/collector/{%2$s}/}")
+    @Value("${sensornet.uri.networkId.collectorId:omcp://sensornet.osiris/%1$s/collector/%2$s/}")
     private String networkIdCollectorIdUri;
 
-    @Value("${sensornet.uri.networkId.collectorId.sensors:omcp://sensornet.osiris/{%1$s}/collector/{%2$s}/sensor/}")
+    @Value("${sensornet.uri.networkId.collectorId.sensors:omcp://sensornet.osiris/%1$s/collector/%2$s/sensor/}")
     private String networkIdCollectorIdSensorsUri;
 
-    @Value("${sensornet.uri.networkId.collectorId.sensorId:omcp://sensornet.osiris/{%1$s}/collector/{%2$s}/sensor/{%3$s}/}")
+    @Value("${sensornet.uri.networkId.collectorId.sensorId:omcp://sensornet.osiris/%1$s/collector/%2$s/sensor/%3$s/}")
     private String networkIdCollectorIdSensorIdUri;
 }

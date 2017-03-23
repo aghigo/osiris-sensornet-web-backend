@@ -8,7 +8,5 @@ import java.util.List;
 
 @Component("sampleRepository")
 public interface SampleRepository {
-    Response getAll();
-    Response getById(String id);
     void notify(SampleCoTo sampleCoTo);
 }
