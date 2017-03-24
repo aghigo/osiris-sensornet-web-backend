@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.service.CollectorService;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
@@ -33,6 +34,7 @@ public class CollectorController {
 
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
+        List<CollectorResponse> collectorResponseList;
         List<CollectorCoTo> collectorCoTo = this.collectorService.getAllByNetworkId(networkId);
         return ResponseEntity.ok().body(collectorCoTo);
     }

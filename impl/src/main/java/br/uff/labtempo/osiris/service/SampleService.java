@@ -1,12 +1,9 @@
 package br.uff.labtempo.osiris.service;
 
-import br.uff.labtempo.osiris.mapper.SampleMapper;
 import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
-import br.uff.labtempo.osiris.model.request.sample.SampleRequest;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 

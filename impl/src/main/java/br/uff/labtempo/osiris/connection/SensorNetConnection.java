@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class SensorNetConnection {
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetConfig config;
 
     public OmcpClient getConnection() {
-        return new RabbitClient(this.sensorNetConfig.getIp(), this.sensorNetConfig.getUsername(), this.sensorNetConfig.getPassword());
+        return new RabbitClient(this.config.getIp(), this.config.getUsername(), this.config.getPassword());
     }
 }
