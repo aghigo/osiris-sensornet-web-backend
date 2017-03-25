@@ -1,6 +1,9 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.model.generator.sensor.SensorGenerator;
+import br.uff.labtempo.osiris.model.request.SensorRequest;
+import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
@@ -21,19 +24,19 @@ public class SensorService {
         this.sensorGenerator = sensorGenerator;
     }
 
-    public SensorCoTo getRandom() {
-        return this.sensorGenerator.generate();
+    public SensorResponse getRandom() {
+        return SensorMapper.toResponse(this.sensorGenerator.generate());
     }
 
-    public SensorCoTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
-        return this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId);
+    public SensorResponse getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
+        return SensorMapper.toResponse(this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId));
     }
 
-    public List<SensorCoTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
-        return this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId);
+    public List<SensorResponse> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
+        return SensorMapper.toResponse(this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId));
     }
 
-    public List<SensorCoTo> getAllByNetworkId(String networkId) {
-        return this.sensorRepository.getAllByNetworkId(networkId);
+    public List<SensorResponse> getAllByNetworkId(String networkId) {
+        return SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkId));
     }
 }

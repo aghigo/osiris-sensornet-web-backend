@@ -1,6 +1,9 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.osiris.mapper.SampleMapper;
 import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
+import br.uff.labtempo.osiris.model.request.SampleRequest;
+import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +23,12 @@ public class SampleService {
     @Autowired
     private SampleGenerator sampleGenerator;
 
-    public SampleCoTo getRandom() {
-        return this.sampleGenerator.generate();
+    public SampleResponse getRandom() {
+        return SampleMapper.toResponse(this.sampleGenerator.generate());
     }
 
-    public URI create(SampleCoTo sampleCoTo) throws URISyntaxException {
+    public URI create(SampleRequest sampleRequest) throws URISyntaxException {
+        SampleCoTo sampleCoTo = SampleMapper.toCoTo(sampleRequest);
         this.sampleRepository.notify(sampleCoTo);
 
         URI uri = new URI(String.format("http://localhost:8080/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),

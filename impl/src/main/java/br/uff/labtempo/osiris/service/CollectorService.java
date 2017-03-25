@@ -1,6 +1,8 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.osiris.mapper.CollectorMapper;
 import br.uff.labtempo.osiris.model.generator.collector.CollectorGenerator;
+import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 
@@ -21,15 +23,15 @@ public class CollectorService {
         this.collectorGenerator = collectorGenerator;
     }
 
-    public CollectorCoTo getRandom() {
-        return this.collectorGenerator.generate();
+    public CollectorResponse getRandom() {
+        return CollectorMapper.toResponse(this.collectorGenerator.generate());
     }
 
-    public List<CollectorCoTo> getAllByNetworkId(String networkId) {
-        return this.collectorRepository.getAllByNetworkId(networkId);
+    public List<CollectorResponse> getAllByNetworkId(String networkId) {
+        return CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkId));
     }
 
-    public CollectorCoTo getByNetworkId(String networkId, String collectorId) {
-        return this.collectorRepository.getByNetworkId(networkId, collectorId);
+    public CollectorResponse getByNetworkId(String networkId, String collectorId) {
+        return CollectorMapper.toResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
     }
 }

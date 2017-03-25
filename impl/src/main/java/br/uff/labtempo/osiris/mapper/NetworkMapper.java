@@ -5,12 +5,23 @@ import br.uff.labtempo.osiris.model.request.NetworkRequest;
 import br.uff.labtempo.osiris.model.response.NetworkResponse;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NetworkMapper {
 
     public static NetworkCoTo toCoTo(NetworkRequest networkRequest) {
         NetworkCoTo networkCoTo = new NetworkCoTo(networkRequest.getId());
         networkCoTo.addInfo(networkCoTo.getInfo());
         return networkCoTo;
+    }
+
+    public static List<NetworkCoTo> toCoTo(List<NetworkRequest> networkRequestList) {
+        List<NetworkCoTo> networkCoToList = new ArrayList<>();
+        for(NetworkRequest networkRequest : networkRequestList) {
+            networkCoToList.add(toCoTo(networkRequest));
+        }
+        return networkCoToList;
     }
 
     public static NetworkResponse toResponse(NetworkCoTo networkCoTo) {
@@ -20,4 +31,11 @@ public class NetworkMapper {
                 .build();
     }
 
+    public static List<NetworkResponse> toResponse(List<NetworkCoTo> networkCoToList) {
+        List<NetworkResponse> networkResponseList = new ArrayList<>();
+        for(NetworkCoTo networkCoTo : networkCoToList) {
+            networkResponseList.add(toResponse(networkCoTo));
+        }
+        return networkResponseList;
+    }
 }

@@ -28,20 +28,19 @@ public class CollectorController {
     @RequestMapping(value = "/collectors/mock", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> getRandom() {
-        CollectorCoTo collectorCoTo = this.collectorService.getRandom();
-        return ResponseEntity.ok().body(collectorCoTo);
+        CollectorResponse collectorResponse = this.collectorService.getRandom();
+        return ResponseEntity.ok().body(collectorResponse);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
-        List<CollectorResponse> collectorResponseList;
-        List<CollectorCoTo> collectorCoTo = this.collectorService.getAllByNetworkId(networkId);
-        return ResponseEntity.ok().body(collectorCoTo);
+        List<CollectorResponse> collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
+        return ResponseEntity.ok().body(collectorResponseList);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId, @PathVariable String collectorId) {
-        CollectorCoTo collectorCoTo = this.collectorService.getByNetworkId(networkId, collectorId);
-        return ResponseEntity.ok().body(collectorCoTo);
+        CollectorResponse collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
+        return ResponseEntity.ok().body(collectorResponse);
     }
 }

@@ -37,6 +37,14 @@ public class SensorMapper {
         return sensorCoTo;
     }
 
+    public static List<SensorCoTo> toCoTo(List<SensorRequest> sensorRequestList) {
+        List<SensorCoTo> sensorCoToList = new ArrayList<>();
+        for(SensorRequest sensorRequest : sensorRequestList) {
+            sensorCoToList.add(toCoTo(sensorRequest));
+        }
+        return sensorCoToList;
+    }
+
     public static SensorResponse toResponse(SensorCoTo sensorCoTo) {
         SensorResponse sensorResponse = new SensorResponse();
         sensorResponse.setId(sensorCoTo.getId());
@@ -73,6 +81,14 @@ public class SensorMapper {
         sensorResponse.setRules(sensorConsumableRuleList);
 
         return sensorResponse;
+    }
+
+    public static List<SensorResponse> toResponse(List<SensorCoTo> sensorCoToList) {
+        List<SensorResponse> sensorRequestList = new ArrayList<>();
+        for(SensorCoTo sensorCoTo : sensorCoToList) {
+            sensorRequestList.add(toResponse(sensorCoTo));
+        }
+        return sensorRequestList;
     }
 
 }

@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.model.request.SampleRequest;
+import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,13 @@ public class SampleController {
 
     @RequestMapping(value ="/samples/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        SampleCoTo sampleCoTo = this.sampleService.getRandom();
-        return ResponseEntity.ok(sampleCoTo);
+        SampleResponse sampleResponse = this.sampleService.getRandom();
+        return ResponseEntity.ok(sampleResponse);
     }
 
     @RequestMapping(value ="/samples", method = RequestMethod.POST)
     public ResponseEntity<?> post(@RequestBody SampleRequest sampleRequest) throws URISyntaxException {
         return ResponseEntity.ok(sampleRequest);
-//        URI uri = this.sampleService.create(sampleCoTo);
-//        return ResponseEntity.created(uri).build();
     }
 
 }
