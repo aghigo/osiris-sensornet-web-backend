@@ -29,7 +29,7 @@ public class SampleService {
 
     public URI create(SampleRequest sampleRequest) throws URISyntaxException {
         SampleCoTo sampleCoTo = SampleMapper.toCoTo(sampleRequest);
-        this.sampleRepository.notify(sampleCoTo);
+        this.sampleRepository.save(sampleCoTo);
 
         URI uri = new URI(String.format("/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),
                 sampleCoTo.getCollector().getId(), sampleCoTo.getSensor().getId()));

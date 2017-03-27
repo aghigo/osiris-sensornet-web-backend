@@ -14,21 +14,6 @@ import org.springframework.stereotype.Component;
 @PropertySource(value = "classpath:application.properties")
 public class SensorNetConfig {
 
-    @Value("${sensornet.hostname:localhost}")
-    private String hostname;
-
-    @Value("${sensornet.ip:127.0.0.1}")
-    private String ip;
-
-    @Value("${sensornet.port:8090}")
-    private int port;
-
-    @Value("${sensornet.username:guest}")
-    private String username;
-
-    @Value("${sensornet.password:guest}")
-    private String password;
-
     @Value("${sensornet.messgegroup.collector:omcp://collector.messagegroup/}")
     private String collectorMessageGroupUri;
 

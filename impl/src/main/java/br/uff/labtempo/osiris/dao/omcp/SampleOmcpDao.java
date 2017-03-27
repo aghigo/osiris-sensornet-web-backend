@@ -3,11 +3,11 @@ package br.uff.labtempo.osiris.dao.omcp;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 
 @Component(value = "sampleOmcpDao")
 public class SampleOmcpDao implements SampleRepository {
@@ -15,13 +15,13 @@ public class SampleOmcpDao implements SampleRepository {
     @Autowired
     private SensorNetConfig sensorNetConfig;
 
+    @Autowired
+    private SensorNetConnection connection;
+
     @Override
-    public void notify(SampleCoTo sample) {
+    public void save(SampleCoTo sample) {
         String uri = sensorNetConfig.getCollectorMessageGroupUri();
-        String ip = sensorNetConfig.getIp();
-        String username = sensorNetConfig.getUsername();
-        String password = sensorNetConfig.getPassword();
-        OmcpClient omcpClient = new RabbitClient(ip, username, password);
+        OmcpClient omcpClient = this.connection.getConnection();
         omcpClient.doNofity(uri, sample);
     }
 }

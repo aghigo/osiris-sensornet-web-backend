@@ -28,6 +28,12 @@ public class SensorController {
         return ResponseEntity.ok(sensorResponse);
     }
 
+    @RequestMapping(value = "/sensors", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll() {
+        List<SensorResponse> sensorResponseList = this.sensorService.getAll();
+        return ResponseEntity.ok(sensorResponseList);
+    }
+
     @RequestMapping(value = "/networks/{networkId}/sensors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
         List<SensorResponse> sensorResponseList = this.sensorService.getAllByNetworkId(networkId);
@@ -45,7 +51,4 @@ public class SensorController {
         SensorResponse sensorResponse = this.sensorService.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId);
         return ResponseEntity.ok(sensorResponse);
     }
-
-
-
 }

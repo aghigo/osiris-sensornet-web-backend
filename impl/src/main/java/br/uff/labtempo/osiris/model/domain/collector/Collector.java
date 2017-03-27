@@ -19,7 +19,7 @@ public class Collector {
     @NotNull @NotEmpty
     private String id;
 
-    @Min(0)
+    @Min(1)
     private long captureInterval;
 
     @NotNull

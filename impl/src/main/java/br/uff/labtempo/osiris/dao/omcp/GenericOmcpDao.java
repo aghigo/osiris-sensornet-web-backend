@@ -4,6 +4,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.connection.OmcpConnection;
+import br.uff.labtempo.osiris.repository.OmcpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +12,18 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Component("genericOmcpDao")
-public class GenericOmcpDao<T> {
+public class GenericOmcpDao<T> implements OmcpRepository<T> {
 
     private Class<T> type;
     private OmcpConnection connection;
 
     @Autowired
-    public GenericOmcpDao(OmcpConnection omcpConnection) {
+    public GenericOmcpDao(Class<T> type, OmcpConnection omcpConnection) {
         this.connection = omcpConnection;
+        this.type = type;
     }
 
-    public Object doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
+    public T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
         Response omcpResponse = this.connection.getConnection().doGet(uri);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:

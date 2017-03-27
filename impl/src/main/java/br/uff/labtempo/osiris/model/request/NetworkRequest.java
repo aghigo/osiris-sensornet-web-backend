@@ -15,7 +15,7 @@ import java.util.Map;
 @EqualsAndHashCode
 @Builder
 public class NetworkRequest {
-    @NotEmpty @NotNull @Length(min = 1)
+    @NotEmpty @NotNull
     private String id;
 
     @NotNull @NotEmpty

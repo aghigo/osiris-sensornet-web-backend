@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.service.CollectorService;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
@@ -30,6 +31,12 @@ public class CollectorController {
     public ResponseEntity<?> getRandom() {
         CollectorResponse collectorResponse = this.collectorService.getRandom();
         return ResponseEntity.ok().body(collectorResponse);
+    }
+
+    @RequestMapping(value = "/collectors", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll() {
+        List<CollectorResponse> collectorResponseList = this.collectorService.getAll();
+        return ResponseEntity.ok().body(collectorResponseList);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)

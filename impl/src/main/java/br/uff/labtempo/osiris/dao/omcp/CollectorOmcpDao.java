@@ -4,6 +4,7 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class CollectorOmcpDao implements CollectorRepository {
     @Autowired
     private SensorNetConfig sensorNetConfig;
 
+    @Autowired
+    private SensorNetConnection connection;
+
     @Override
     public CollectorCoTo getByNetworkId(String networkId, String collectorId) {
-        String ip = this.sensorNetConfig.getIp();
-        String username = this.sensorNetConfig.getUsername();
-        String password = this.sensorNetConfig.getPassword();
+        OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
-        OmcpClient omcpClient = new RabbitClient(ip, username, password);
         Response response = omcpClient.doGet(uri);
         CollectorCoTo collectorCoTo = response.getContent(CollectorCoTo.class);
         return collectorCoTo;
@@ -32,11 +33,10 @@ public class CollectorOmcpDao implements CollectorRepository {
 
     @Override
     public List<CollectorCoTo> getAllByNetworkId(String networkId) {
-        String ip = this.sensorNetConfig.getIp();
-        String username = this.sensorNetConfig.getUsername();
-        String password = this.sensorNetConfig.getPassword();
+        OmcpClient omcpClient = this.connection.getConnection();
+
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorsUri(), networkId);
-        OmcpClient omcpClient = new RabbitClient(ip, username, password);
+
         Response response = omcpClient.doGet(uri);
         CollectorCoTo[] collectorCoToArray = response.getContent(CollectorCoTo[].class);
         List<CollectorCoTo> collectorCoToList = Arrays.asList(collectorCoToArray);
