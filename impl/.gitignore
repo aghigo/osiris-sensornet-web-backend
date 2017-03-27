@@ -47,6 +47,8 @@ fabric.properties
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
 osiris-sensornet-web-backend.iml
+impl/osiris-sensornet-web-backend.iml
+osiris-sensornet-web-backend.iml
 *.iml
 # modules.xml
 # .idea/misc.xml

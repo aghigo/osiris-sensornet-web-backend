@@ -5,14 +5,15 @@ import br.uff.labtempo.osiris.model.request.NetworkRequest;
 import br.uff.labtempo.osiris.model.response.NetworkResponse;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkMapper {
 
-    public static NetworkCoTo toCoTo(NetworkRequest networkRequest) {
+    public static NetworkCoTo toCoTo(@Valid NetworkRequest networkRequest) {
         NetworkCoTo networkCoTo = new NetworkCoTo(networkRequest.getId());
-        networkCoTo.addInfo(networkCoTo.getInfo());
+        networkCoTo.addInfo(networkRequest.getInfo());
         return networkCoTo;
     }
 

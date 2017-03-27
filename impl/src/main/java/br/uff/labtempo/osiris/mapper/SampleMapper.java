@@ -10,12 +10,13 @@ import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SampleMapper {
 
-    public static SampleCoTo toCoTo(SampleRequest sampleRequest) {
+    public static SampleCoTo toCoTo(@Valid SampleRequest sampleRequest) {
         NetworkCoTo networkCoTo = NetworkMapper.toCoTo(sampleRequest.getNetwork());
         CollectorCoTo collectorCoTo = CollectorMapper.toCoTo(sampleRequest.getCollector());
         SensorCoTo sensorCoTo = SensorMapper.toCoTo(sampleRequest.getSensor());

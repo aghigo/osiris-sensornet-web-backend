@@ -31,7 +31,7 @@ public class SampleService {
         SampleCoTo sampleCoTo = SampleMapper.toCoTo(sampleRequest);
         this.sampleRepository.notify(sampleCoTo);
 
-        URI uri = new URI(String.format("http://localhost:8080/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),
+        URI uri = new URI(String.format("/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),
                 sampleCoTo.getCollector().getId(), sampleCoTo.getSensor().getId()));
 
         return uri;

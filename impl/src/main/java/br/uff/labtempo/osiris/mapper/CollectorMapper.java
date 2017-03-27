@@ -4,12 +4,13 @@ import br.uff.labtempo.osiris.model.request.CollectorRequest;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollectorMapper {
 
-    public static CollectorCoTo toCoTo(CollectorRequest collectorRequest) {
+    public static CollectorCoTo toCoTo(@Valid CollectorRequest collectorRequest) {
         CollectorCoTo collectorCoTo = new CollectorCoTo(collectorRequest.getId(),
                 collectorRequest.getCaptureInterval(), collectorRequest.getCaptureIntervalTimeUnit());
         collectorCoTo.addInfo(collectorRequest.getInfo());

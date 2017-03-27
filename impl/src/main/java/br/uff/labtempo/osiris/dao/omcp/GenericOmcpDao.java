@@ -11,8 +11,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Component("genericOmcpDao")
-public class GenericOmcpDao {
+public class GenericOmcpDao<T> {
 
+    private Class<T> type;
     private OmcpConnection connection;
 
     @Autowired
@@ -20,7 +21,7 @@ public class GenericOmcpDao {
         this.connection = omcpConnection;
     }
 
-    public Object doGet(String uri, Class<?> type) throws AbstractRequestException, AbstractClientRuntimeException {
+    public Object doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
         Response omcpResponse = this.connection.getConnection().doGet(uri);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
@@ -38,15 +39,15 @@ public class GenericOmcpDao {
             case REQUEST_TIMEOUT:
                 throw new RequestTimeoutException();
         }
-        String content = omcpResponse.getContent();
-        if(content == null || content.isEmpty()) {
+        T content = omcpResponse.getContent(type);
+        if(content == null) {
             throw new NotFoundException();
         }
-        return omcpResponse.getContent(type);
+        return content;
     }
 
-    public URI doPost(String uri, Object object) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
-        Response omcpResponse = this.connection.getConnection().doPost(uri, object);
+    public URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
+        Response omcpResponse = this.connection.getConnection().doPost(uri, t);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -66,8 +67,8 @@ public class GenericOmcpDao {
         return new URI(omcpResponse.getLocation());
     }
 
-    public void doPut(String uri, Object object) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.connection.getConnection().doPut(uri, object);
+    public void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
+        Response omcpResponse = this.connection.getConnection().doPut(uri, t);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -106,7 +107,7 @@ public class GenericOmcpDao {
         }
     }
 
-    public void doNotify(String uri, Object object) throws AbstractRequestException, AbstractClientRuntimeException {
-        this.connection.getConnection().doNofity(uri, object);
+    public void doNotify(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
+        this.connection.getConnection().doNofity(uri, t);
     }
 }

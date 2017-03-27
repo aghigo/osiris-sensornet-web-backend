@@ -10,11 +10,12 @@ import br.uff.labtempo.osiris.to.common.data.ConsumableRuleTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SensorMapper {
-    public static SensorCoTo toCoTo(SensorRequest sensorRequest) {
+    public static SensorCoTo toCoTo(@Valid SensorRequest sensorRequest) {
         SensorCoTo sensorCoTo = new SensorCoTo(sensorRequest.getId(),
                 State.NEW, sensorRequest.getCaptureDateInMillis(),
                 sensorRequest.getCaptureDateInNano(), sensorRequest.getAcquisitionDateInMillis());
