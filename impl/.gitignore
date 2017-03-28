@@ -10,6 +10,7 @@
 *.rar
 hs_err_pid*
 *.iml
+target/
 .idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
