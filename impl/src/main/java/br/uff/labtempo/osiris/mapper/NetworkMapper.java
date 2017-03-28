@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NetworkMapper {
 
-    public static NetworkCoTo toCoTo(@Valid NetworkRequest networkRequest) {
+    public static NetworkCoTo toCoTo(NetworkRequest networkRequest) {
         NetworkCoTo networkCoTo = new NetworkCoTo(networkRequest.getId());
         networkCoTo.addInfo(networkRequest.getInfo());
         return networkCoTo;

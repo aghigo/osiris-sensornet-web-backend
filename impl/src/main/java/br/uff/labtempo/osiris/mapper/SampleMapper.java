@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SampleMapper {
 
-    public static SampleCoTo toCoTo(@Valid SampleRequest sampleRequest) {
+    public static SampleCoTo toCoTo(SampleRequest sampleRequest) {
         NetworkCoTo networkCoTo = NetworkMapper.toCoTo(sampleRequest.getNetwork());
         CollectorCoTo collectorCoTo = CollectorMapper.toCoTo(sampleRequest.getCollector());
         SensorCoTo sensorCoTo = SensorMapper.toCoTo(sampleRequest.getSensor());

@@ -1,9 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.osiris.model.request.SensorRequest;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.service.SensorService;
-import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.mapper;
 
-
 import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.model.request.SensorRequest;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SensorMapper {
-    public static SensorCoTo toCoTo(@Valid SensorRequest sensorRequest) {
+    public static SensorCoTo toCoTo(SensorRequest sensorRequest) {
         SensorCoTo sensorCoTo = new SensorCoTo(sensorRequest.getId(),
                 State.NEW, sensorRequest.getCaptureDateInMillis(),
                 sensorRequest.getCaptureDateInNano(), sensorRequest.getAcquisitionDateInMillis());
@@ -91,5 +90,4 @@ public class SensorMapper {
         }
         return sensorRequestList;
     }
-
 }
