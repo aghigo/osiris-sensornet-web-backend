@@ -1,0 +1,396 @@
+{
+	"variables": [],
+	"info": {
+		"name": "osiris-sensornet-web-backend",
+		"_postman_id": "fe7f347b-fc18-3ed7-585d-183a8afc96d2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SensorNet",
+			"description": "SensorNet related endpoints.",
+			"item": [
+				{
+					"name": "/sensornet/samples/mock",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a random mocked Sample (Network + Collector + Sensor)"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/mock",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"info\": {\n      \"operating system\": \"Windows NT\",\n      \"domain\": \"br.uff.sti\"\n    }\n  },\n  \"collector\": {\n    \"id\": \"collectorId535652\",\n    \"captureInterval\": 1490561715452,\n    \"captureIntervalTimeUnit\": \"MILLISECONDS\",\n    \"info\": {\n      \"type\": \"centralized\",\n      \"transmission\": \"wireless\"\n    }\n  },\n  \"sensor\": {\n    \"id\": \"sensorId311417\",\n    \"captureDateInMillis\": 1490561715452,\n    \"captureDateInNano\": 1490561,\n    \"acquisitionDateInMillis\": 1490561742047,\n    \"info\": {\n      \"sendCount\": \"quantity of sent values\"\n    },\n    \"values\": [\n      {\n        \"name\": \"temperature\",\n        \"value\": 88654,\n        \"unit\": \"88654\",\n        \"symbol\": \"Cº\"\n      },\n      {\n        \"name\": \"pressure\",\n        \"value\": 3695,\n        \"unit\": \"3695\",\n        \"symbol\": \"P\"\n      }\n    ],\n    \"consumables\": {\n      \"Good Signal\": 4,\n      \"Low Signal\": 34,\n      \"Normal Signal\": 82\n    },\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 16,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a new random SensorNet Network (Mock)"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/collectors/mock",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a new random mocked Collector"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/sensors/mock",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a new random mocked Sensor from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/samples",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"info\": {\n      \"operating system\": \"Windows NT\",\n      \"domain\": \"br.uff.sti\"\n    }\n  },\n  \"collector\": {\n    \"id\": \"collectorId535652\",\n    \"captureInterval\": 1490561715452,\n    \"captureIntervalTimeUnit\": \"MILLISECONDS\",\n    \"info\": {\n      \"type\": \"centralized\",\n      \"transmission\": \"wireless\"\n    }\n  },\n  \"sensor\": {\n    \"id\": \"sensorId311417\",\n    \"captureDateInMillis\": 1490561715452,\n    \"captureDateInNano\": 1490561,\n    \"acquisitionDateInMillis\": 1490561742047,\n    \"info\": {\n      \"sendCount\": \"quantity of sent values\"\n    },\n    \"values\": [\n      {\n        \"name\": \"temperature\",\n        \"value\": 88654,\n        \"unit\": \"88654\",\n        \"symbol\": \"Cº\"\n      },\n      {\n        \"name\": \"pressure\",\n        \"value\": 3695,\n        \"unit\": \"3695\",\n        \"symbol\": \"P\"\n      }\n    ],\n    \"consumables\": {\n      \"Good Signal\": 4,\n      \"Low Signal\": 34,\n      \"Normal Signal\": 82\n    },\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 16,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Create a new Sample (Sample is an Object that encapsulates Network + Collector + Sensor) on SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get All Networks from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/collectors",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get All Collectors from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/sensors",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get All Sensors from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/12345",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a specific Network from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}/sensors",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/sensors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get all Sensors from a specific Network"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}/collectors",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/12345/collectors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get all Collectors from a specific Network"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/12345/collectors/123",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a specific collector from a specific Network"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}/sensors",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/12345/collectors/123/sensors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get all Sensors from a specific collector from a specific Network"
+					},
+					"response": []
+				},
+				{
+					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}/sensors/{sensorId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/12345/collectors/123/sensors/xpto",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+						},
+						"description": "Get a specific sensor from a specific collector from a specific Network"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VirtualSensorNet",
+			"description": "VirtualSensorNet related endpoints",
+			"item": []
+		},
+		{
+			"name": "/omcp",
+			"request": {
+				"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "uri",
+						"value": "omcp://sensornet.osiris/",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Generic Endpoint to test GET method from OMCP protocol directly."
+			},
+			"response": []
+		}
+	]
+}

@@ -6,21 +6,20 @@ import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
 import br.uff.labtempo.osiris.model.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
-import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
-import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 @Service
+@Profile("schedule")
 @EnableScheduling
 public class CreateSensorSchedule {
 
@@ -49,9 +48,23 @@ public class CreateSensorSchedule {
 
     @Scheduled(cron="${sensornet.schedule.create.sensor.cron:*/10 * * * * ?}")
     public void createNewSample() throws URISyntaxException {
-        log.info(String.format("networkId-%s", UUID.randomUUID().toString()));
+        SampleCoTo sampleCoTo = this.sampleGenerator.generate();
+        this.sampleRepository.save(sampleCoTo);
+        log.info(String.format(String.format("SampleCoTo Created ([%s], [%s], [%s]).",
+                sampleCoTo.getNetwork().getId(), sampleCoTo.getCollector().getId()
+                ,sampleCoTo.getSensor().getId())));
     }
 
-    public void createNewCollector() {}
-    public void createNewSensor() {}
+    @Scheduled(cron="${sensornet.schedule.create.collector.cron:*/10 * * * * ?}")
+    public void createNewCollector() {
+        CollectorCoTo collectorCoTo = this.collectorGenerator.generate();
+
+        log.info(String.format("CollectorCoTo Created (%s)", collectorCoTo.getId()));
+    }
+//
+//    @Scheduled(cron="${sensornet.schedule.create.sensor.cron:*/10 * * * * ?}")
+//    public void createNewSensor() {
+//        SensorCoTo sensorCoTo = this.sensorGenerator.generate();
+//        log.info(String.format("Sensor Created (%s)", sensorCoTo.getId()));
+//    }
 }
