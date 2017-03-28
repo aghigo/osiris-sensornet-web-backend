@@ -7,11 +7,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public interface OmcpRepository<T> {
-    public Object doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException;
+    T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException;
 
-    public URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException;
+    URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException;
 
-    public void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException;
+    void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException;
 
     void doDelete(String uri) throws AbstractRequestException, AbstractClientRuntimeException;
 

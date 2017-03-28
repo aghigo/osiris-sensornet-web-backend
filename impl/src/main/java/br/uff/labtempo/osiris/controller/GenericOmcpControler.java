@@ -28,14 +28,14 @@ public class GenericOmcpControler {
     private OmcpRepository<String> omcpRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> doGet(@RequestHeader(value = "url") @NotEmpty @NotNull @Valid String url) {
+    public ResponseEntity<?> doGet(@RequestHeader(value = "uri") @NotEmpty @NotNull @Valid String uri) {
         String responseContent = null;
         try {
-            responseContent = (String) this.omcpRepository.doGet(url);
+            responseContent = (String) this.omcpRepository.doGet(uri);
         } catch(AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).build();
         }
-        if(responseContent.isEmpty()) {
+        if(responseContent == null || responseContent.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(responseContent);

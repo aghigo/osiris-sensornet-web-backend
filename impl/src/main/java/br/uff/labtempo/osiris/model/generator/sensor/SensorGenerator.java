@@ -10,15 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class SensorGenerator {
-
-    private final int INFO_RANGE = 5;
-    private final int VALUE_RANGE = 4;
-    private final int ID_RANGE = 999999;
-
     private SensorInfoGenerator sensorInfoGenerator;
     private SensorValueGenerator sensorValueGenerator;
     private SensorConsumableRuleGenerator sensorConsumableRuleGenerator;
@@ -30,7 +26,7 @@ public class SensorGenerator {
     }
 
     public SensorCoTo generate() {
-        String id = "sensorId" + randomLong(ID_RANGE);
+        String id = getId();
         State state = State.NEW;
         long captureDateInMillis = new Date().getTime();
         int captureDateInNano = (int) TimeUnit.MILLISECONDS.convert(captureDateInMillis, TimeUnit.NANOSECONDS);
@@ -59,11 +55,11 @@ public class SensorGenerator {
         return sensorCoTo;
     }
 
-    private State getState() {
-        return State.values()[(int) (Math.random() * State.values().length)];
-    }
-
     private long randomLong(int maxRange) {
         return (long) (Math.random() * (maxRange + 1));
+    }
+
+    private String getId() {
+        return "sensorId-" + UUID.randomUUID().toString();
     }
 }

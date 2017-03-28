@@ -9,13 +9,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class CollectorGenerator {
 
-    private final String ID_PREFIX = "collectorId";
-    private Random random;
     private Map<String, List<String>> collectorInfos;
     private final TimeUnit[] timeUnits = {TimeUnit.SECONDS, TimeUnit.MILLISECONDS, TimeUnit.MINUTES};
 
     public CollectorGenerator() {
-        this.random = new Random();
         this.collectorInfos = new LinkedHashMap<>();
         this.collectorInfos.put("description", Arrays.asList("UFF laboratory", "STI", "network collector", "grouped collector"));
         this.collectorInfos.put("type", Arrays.asList("centralized", "distributed"));
@@ -38,7 +35,7 @@ public class CollectorGenerator {
     }
 
     public String getId() {
-        return ID_PREFIX + (long) (Math.random() * 999999);
+        return "collectorId-" + UUID.randomUUID().toString();
     }
 
     public long getCaptureInterval() {

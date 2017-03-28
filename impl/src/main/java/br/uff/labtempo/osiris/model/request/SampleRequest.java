@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.model.request;
 
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -12,12 +13,12 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Builder
 public class SampleRequest {
-    @NotNull
+    @NotNull @Valid
     private NetworkRequest network;
 
-    @NotNull
+    @NotNull @Valid
     private CollectorRequest collector;
 
-    @NotNull
+    @NotNull @Valid
     private SensorRequest sensor;
 }

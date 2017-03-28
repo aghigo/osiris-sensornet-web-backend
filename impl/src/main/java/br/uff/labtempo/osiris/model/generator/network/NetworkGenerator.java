@@ -9,11 +9,9 @@ import java.util.*;
 @Component
 public class NetworkGenerator {
 
-    private Random random;
     private Map<String, List<String>> networkInfos;
 
     public NetworkGenerator(){
-        this.random = new Random();
         this.networkInfos = new LinkedHashMap<>();
         this.networkInfos.put("domain", Arrays.asList("br.uff.labtempo", "br.uff.sti", "br.uff.ic"));
         this.networkInfos.put("type", Arrays.asList("Wireless", "LAN", "WLAN", "VPN"));
@@ -48,6 +46,6 @@ public class NetworkGenerator {
     }
 
     private String getId() {
-        return "networkId" + this.random.nextInt(10000) + 1;
+        return "networkId-" + UUID.randomUUID().toString();
     }
 }

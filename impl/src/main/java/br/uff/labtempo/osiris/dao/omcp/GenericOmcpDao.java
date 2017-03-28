@@ -14,13 +14,11 @@ import java.net.URISyntaxException;
 @Component("genericOmcpDao")
 public class GenericOmcpDao<T> implements OmcpRepository<T> {
 
-    private Class<T> type;
     private OmcpConnection connection;
 
     @Autowired
-    public GenericOmcpDao(Class<T> type, OmcpConnection omcpConnection) {
+    public GenericOmcpDao(OmcpConnection omcpConnection) {
         this.connection = omcpConnection;
-        this.type = type;
     }
 
     public T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
@@ -41,7 +39,7 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
             case REQUEST_TIMEOUT:
                 throw new RequestTimeoutException();
         }
-        T content = omcpResponse.getContent(type);
+        T content = (T) omcpResponse.getContent();
         if(content == null) {
             throw new NotFoundException();
         }

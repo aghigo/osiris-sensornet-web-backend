@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
@@ -34,7 +35,8 @@ public class SampleController {
 
     @RequestMapping(value ="/samples", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody(required = true) @Valid SampleRequest sampleRequest) throws URISyntaxException {
-        return ResponseEntity.ok(SampleMapper.toCoTo(sampleRequest));
+        URI uri = this.sampleService.create(sampleRequest);
+        return ResponseEntity.created(uri).build();
     }
 
 }

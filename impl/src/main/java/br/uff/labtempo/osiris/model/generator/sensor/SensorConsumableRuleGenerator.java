@@ -9,7 +9,6 @@ import java.util.*;
 @Data
 public class SensorConsumableRuleGenerator {
 
-    private final int RANGE = 1;
     private Map<String, List<SensorConsumableRule>> sensorConsumableRules;
 
     public SensorConsumableRuleGenerator() {
