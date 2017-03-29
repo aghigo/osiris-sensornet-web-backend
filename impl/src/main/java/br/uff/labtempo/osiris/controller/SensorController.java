@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SensorController {
-
     private SensorService sensorService;
 
     @Autowired

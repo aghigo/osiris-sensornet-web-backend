@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.osiris.mapper.SampleMapper;
 import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
@@ -19,7 +18,6 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SampleController {
-
     private SampleService sampleService;
 
     @Autowired

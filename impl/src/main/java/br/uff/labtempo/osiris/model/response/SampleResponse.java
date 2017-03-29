@@ -1,5 +1,8 @@
 package br.uff.labtempo.osiris.model.response;
 
+import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
+import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import lombok.*;
 
 import javax.validation.Valid;
@@ -14,11 +17,11 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class SampleResponse {
     @NotNull @Valid
-    private NetworkResponse network;
+    private NetworkCoTo network;
 
     @NotNull @Valid
-    private CollectorResponse collector;
+    private CollectorCoTo collector;
 
     @NotNull @Valid
-    private SensorResponse sensor;
+    private SensorCoTo sensor;
 }

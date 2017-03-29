@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.service;
 
-import br.uff.labtempo.osiris.mapper.SampleMapper;
 import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
 import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
@@ -24,11 +23,17 @@ public class SampleService {
     private SampleGenerator sampleGenerator;
 
     public SampleResponse getRandom() {
-        return SampleMapper.toResponse(this.sampleGenerator.generate());
+        SampleCoTo sampleCoTo = this.sampleGenerator.getSampleCoTo();
+        SampleResponse sampleResponse = SampleResponse.builder()
+                .network(sampleCoTo.getNetwork())
+                .collector(sampleCoTo.getCollector())
+                .sensor(sampleCoTo.getSensor())
+                .build();
+        return sampleResponse;
     }
 
     public URI create(SampleRequest sampleRequest) throws URISyntaxException {
-        SampleCoTo sampleCoTo = SampleMapper.toCoTo(sampleRequest);
+        SampleCoTo sampleCoTo = new SampleCoTo(sampleRequest.getNetwork(), sampleRequest.getCollector(), sampleRequest.getSensor());
         this.sampleRepository.save(sampleCoTo);
 
         URI uri = new URI(String.format("/sensornet/network/%s/collector/%s/sensor/%s/", sampleCoTo.getNetwork().getId(),

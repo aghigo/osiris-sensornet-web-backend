@@ -48,7 +48,7 @@ public class CreateSensorSchedule {
 
     @Scheduled(cron="${sensornet.schedule.create.sensor.cron:*/10 * * * * ?}")
     public void createNewSample() throws URISyntaxException {
-        SampleCoTo sampleCoTo = this.sampleGenerator.generate();
+        SampleCoTo sampleCoTo = this.sampleGenerator.getSampleCoTo();
         this.sampleRepository.save(sampleCoTo);
         log.info(String.format(String.format("SampleCoTo Created ([%s], [%s], [%s]).",
                 sampleCoTo.getNetwork().getId(), sampleCoTo.getCollector().getId()
@@ -57,7 +57,7 @@ public class CreateSensorSchedule {
 
     @Scheduled(cron="${sensornet.schedule.create.collector.cron:*/10 * * * * ?}")
     public void createNewCollector() {
-        CollectorCoTo collectorCoTo = this.collectorGenerator.generate();
+        CollectorCoTo collectorCoTo = this.collectorGenerator.getCollectorCoTo();
 
         log.info(String.format("CollectorCoTo Created (%s)", collectorCoTo.getId()));
     }

@@ -29,8 +29,8 @@ public class NetworkService {
         this.networkGenerator = networkGenerator;
     }
 
-    public NetworkResponse getRandom() {
-        return NetworkMapper.toResponse(this.networkGenerator.generate());
+    public NetworkCoTo getRandom() {
+        return this.networkGenerator.getNetworkCoto();
     }
 
     public List<NetworkResponse> getAll() throws UnreachableModuleException, BadRequestException {

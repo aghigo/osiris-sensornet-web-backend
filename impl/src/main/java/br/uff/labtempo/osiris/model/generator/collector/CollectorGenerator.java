@@ -19,6 +19,12 @@ public class CollectorGenerator {
         this.collectorInfos.put("transmission", Arrays.asList("wireless", "wired", "special fiber"));
     }
 
+    public CollectorCoTo getCollectorCoTo() {
+        CollectorCoTo collectorCoTo = new CollectorCoTo(getId(), getCaptureInterval(), getCaptureIntervalTimeUnit());
+        collectorCoTo.addInfo(getRandomCollectorInfos());
+        return collectorCoTo;
+    }
+
     private Map<String, String> getRandomCollectorInfos() {
         Map<String, String> infos = new LinkedHashMap<>();
         Set<String> selectedKeys = new LinkedHashSet<>();
@@ -44,11 +50,5 @@ public class CollectorGenerator {
 
     public TimeUnit getCaptureIntervalTimeUnit() {
         return this.timeUnits[(int) (Math.random() * this.timeUnits.length)];
-    }
-
-    public CollectorCoTo generate() {
-        CollectorCoTo collectorCoTo = new CollectorCoTo(getId(), getCaptureInterval(), getCaptureIntervalTimeUnit());
-        collectorCoTo.addInfo(getRandomCollectorInfos());
-        return collectorCoTo;
     }
 }

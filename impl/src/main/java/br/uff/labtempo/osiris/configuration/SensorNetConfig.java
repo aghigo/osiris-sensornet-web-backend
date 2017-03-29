@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class SensorNetConfig {
-
     @Value("${sensornet.messgegroup.collector:omcp://collector.messagegroup/}")
     private String collectorMessageGroupUri;
 
@@ -40,4 +39,7 @@ public class SensorNetConfig {
 
     @Value("${sensornet.uri.networkId.collectorId.sensorId:omcp://sensornet.osiris/%1$s/collector/%2$s/sensor/%3$s/}")
     private String networkIdCollectorIdSensorIdUri;
+
+    @Value("${sensornet.location.created.sample:/networks/%1$s/collectors/%2$s/sensors/%3$s/}")
+    private String sampleCreatedLocation;
 }

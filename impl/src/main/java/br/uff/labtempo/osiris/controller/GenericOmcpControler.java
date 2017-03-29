@@ -23,7 +23,6 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping(value = "/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GenericOmcpControler {
-
     @Autowired
     private OmcpRepository<String> omcpRepository;
 

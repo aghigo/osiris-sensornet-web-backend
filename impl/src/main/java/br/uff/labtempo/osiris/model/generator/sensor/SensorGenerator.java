@@ -25,7 +25,7 @@ public class SensorGenerator {
         this.sensorConsumableRuleGenerator = new SensorConsumableRuleGenerator();
     }
 
-    public SensorCoTo generate() {
+    public SensorCoTo getSensorCoTo() {
         String id = getId();
         State state = State.NEW;
         long captureDateInMillis = new Date().getTime();
@@ -34,24 +34,23 @@ public class SensorGenerator {
 
         SensorCoTo sensorCoTo = new SensorCoTo(id, state, captureDateInMillis, captureDateInNano, acquisitionDateInMillis);
 
-        Set<SensorInfo> sensorInfo = this.sensorInfoGenerator.generate();
+        Set<SensorInfo> sensorInfo = this.sensorInfoGenerator.getSensorInfoSet();
         for(SensorInfo i : sensorInfo) {
             sensorCoTo.addInfo(i.getInfoName(), i.getInfoDescription());
         }
 
-        Set<SensorValue> sensorValue = this.sensorValueGenerator.generate();
+        Set<SensorValue> sensorValue = this.sensorValueGenerator.getSensorValueSet();
         for(SensorValue s : sensorValue) {
             sensorCoTo.addValue(s.getName(), s.getValue(), s.getUnit(), s.getSymbol());
         }
 
-        Set<List<SensorConsumableRule>> consumableRulesList = this.sensorConsumableRuleGenerator.generate();
+        Set<List<SensorConsumableRule>> consumableRulesList = this.sensorConsumableRuleGenerator.getSensorConsumableRuleListSet();
         for(List<SensorConsumableRule> cl : consumableRulesList) {
             for(SensorConsumableRule c : cl){
                 sensorCoTo.addConsumable(c.getName(), (int) randomLong(100));
                 sensorCoTo.addConsumableRule(c.getName(), c.getConsumableName(), c.getOperator(), c.getLimitValue(), c.getMessage());
             }
         }
-
         return sensorCoTo;
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class NetworkController {
-
     private NetworkService networkService;
 
     @Autowired
@@ -23,8 +22,8 @@ public class NetworkController {
 
     @RequestMapping(value = "/networks/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        NetworkResponse networkResponse = this.networkService.getRandom();
-        return ResponseEntity.ok(networkResponse);
+        NetworkCoTo networkCoTo = this.networkService.getRandom();
+        return ResponseEntity.ok(networkCoTo);
     }
 
     @RequestMapping(value = "/networks", method = RequestMethod.GET)
@@ -38,5 +37,4 @@ public class NetworkController {
         NetworkResponse networkResponse = this.networkService.getById(networkId);
         return ResponseEntity.ok(networkResponse);
     }
-
 }

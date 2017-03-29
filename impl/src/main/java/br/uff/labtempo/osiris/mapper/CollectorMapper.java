@@ -1,43 +1,22 @@
 package br.uff.labtempo.osiris.mapper;
 
-import br.uff.labtempo.osiris.model.request.CollectorRequest;
+
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
-
-import java.util.ArrayList;
-import java.util.List;
+import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 
 public class CollectorMapper {
-
-    public static CollectorCoTo toCoTo(CollectorRequest collectorRequest) {
-        CollectorCoTo collectorCoTo = new CollectorCoTo(collectorRequest.getId(),
-                collectorRequest.getCaptureInterval(), collectorRequest.getCaptureIntervalTimeUnit());
-        collectorCoTo.addInfo(collectorRequest.getInfo());
-        return collectorCoTo;
-    }
-
-    public static List<CollectorCoTo> toCoTo(List<CollectorRequest> collectorRequestList) {
-        List<CollectorCoTo> collectorCoToList = new ArrayList<>();
-        for(CollectorRequest collectorRequest : collectorRequestList) {
-            collectorCoToList.add(toCoTo(collectorRequest));
-        }
-        return collectorCoToList;
-    }
-
-    public static CollectorResponse toResponse(CollectorCoTo collectorCoTo) {
-                 return CollectorResponse.builder()
-                .id(collectorCoTo.getId())
-                .captureInterval(collectorCoTo.getCaptureInterval())
-                .captureIntervalTimeUnit(collectorCoTo.getCaptureIntervalTimeUnit())
-                .info(collectorCoTo.getInfo())
+    public static CollectorResponse toResponse(CollectorSnTo collectorSnTo) {
+        CollectorResponse collectorResponse = CollectorResponse.builder()
+                .info(collectorSnTo.getInfo())
+                .captureInterval(collectorSnTo.getCaptureInterval())
+                .captureIntervaltimeUnit(collectorSnTo.getCaptureIntervalTimeUnit())
+                .id(collectorSnTo.getId())
+                .lastModified(collectorSnTo.getLastModified().getTimeInMillis())
+                .networkId(collectorSnTo.getNetworkId())
+                .state(collectorSnTo.getState())
+                .totalSensors(collectorSnTo.getTotalSensors())
                 .build();
-    }
-
-    public static List<CollectorResponse> toResponse(List<CollectorCoTo> collectorCoToList) {
-        List<CollectorResponse> collectorResponseList = new ArrayList<>();
-        for(CollectorCoTo collectorCoTo : collectorCoToList) {
-            collectorResponseList.add(toResponse(collectorCoTo));
-        }
-        return collectorResponseList;
+        return collectorResponse;
     }
 }

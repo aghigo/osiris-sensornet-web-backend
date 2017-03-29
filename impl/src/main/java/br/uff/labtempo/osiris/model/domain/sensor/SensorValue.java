@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.model.domain.sensor;
 
+import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,6 +15,9 @@ import javax.validation.constraints.NotNull;
 public class SensorValue {
     @NotNull @NotEmpty
     private String name;
+
+    @NotNull
+    private ValueType type;
 
     @Min(1)
     private long value;

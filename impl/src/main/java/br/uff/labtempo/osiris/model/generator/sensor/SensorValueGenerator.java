@@ -24,7 +24,7 @@ public class SensorValueGenerator {
         this.sensorValues.add(new SensorValue("pressure", randomLong(VALUE_RANGE), "pascal", "P"));
     }
 
-    public Set<SensorValue> generate() {
+    public Set<SensorValue> getSensorValueSet() {
         Set<SensorValue> sensorValues = new HashSet<>();
         for(int i = 0; i < (int) (Math.random() * randomSizeRange() + 1); i++) {
             sensorValues.add(this.sensorValues.get(randomSizeRange()));

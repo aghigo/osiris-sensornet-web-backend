@@ -24,12 +24,12 @@ public class SampleGenerator {
         this.sensorGenerator = sensorGenerator;
     }
 
-    public SampleCoTo generate() {
-        SampleCoTo sampleCoTo = new SampleCoTo(this.networkGenerator.generate(), this.collectorGenerator.generate(), this.sensorGenerator.generate());
+    public SampleCoTo getSampleCoTo() {
+        SampleCoTo sampleCoTo = new SampleCoTo(this.networkGenerator.getNetworkCoto(), this.collectorGenerator.getCollectorCoTo(), this.sensorGenerator.getSensorCoTo());
         return sampleCoTo;
     }
 
-    public SampleCoTo generate(NetworkCoTo networkCoTo, CollectorCoTo collectorCoTo, SensorCoTo sensorCoTo) {
+    public SampleCoTo getSampleCoTo(NetworkCoTo networkCoTo, CollectorCoTo collectorCoTo, SensorCoTo sensorCoTo) {
         SampleCoTo sampleCoTo = new SampleCoTo(networkCoTo, collectorCoTo, sensorCoTo);
         return sampleCoTo;
     }

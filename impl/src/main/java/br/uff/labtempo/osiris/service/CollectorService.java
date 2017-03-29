@@ -29,7 +29,7 @@ public class CollectorService {
     }
 
     public CollectorResponse getRandom() {
-        return CollectorMapper.toResponse(this.collectorGenerator.generate());
+        return CollectorMapper.toResponse(this.collectorGenerator.getCollectorCoTo());
     }
 
     public List<CollectorResponse> getAllByNetworkId(String networkId) {

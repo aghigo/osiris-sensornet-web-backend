@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.model.generator.network;
 
 
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -20,7 +21,7 @@ public class NetworkGenerator {
         this.networkInfos.put("hardware", Arrays.asList("Arduino v6.4", "Raspberry Pi v1.6", "EmbbededTech x86"));
     }
 
-    public NetworkCoTo generate() {
+    public NetworkCoTo getNetworkCoto() {
         NetworkCoTo networkCoTo = new NetworkCoTo(getId());
         networkCoTo.addInfo(getInfo());
         return networkCoTo;

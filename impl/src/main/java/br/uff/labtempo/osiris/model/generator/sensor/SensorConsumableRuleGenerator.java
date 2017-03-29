@@ -45,7 +45,7 @@ public class SensorConsumableRuleGenerator {
 
     }
 
-    public Set<List<SensorConsumableRule>> generate() {
+    public Set<List<SensorConsumableRule>> getSensorConsumableRuleListSet() {
         Set<List<SensorConsumableRule>> consumableRules = new LinkedHashSet<>();
         for(int i = 0; i < (int) (Math.random() * (this.sensorConsumableRules.size()) + 1); i++) {
             consumableRules.add(random());

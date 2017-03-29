@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.dao.omcp;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.connection.OmcpConnection;
+import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.OmcpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,15 +14,15 @@ import java.net.URISyntaxException;
 @Component("genericOmcpDao")
 public class GenericOmcpDao<T> implements OmcpRepository<T> {
 
-    private OmcpConnection connection;
+    private SensorNetConnection sensorNetConnection;
 
     @Autowired
-    public GenericOmcpDao(OmcpConnection omcpConnection) {
-        this.connection = omcpConnection;
+    public GenericOmcpDao(SensorNetConnection sensorNetConnection) {
+        this.sensorNetConnection = sensorNetConnection;
     }
 
     public T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.connection.getConnection().doGet(uri);
+        Response omcpResponse = this.sensorNetConnection.getConnection().doGet(uri);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -47,7 +47,7 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
     }
 
     public URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
-        Response omcpResponse = this.connection.getConnection().doPost(uri, t);
+        Response omcpResponse = this.sensorNetConnection.getConnection().doPost(uri, t);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -68,7 +68,7 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
     }
 
     public void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.connection.getConnection().doPut(uri, t);
+        Response omcpResponse = this.sensorNetConnection.getConnection().doPut(uri, t);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -88,7 +88,7 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
     }
 
     public void doDelete(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.connection.getConnection().doDelete(uri);
+        Response omcpResponse = this.sensorNetConnection.getConnection().doDelete(uri);
         switch(omcpResponse.getStatusCode()) {
             case BAD_REQUEST:
                 throw new BadRequestException();
@@ -108,6 +108,6 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
     }
 
     public void doNotify(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
-        this.connection.getConnection().doNofity(uri, t);
+        this.sensorNetConnection.getConnection().doNofity(uri, t);
     }
 }

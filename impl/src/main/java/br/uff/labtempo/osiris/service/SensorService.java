@@ -10,6 +10,7 @@ import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,8 @@ public class SensorService {
         this.sensorGenerator = sensorGenerator;
     }
 
-    public SensorResponse getRandom() {
-        return SensorMapper.toResponse(this.sensorGenerator.generate());
+    public SensorCoTo getRandom() {
+        this.sensorGenerator.getSensorCoTo();
     }
 
     public SensorResponse getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
@@ -48,9 +49,9 @@ public class SensorService {
 
     public List<SensorResponse> getAll() {
         List<SensorResponse> sensorResponseList = new ArrayList<>();
-        List<NetworkCoTo> networkCoToList = this.networkRepository.getAll();
-        for(NetworkCoTo networkCoTo : networkCoToList) {
-            sensorResponseList.addAll(SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkCoTo.getId())));
+        List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
+        for(NetworkSnTo networkSnTo : networkCoToList) {
+            sensorResponseList.addAll(SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkSnTo.getId())));
         }
         return sensorResponseList;
     }

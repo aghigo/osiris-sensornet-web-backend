@@ -21,7 +21,7 @@ public class SensorInfoGenerator {
         this.sensorInfos.add(SensorInfo.builder().infoName("motelMode").infoDescription("automatic").build());
     }
 
-    public Set<SensorInfo> generate() {
+    public Set<SensorInfo> getSensorInfoSet() {
         Set<SensorInfo> sensorInfos = new HashSet<>();
         for(int i = 0; i < randomSizedRange() + 1; i++){
             sensorInfos.add(this.sensorInfos.get(randomSizedRange()));
@@ -29,7 +29,7 @@ public class SensorInfoGenerator {
         return sensorInfos;
     }
 
-    public int randomSizedRange() {
+    private int randomSizedRange() {
         return (int) (Math.random() * this.sensorInfos.size());
     }
 }

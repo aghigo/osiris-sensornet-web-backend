@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.model.response;
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
+import br.uff.labtempo.osiris.to.common.definitions.State;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,27 +19,39 @@ import java.util.Map;
 @ToString
 @Builder
 public class SensorResponse {
-    @NotNull @NotEmpty
-    private String id;
-
     @Min(1)
-    private long captureDateInMillis;
-
-    @Min(1)
-    private int captureDateInNano;
-
-    @Min(1)
-    private long acquisitionDateInMillis;
+    private long lastModified;
 
     @NotNull @NotEmpty
-    private Map<String, String> info;
+    private String networkId;
 
     @NotNull @NotEmpty
-    private List<SensorValue> values;
+    private String collectorId;
+
+    @Min(1)
+    private long storageTimestampInMillis;
+
+    @Min(1)
+    private long captureTimestampInMillis;
+
+    @Min(1)
+    private long acquisitionTimestampInMillis;
+
+    @Min(1)
+    private long capturePrecisionInNano;
 
     @NotNull @NotEmpty
     private Map<String, Integer> consumables;
 
     @NotNull @NotEmpty
-    private List<SensorConsumableRule> rules;
+    private List<SensorValue> values;
+
+    @NotNull @NotEmpty
+    private String id;
+
+    @NotNull
+    private State state;
+
+    @NotNull @NotEmpty
+    private Map<String, String> info;
 }
