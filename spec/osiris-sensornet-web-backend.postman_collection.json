@@ -3,13 +3,208 @@
 	"info": {
 		"name": "osiris-sensornet-web-backend",
 		"_postman_id": "fe7f347b-fc18-3ed7-585d-183a8afc96d2",
-		"description": "",
+		"description": "Osiris REST and OMCP endpoints for SensorNet and VirtualSensorNet modules. This is part of the backend for the OSIRIS Framework new web interface:\nhttps://github.com/aghigo/osiris-sensornet-web-backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "SensorNet",
-			"description": "SensorNet related endpoints.",
+			"name": "SensorNet OMCP",
+			"description": "SensorNet OMCP endpoints.",
+			"item": [
+				{
+					"name": "omcp://sensornet.osiris/",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "GET all networks from SensorNet."
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a specific network from SensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}/collector",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all collectors from a specific network."
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}/sensor",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/sensor",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all sensors from a specific network."
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a specific collector from a specific network."
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}/sensor",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all sensors from a specific collector from a specific network."
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}/sensor/{sensorId}",
+					"request": {
+						"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a specific sensor from a specific collector from a specific network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SensorNet REST",
+			"description": "SensorNet REST endpoints.",
 			"item": [
 				{
 					"name": "/sensornet/samples/mock",
@@ -29,11 +224,11 @@
 							}
 						],
 						"body": {},
-						"description": "Get a random mocked Sample (Network + Collector + Sensor)"
+						"description": "Create and return random mocked SampleRequest object (NetworkRequest + CollectorRequest + SensorRequest)"
 					},
 					"response": [
 						{
-							"id": "28ddbf71-7f5c-457a-868c-56da3733f1aa",
+							"id": "acbd7fa7-ba45-4723-a625-8412ad26a453",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -104,11 +299,11 @@
 							"mode": "raw",
 							"raw": "{\n  \"network\": {\n    \"id\": \"networkId-31d4bcb9-b9e2-4967-9330-8fe36ba70e9e\",\n    \"info\": {\n      \"operating system\": \"Fedora Workstation\",\n      \"domain\": \"br.uff.labtempo\",\n      \"hardware\": \"Arduino v6.4\"\n    }\n  },\n  \"collector\": {\n    \"id\": \"collectorId-83c28765-94fe-4b03-9baa-3c2a9326bde2\",\n    \"captureInterval\": 1490734268440,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"info\": {\n      \"type\": \"distributed\",\n      \"transmission\": \"special fiber\"\n    }\n  },\n  \"sensor\": {\n    \"id\": \"sensorId-c613aa7f-7456-45cf-bbfc-844708c9eb41\",\n    \"captureDateInMillis\": 1490734268440,\n    \"captureDateInNano\": 1490734,\n    \"acquisitionDateInMillis\": 1490734285277,\n    \"info\": {\n      \"parent\": \"parent sensor\",\n      \"motelMode\": \"automatic\"\n    },\n    \"values\": [\n      {\n        \"name\": \"temperature\",\n        \"value\": 26612,\n        \"unit\": \"26612\",\n        \"symbol\": \"K\"\n      }\n    ],\n    \"consumables\": {\n      \"Good Signal\": 11,\n      \"Low Signal\": 69,\n      \"Low battery\": 13,\n      \"Full battery\": 58,\n      \"Normal battery\": 46,\n      \"Normal Signal\": 92\n    },\n    \"rules\": [\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 13,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 13,\n        \"message\": \"Battery is normal.\"\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 0,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 3,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      }\n    ]\n  }\n}"
 						},
-						"description": "Create a new Sample (Sample is an Object that encapsulates Network + Collector + Sensor) on SensorNet"
+						"description": "Create a new Sample (SampleCoTo is an object that encapsulates and relates Network, Collector and Sensor) on SensorNet."
 					},
 					"response": [
 						{
-							"id": "82da2ff0-2eb5-4395-8768-8c24c3a5f0f7",
+							"id": "885a35de-b9b8-4835-9c5b-b5530642bc89",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -182,11 +377,11 @@
 							"mode": "raw",
 							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
 						},
-						"description": "Get a new random mocked Collector"
+						"description": "Create and return a new random mocked CollectorRequest object."
 					},
 					"response": [
 						{
-							"id": "3d815181-244c-4665-9113-db0984353862",
+							"id": "ed560cf1-b888-4e64-90ff-9496c06d6ac8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -264,7 +459,7 @@
 					},
 					"response": [
 						{
-							"id": "a28f8c4f-3902-4f53-a7d2-d516986a1749",
+							"id": "7f24d51c-8291-4487-97e0-e0ff2860e6e3",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -338,11 +533,11 @@
 							"mode": "raw",
 							"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
 						},
-						"description": "Get a new random mocked Sensor from SensorNet"
+						"description": "Create and return a new random mocked SensorRequest object."
 					},
 					"response": [
 						{
-							"id": "aaf5a246-2e60-410b-8269-369c38f830a3",
+							"id": "5972bb28-c51a-4e48-95fa-86cb1ffcdb85",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -418,7 +613,60 @@
 						},
 						"description": "Get All Sensors from SensorNet"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "72b2359d-bead-41a4-94d6-c4718fc28485",
+							"name": "response_example_1",
+							"originalRequest": {
+								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 29 Mar 2017 14:28:40 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 2280,
+							"body": "[{\"id\":\"sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7\",\"captureDateInMillis\":1490728242002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728329746,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":95,\"Normal Signal\":5},\"rules\":null},{\"id\":\"sensorId-aca7d6b1-79ff-4324-88b3-13be34899357\",\"captureDateInMillis\":1490728243001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728303406,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":9,\"Full battery\":91,\"Normal battery\":88},\"rules\":null},{\"id\":\"sensorId-73aaea6d-609c-4aab-831c-8a773038b69c\",\"captureDateInMillis\":1490728244002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728285911,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":84,\"Low Signal\":11,\"Low battery\":12,\"Full battery\":60,\"Normal battery\":24,\"Normal Signal\":8},\"rules\":null},{\"id\":\"sensorId-8179d67d-066d-4f27-830e-1c4e764590bf\",\"captureDateInMillis\":1490728245002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728305763,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":46,\"Low Signal\":68,\"Normal Signal\":2},\"rules\":null},{\"id\":\"sensorId-d406b3fd-f168-48b8-9509-d2736d72b904\",\"captureDateInMillis\":1490728246000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728337921,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":45,\"Full battery\":95,\"Normal battery\":77},\"rules\":null},{\"id\":\"sensorId-6eb0965d-e8da-4a53-a754-6ad439e6c0be\",\"captureDateInMillis\":1490728247002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728263960,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":67,\"Full battery\":17,\"Normal battery\":47},\"rules\":null},{\"id\":\"sensorId-03302db0-4cd5-4164-aa2c-8d79478ea88f\",\"captureDateInMillis\":1490728248001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728298612,\"info\":{\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":24,\"Low Signal\":65,\"Low battery\":54,\"Full battery\":94,\"Normal battery\":25,\"Normal Signal\":1},\"rules\":null},{\"id\":\"sensorId-d49f32f0-8614-4634-a5eb-c46f2891d066\",\"captureDateInMillis\":1490728249002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728315145,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":38,\"Low Signal\":9,\"Low battery\":74,\"Full battery\":51,\"Normal battery\":78,\"Normal Signal\":19},\"rules\":null},{\"id\":\"sensorId-6ec4a877-cb0a-4dbe-89e8-56967e9405f9\",\"captureDateInMillis\":1490728250002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728263423,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"},{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":44,\"Low Signal\":69,\"Normal Signal\":31},\"rules\":null},{\"id\":\"sensorId-2d3631e9-e543-4dba-9b9b-0ba1a8aa74aa\",\"captureDateInMillis\":1490728251000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728257623,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":27,\"Low Signal\":100,\"Normal Signal\":96},\"rules\":null},{\"id\":\"sensorId-a5be7ce5-e1a1-49cd-8a69-eaa370a9b131\",\"captureDateInMillis\":1490728252002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728253358,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":62,\"Low Signal\":32,\"Low battery\":58,\"Full battery\":9,\"Normal battery\":35,\"Normal Signal\":34},\"rules\":null},{\"id\":\"sensorId-8248a607-04be-4986-97b5-9c9c9b5b13b5\",\"captureDateInMillis\":1490728253001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728268307,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":78,\"Low Signal\":40,\"Normal Signal\":34},\"rules\":null},{\"id\":\"sensorId-fea3a8fb-7479-46aa-8c63-5c41f6a78f36\",\"captureDateInMillis\":1490728254000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728351274,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":29,\"Full battery\":55,\"Normal battery\":18},\"rules\":null},{\"id\":\"sensorId-a30cffe9-f82a-4ead-a9ba-2450b612fe9f\",\"captureDateInMillis\":1490728255002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728273991,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":68,\"Low Signal\":68,\"Low battery\":35,\"Full battery\":96,\"Normal battery\":89,\"Normal Signal\":15},\"rules\":null},{\"id\":\"sensorId-267d4b6a-0dae-47d2-b67b-4b918c175809\",\"captureDateInMillis\":1490728256001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728332404,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":71,\"Low Signal\":95,\"Low battery\":6,\"Full battery\":64,\"Normal battery\":42,\"Normal Signal\":19},\"rules\":null},{\"id\":\"sensorId-46e987b7-25af-4222-9f96-2f1947a56b5e\",\"captureDateInMillis\":1490728257003,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728355102,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"},{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":53,\"Full battery\":83,\"Normal battery\":93},\"rules\":null},{\"id\":\"sensorId-ac478661-2a62-46c5-af08-8c067661ed2f\",\"captureDateInMillis\":1490728258001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728311464,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":38,\"Full battery\":8,\"Normal battery\":32},\"rules\":null},{\"id\":\"sensorId-1055b841-cd5f-4d39-89c7-c5d1c265f628\",\"captureDateInMillis\":1490728259002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728270051,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Low battery\":82,\"Full battery\":7,\"Normal battery\":9},\"rules\":null},{\"id\":\"sensorId-1ad2b259-b42f-41aa-bacc-d091f8b6fc24\",\"captureDateInMillis\":1490728260000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728319844,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":97,\"Low Signal\":45,\"Normal Signal\":38},\"rules\":null},{\"id\":\"sensorId-7f2e53f7-e8ac-4b81-be60-bc31be63aa79\",\"captureDateInMillis\":1490728261001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728353451,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":17,\"Full battery\":99,\"Normal battery\":78},\"rules\":null},{\"id\":\"sensorId-b8695a51-8600-46e8-8c9f-c69893fa5147\",\"captureDateInMillis\":1490728262002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728276901,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"},{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":47,\"Low Signal\":9,\"Low battery\":47,\"Full battery\":48,\"Normal battery\":57,\"Normal Signal\":39},\"rules\":null},{\"id\":\"sensorId-504a3211-c91d-4b50-a673-ae8172e0b238\",\"captureDateInMillis\":1490728263000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728339246,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":99,\"Full battery\":17,\"Normal battery\":21},\"rules\":null},{\"id\":\"sensorId-57093cec-3a60-4221-ba98-249add4fec2c\",\"captureDateInMillis\":1490728264000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728272966,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":95,\"Full battery\":7,\"Normal battery\":55},\"rules\":null},{\"id\":\"sensorId-99d99da0-cb41-41f0-90fd-31030f92293b\",\"captureDateInMillis\":1490728265000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728308080,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Low battery\":45,\"Full battery\":90,\"Normal battery\":46},\"rules\":null},{\"id\":\"sensorId-bf3ec7a0-d404-4a05-97bd-e29820be7d97\",\"captureDateInMillis\":1490728266001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728295965,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":1,\"Low Signal\":34,\"Low battery\":70,\"Full battery\":94,\"Normal battery\":65,\"Normal Signal\":31},\"rules\":null},{\"id\":\"sensorId-98ef0016-84d7-43ba-8896-34efc085822f\",\"captureDateInMillis\":1490728267000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728268869,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Low battery\":25,\"Full battery\":56,\"Normal battery\":55},\"rules\":null},{\"id\":\"sensorId-6a76094f-c233-44ce-a534-cfd5d01c9d13\",\"captureDateInMillis\":1490728268000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728320528,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":84,\"Low Signal\":9,\"Low battery\":66,\"Full battery\":36,\"Normal battery\":77,\"Normal Signal\":40},\"rules\":null},{\"id\":\"sensorId-f915f358-504f-49ec-8de7-033ac0b8fef5\",\"captureDateInMillis\":1490728269001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728344439,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":88,\"Full battery\":96,\"Normal battery\":0},\"rules\":null},{\"id\":\"sensorId-ce9191ff-ab0b-4743-8fb3-4610461226ec\",\"captureDateInMillis\":1490728270000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728285420,\"info\":{\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":57,\"Low Signal\":3,\"Low battery\":30,\"Full battery\":55,\"Normal battery\":100,\"Normal Signal\":18},\"rules\":null},{\"id\":\"sensorId-1039c853-b049-48ae-b62e-d834abbc59e4\",\"captureDateInMillis\":1490728271002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728283270,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":2,\"Low Signal\":82,\"Normal Signal\":97},\"rules\":null},{\"id\":\"sensorId-ea55c9a9-20eb-49da-aae0-f914723c31bb\",\"captureDateInMillis\":1490728272001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728300899,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":5,\"Low Signal\":67,\"Low battery\":23,\"Full battery\":38,\"Normal battery\":9,\"Normal Signal\":61},\"rules\":null},{\"id\":\"sensorId-aa4279a9-7170-4dab-b1b5-d25e5caa8cf0\",\"captureDateInMillis\":1490728273001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728325091,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":75,\"Low Signal\":45,\"Normal Signal\":82},\"rules\":null},{\"id\":\"sensorId-657f459e-4b80-4135-999f-979e3e29e324\",\"captureDateInMillis\":1490728274000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728306521,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":61,\"Low Signal\":76,\"Normal Signal\":6},\"rules\":null},{\"id\":\"sensorId-4c42b0a4-ce4c-4894-bf9b-7105902d7e29\",\"captureDateInMillis\":1490728275001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728358526,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"},{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":98,\"Low Signal\":27,\"Low battery\":12,\"Full battery\":55,\"Normal battery\":4,\"Normal Signal\":65},\"rules\":null},{\"id\":\"sensorId-15f3d753-dbf5-49e3-a5f5-315af72df929\",\"captureDateInMillis\":1490728276001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728358915,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":73,\"Low Signal\":3,\"Low battery\":64,\"Full battery\":30,\"Normal battery\":62,\"Normal Signal\":55},\"rules\":null},{\"id\":\"sensorId-d97c45a4-736d-4e2a-a92b-aadcc819d81e\",\"captureDateInMillis\":1490728277000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728323170,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":20,\"Low Signal\":61,\"Normal Signal\":0},\"rules\":null},{\"id\":\"sensorId-dfcf8998-55e7-4126-abfe-a9765cc6f158\",\"captureDateInMillis\":1490728278001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728361585,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":16,\"Low Signal\":74,\"Normal Signal\":83},\"rules\":null},{\"id\":\"sensorId-d24de5d8-7fe4-48a3-ac42-57f545bcabe9\",\"captureDateInMillis\":1490728279000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728307352,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"},{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":26,\"Full battery\":95,\"Normal battery\":5},\"rules\":null},{\"id\":\"sensorId-eaf2db60-ecec-42ad-8f34-0dfba8fe5b3f\",\"captureDateInMillis\":1490728280000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728313253,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":11,\"Low Signal\":80,\"Low battery\":26,\"Full battery\":49,\"Normal battery\":92,\"Normal Signal\":40},\"rules\":null},{\"id\":\"sensorId-3ee4cedd-4f69-4f09-8a7f-b8b5a75b91a3\",\"captureDateInMillis\":1490728281000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728362041,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":46843,\"unit\":\"46843\",\"symbol\":\"Fº\"},{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":90,\"Low Signal\":68,\"Low battery\":78,\"Full battery\":13,\"Normal battery\":37,\"Normal Signal\":30},\"rules\":null},{\"id\":\"sensorId-bf9a7d13-1470-49bf-bf86-2c69cbcde46c\",\"captureDateInMillis\":1490728282000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728308254,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":23,\"Full battery\":77,\"Normal battery\":20},\"rules\":null},{\"id\":\"sensorId-19674fe6-5450-4954-9308-64803e8dd2d3\",\"captureDateInMillis\":1490728283006,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728298593,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":63,\"Low Signal\":97,\"Normal Signal\":81},\"rules\":null},{\"id\":\"sensorId-b52c0c25-b8a8-4fd2-b7ff-7d4d8f97d8ab\",\"captureDateInMillis\":1490728284001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728380498,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":2,\"Low Signal\":86,\"Normal Signal\":86},\"rules\":null},{\"id\":\"sensorId-ce3ef3d7-abaa-4984-8d32-2cdbd2a15a31\",\"captureDateInMillis\":1490728285001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728342485,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":20,\"Low Signal\":69,\"Normal Signal\":20},\"rules\":null},{\"id\":\"sensorId-a6040294-48e5-4a56-945b-5c6cfa7c639f\",\"captureDateInMillis\":1490728286000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728306550,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":68,\"Low Signal\":86,\"Low battery\":91,\"Full battery\":59,\"Normal battery\":9,\"Normal Signal\":76},\"rules\":null},{\"id\":\"sensorId-0fb08729-f333-4e40-ab98-b02520bc5e7c\",\"captureDateInMillis\":1490728287001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728366380,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":32,\"Low Signal\":25,\"Normal Signal\":20},\"rules\":null},{\"id\":\"sensorId-f13bffef-1d32-4d02-8399-cefc22c4721e\",\"captureDateInMillis\":1490728288000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728382205,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":43,\"Full battery\":22,\"Normal battery\":74},\"rules\":null},{\"id\":\"sensorId-e4d2cb38-2e84-4f30-a050-6af09715c9a6\",\"captureDateInMillis\":1490728289000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728382931,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"}],\"consumables\":{\"Low battery\":49,\"Full battery\":46,\"Normal battery\":35},\"rules\":null},{\"id\":\"sensorId-ca6c7007-095f-4e9a-97ee-ef2c447217f7\",\"captureDateInMillis\":1490728290001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728316487,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Low battery\":72,\"Full battery\":43,\"Normal battery\":8},\"rules\":null},{\"id\":\"sensorId-c33e9013-ba17-4ad3-ae97-b024c0286ffa\",\"captureDateInMillis\":1490728291008,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728307948,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":89,\"Low Signal\":3,\"Normal Signal\":31},\"rules\":null},{\"id\":\"sensorId-e65ff280-cae2-48aa-8613-1c12b9b7b774\",\"captureDateInMillis\":1490728292000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728333726,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Low battery\":18,\"Full battery\":20,\"Normal battery\":84},\"rules\":null},{\"id\":\"sensorId-f461c7a3-7f2c-45b0-a3e2-118c5aa1a8dd\",\"captureDateInMillis\":1490728293001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728317962,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"},{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"luminosity\",\"value\":1142,\"unit\":\"1142\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":95,\"Low Signal\":71,\"Normal Signal\":3},\"rules\":null},{\"id\":\"sensorId-d2146495-99eb-44f9-a4e0-ab33abb330ea\",\"captureDateInMillis\":1490728294001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728369169,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":52736,\"unit\":\"52736\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":51240,\"unit\":\"51240\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":62,\"Full battery\":1,\"Normal battery\":40},\"rules\":null},{\"id\":\"sensorId-cb937e7f-f129-4893-b364-fd54b84ad0c0\",\"captureDateInMillis\":1490728400004,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728439860,\"info\":{\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":43,\"Low Signal\":98,\"Normal Signal\":4},\"rules\":null},{\"id\":\"sensorId-6eb8fa67-c583-4302-a220-3394244ef732\",\"captureDateInMillis\":1490728401000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728485844,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":94,\"Low Signal\":79,\"Low battery\":95,\"Full battery\":48,\"Normal battery\":64,\"Normal Signal\":0},\"rules\":null},{\"id\":\"sensorId-664570e9-f36c-42d9-9a38-82cc3c2b1d78\",\"captureDateInMillis\":1490728402000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728440949,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Low battery\":95,\"Full battery\":82,\"Normal battery\":50},\"rules\":null},{\"id\":\"sensorId-c39ce849-c3cc-4809-9c1f-cd6340b20ce0\",\"captureDateInMillis\":1490728403001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728412674,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":12,\"Low Signal\":68,\"Normal Signal\":28},\"rules\":null},{\"id\":\"sensorId-1e0f1a4f-586d-44d5-8d06-9644e160a8b7\",\"captureDateInMillis\":1490728404001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728437882,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":30,\"Low Signal\":60,\"Normal Signal\":82},\"rules\":null},{\"id\":\"sensorId-dde36bd9-17f8-44cd-bd64-e743cc2ec894\",\"captureDateInMillis\":1490728405000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728430310,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":36,\"Low Signal\":59,\"Low battery\":84,\"Full battery\":68,\"Normal battery\":55,\"Normal Signal\":60},\"rules\":null},{\"id\":\"sensorId-9475a3b1-ed4d-4d59-808c-c68ca2851afe\",\"captureDateInMillis\":1490728406001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728454503,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":86,\"Full battery\":95,\"Normal battery\":34},\"rules\":null},{\"id\":\"sensorId-834c6311-277e-4378-8686-67487d9c8dc0\",\"captureDateInMillis\":1490728407000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728428180,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":65,\"Low Signal\":43,\"Low battery\":19,\"Full battery\":10,\"Normal battery\":4,\"Normal Signal\":44},\"rules\":null},{\"id\":\"sensorId-dda25308-cb0c-4431-a9c5-5d3dded95147\",\"captureDateInMillis\":1490728408000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728448813,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":49,\"Low Signal\":94,\"Normal Signal\":39},\"rules\":null},{\"id\":\"sensorId-51421578-8efc-41ff-a3fc-80b44d1791ab\",\"captureDateInMillis\":1490728409000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728441284,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"},{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":73,\"Full battery\":10,\"Normal battery\":67},\"rules\":null},{\"id\":\"sensorId-ab8fbcf3-429b-46c6-9706-7b319ca58a53\",\"captureDateInMillis\":1490728410000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728457173,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":23,\"Low Signal\":29,\"Low battery\":12,\"Full battery\":3,\"Normal battery\":63,\"Normal Signal\":33},\"rules\":null},{\"id\":\"sensorId-bd65c70f-c546-4a1b-9e8d-64bd334faf77\",\"captureDateInMillis\":1490728411001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728439676,\"info\":{\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":89,\"Low Signal\":18,\"Normal Signal\":82},\"rules\":null},{\"id\":\"sensorId-e308af6c-9d3a-4700-9e91-37246a5db122\",\"captureDateInMillis\":1490728412000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728425836,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":96,\"Low Signal\":59,\"Low battery\":73,\"Full battery\":26,\"Normal battery\":65,\"Normal Signal\":8},\"rules\":null},{\"id\":\"sensorId-85f9bdef-f703-43e7-b1df-e77873f026cf\",\"captureDateInMillis\":1490728413001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728489531,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"},{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":26,\"Low Signal\":29,\"Normal Signal\":5},\"rules\":null},{\"id\":\"sensorId-8e625272-3ec5-4261-917d-963120aaddf5\",\"captureDateInMillis\":1490728414000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728508751,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":47,\"Low Signal\":95,\"Normal Signal\":45},\"rules\":null},{\"id\":\"sensorId-0da90178-42d9-4a60-b0f4-280348d0a9b1\",\"captureDateInMillis\":1490728415001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728504018,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Low battery\":6,\"Full battery\":62,\"Normal battery\":29},\"rules\":null},{\"id\":\"sensorId-c688368f-653e-4cee-b8e8-418f1ac1421e\",\"captureDateInMillis\":1490728416000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728490396,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"},{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":24,\"Low Signal\":33,\"Low battery\":39,\"Full battery\":59,\"Normal battery\":0,\"Normal Signal\":47},\"rules\":null},{\"id\":\"sensorId-38be81d4-5aa2-4edf-9cc3-81be35f39f21\",\"captureDateInMillis\":1490728417000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728421517,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":23,\"Low Signal\":22,\"Low battery\":90,\"Full battery\":42,\"Normal battery\":59,\"Normal Signal\":11},\"rules\":null},{\"id\":\"sensorId-8a88fb3f-891e-47db-8d9d-17239529b45b\",\"captureDateInMillis\":1490728418001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728516448,\"info\":{\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":92,\"Low Signal\":42,\"Normal Signal\":90},\"rules\":null},{\"id\":\"sensorId-b9173039-c9d4-472e-a1ae-c51b96e73808\",\"captureDateInMillis\":1490728419000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728443640,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"},{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":27,\"Low Signal\":6,\"Normal Signal\":11},\"rules\":null},{\"id\":\"sensorId-859da2e0-abc4-4a7b-8313-a1de028f984d\",\"captureDateInMillis\":1490728420000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728462866,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":40,\"Low Signal\":15,\"Normal Signal\":79},\"rules\":null},{\"id\":\"sensorId-ccb4c171-6847-4b9b-ac95-120eb6de77e0\",\"captureDateInMillis\":1490728421000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728520481,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":24,\"Full battery\":46,\"Normal battery\":39},\"rules\":null},{\"id\":\"sensorId-9420319c-15e5-4625-be1b-f6e6a4573e68\",\"captureDateInMillis\":1490728422001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728521449,\"info\":{\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"},{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"},{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":56,\"Low Signal\":65,\"Normal Signal\":7},\"rules\":null},{\"id\":\"sensorId-dd992b63-ed22-4ea4-ad05-1a61952583bb\",\"captureDateInMillis\":1490728423000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728438643,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":58,\"Low Signal\":23,\"Low battery\":0,\"Full battery\":68,\"Normal battery\":30,\"Normal Signal\":1},\"rules\":null},{\"id\":\"sensorId-54140435-67be-4b3b-a475-c3a76ee76721\",\"captureDateInMillis\":1490728424000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728441056,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":37,\"Normal Signal\":63},\"rules\":null},{\"id\":\"sensorId-b25b3f63-9235-43ff-ac5a-fbb9866a35b8\",\"captureDateInMillis\":1490728425000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728491085,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":90,\"Low Signal\":84,\"Low battery\":50,\"Full battery\":79,\"Normal battery\":4,\"Normal Signal\":11},\"rules\":null},{\"id\":\"sensorId-5c065484-fcd6-482c-9569-bc44a686ee39\",\"captureDateInMillis\":1490728426000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728441936,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":33,\"Low Signal\":71,\"Normal Signal\":44},\"rules\":null},{\"id\":\"sensorId-7ecbd368-050e-4696-a928-95d3fdaeb3b8\",\"captureDateInMillis\":1490728427001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728500929,\"info\":{\"sendCount\":\"quantity of sent values\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Low battery\":57,\"Full battery\":36,\"Normal battery\":6},\"rules\":null},{\"id\":\"sensorId-96196ec7-9ffd-44bb-8296-4c547857b42d\",\"captureDateInMillis\":1490728428001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728456987,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":97,\"Low Signal\":90,\"Low battery\":84,\"Full battery\":51,\"Normal battery\":77,\"Normal Signal\":35},\"rules\":null},{\"id\":\"sensorId-2b8e939c-8ca8-4931-bea2-b81323ec2c21\",\"captureDateInMillis\":1490728429000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728479119,\"info\":{\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"},{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":93,\"Low Signal\":8,\"Normal Signal\":48},\"rules\":null},{\"id\":\"sensorId-03d286f0-f0a3-4be0-87b2-6082992a252e\",\"captureDateInMillis\":1490728430001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728431890,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"},{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":41,\"Low Signal\":14,\"Low battery\":96,\"Full battery\":25,\"Normal battery\":25,\"Normal Signal\":66},\"rules\":null},{\"id\":\"sensorId-e8131e2b-d956-42e4-a77d-2bbcb7db370c\",\"captureDateInMillis\":1490728431000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728498465,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":31,\"Low Signal\":98,\"Low battery\":20,\"Full battery\":32,\"Normal battery\":6,\"Normal Signal\":52},\"rules\":null},{\"id\":\"sensorId-08e941f0-2a27-4afc-b938-8f6ad052c5c9\",\"captureDateInMillis\":1490728432001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728435167,\"info\":{\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"},{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":54,\"Low Signal\":55,\"Low battery\":11,\"Full battery\":50,\"Normal battery\":54,\"Normal Signal\":2},\"rules\":null},{\"id\":\"sensorId-d8301cef-5853-4a72-9d0b-7d50b76bb212\",\"captureDateInMillis\":1490728433000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728530023,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":1,\"Low Signal\":15,\"Normal Signal\":14},\"rules\":null},{\"id\":\"sensorId-44c89b5b-7a72-4a93-abec-07fe13a2225a\",\"captureDateInMillis\":1490728434001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728492133,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":95,\"Low Signal\":15,\"Normal Signal\":33},\"rules\":null},{\"id\":\"sensorId-c5024407-ecc5-44ee-ae8a-c011fa2e22e8\",\"captureDateInMillis\":1490728435001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728520365,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Good Signal\":95,\"Low Signal\":20,\"Low battery\":28,\"Full battery\":43,\"Normal battery\":37,\"Normal Signal\":99},\"rules\":null},{\"id\":\"sensorId-0d2957b8-e0cc-4ac3-b171-88d5c0a3e9a2\",\"captureDateInMillis\":1490728436000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728483508,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":75,\"Low Signal\":90,\"Low battery\":43,\"Full battery\":78,\"Normal battery\":72,\"Normal Signal\":38},\"rules\":null},{\"id\":\"sensorId-e8f28313-7f57-4d99-bc57-94767d6fdea0\",\"captureDateInMillis\":1490728437001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728499880,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":60,\"Full battery\":20,\"Normal battery\":81},\"rules\":null},{\"id\":\"sensorId-8bc5defa-8977-4417-8acf-6464c25328ee\",\"captureDateInMillis\":1490728438001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728532371,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":91,\"Full battery\":28,\"Normal battery\":74},\"rules\":null},{\"id\":\"sensorId-1e4bcbf1-253a-4e07-bdd0-dd0ee72d1495\",\"captureDateInMillis\":1490728439000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728490581,\"info\":{\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"}],\"consumables\":{\"Good Signal\":67,\"Low Signal\":45,\"Normal Signal\":81},\"rules\":null},{\"id\":\"sensorId-1dab4f79-bfec-460a-bd70-fc08df4265e6\",\"captureDateInMillis\":1490728440001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728480951,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":62641,\"unit\":\"62641\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":94,\"Low Signal\":37,\"Normal Signal\":23},\"rules\":null},{\"id\":\"sensorId-312d61e3-787a-426b-bc78-d686a57d34f8\",\"captureDateInMillis\":1490728441000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728536517,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":80,\"Low Signal\":6,\"Low battery\":55,\"Full battery\":10,\"Normal battery\":63,\"Normal Signal\":84},\"rules\":null},{\"id\":\"sensorId-72f58f76-bba5-42c5-ab0f-a0a9dddd1e15\",\"captureDateInMillis\":1490728442001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728487970,\"info\":{\"motelMode\":\"automatic\"},\"values\":[{\"name\":\"pressure\",\"value\":39605,\"unit\":\"39605\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":97,\"Low Signal\":10,\"Normal Signal\":52},\"rules\":null},{\"id\":\"sensorId-ce5c099b-152c-4587-aeb8-d3ce2a52bdae\",\"captureDateInMillis\":1490728443000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728485910,\"info\":{\"parent\":\"parent sensor\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":64,\"Low Signal\":94,\"Normal Signal\":97},\"rules\":null},{\"id\":\"sensorId-e3d4b7ce-65d0-4b1b-bb9b-feadf8256c47\",\"captureDateInMillis\":1490728444000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728452277,\"info\":{\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":86800,\"unit\":\"86800\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":61,\"Full battery\":67,\"Normal battery\":32},\"rules\":null},{\"id\":\"sensorId-304665f8-086c-487f-8652-7f18c107a999\",\"captureDateInMillis\":1490728445000,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728471730,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":82552,\"unit\":\"82552\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":56,\"Low Signal\":92,\"Low battery\":99,\"Full battery\":41,\"Normal battery\":21,\"Normal Signal\":1},\"rules\":null},{\"id\":\"sensorId-e8a17187-4229-467a-896b-af129f412253\",\"captureDateInMillis\":1490728446001,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728449447,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":50065,\"unit\":\"50065\",\"symbol\":\"K\"}],\"consumables\":{\"Low battery\":60,\"Full battery\":1,\"Normal battery\":55},\"rules\":null},{\"id\":\"sensorId-691c54be-d73b-43d5-b01d-1b17aff3d2a2\",\"captureDateInMillis\":1490732095003,\"captureDateInNano\":1490732,\"acquisitionDateInMillis\":1490732112306,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":16603,\"unit\":\"16603\",\"symbol\":\"C\"}],\"consumables\":{\"Good Signal\":75,\"Low Signal\":20,\"Low battery\":34,\"Full battery\":22,\"Normal battery\":18,\"Normal Signal\":29},\"rules\":null},{\"id\":\"sensorId-54a8f348-b546-4a9b-bb88-e1ea58bc846d\",\"captureDateInMillis\":1490732096000,\"captureDateInNano\":1490732,\"acquisitionDateInMillis\":1490732186441,\"info\":{\"parent\":\"parent sensor\",\"motelMode\":\"automatic\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":16603,\"unit\":\"16603\",\"symbol\":\"C\"}],\"consumables\":{\"Low battery\":49,\"Full battery\":76,\"Normal battery\":34},\"rules\":null},{\"id\":\"sensorId-482bf73d-991f-47f1-87fd-116e94a4f62f\",\"captureDateInMillis\":1490732097000,\"captureDateInNano\":1490732,\"acquisitionDateInMillis\":1490732193655,\"info\":{\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"pressure\",\"value\":63632,\"unit\":\"63632\",\"symbol\":\"P\"},{\"name\":\"temperature\",\"value\":25080,\"unit\":\"25080\",\"symbol\":\"Cº\"},{\"name\":\"temperature\",\"value\":76587,\"unit\":\"76587\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":86,\"Full battery\":83,\"Normal battery\":19},\"rules\":null},{\"id\":\"sensorId-e2383800-88db-4b18-8d7a-d12a60aa8e24\",\"captureDateInMillis\":1490732098000,\"captureDateInNano\":1490732,\"acquisitionDateInMillis\":1490732178039,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"luminosity\",\"value\":16603,\"unit\":\"16603\",\"symbol\":\"C\"},{\"name\":\"temperature\",\"value\":76587,\"unit\":\"76587\",\"symbol\":\"Fº\"}],\"consumables\":{\"Low battery\":68,\"Full battery\":29,\"Normal battery\":19},\"rules\":null},{\"id\":\"sensorId-c613aa7f-7456-45cf-bbfc-844708c9eb41\",\"captureDateInMillis\":1490734268440,\"captureDateInNano\":1490734,\"acquisitionDateInMillis\":1490734285277,\"info\":{\"motelMode\":\"automatic\",\"parent\":\"parent sensor\"},\"values\":[{\"name\":\"temperature\",\"value\":26612,\"unit\":\"26612\",\"symbol\":\"K\"}],\"consumables\":{\"Good Signal\":11,\"Low Signal\":69,\"Low battery\":13,\"Full battery\":58,\"Normal battery\":46,\"Normal Signal\":92},\"rules\":null}]"
+						}
+					]
 				},
 				{
 					"name": "/sensornet/networks/mock",
@@ -441,11 +689,11 @@
 							"mode": "raw",
 							"raw": "{\n  \"network\": {\n    \"info\": {\n      \"operating system\": \"Windows NT\",\n      \"domain\": \"br.uff.sti\"\n    }\n  },\n  \"collector\": {\n    \"id\": \"collectorId535652\",\n    \"captureInterval\": 1490561715452,\n    \"captureIntervalTimeUnit\": \"MILLISECONDS\",\n    \"info\": {\n      \"type\": \"centralized\",\n      \"transmission\": \"wireless\"\n    }\n  },\n  \"sensor\": {\n    \"id\": \"sensorId311417\",\n    \"captureDateInMillis\": 1490561715452,\n    \"captureDateInNano\": 1490561,\n    \"acquisitionDateInMillis\": 1490561742047,\n    \"info\": {\n      \"sendCount\": \"quantity of sent values\"\n    },\n    \"values\": [\n      {\n        \"name\": \"temperature\",\n        \"value\": 88654,\n        \"unit\": \"88654\",\n        \"symbol\": \"Cº\"\n      },\n      {\n        \"name\": \"pressure\",\n        \"value\": 3695,\n        \"unit\": \"3695\",\n        \"symbol\": \"P\"\n      }\n    ],\n    \"consumables\": {\n      \"Good Signal\": 4,\n      \"Low Signal\": 34,\n      \"Normal Signal\": 82\n    },\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 16,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      }\n    ]\n  }\n}"
 						},
-						"description": "Get a new random SensorNet Network (Mock)"
+						"description": "Create and return a new random mocked NetworkRequest object."
 					},
 					"response": [
 						{
-							"id": "58ead6a7-9c10-4234-9bb3-2fe46e553662",
+							"id": "0377c680-e2b9-45ea-96be-15d3be93d167",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/mock",
@@ -523,7 +771,7 @@
 					},
 					"response": [
 						{
-							"id": "9a1f373a-1d84-4faf-8f5f-4778c24b9596",
+							"id": "c472e8dd-ee9f-4acf-b67f-bfd21264cab3",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -601,7 +849,7 @@
 					},
 					"response": [
 						{
-							"id": "dde61160-67e9-4e07-8a78-17730550df6f",
+							"id": "b2aee11b-e1f2-4e8b-9345-ab2515ad5412",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -677,7 +925,60 @@
 						},
 						"description": "Get all Sensors from a specific Network"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "1131f5f9-4939-4d90-b469-247bc07365c2",
+							"name": "response_example_1",
+							"originalRequest": {
+								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 29 Mar 2017 14:26:01 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 86,
+							"body": "[{\"id\":\"sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7\",\"captureDateInMillis\":1490728242002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728329746,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":95,\"Normal Signal\":5},\"rules\":null}]"
+						}
+					]
 				},
 				{
 					"name": "/sensornet/networks/{networkId}/collectors",
@@ -704,7 +1005,7 @@
 					},
 					"response": [
 						{
-							"id": "71d582af-2f76-487d-867c-60b65452322b",
+							"id": "8173c2e6-d402-42b2-86ac-6684a1126b7c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -782,7 +1083,7 @@
 					},
 					"response": [
 						{
-							"id": "0c8930f8-bae7-4a06-b1f6-2edc14f31458",
+							"id": "ed919062-b9dc-4dd8-974c-be5d09a541ba",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -858,7 +1159,60 @@
 						},
 						"description": "Get all Sensors from a specific collector from a specific Network"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "c0c0b984-5d9d-41b2-a620-762c43b41385",
+							"name": "response_example_1",
+							"originalRequest": {
+								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 29 Mar 2017 14:27:29 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 67,
+							"body": "[{\"id\":\"sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7\",\"captureDateInMillis\":1490728242002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728329746,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":95,\"Normal Signal\":5},\"rules\":null}]"
+						}
+					]
 				},
 				{
 					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}/sensors/{sensorId}",
@@ -883,41 +1237,72 @@
 						},
 						"description": "Get a specific sensor from a specific collector from a specific Network"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "48adbe8c-a8f2-4906-a2e9-bb1691cbf87c",
+							"name": "response_example_1",
+							"originalRequest": {
+								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"network\": {\n    \"id\": \"networkId93581\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"domain\": \"br.uff.ic\"\n    },\n    \"infoTo\": [\n      {\n        \"name\": \"domain\",\n        \"description\": \"br.uff.ic\"\n      }\n    ]\n  },\n  \"collector\": {\n    \"id\": \"collectorId856819\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"description\": \"network collector\",\n      \"transmission\": \"wired\"\n    },\n    \"captureInterval\": 1490314643560,\n    \"captureIntervalTimeUnit\": \"SECONDS\",\n    \"infoTo\": [\n      {\n        \"name\": \"description\",\n        \"description\": \"network collector\"\n      },\n      {\n        \"name\": \"transmission\",\n        \"description\": \"wired\"\n      }\n    ]\n  },\n  \"sensor\": {\n    \"id\": \"sensorId729622\",\n    \"state\": \"NEW\",\n    \"info\": {\n      \"motelMode\": \"automatic\",\n      \"metric\": \"environment climate\"\n    },\n    \"captureTimestampInMillis\": 1490314643560,\n    \"acquisitionTimestampInMillis\": 1490314721793,\n    \"capturePrecisionInNano\": 1490314,\n    \"consumables\": {\n      \"Good Signal\": 62,\n      \"Low Signal\": 81,\n      \"Low battery\": 64,\n      \"Full battery\": 82,\n      \"Normal battery\": 49,\n      \"Normal Signal\": 45\n    },\n    \"values\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"number\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"number\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ],\n    \"rules\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"<\",\n        \"limitValue\": \"9\",\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \">\",\n        \"limitValue\": \"59\",\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"4\",\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"==\",\n        \"limitValue\": \"100\",\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"<\",\n        \"limitValue\": \"5\",\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"consumableRulesTo\": [\n      {\n        \"name\": \"Low Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 9,\n        \"message\": \"Signal is low.\"\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"GREATER_THAN\",\n        \"limitValue\": 59,\n        \"message\": \"Signal is normal.\"\n      },\n      {\n        \"name\": \"Good Signal\",\n        \"consumableName\": \"signal\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Signal is good.\"\n      },\n      {\n        \"name\": \"Low battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 4,\n        \"message\": \"Battery is low.\"\n      },\n      {\n        \"name\": \"Full battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"EQUAL\",\n        \"limitValue\": 100,\n        \"message\": \"Battery is full.\"\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"consumableName\": \"battery\",\n        \"operator\": \"LESS_THAN\",\n        \"limitValue\": 5,\n        \"message\": \"Battery is normal.\"\n      }\n    ],\n    \"infoTo\": [\n      {\n        \"name\": \"motelMode\",\n        \"description\": \"automatic\"\n      },\n      {\n        \"name\": \"metric\",\n        \"description\": \"environment climate\"\n      }\n    ],\n    \"consumablesTo\": [\n      {\n        \"name\": \"Good Signal\",\n        \"value\": 62\n      },\n      {\n        \"name\": \"Low Signal\",\n        \"value\": 81\n      },\n      {\n        \"name\": \"Low battery\",\n        \"value\": 64\n      },\n      {\n        \"name\": \"Full battery\",\n        \"value\": 82\n      },\n      {\n        \"name\": \"Normal battery\",\n        \"value\": 49\n      },\n      {\n        \"name\": \"Normal Signal\",\n        \"value\": 45\n      }\n    ],\n    \"captureTimestampInNano\": 1490314643561490314,\n    \"valuesTo\": [\n      {\n        \"name\": \"luminosity\",\n        \"type\": \"NUMBER\",\n        \"value\": \"24325\",\n        \"unit\": \"candela\",\n        \"symbol\": \"C\"\n      },\n      {\n        \"name\": \"temperature\",\n        \"type\": \"NUMBER\",\n        \"value\": \"57155\",\n        \"unit\": \"fahrenheit\",\n        \"symbol\": \"Fº\"\n      }\n    ]\n  }\n}"
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 29 Mar 2017 14:27:20 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 97,
+							"body": "{\"id\":\"sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7\",\"captureDateInMillis\":1490728242002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728329746,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":95,\"Normal Signal\":5},\"rules\":null}"
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "VirtualSensorNet",
-			"description": "VirtualSensorNet related endpoints",
+			"name": "VirtualSensorNet OMCP",
+			"description": "VirtualSensorNet OMCP endponts.",
 			"item": []
 		},
 		{
-			"name": "/omcp",
-			"request": {
-				"url": "{{osiris-sensornet-backend.endpoint}}/omcp",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "uri",
-						"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "Generic Endpoint to test GET method from OMCP protocol directly."
-			},
-			"response": []
+			"name": "VirtualSensorNet REST",
+			"description": "VirtualSensorNet REST endponits.",
+			"item": []
 		}
 	]
 }
