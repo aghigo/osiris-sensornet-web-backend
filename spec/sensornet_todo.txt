@@ -1,8 +1,0 @@
-OK - configurar docker para levantar rabbitmq, postgresql e modulos omcp do sensornet e virtualsensornet
-melhorar configuracao do docker para deixar parametrizavel para ambiente de producao e suportar multiplas instancias de um mesmo modulo)
-gerar massa (generators de sensor, collector e network)
-OK - criar endpoints de sample (Get e POST)
-incluir campos opcionais em sensor/collector/network (state)
-melhorar mapeamento dos dominios das camadas (request, CoTo, response)
-OK - fechar os endpoints de consulta (Get) de network, collector e sensor
-inciar schedules para simular ambiente do osiris
