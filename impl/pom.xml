@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.uff.labtempo.osiris</groupId>
-	<artifactId>osiris-sensornet-web-backend</artifactId>
+	<artifactId>osiris-web-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>osiris-sensornet-web-backend</name>
-	<description>REST API&#39;s for SensorNet Module Web Interface</description>
+	<name>osiris-web-backend</name>
+	<description>Backend of the OSIRIS' Framework Web Interface. Contains REST APIs for the SensorNet and VirtualSensorNet modules.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
