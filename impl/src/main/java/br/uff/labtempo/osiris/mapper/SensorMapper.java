@@ -37,4 +37,12 @@ public class SensorMapper {
 
         return sensorResponse;
     }
+
+    public static List<SensorResponse> toResponse(List<SensorSnTo> sensorSnToList) {
+        List<SensorResponse> sensorResponseList = new ArrayList<>();
+        for(SensorSnTo sensorSnTo : sensorSnToList) {
+            sensorResponseList.add(toResponse(sensorSnTo));
+        }
+        return sensorResponseList;
+    }
 }

@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.model.generator.sensor;
 
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
+import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ public class SensorValueGenerator {
 
     public SensorValueGenerator(){
         this.sensorValues = new ArrayList<>();
-        this.sensorValues.add(new SensorValue("temperature", randomLong(VALUE_RANGE), "celsius", "Cº"));
-        this.sensorValues.add(new SensorValue("temperature", randomLong(VALUE_RANGE), "fahrenheit", "Fº"));
-        this.sensorValues.add(new SensorValue("temperature", randomLong(VALUE_RANGE), "kelvin", "K"));
-        this.sensorValues.add(new SensorValue("luminosity", randomLong(VALUE_RANGE), "candela", "C"));
-        this.sensorValues.add(new SensorValue("pressure", randomLong(VALUE_RANGE), "pascal", "P"));
+        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "celsius", "Cº"));
+        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "fahrenheit", "Fº"));
+        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER , randomLong(VALUE_RANGE), "kelvin", "K"));
+        this.sensorValues.add(new SensorValue("luminosity", ValueType.NUMBER, randomLong(VALUE_RANGE), "candela", "C"));
+        this.sensorValues.add(new SensorValue("pressure", ValueType.NUMBER, randomLong(VALUE_RANGE), "pascal", "P"));
     }
 
     public Set<SensorValue> getSensorValueSet() {

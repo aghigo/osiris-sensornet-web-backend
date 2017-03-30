@@ -7,6 +7,7 @@ import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
+import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,23 +24,23 @@ public class CollectorOmcpDao implements CollectorRepository {
     private SensorNetConnection connection;
 
     @Override
-    public CollectorCoTo getByNetworkId(String networkId, String collectorId) {
+    public CollectorSnTo getByNetworkId(String networkId, String collectorId) {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
         Response response = omcpClient.doGet(uri);
-        CollectorCoTo collectorCoTo = response.getContent(CollectorCoTo.class);
-        return collectorCoTo;
+        CollectorSnTo collectorSnTo = response.getContent(CollectorSnTo.class);
+        return collectorSnTo;
     }
 
     @Override
-    public List<CollectorCoTo> getAllByNetworkId(String networkId) {
+    public List<CollectorSnTo> getAllByNetworkId(String networkId) {
         OmcpClient omcpClient = this.connection.getConnection();
 
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorsUri(), networkId);
 
         Response response = omcpClient.doGet(uri);
-        CollectorCoTo[] collectorCoToArray = response.getContent(CollectorCoTo[].class);
-        List<CollectorCoTo> collectorCoToList = Arrays.asList(collectorCoToArray);
-        return collectorCoToList;
+        CollectorSnTo[] collectorSnToArray = response.getContent(CollectorSnTo[].class);
+        List<CollectorSnTo> collectorSnToList = Arrays.asList(collectorSnToArray);
+        return collectorSnToList;
     }
 }

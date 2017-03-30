@@ -21,8 +21,7 @@ public class CollectorController {
 
     @RequestMapping(value = "/collectors/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        CollectorResponse collectorResponse = this.collectorService.getRandom();
-        return ResponseEntity.ok().body(collectorResponse);
+        return ResponseEntity.ok().body(this.collectorService.getRandom());
     }
 
     @RequestMapping(value = "/collectors", method = RequestMethod.GET)

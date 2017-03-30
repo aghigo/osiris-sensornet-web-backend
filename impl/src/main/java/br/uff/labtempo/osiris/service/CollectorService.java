@@ -8,6 +8,7 @@ import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,8 @@ public class CollectorService {
         this.collectorGenerator = collectorGenerator;
     }
 
-    public CollectorResponse getRandom() {
-        return CollectorMapper.toResponse(this.collectorGenerator.getCollectorCoTo());
+    public CollectorCoTo getRandom() {
+        return this.collectorGenerator.getCollectorCoTo();
     }
 
     public List<CollectorResponse> getAllByNetworkId(String networkId) {
@@ -42,9 +43,9 @@ public class CollectorService {
 
     public List<CollectorResponse> getAll() {
         List<CollectorResponse> collectorResponseList = new ArrayList<>();
-        List<NetworkCoTo> networkCoToList = this.networkRepository.getAll();
-        for(NetworkCoTo networkCoTo : networkCoToList) {
-            collectorResponseList.addAll(CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkCoTo.getId())));
+        List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
+        for(NetworkSnTo networkSnTo : networkCoToList) {
+            collectorResponseList.addAll(CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkSnTo.getId())));
         }
         return collectorResponseList;
     }

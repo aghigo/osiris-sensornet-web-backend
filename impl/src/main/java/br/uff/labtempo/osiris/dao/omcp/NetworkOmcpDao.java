@@ -7,6 +7,7 @@ import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
+import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,21 +24,21 @@ public class NetworkOmcpDao implements NetworkRepository {
     private SensorNetConnection connection;
 
     @Override
-    public NetworkCoTo getById(String id) {
+    public NetworkSnTo getById(String id) {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdUri(), id);
         Response response = omcpClient.doGet(uri);
-        NetworkCoTo networkCoto = response.getContent(NetworkCoTo.class);
-        return networkCoto;
+        NetworkSnTo networkSnTo = response.getContent(NetworkSnTo.class);
+        return networkSnTo;
     }
 
     @Override
-    public List<NetworkCoTo> getAll() {
+    public List<NetworkSnTo> getAll() {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = this.sensorNetConfig.getNetworksUri();
         Response response = omcpClient.doGet(uri);
-        NetworkCoTo[] networkCotoArray = response.getContent(NetworkCoTo[].class);
-        List<NetworkCoTo> networkCotoList = Arrays.asList(networkCotoArray);
-        return networkCotoList;
+        NetworkSnTo[] networkSnToArray = response.getContent(NetworkSnTo[].class);
+        List<NetworkSnTo> networkSnToList = Arrays.asList(networkSnToArray);
+        return networkSnToList;
     }
 }

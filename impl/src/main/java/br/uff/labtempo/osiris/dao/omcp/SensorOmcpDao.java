@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.SensorRepository;
-import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,31 +22,31 @@ public class SensorOmcpDao implements SensorRepository {
     private SensorNetConnection connection;
 
     @Override
-    public SensorCoTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
+    public SensorSnTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
         Response response = omcpClient.doGet(uri);
-        SensorCoTo sensorCoTo = response.getContent(SensorCoTo.class);
-        return sensorCoTo;
+        SensorSnTo sensorSnTo = response.getContent(SensorSnTo.class);
+        return sensorSnTo;
     }
 
     @Override
-    public List<SensorCoTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
+    public List<SensorSnTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId);
         Response response = omcpClient.doGet(uri);
-        SensorCoTo[] sensorCoToArray = response.getContent(SensorCoTo[].class);
-        List<SensorCoTo> sensorCoToList = Arrays.asList(sensorCoToArray);
-        return sensorCoToList;
+        SensorSnTo[] sensorSnToArray = response.getContent(SensorSnTo[].class);
+        List<SensorSnTo> sensorSnToList = Arrays.asList(sensorSnToArray);
+        return sensorSnToList;
     }
 
     @Override
-    public List<SensorCoTo> getAllByNetworkId(String networkId) {
+    public List<SensorSnTo> getAllByNetworkId(String networkId) {
         OmcpClient omcpClient = this.connection.getConnection();
         String uri = String.format(this.sensorNetConfig.getNetworkIdSensorsUri(), networkId);
         Response response = omcpClient.doGet(uri);
-        SensorCoTo[] sensorCoToArray = response.getContent(SensorCoTo[].class);
-        List<SensorCoTo> sensorCoToList = Arrays.asList(sensorCoToArray);
-        return sensorCoToList;
+        SensorSnTo[] sensorSnToArray = response.getContent(SensorSnTo[].class);
+        List<SensorSnTo> sensorSnToList = Arrays.asList(sensorSnToArray);
+        return sensorSnToList;
     }
 }

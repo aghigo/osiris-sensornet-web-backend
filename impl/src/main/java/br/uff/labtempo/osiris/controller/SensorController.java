@@ -21,8 +21,7 @@ public class SensorController {
 
     @RequestMapping(value = "/sensors/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        SensorResponse sensorResponse = this.sensorService.getRandom();
-        return ResponseEntity.ok(sensorResponse);
+        return ResponseEntity.ok(this.sensorService.getRandom());
     }
 
     @RequestMapping(value = "/sensors", method = RequestMethod.GET)

@@ -5,6 +5,9 @@ import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CollectorMapper {
     public static CollectorResponse toResponse(CollectorSnTo collectorSnTo) {
         CollectorResponse collectorResponse = CollectorResponse.builder()
@@ -18,5 +21,12 @@ public class CollectorMapper {
                 .totalSensors(collectorSnTo.getTotalSensors())
                 .build();
         return collectorResponse;
+    }
+    public static List<CollectorResponse> toResponse(List<CollectorSnTo> collectorSnToList) {
+        List<CollectorResponse> collectorResponseList = new ArrayList<>();
+        for(CollectorSnTo collectorSnTo : collectorSnToList) {
+            collectorResponseList.add(toResponse(collectorSnTo));
+        }
+        return collectorResponseList;
     }
 }
