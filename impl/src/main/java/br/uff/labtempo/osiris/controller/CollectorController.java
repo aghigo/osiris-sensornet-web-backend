@@ -5,6 +5,7 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.service.CollectorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,20 +28,50 @@ public class CollectorController {
     }
 
     @RequestMapping(value = "/collectors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
-        List<CollectorResponse> collectorResponseList = this.collectorService.getAll();
+    public ResponseEntity<?> getAll() {
+        List<CollectorResponse> collectorResponseList = null;
+        try {
+            collectorResponseList = this.collectorService.getAll();
+        } catch (AbstractRequestException e) {
+            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (AbstractClientRuntimeException e) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+        if(collectorResponseList == null || collectorResponseList.isEmpty()) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.ok().body(collectorResponseList);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
-        List<CollectorResponse> collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
+        List<CollectorResponse> collectorResponseList = null;
+        try {
+            collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
+        } catch (AbstractRequestException e) {
+            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (AbstractClientRuntimeException e) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+        if(collectorResponseList == null || collectorResponseList.isEmpty()) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.ok().body(collectorResponseList);
     }
 
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId, @PathVariable String collectorId) {
-        CollectorResponse collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
+        CollectorResponse collectorResponse = null;
+        try {
+            collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
+        } catch (AbstractRequestException e) {
+            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (AbstractClientRuntimeException e) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+        if(collectorResponse == null) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.ok().body(collectorResponse);
     }
 }

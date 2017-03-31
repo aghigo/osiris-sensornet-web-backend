@@ -33,15 +33,15 @@ public class SensorService {
         return this.sensorGenerator.getSensorCoTo();
     }
 
-    public SensorResponse getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) {
+    public SensorResponse getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) throws AbstractRequestException, AbstractClientRuntimeException {
         return SensorMapper.toResponse(this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId));
     }
 
-    public List<SensorResponse> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) {
+    public List<SensorResponse> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         return SensorMapper.toResponse(this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId));
     }
 
-    public List<SensorResponse> getAllByNetworkId(String networkId) {
+    public List<SensorResponse> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         return SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkId));
     }
 

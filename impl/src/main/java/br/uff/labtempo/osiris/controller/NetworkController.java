@@ -35,7 +35,7 @@ public class NetworkController {
         try {
             networkResponseList = this.networkService.getAll();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (AbstractClientRuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -51,8 +51,7 @@ public class NetworkController {
         try {
             networkResponse = this.networkService.getById(networkId);
         } catch (AbstractRequestException e) {
-            throw e;
-            //return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (AbstractClientRuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

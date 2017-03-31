@@ -35,11 +35,11 @@ public class CollectorService {
         return this.collectorGenerator.getCollectorCoTo();
     }
 
-    public List<CollectorResponse> getAllByNetworkId(String networkId) {
+    public List<CollectorResponse> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         return CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkId));
     }
 
-    public CollectorResponse getByNetworkId(String networkId, String collectorId) {
+    public CollectorResponse getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         return CollectorMapper.toResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
     }
 
