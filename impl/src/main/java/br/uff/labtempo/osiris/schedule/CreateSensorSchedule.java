@@ -55,12 +55,12 @@ public class CreateSensorSchedule {
                 ,sampleCoTo.getSensor().getId())));
     }
 
-    @Scheduled(cron="${sensornet.schedule.create.collector.cron:*/10 * * * * ?}")
-    public void createNewCollector() {
-        CollectorCoTo collectorCoTo = this.collectorGenerator.getCollectorCoTo();
-
-        log.info(String.format("CollectorCoTo Created (%s)", collectorCoTo.getId()));
-    }
+//    @Scheduled(cron="${sensornet.schedule.create.collector.cron:*/10 * * * * ?}")
+//    public void createNewCollector() {
+//        CollectorCoTo collectorCoTo = this.collectorGenerator.getCollectorCoTo();
+//
+//        log.info(String.format("CollectorCoTo Created (%s)", collectorCoTo.getId()));
+//    }
 //
 //    @Scheduled(cron="${sensornet.schedule.create.sensor.cron:*/10 * * * * ?}")
 //    public void createNewSensor() {

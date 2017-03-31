@@ -56,7 +56,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871",
 								"description": ""
 							}
 						],
@@ -83,7 +83,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector",
 								"description": ""
 							}
 						],
@@ -110,7 +110,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/sensor",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/sensor",
 								"description": ""
 							}
 						],
@@ -137,7 +137,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37",
 								"description": ""
 							}
 						],
@@ -164,7 +164,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensor",
 								"description": ""
 							}
 						],
@@ -191,7 +191,7 @@
 							},
 							{
 								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7/collector/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensor/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensor/sensorId-41bf8bce-58a0-4867-87e6-1726742598b9",
 								"description": ""
 							}
 						],
@@ -228,7 +228,7 @@
 					},
 					"response": [
 						{
-							"id": "c0b826aa-0a14-41f6-9122-b78b0b369d17",
+							"id": "1e13b672-c406-45f6-a3b9-1fee4092b9b3",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -303,7 +303,7 @@
 					},
 					"response": [
 						{
-							"id": "a3398a18-4a40-4717-a4c9-ffc1d3cdea37",
+							"id": "7dd77a61-ef16-4b00-a3d6-f61d118e235e",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -381,7 +381,7 @@
 					},
 					"response": [
 						{
-							"id": "fd8e336a-840c-4666-a1c2-e14e93370b97",
+							"id": "11d85eea-0580-44aa-a2ee-630794e012f7",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -459,7 +459,7 @@
 					},
 					"response": [
 						{
-							"id": "a9dcaa47-d2cc-4064-90f2-61feeb9b3d85",
+							"id": "48b636b9-dbdc-449d-8e38-d3a0cbf25cd9",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -537,7 +537,7 @@
 					},
 					"response": [
 						{
-							"id": "b21250e1-63d9-407a-a73d-6dfe1572a317",
+							"id": "56e3c638-3eba-43ba-9e41-1b98c58d61e2",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -615,7 +615,7 @@
 					},
 					"response": [
 						{
-							"id": "0784b729-3ea0-48cd-9bbf-8719fc2bd133",
+							"id": "f30a9b3e-3d3d-4146-beb4-a4ca8cf8e3b4",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -693,7 +693,7 @@
 					},
 					"response": [
 						{
-							"id": "3799cc84-d118-4bf3-b877-ce7c0bf25dce",
+							"id": "621d9905-7b4f-4eb9-9c74-5bab2b117234",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/mock",
@@ -771,7 +771,7 @@
 					},
 					"response": [
 						{
-							"id": "a2afdcd4-78f6-4374-9958-3450e406f21e",
+							"id": "79e75e5a-43a3-45c0-b567-3176d055a04e",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -827,7 +827,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871",
 						"method": "GET",
 						"header": [
 							{
@@ -849,7 +849,7 @@
 					},
 					"response": [
 						{
-							"id": "fb55ba0d-d737-4d2d-a7d1-b59ba8e6c259",
+							"id": "d5e4a787-5989-4576-9117-f997b37a1b0d",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -905,7 +905,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}/sensors",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/sensors",
 						"method": "GET",
 						"header": [
 							{
@@ -927,7 +927,7 @@
 					},
 					"response": [
 						{
-							"id": "0d2cbeda-9b5f-48ea-bd64-c7f4138eec0f",
+							"id": "368f9bbf-aa85-400b-a5a3-36569369bd3d",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -983,7 +983,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}/collectors",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collectors",
 						"method": "GET",
 						"header": [
 							{
@@ -1005,7 +1005,7 @@
 					},
 					"response": [
 						{
-							"id": "88c43506-cbf4-4acf-98ef-5c622e96fa4b",
+							"id": "5e48633a-e52c-41c0-b298-86aaab1fe4d6",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1061,7 +1061,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collectors/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37",
 						"method": "GET",
 						"header": [
 							{
@@ -1083,7 +1083,7 @@
 					},
 					"response": [
 						{
-							"id": "05c98e10-a580-4acf-bef3-f1af7524ea70",
+							"id": "a6b07a74-3945-4cda-8112-1ef56a0a43d5",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1139,7 +1139,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}/sensors",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collectors/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensors",
 						"method": "GET",
 						"header": [
 							{
@@ -1161,7 +1161,7 @@
 					},
 					"response": [
 						{
-							"id": "1daf0ec0-4681-4ddb-8227-185860f33c93",
+							"id": "190a0983-54e0-4f98-8e88-0f9ae81e00e8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1217,7 +1217,7 @@
 				{
 					"name": "/sensornet/networks/{networkId}/collectors/{collectorId}/sensors/{sensorId}",
 					"request": {
-						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
+						"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collectors/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensors/sensorId-41bf8bce-58a0-4867-87e6-1726742598b9",
 						"method": "GET",
 						"header": [
 							{
@@ -1239,7 +1239,7 @@
 					},
 					"response": [
 						{
-							"id": "8c26502d-091b-42f4-8dd5-e361894c64d8",
+							"id": "8afdb2a4-60d1-4aaf-9f0b-37d4e2587f20",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
