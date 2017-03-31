@@ -49,9 +49,9 @@ public class CollectorController {
         try {
             collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
         } catch (AbstractRequestException e) {
-            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         if(collectorResponseList == null || collectorResponseList.isEmpty()) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -65,9 +65,10 @@ public class CollectorController {
         try {
             collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
         } catch (AbstractRequestException e) {
-            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage()
+            );
         }
         if(collectorResponse == null) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -33,9 +33,9 @@ public class SensorController {
         try {
             sensorResponseList = this.sensorService.getAll();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         if(sensorResponseList == null || sensorResponseList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -49,9 +49,9 @@ public class SensorController {
         try {
             sensorResponseList = this.sensorService.getAllByNetworkId(networkId);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         if(sensorResponseList == null || sensorResponseList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -65,9 +65,9 @@ public class SensorController {
         try {
             sensorResponseList = this.sensorService.getAllByCollectorIdAndNetworkId(networkId, collectorId);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         if(sensorResponseList == null || sensorResponseList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -81,9 +81,9 @@ public class SensorController {
         try {
             sensorResponse = this.sensorService.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         if(sensorResponse == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -35,12 +35,9 @@ public class NetworkController {
         try {
             networkResponseList = this.networkService.getAll();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-        if(networkResponseList == null || networkResponseList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(networkResponseList);
     }
@@ -51,12 +48,9 @@ public class NetworkController {
         try {
             networkResponse = this.networkService.getById(networkId);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).build();
         } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
-        if(networkResponse == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         return ResponseEntity.ok(networkResponse);
     }
