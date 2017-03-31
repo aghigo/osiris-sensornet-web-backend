@@ -1,5 +1,7 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.model.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
@@ -43,7 +45,7 @@ public class SensorService {
         return SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkId));
     }
 
-    public List<SensorResponse> getAll() {
+    public List<SensorResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<SensorResponse> sensorResponseList = new ArrayList<>();
         List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
         for(NetworkSnTo networkSnTo : networkCoToList) {

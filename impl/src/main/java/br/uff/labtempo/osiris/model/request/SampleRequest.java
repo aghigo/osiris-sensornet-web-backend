@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.model.request;
 
+import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
@@ -18,11 +19,11 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class SampleRequest {
     @NotNull @Valid
-    private NetworkCoTo network;
+    private NetworkRequest network;
 
     @NotNull @Valid
-    private CollectorCoTo collector;
+    private CollectorRequest collector;
 
     @NotNull @Valid
-    private SensorCoTo sensor;
+    private SensorRequest sensor;
 }

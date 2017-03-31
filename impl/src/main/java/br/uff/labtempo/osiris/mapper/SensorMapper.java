@@ -1,8 +1,12 @@
 package br.uff.labtempo.osiris.mapper;
 
+import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
+import br.uff.labtempo.osiris.model.request.SensorRequest;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
+import br.uff.labtempo.osiris.to.common.definitions.State;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 
 import java.util.ArrayList;
@@ -44,5 +48,26 @@ public class SensorMapper {
             sensorResponseList.add(toResponse(sensorSnTo));
         }
         return sensorResponseList;
+    }
+
+    public static SensorCoTo toCoTo(SensorRequest sensorRequest) {
+        SensorCoTo sensorCoTo = new SensorCoTo(sensorRequest.getId(), State.NEW, sensorRequest.getCaptureDateInMillis()
+        , sensorRequest.getCaptureDateInNano(), sensorRequest.getAcquisitionDateInMillis());
+
+        sensorCoTo.addInfo(sensorRequest.getInfo());
+
+        for(SensorValue value : sensorRequest.getValues()) {
+            sensorCoTo.addValue(value.getName(), value.getValue(), value.getUnit(), value.getSymbol());
+        }
+
+        for(String consumable : sensorRequest.getConsumables().keySet()) {
+            sensorCoTo.addConsumable(consumable, sensorRequest.getConsumables().get(consumable));
+        }
+
+        for(SensorConsumableRule rule : sensorRequest.getRules()) {
+            sensorCoTo.addConsumableRule(rule.getName(), rule.getConsumableName(), rule.getOperator(), rule.getLimitValue(), rule.getMessage());
+        }
+
+        return sensorCoTo;
     }
 }

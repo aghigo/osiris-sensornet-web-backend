@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.mapper;
 
 
+import br.uff.labtempo.osiris.model.request.CollectorRequest;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
@@ -28,5 +29,20 @@ public class CollectorMapper {
             collectorResponseList.add(toResponse(collectorSnTo));
         }
         return collectorResponseList;
+    }
+
+    public static CollectorCoTo toCoTo(CollectorRequest collectorRequest) {
+        CollectorCoTo collectorCoTo = new CollectorCoTo(collectorRequest.getId(),
+                collectorRequest.getCaptureInterval(), collectorRequest.getCaptureIntervalTimeUnit());
+        collectorCoTo.addInfo(collectorRequest.getInfo());
+        return collectorCoTo;
+    }
+
+    public static List<CollectorCoTo> toCoTo(List<CollectorRequest> collectorRequestList) {
+        List<CollectorCoTo> collectorCoToList = new ArrayList<>();
+        for(CollectorRequest collectorRequest : collectorRequestList) {
+            collectorCoToList.add(toCoTo(collectorRequest));
+        }
+        return collectorCoToList;
     }
 }

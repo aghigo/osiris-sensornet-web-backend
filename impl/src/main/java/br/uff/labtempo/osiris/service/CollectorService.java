@@ -1,5 +1,7 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.CollectorMapper;
 import br.uff.labtempo.osiris.model.generator.collector.CollectorGenerator;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
@@ -41,7 +43,7 @@ public class CollectorService {
         return CollectorMapper.toResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
     }
 
-    public List<CollectorResponse> getAll() {
+    public List<CollectorResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<CollectorResponse> collectorResponseList = new ArrayList<>();
         List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
         for(NetworkSnTo networkSnTo : networkCoToList) {

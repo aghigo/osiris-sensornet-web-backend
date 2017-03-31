@@ -1,5 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.service.CollectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class CollectorController {
     }
 
     @RequestMapping(value = "/collectors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<CollectorResponse> collectorResponseList = this.collectorService.getAll();
         return ResponseEntity.ok().body(collectorResponseList);
     }

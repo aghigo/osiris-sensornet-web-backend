@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.model.request;
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
+import br.uff.labtempo.osiris.to.common.definitions.State;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,6 +21,8 @@ import java.util.Map;
 public class SensorRequest {
     @NotNull @NotEmpty
     private String id;
+
+    private State state;
 
     @Min(1)
     private long captureDateInMillis;

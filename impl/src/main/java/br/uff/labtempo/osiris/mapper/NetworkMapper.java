@@ -1,6 +1,8 @@
 package br.uff.labtempo.osiris.mapper;
 
+import br.uff.labtempo.osiris.model.request.NetworkRequest;
 import br.uff.labtempo.osiris.model.response.NetworkResponse;
+import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 
 import java.util.ArrayList;
@@ -25,5 +27,19 @@ public class NetworkMapper {
             networkResponseList.add(toResponse(networkSnTo));
         }
         return networkResponseList;
+    }
+
+    public static NetworkCoTo toCoTo(NetworkRequest networkRequest) {
+        NetworkCoTo networkCoTo = new NetworkCoTo(networkRequest.getId());
+        networkCoTo.addInfo(networkRequest.getInfo());
+        return networkCoTo;
+    }
+
+    public static List<NetworkCoTo> toCoTo(List<NetworkRequest> networkRequestList) {
+        List<NetworkCoTo> networkCoToList = new ArrayList<>();
+        for(NetworkRequest networkRequest : networkRequestList) {
+            networkCoToList.add(toCoTo(networkRequest));
+        }
+        return networkCoToList;
     }
 }
