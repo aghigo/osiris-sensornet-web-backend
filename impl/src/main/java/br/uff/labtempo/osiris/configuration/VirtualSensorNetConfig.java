@@ -13,30 +13,24 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class VirtualSensorNetConfig {
-    @Value("${virtualsensornet.messgegroup.collector:omcp://collector.messagegroup/}")
-    private String collectorMessageGroupUri;
+    @Value("${virtualsensornet.ip:127.0.0.1}")
+    private String ip;
 
-    @Value("${virtualsensornet.uri:omcp://sensornet.osiris/}")
-    private String moduleUri;
+    @Value("${virtualsensornet.port:8091}")
+    private int port;
 
-    @Value("${virtualsensornet.uri.networks:omcp://sensornet.osiris/}")
-    private String networksUri;
+    @Value("${virtualsensornet.username:guest}")
+    private String username;
 
-    @Value("${virtualsensornet.uri.networkId:omcp://sensornet.osiris/%1$s/}")
-    private String networkIdUri;
+    @Value("${virtualsensornet.password:guest}")
+    private String password;
 
-    @Value("${virtualsensornet.uri.networkId.collectors:omcp://sensornet.osiris/%1$s/collector/}")
-    private String networkIdCollectorsUri;
+    @Value("${virtualsensornet.uri=omcp://virtualsensornet.osiris/}")
+    private String virtualSensorNetUri;
 
-    @Value("${virtualsensornet.uri.networkId.sensors:omcp://sensornet.osiris/%1$s/sensor/}")
-    private String networkIdSensorsUri;
+    @Value("${virtualsensornet.uri.datatypes:omcp://virtualsensornet.osiris/datatype}")
+    private String dataTypesUri;
 
-    @Value("${virtualsensornet.uri.networkId.collectorId:omcp://sensornet.osiris/%1$s/collector/%2$s/}")
-    private String networkIdCollectorIdUri;
-
-    @Value("${virtualsensornet.uri.networkId.collectorId.sensors:omcp://sensornet.osiris/%1$s/collector/%2$s/sensor/}")
-    private String networkIdCollectorIdSensorsUri;
-
-    @Value("${virtualsensornet.uri.networkId.collectorId.sensorId:omcp://sensornet.osiris/%1$s/collector/%2$s/sensor/%3$s/}")
-    private String networkIdCollectorIdSensorIdUri;
+    @Value("${virtualsensornet.uri.datatypeId:omcp://virtualsensornet.osiris/datatype/%1$s/}")
+    private String dataTypeIdUri;
 }
