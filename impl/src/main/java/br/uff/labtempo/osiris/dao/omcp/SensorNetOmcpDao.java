@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Component("genericOmcpDao")
-public class GenericOmcpDao<T> implements OmcpRepository<T> {
+@Component("sensorNetOmcpDao")
+public class SensorNetOmcpDao<T> implements OmcpRepository<T> {
 
     private SensorNetConnection sensorNetConnection;
 
     @Autowired
-    public GenericOmcpDao(SensorNetConnection sensorNetConnection) {
+    public SensorNetOmcpDao(SensorNetConnection sensorNetConnection) {
         this.sensorNetConnection = sensorNetConnection;
     }
 
