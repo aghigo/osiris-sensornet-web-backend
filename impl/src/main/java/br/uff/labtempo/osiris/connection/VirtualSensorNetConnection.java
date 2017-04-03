@@ -12,7 +12,7 @@ public class VirtualSensorNetConnection {
     @Value("${virtualsensornet.ip:127.0.0.1}")
     private String ip;
 
-    @Value("${virtualsensornet.port:8090}")
+    @Value("${virtualsensornet.port:8091}")
     private int port;
 
     @Value("${virtualsensornet.username:guest}")
