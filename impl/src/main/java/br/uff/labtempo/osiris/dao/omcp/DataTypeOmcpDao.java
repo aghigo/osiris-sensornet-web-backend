@@ -58,7 +58,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getDataTypeIdUri();
+        String uri = this.virtualSensorNetConfig.getDataTypesUri();
         Response response;
         try {
             response = omcpClient.doGet(uri);
