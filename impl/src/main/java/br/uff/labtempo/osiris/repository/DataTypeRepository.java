@@ -14,5 +14,5 @@ public interface DataTypeRepository {
     List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;
     URI insert(DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException;
     void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException;
-    void delete(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException;
+    void delete(String id) throws AbstractClientRuntimeException, AbstractRequestException;
 }

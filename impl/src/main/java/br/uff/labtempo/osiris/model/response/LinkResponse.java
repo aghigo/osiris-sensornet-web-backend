@@ -31,5 +31,5 @@ public class LinkResponse {
     private String networkId;
 
     @NotNull @NotEmpty
-    private Map<String, String> field;
+    private Map<String, Long> field;
 }
