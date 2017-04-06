@@ -33,4 +33,25 @@ public class VirtualSensorNetConfig {
 
     @Value("${virtualsensornet.uri.datatypeId:omcp://virtualsensornet.osiris/datatype/%1$s/}")
     private String dataTypeIdUri;
+
+    @Value("${virtualsensornet.uri.links:omcp://virtualsensornet.osiris/vsensor/}")
+    private String linksUri;
+
+    @Value("${virtualsensornet.uri.linkId:omcp://virtualsensornet.osiris/vsensor/%1$s/}")
+    private String linkIdUri;
+
+    @Value("${virtualsensornet.uri.composites:omcp://virtualsensornet.osiris/composite}")
+    private String compositesUri;
+
+    @Value("${virtualsensornet.uri.compositeId:omcp://virtualsensornet.osiris/composite/%1$s/}")
+    private String compositeIdUri;
+
+    @Value("${virtualsensornet.uri.blendings:omcp://virtualsensornet.osiris/blending}")
+    private String blendingsUri;
+
+    @Value("${virtualsensornet.uri.blendingId:omcp://virtualsensornet.osiris/blending/%1$s/}")
+    private String blendingIdUri;
+
+    @Value("${virtualsensornet.uri.function:omcp://virtualsensornet.osiris/function}")
+    private String functionUri;
 }
