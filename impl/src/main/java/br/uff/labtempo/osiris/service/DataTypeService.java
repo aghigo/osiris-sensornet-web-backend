@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.DataTypeMapper;
-import br.uff.labtempo.osiris.model.generator.DataTypeGenerator;
+import br.uff.labtempo.osiris.model.generator.datatype.DataTypeGenerator;
 import br.uff.labtempo.osiris.model.request.DataTypeRequest;
 import br.uff.labtempo.osiris.model.response.DataTypeResponse;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;

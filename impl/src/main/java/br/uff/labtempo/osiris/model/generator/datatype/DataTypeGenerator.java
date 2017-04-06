@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.generator;
+package br.uff.labtempo.osiris.model.generator.datatype;
 
 import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
