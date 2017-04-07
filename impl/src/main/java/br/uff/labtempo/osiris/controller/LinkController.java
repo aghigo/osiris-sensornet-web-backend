@@ -4,6 +4,7 @@ import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.LinkRequest;
 import br.uff.labtempo.osiris.model.response.LinkResponse;
 import br.uff.labtempo.osiris.service.LinkService;
+import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
@@ -41,6 +43,38 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
     }
 
+    @RequestMapping(value = "/links", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> options() {
+        return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
+    }
+
+    @RequestMapping(value = "/links", method = RequestMethod.POST)
+    public ResponseEntity<?> post(@Valid LinkRequest linkRequest) {
+        URI uri;
+        try {
+            uri = this.linkService.create(linkRequest);
+        } catch (AbstractRequestException | URISyntaxException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/links/mock", method = RequestMethod.GET)
+    public ResponseEntity<?> getRandom() {
+        LinkVsnTo linkVsnTo;
+        try {
+            linkVsnTo = this.linkService.getRandom();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
+    }
+
+    @RequestMapping(value = "/links/mock", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsMock() {
+        return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
+    }
+
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String linkId) {
         LinkResponse linkResponse;
@@ -53,17 +87,6 @@ public class LinkController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(linkResponse);
-    }
-
-    @RequestMapping(value = "/links", method = RequestMethod.POST)
-    public ResponseEntity<?> post(@Valid LinkRequest linkRequest) {
-        URI uri;
-        try {
-            uri = this.linkService.create(linkRequest);
-        } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-        return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.PUT)
@@ -84,11 +107,6 @@ public class LinkController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @RequestMapping(value = "/links", method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> options() {
-        return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
     }
 
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.OPTIONS)
