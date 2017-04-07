@@ -228,7 +228,79 @@
 					},
 					"response": [
 						{
-							"id": "a87221b9-ac71-4a25-b4ed-f26f92300b4c",
+							"id": "e45815b2-18c8-4377-9913-13ebf74e7e1e",
+							"name": "response_example_1",
+							"originalRequest": {
+								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Tue, 28 Mar 2017 20:48:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 75,
+							"body": "{\"network\":{\"id\":\"networkId-38fbedf8-3125-4354-a2bf-7fee2c69108f\",\"info\":{\"operating system\":\"Android 4.4\"}},\"collector\":{\"id\":\"collectorId-45d556cb-bd1f-4b77-ba28-dfd8b512830c\",\"captureInterval\":1490734139079,\"captureIntervalTimeUnit\":\"MILLISECONDS\",\"info\":{\"type\":\"distributed\"}},\"sensor\":{\"id\":\"sensorId-7f732762-53eb-43b8-a577-013cfe8241ad\",\"captureDateInMillis\":1490734139079,\"captureDateInNano\":1490734,\"acquisitionDateInMillis\":1490734158641,\"info\":{\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":11447,\"unit\":\"11447\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":48,\"Low Signal\":3,\"Low battery\":53,\"Full battery\":76,\"Normal battery\":6,\"Normal Signal\":94},\"rules\":[{\"name\":\"Low Signal\",\"consumableName\":\"signal\",\"operator\":\"LESS_THAN\",\"limitValue\":0,\"message\":\"Signal is low.\"},{\"name\":\"Normal Signal\",\"consumableName\":\"signal\",\"operator\":\"GREATER_THAN\",\"limitValue\":3,\"message\":\"Signal is normal.\"},{\"name\":\"Good Signal\",\"consumableName\":\"signal\",\"operator\":\"EQUAL\",\"limitValue\":100,\"message\":\"Signal is good.\"},{\"name\":\"Low battery\",\"consumableName\":\"battery\",\"operator\":\"LESS_THAN\",\"limitValue\":13,\"message\":\"Battery is low.\"},{\"name\":\"Full battery\",\"consumableName\":\"battery\",\"operator\":\"EQUAL\",\"limitValue\":100,\"message\":\"Battery is full.\"},{\"name\":\"Normal battery\",\"consumableName\":\"battery\",\"operator\":\"LESS_THAN\",\"limitValue\":13,\"message\":\"Battery is normal.\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "/sensornet/samples",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/sensornet/samples",
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a Sample from SensorNet (NetworkRequest + CollectorRequest + SensorRequest)"
+					},
+					"response": [
+						{
+							"id": "cef8e865-6102-42f7-b3b2-c642d457e7a6",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -303,7 +375,7 @@
 					},
 					"response": [
 						{
-							"id": "270345bd-868e-4831-8cc1-f3b57b639262",
+							"id": "929aed64-dede-443f-a131-52052393d45a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -381,7 +453,7 @@
 					},
 					"response": [
 						{
-							"id": "7d9cf36f-990f-490a-9efa-23b774fcc77d",
+							"id": "086ec6b1-8978-4299-aab0-2ea42efa4551",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -459,7 +531,7 @@
 					},
 					"response": [
 						{
-							"id": "7d00e65f-d0b8-44f0-9027-95db92074a40",
+							"id": "bd97aa46-b9e4-4709-8b24-93a79e2b6b2b",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -537,7 +609,7 @@
 					},
 					"response": [
 						{
-							"id": "8d2ba0f5-a170-4161-8b12-7325d88f63ad",
+							"id": "39322cc5-4efb-49bf-9852-332139d7e22e",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -615,7 +687,7 @@
 					},
 					"response": [
 						{
-							"id": "ab30997b-97c1-4a5e-bdad-76b7dd9233c1",
+							"id": "81f602a1-c143-4ef8-8e43-0c5aa1097701",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -693,7 +765,7 @@
 					},
 					"response": [
 						{
-							"id": "291bb3a6-1620-46a5-8962-a7a23964fce0",
+							"id": "ddddf361-11ef-481b-a68f-17ba6ed219df",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/mock",
@@ -771,7 +843,7 @@
 					},
 					"response": [
 						{
-							"id": "9ab224d8-c27a-4af3-b33e-c2c65c4f39d7",
+							"id": "38c744d4-0f15-4d70-942a-5845e527f735",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -849,7 +921,7 @@
 					},
 					"response": [
 						{
-							"id": "b1599634-2d2c-4b38-b437-74869819daa9",
+							"id": "183a400c-7b27-4533-b910-85ca7141ca08",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -927,7 +999,7 @@
 					},
 					"response": [
 						{
-							"id": "32fe09c4-b768-4ec3-afb2-c23dc73bf671",
+							"id": "20c3b8d7-5d59-464a-84a1-7cc9d47fd69c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1005,7 +1077,7 @@
 					},
 					"response": [
 						{
-							"id": "14a2ac3d-3e6e-448f-96c5-979e6a56bb87",
+							"id": "2be3f097-a3ff-4110-9815-041777e3b8a5",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1083,7 +1155,7 @@
 					},
 					"response": [
 						{
-							"id": "fb6ef947-d5c3-4add-8615-1e2754955363",
+							"id": "1fdf5014-f8d2-4834-b45c-0741aafe84de",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1161,7 +1233,7 @@
 					},
 					"response": [
 						{
-							"id": "52627aa0-182a-4200-9bdf-e4a6f1a09a0b",
+							"id": "16df660a-47bd-4613-aab9-dc0eb8cf86d6",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1239,7 +1311,7 @@
 					},
 					"response": [
 						{
-							"id": "a563fe9f-b07e-42dc-af89-649935082834",
+							"id": "cb38f08c-ee00-4b6d-be3a-0b3c8ae67582",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1352,7 +1424,7 @@
 					"response": []
 				},
 				{
-					"name": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
+					"name": "/virtualsensornet/datatypes/mock",
 					"request": {
 						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
 						"method": "GET",
@@ -1369,7 +1441,7 @@
 							}
 						],
 						"body": {},
-						"description": "Get a new created random DataType."
+						"description": "Get a new created random mocked DataType object."
 					},
 					"response": []
 				},
@@ -1436,6 +1508,28 @@
 						],
 						"body": {},
 						"description": "Get All Link Sensors from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/links/mock",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a randomly crated Link Sensor."
 					},
 					"response": []
 				},
