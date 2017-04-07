@@ -117,11 +117,57 @@ public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Override
     public void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
-
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        Response response;
+        try {
+            response = omcpClient.doPut(id, dataTypeVsnTo);
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+        switch(response.getStatusCode()) {
+            case NOT_FOUND:
+                throw new NotFoundException();
+            case BAD_REQUEST:
+                throw new BadRequestException();
+            case REQUEST_TIMEOUT:
+                throw new RequestTimeoutException();
+            case INTERNAL_SERVER_ERROR:
+                throw new InternalServerErrorException();
+            case FORBIDDEN:
+                throw new ForbiddenException();
+            case METHOD_NOT_ALLOWED:
+                throw new MethodNotAllowedException();
+            case NOT_IMPLEMENTED:
+                throw new NotImplementedException();
+        }
     }
 
     @Override
-    public void delete(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
-
+    public void delete(String id) throws AbstractClientRuntimeException, AbstractRequestException {
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        Response response;
+        try {
+            response = omcpClient.doDelete(id);
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+        switch(response.getStatusCode()) {
+            case NOT_FOUND:
+                throw new NotFoundException();
+            case BAD_REQUEST:
+                throw new BadRequestException();
+            case REQUEST_TIMEOUT:
+                throw new RequestTimeoutException();
+            case INTERNAL_SERVER_ERROR:
+                throw new InternalServerErrorException();
+            case FORBIDDEN:
+                throw new ForbiddenException();
+            case METHOD_NOT_ALLOWED:
+                throw new MethodNotAllowedException();
+            case NOT_IMPLEMENTED:
+                throw new NotImplementedException();
+        }
     }
 }

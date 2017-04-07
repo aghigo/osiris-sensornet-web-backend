@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LinkMapper {
-    public LinkVsnTo toVsnTo(LinkRequest linkRequest) {
+    public static LinkVsnTo toVsnTo(LinkRequest linkRequest) {
         LinkVsnTo linkVsnTo = new LinkVsnTo(linkRequest.getSensorId(), linkRequest.getCollectorId(), linkRequest.getNetworkId());
         Map<String, Long> fields = linkRequest.getField();
         for(String fieldName : fields.keySet()) {
@@ -20,7 +20,7 @@ public class LinkMapper {
         return linkVsnTo;
     }
 
-    public List<LinkVsnTo> toVsnTo(List<LinkRequest> linkRequestList) {
+    public static List<LinkVsnTo> toVsnTo(List<LinkRequest> linkRequestList) {
         List<LinkVsnTo> linkVsnToList = new ArrayList<>();
         for(LinkRequest linkRequest : linkRequestList) {
             linkVsnToList.add(toVsnTo(linkRequest));
@@ -28,7 +28,7 @@ public class LinkMapper {
         return linkVsnToList;
     }
 
-    public LinkResponse toResponse(LinkVsnTo linkVsnTo) {
+    public static LinkResponse toResponse(LinkVsnTo linkVsnTo) {
         LinkResponse linkResponse = new LinkResponse();
         linkResponse.setId(linkVsnTo.getId());
         linkResponse.setSensorId(linkVsnTo.getSensorId());
@@ -42,7 +42,7 @@ public class LinkMapper {
         return linkResponse;
     }
 
-    public List<LinkResponse> toResponse(List<LinkVsnTo> linkVsnToList) {
+    public static List<LinkResponse> toResponse(List<LinkVsnTo> linkVsnToList) {
         List<LinkResponse> linkResponseList = new ArrayList<>();
         for(LinkVsnTo linkVsnTo : linkVsnToList) {
             linkResponseList.add(toResponse(linkVsnTo));

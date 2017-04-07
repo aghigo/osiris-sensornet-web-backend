@@ -11,6 +11,8 @@ import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -83,17 +85,87 @@ public class LinkOmcpDao implements LinkRepository {
     }
 
     @Override
-    public void save(LinkVsnTo linkVsnTo) {
-
+    public URI save(LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = this.virtualSensorNetConfig.getLinksUri();
+        Response response;
+        try {
+            response = omcpClient.doPost(uri, linkVsnTo);
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+        switch(response.getStatusCode()) {
+            case NOT_FOUND:
+                throw new NotFoundException();
+            case BAD_REQUEST:
+                throw new BadRequestException();
+            case REQUEST_TIMEOUT:
+                throw new RequestTimeoutException();
+            case INTERNAL_SERVER_ERROR:
+                throw new InternalServerErrorException();
+            case FORBIDDEN:
+                throw new ForbiddenException();
+            case METHOD_NOT_ALLOWED:
+                throw new MethodNotAllowedException();
+            case NOT_IMPLEMENTED:
+                throw new NotImplementedException();
+        }
+        return new URI(response.getLocation());
     }
 
     @Override
-    public void update(String id, LinkVsnTo linkVsnTo) {
-
+    public void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = this.virtualSensorNetConfig.getLinksUri();
+        Response response;
+        try {
+            response = omcpClient.doPut(uri, linkVsnTo);
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+        switch(response.getStatusCode()) {
+            case NOT_FOUND:
+                throw new NotFoundException();
+            case BAD_REQUEST:
+                throw new BadRequestException();
+            case REQUEST_TIMEOUT:
+                throw new RequestTimeoutException();
+            case INTERNAL_SERVER_ERROR:
+                throw new InternalServerErrorException();
+            case FORBIDDEN:
+                throw new ForbiddenException();
+            case METHOD_NOT_ALLOWED:
+                throw new MethodNotAllowedException();
+            case NOT_IMPLEMENTED:
+                throw new NotImplementedException();
+        }
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException {
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = this.virtualSensorNetConfig.getLinksUri();
+        Response response;
+        try {
+            response = omcpClient.doDelete(id);
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+        switch(response.getStatusCode()) {
+            case NOT_FOUND:
+                throw new NotFoundException();
+            case BAD_REQUEST:
+                throw new BadRequestException();
+            case REQUEST_TIMEOUT:
+                throw new RequestTimeoutException();
+            case INTERNAL_SERVER_ERROR:
+                throw new InternalServerErrorException();
+            case FORBIDDEN:
+                throw new ForbiddenException();
+            case METHOD_NOT_ALLOWED:
+                throw new MethodNotAllowedException();
+            case NOT_IMPLEMENTED:
+                throw new NotImplementedException();
+        }
     }
 }

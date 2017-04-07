@@ -7,11 +7,14 @@ import br.uff.labtempo.osiris.model.response.NetworkResponse;
 import br.uff.labtempo.osiris.service.NetworkService;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -29,6 +32,11 @@ public class NetworkController {
         return ResponseEntity.ok(networkCoTo);
     }
 
+    @RequestMapping(value = "/networks/mock", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsMock() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+    }
+
     @RequestMapping(value = "/networks", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         List<NetworkResponse> networkResponseList;
@@ -42,6 +50,11 @@ public class NetworkController {
         return ResponseEntity.ok(networkResponseList);
     }
 
+    @RequestMapping(value = "/networks", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsNetworks() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+    }
+
     @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         NetworkResponse networkResponse = null;
@@ -53,5 +66,10 @@ public class NetworkController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         return ResponseEntity.ok(networkResponse);
+    }
+
+    @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsNetworkId() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 }

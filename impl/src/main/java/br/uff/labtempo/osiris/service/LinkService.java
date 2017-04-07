@@ -9,6 +9,7 @@ import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -23,23 +24,28 @@ public class LinkService {
 
     public LinkResponse getById(String id) throws AbstractRequestException {
         LinkVsnTo linkVsnTo = this.linkRepository.getById(id);
-        LinkResponse linkResponse = LinkMapper.
-
+        LinkResponse linkResponse = LinkMapper.toResponse(linkVsnTo);
+        return linkResponse;
     }
 
-    public List<LinkResponse> getAll() {
-        return null;
+    public List<LinkResponse> getAll() throws AbstractRequestException {
+        List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
+        List<LinkResponse> linkResponseList = LinkMapper.toResponse(linkVsnToList);
+        return linkResponseList;
     }
 
-    public void create(LinkRequest linkRequest) {
-
+    public URI create(LinkRequest linkRequest) throws AbstractRequestException {
+        LinkVsnTo linkVsnTo = LinkMapper.toVsnTo(linkRequest);
+        URI uri = this.linkRepository.save(linkVsnTo);
+        return uri;
     }
 
-    public void update(String id, LinkRequest linkRequest) {
-
+    public void update(String id, LinkRequest linkRequest) throws AbstractRequestException {
+        LinkVsnTo linkVsnTo = LinkMapper.toVsnTo(linkRequest);
+        this.linkRepository.update(id, linkVsnTo);
     }
 
-    public void delete(String id) {
-
+    public void delete(String id) throws AbstractRequestException {
+        this.linkRepository.delete(id);
     }
 }

@@ -5,6 +5,7 @@ import br.uff.labtempo.osiris.repository.OmcpRepository;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 @RestController
 @RequestMapping(value = "/virtualsensornet/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -34,5 +37,10 @@ public class VirtualSensorNetOmcpControler {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(responseContent);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsNetworkIdCollectorIdSensorId() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 }

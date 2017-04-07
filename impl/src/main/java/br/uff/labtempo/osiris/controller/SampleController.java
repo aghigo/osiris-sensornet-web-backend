@@ -4,6 +4,7 @@ import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -31,10 +34,19 @@ public class SampleController {
         return ResponseEntity.ok(sampleResponse);
     }
 
+    @RequestMapping(value = "/samples/mock", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsMock() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+    }
+
     @RequestMapping(value ="/samples", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody(required = true) @Valid SampleRequest sampleRequest) throws URISyntaxException {
         URI uri = this.sampleService.create(sampleRequest);
         return ResponseEntity.created(uri).build();
     }
 
+    @RequestMapping(value = "/samples", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> optionsSamples() {
+        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+    }
 }
