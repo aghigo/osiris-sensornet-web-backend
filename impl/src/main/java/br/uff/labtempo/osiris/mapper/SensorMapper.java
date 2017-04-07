@@ -11,9 +11,10 @@ import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SensorMapper {
-    public static SensorResponse toResponse(SensorSnTo sensorSnTo) {
+    public static SensorResponse snToToResponse(SensorSnTo sensorSnTo) {
         SensorResponse sensorResponse = SensorResponse.builder()
                 .acquisitionTimestampInMillis(sensorSnTo.getAcquisitionTimestampInMillis())
                 .capturePrecisionInNano(sensorSnTo.getCapturePrecisionInNano())
@@ -42,15 +43,15 @@ public class SensorMapper {
         return sensorResponse;
     }
 
-    public static List<SensorResponse> toResponse(List<SensorSnTo> sensorSnToList) {
+    public static List<SensorResponse> snToToResponse(List<SensorSnTo> sensorSnToList) {
         List<SensorResponse> sensorResponseList = new ArrayList<>();
         for(SensorSnTo sensorSnTo : sensorSnToList) {
-            sensorResponseList.add(toResponse(sensorSnTo));
+            sensorResponseList.add(snToToResponse(sensorSnTo));
         }
         return sensorResponseList;
     }
 
-    public static SensorCoTo toCoTo(SensorRequest sensorRequest) {
+    public static SensorCoTo requestToCoTo(SensorRequest sensorRequest) {
         SensorCoTo sensorCoTo = new SensorCoTo(sensorRequest.getId(), State.NEW, sensorRequest.getCaptureDateInMillis()
         , sensorRequest.getCaptureDateInNano(), sensorRequest.getAcquisitionDateInMillis());
 
@@ -69,5 +70,26 @@ public class SensorMapper {
         }
 
         return sensorCoTo;
+    }
+
+    public static SensorCoTo snToToCoTo(SensorSnTo sensorSnTo) {
+        SensorCoTo sensorCoTo = new SensorCoTo(sensorSnTo.getId(), sensorSnTo.getState(), sensorSnTo.getCaptureTimestampInMillis(), sensorSnTo.getCapturePrecisionInNano(), sensorSnTo.getAcquisitionTimestampInMillis());
+        sensorCoTo.addInfo(sensorSnTo.getInfo());
+        for(ValueTo valueTo : sensorSnTo.getValuesTo()) {
+            sensorCoTo.addValue(valueTo.getName(), valueTo.getValue(), valueTo.getUnit(), valueTo.getSymbol());
+        }
+        Map<String, Integer> consumableMap = sensorSnTo.getConsumables();
+        for(String consumableName : consumableMap.keySet()) {
+            sensorCoTo.addConsumable(consumableName, consumableMap.get(consumableName));
+        }
+        return sensorCoTo;
+    }
+
+    public static List<SensorCoTo> snToToCoTo(List<SensorSnTo> sensorSnToList) {
+        List<SensorCoTo> sensorCoToList = new ArrayList<>();
+        for(SensorSnTo sensorSnTo : sensorSnToList) {
+            sensorCoToList.add(snToToCoTo(sensorSnTo));
+        }
+        return sensorCoToList;
     }
 }

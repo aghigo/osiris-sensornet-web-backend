@@ -9,16 +9,16 @@ import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 
 public class SampleMapper {
-    public static SampleCoTo toCoTo(SampleRequest sampleRequest) {
-        NetworkCoTo networkCoTo = NetworkMapper.toCoTo(sampleRequest.getNetwork());
-        CollectorCoTo collectorCoTo = CollectorMapper.toCoTo(sampleRequest.getCollector());
-        SensorCoTo sensorCoTo = SensorMapper.toCoTo(sampleRequest.getSensor());
+    public static SampleCoTo requestToCoTo(SampleRequest sampleRequest) {
+        NetworkCoTo networkCoTo = NetworkMapper.requestToCoTo(sampleRequest.getNetwork());
+        CollectorCoTo collectorCoTo = CollectorMapper.requestToCoTo(sampleRequest.getCollector());
+        SensorCoTo sensorCoTo = SensorMapper.requestToCoTo(sampleRequest.getSensor());
 
         SampleCoTo sampleCoTo = new SampleCoTo(networkCoTo, collectorCoTo, sensorCoTo);
         return sampleCoTo;
     }
 
-    public static SampleResponse toResponse(SampleCoTo sampleCoTo) {
+    public static SampleResponse coToToResponse(SampleCoTo sampleCoTo) {
         SampleResponse sampleResponse = SampleResponse.builder()
                 .network(sampleCoTo.getNetwork())
                 .collector(sampleCoTo.getCollector())

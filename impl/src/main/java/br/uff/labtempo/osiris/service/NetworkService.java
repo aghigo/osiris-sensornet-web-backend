@@ -31,10 +31,10 @@ public class NetworkService {
     }
 
     public List<NetworkResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
-        return NetworkMapper.toResponse(this.networkRepository.getAll());
+        return NetworkMapper.snToToResponse(this.networkRepository.getAll());
     }
 
     public NetworkResponse getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
-        return NetworkMapper.toResponse(this.networkRepository.getById(id));
+        return NetworkMapper.snToToResponse(this.networkRepository.getById(id));
     }
 }

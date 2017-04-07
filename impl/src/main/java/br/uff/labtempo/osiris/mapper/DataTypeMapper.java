@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataTypeMapper {
-    public static DataTypeVsnTo toVsnTo(DataTypeRequest dataTypeRequest) {
+    public static DataTypeVsnTo requestToVsnTo(DataTypeRequest dataTypeRequest) {
         DataTypeVsnTo dataTypeVsnTo = new DataTypeVsnTo(dataTypeRequest.getName(), dataTypeRequest.getType()
         , dataTypeRequest.getUnit(), dataTypeRequest.getSymbol());
         return dataTypeVsnTo;
     }
 
-    public static List<DataTypeVsnTo> toVsnTo(List<DataTypeRequest> dataTypeRequestList) {
+    public static List<DataTypeVsnTo> requestToVsnTo(List<DataTypeRequest> dataTypeRequestList) {
         List<DataTypeVsnTo> dataTypeVsnToList = new ArrayList<>();
         for(DataTypeRequest dataTypeRequest : dataTypeRequestList) {
             DataTypeVsnTo dataTypeVsnTo = new DataTypeVsnTo(dataTypeRequest.getName(), dataTypeRequest.getType()
@@ -24,16 +24,16 @@ public class DataTypeMapper {
         return dataTypeVsnToList;
     }
 
-    public static DataTypeResponse toResponse(DataTypeVsnTo dataTypeVsnTo) {
+    public static DataTypeResponse vsnToToResponse(DataTypeVsnTo dataTypeVsnTo) {
         DataTypeResponse dataTypeResponse = new DataTypeResponse(dataTypeVsnTo.getId(), dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getType(),
                 dataTypeVsnTo.getUnit(), dataTypeVsnTo.getSymbol(), dataTypeVsnTo.getUsedBy());
         return dataTypeResponse;
     }
 
-    public static List<DataTypeResponse> toResponse(List<DataTypeVsnTo> dataTypeVsnToList) {
+    public static List<DataTypeResponse> vsnToToResponse(List<DataTypeVsnTo> dataTypeVsnToList) {
         List<DataTypeResponse> dataTypeResponseList = new ArrayList<>();
         for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
-            dataTypeResponseList.add(toResponse(dataTypeVsnTo));
+            dataTypeResponseList.add(vsnToToResponse(dataTypeVsnTo));
         }
         return dataTypeResponseList;
     }

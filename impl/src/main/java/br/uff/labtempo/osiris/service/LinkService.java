@@ -32,24 +32,24 @@ public class LinkService {
 
     public LinkResponse getById(String id) throws AbstractRequestException {
         LinkVsnTo linkVsnTo = this.linkRepository.getById(id);
-        LinkResponse linkResponse = LinkMapper.toResponse(linkVsnTo);
+        LinkResponse linkResponse = LinkMapper.vsnToToResponse(linkVsnTo);
         return linkResponse;
     }
 
     public List<LinkResponse> getAll() throws AbstractRequestException {
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
-        List<LinkResponse> linkResponseList = LinkMapper.toResponse(linkVsnToList);
+        List<LinkResponse> linkResponseList = LinkMapper.vsnToToResponse(linkVsnToList);
         return linkResponseList;
     }
 
     public URI create(LinkRequest linkRequest) throws AbstractRequestException, URISyntaxException {
-        LinkVsnTo linkVsnTo = LinkMapper.toVsnTo(linkRequest);
+        LinkVsnTo linkVsnTo = LinkMapper.requestToVsnTo(linkRequest);
         URI uri = this.linkRepository.save(linkVsnTo);
         return uri;
     }
 
     public void update(String id, LinkRequest linkRequest) throws AbstractRequestException {
-        LinkVsnTo linkVsnTo = LinkMapper.toVsnTo(linkRequest);
+        LinkVsnTo linkVsnTo = LinkMapper.requestToVsnTo(linkRequest);
         this.linkRepository.update(id, linkVsnTo);
     }
 

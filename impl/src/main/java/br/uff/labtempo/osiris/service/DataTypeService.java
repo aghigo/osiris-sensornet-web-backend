@@ -34,15 +34,15 @@ public class DataTypeService {
 
     public DataTypeResponse getById(String id) throws AbstractClientRuntimeException, AbstractRequestException {
         DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(id);
-        return DataTypeMapper.toResponse(dataTypeVsnTo);
+        return DataTypeMapper.vsnToToResponse(dataTypeVsnTo);
     }
 
     public List<DataTypeResponse> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
-        return DataTypeMapper.toResponse(this.dataTypeRepository.getAll());
+        return DataTypeMapper.vsnToToResponse(this.dataTypeRepository.getAll());
     }
 
     public URI create(DataTypeRequest dataTypeRequest) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
-        DataTypeVsnTo dataTypeVsnTo = DataTypeMapper.toVsnTo(dataTypeRequest);
+        DataTypeVsnTo dataTypeVsnTo = DataTypeMapper.requestToVsnTo(dataTypeRequest);
         return this.dataTypeRepository.insert(dataTypeVsnTo);
     }
 

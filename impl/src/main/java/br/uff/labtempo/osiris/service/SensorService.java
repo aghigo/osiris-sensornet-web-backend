@@ -34,22 +34,22 @@ public class SensorService {
     }
 
     public SensorResponse getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) throws AbstractRequestException, AbstractClientRuntimeException {
-        return SensorMapper.toResponse(this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId));
+        return SensorMapper.snToToResponse(this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId));
     }
 
     public List<SensorResponse> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
-        return SensorMapper.toResponse(this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId));
+        return SensorMapper.snToToResponse(this.sensorRepository.getAllByCollectorIdAndNetworkId(networkId, collectorId));
     }
 
     public List<SensorResponse> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
-        return SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkId));
+        return SensorMapper.snToToResponse(this.sensorRepository.getAllByNetworkId(networkId));
     }
 
     public List<SensorResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<SensorResponse> sensorResponseList = new ArrayList<>();
         List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
         for(NetworkSnTo networkSnTo : networkCoToList) {
-            sensorResponseList.addAll(SensorMapper.toResponse(this.sensorRepository.getAllByNetworkId(networkSnTo.getId())));
+            sensorResponseList.addAll(SensorMapper.snToToResponse(this.sensorRepository.getAllByNetworkId(networkSnTo.getId())));
         }
         return sensorResponseList;
     }

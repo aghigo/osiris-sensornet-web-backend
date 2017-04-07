@@ -36,18 +36,18 @@ public class CollectorService {
     }
 
     public List<CollectorResponse> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
-        return CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkId));
+        return CollectorMapper.snToToResponse(this.collectorRepository.getAllByNetworkId(networkId));
     }
 
     public CollectorResponse getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
-        return CollectorMapper.toResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
+        return CollectorMapper.snToToResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
     }
 
     public List<CollectorResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<CollectorResponse> collectorResponseList = new ArrayList<>();
         List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();
         for(NetworkSnTo networkSnTo : networkCoToList) {
-            collectorResponseList.addAll(CollectorMapper.toResponse(this.collectorRepository.getAllByNetworkId(networkSnTo.getId())));
+            collectorResponseList.addAll(CollectorMapper.snToToResponse(this.collectorRepository.getAllByNetworkId(networkSnTo.getId())));
         }
         return collectorResponseList;
     }
