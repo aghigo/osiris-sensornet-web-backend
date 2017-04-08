@@ -5,7 +5,7 @@
 
 # Requirements
 
-* Configure the OSIRIS Framework into your local machine. [Instructions here](https://github.com/aghigo/osiris-binaries)
+* Configure the OSIRIS Framework into your local machine. [Instructions here](https://github.com/aghigo/osiris-binaries/blob/master/README.md#local-development-environment-setup-ubuntu-1604-64-bit)
 * Import this maven project into your favorite Java IDE (e.g. Eclipse, IntelliJ), build and run it.
 
 # Manual
