@@ -78,8 +78,34 @@ public class DataTypeController {
         return ResponseEntity.ok(dataTypeResponse);
     }
 
+    @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> doPut(@PathVariable String dataTypeId, @Valid DataTypeRequest dataTypeRequest) {
+        DataTypeResponse dataTypeResponse;
+        try {
+            this.dataTypeService.update(dataTypeId, dataTypeRequest);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> doDelete(@PathVariable String dataTypeId) {
+        DataTypeResponse dataTypeResponse;
+        try {
+            this.dataTypeService.delete(dataTypeId);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
+
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsDatatypeId() {
-        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+        return allows(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.OPTIONS);
     }
 }

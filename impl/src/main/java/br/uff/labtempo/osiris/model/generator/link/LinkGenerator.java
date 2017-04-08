@@ -36,18 +36,20 @@ public class LinkGenerator {
     private DataTypeService dataTypeService;
 
     public LinkVsnTo generateVsnTo() throws AbstractRequestException {
-        String id = getId();
-        String networkId = getNetworkId();
-        String collectorId = getCollectorId(networkId);
-        String sensorId = getSensorId(collectorId, networkId);
-        Map<String, Long> fieldMap = getField();
-
-        LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
-
-        for(String fieldName : fieldMap.keySet()) {
-            linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
+        try {
+            String id = getId();
+            String networkId = getNetworkId();
+            String collectorId = getCollectorId(networkId);
+            String sensorId = getSensorId(collectorId, networkId);
+            Map<String, Long> fieldMap = getField();
+            LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
+            for(String fieldName : fieldMap.keySet()) {
+                linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
+            }
+            return linkVsnTo;
+        } catch (Exception e) {
+            throw e;
         }
-        return linkVsnTo;
     }
 
     private String getId() {

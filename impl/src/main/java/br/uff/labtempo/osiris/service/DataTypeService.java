@@ -46,7 +46,12 @@ public class DataTypeService {
         return this.dataTypeRepository.insert(dataTypeVsnTo);
     }
 
-    public void update(String id, DataTypeRequest dataTypeRequest) {}
+    public void update(String id, DataTypeRequest dataTypeRequest) throws AbstractRequestException {
+        DataTypeVsnTo dataTypeVsnTo = DataTypeMapper.requestToVsnTo(dataTypeRequest);
+        this.dataTypeRepository.update(id, dataTypeVsnTo);
+    }
 
-    public void delete(String id, DataTypeRequest dataTypeRequest) {}
+    public void delete(String id) throws AbstractRequestException {
+        this.dataTypeRepository.delete(id);
+    }
 }
