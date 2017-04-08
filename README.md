@@ -10,11 +10,11 @@
 
 # Manual
 
-* To see and use the endpoints, import the .json file [osiris-web-backend.postman_collection](/tree/master/spec/osiris-web-backend.postman_collection.json) into your [Postman](https://www.getpostman.com/).
+* To see and use the endpoints, import the .json file [osiris-web-backend.postman_collection](https://github.com/aghigo/osiris-web-backend/blob/master/spec/osiris-web-backend.postman_collection.json) into your [Postman](https://www.getpostman.com/).
 
 # About
 
-* This is part of a Undergraduate Thesis for the [Bachelor of Computer Information Systems](http://www.ic.uff.br/index.php/en-GB/undergraduate-programs/information-systems) course at [Universidade Federal Fluminense]().
+* This is part of a Undergraduate Thesis for the [Bachelor of Computer Information Systems](http://www.ic.uff.br/index.php/en-GB/undergraduate-programs/information-systems) course at [Universidade Federal Fluminense](www.uff.br/).
 
 # Authors
 
