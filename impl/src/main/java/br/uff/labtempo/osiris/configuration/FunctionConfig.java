@@ -18,9 +18,9 @@ public class FunctionConfig {
     @Value("${function.uri:omcp://%1$s.function.osiris}")
     private String functionUri;
 
-    @Value("${function.uri.interface}")
+    @Value("${function.uri.interface:omcp://%1$s.function.osiris/interface/}")
     private String functionInterfaceUri;
 
-    @Value("#{'${function.names}'.split(',')}")
+    @Value("#{'${function.names:average,sum,min,max}'.split(',')}")
     private List<String> functionNames;
 }
