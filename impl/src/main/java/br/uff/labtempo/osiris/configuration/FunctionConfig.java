@@ -21,6 +21,6 @@ public class FunctionConfig {
     @Value("${function.uri.interface}")
     private String functionInterfaceUri;
 
-    @Value("${function.names}")
+    @Value("#{'${function.names}'.split(',')}")
     private List<String> functionNames;
 }

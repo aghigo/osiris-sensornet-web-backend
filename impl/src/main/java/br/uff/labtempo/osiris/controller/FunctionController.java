@@ -9,15 +9,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/virtualsensornet", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class FunctionController {
     @Autowired
     private FunctionService functionService;
 
-    @RequestMapping(value = "/functions")
+    @RequestMapping(value = "/function", method = RequestMethod.GET)
+    public ResponseEntity<?> getAvailableFunctionList() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.functionService.getAvailableFunctionsUri());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/function/{functionName}", method = RequestMethod.GET)
     public ResponseEntity<?> getByName(String functionName) {
         try {
             FunctionVsnTo functionVsnTo = this.functionService.getByName(functionName);
@@ -27,6 +37,7 @@ public class FunctionController {
         }
     }
 
+    @RequestMapping(value = "/function/{functionName}/interface", method = RequestMethod.GET)
     public ResponseEntity<?> getInterface(String functionName) throws AbstractRequestException {
         try {
             InterfaceFnTo interfaceFnTo = this.functionService.getInterface(functionName);
@@ -36,6 +47,7 @@ public class FunctionController {
         }
     }
 
+    @RequestMapping(value = "/virtualsensornet/functions/{functionName}", method = RequestMethod.GET)
     public ResponseEntity<?> getFromVirtualSensorNet(String functionName) throws AbstractRequestException {
         try {
             FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionName);
