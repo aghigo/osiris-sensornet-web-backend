@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.model.request;
 
-import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 

@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.NetworkMapper;
-import br.uff.labtempo.osiris.model.generator.network.NetworkGenerator;
+import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
 import br.uff.labtempo.osiris.model.response.NetworkResponse;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;

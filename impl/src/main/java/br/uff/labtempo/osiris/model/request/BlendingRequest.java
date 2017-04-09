@@ -15,7 +15,7 @@ import java.util.Map;
 @EqualsAndHashCode
 public class BlendingRequest {
     @NotNull @NotEmpty
-    private String function;
+    private String functionName;
 
     @NotNull @NotEmpty
     private Map<String, Long> fields;

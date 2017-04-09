@@ -75,7 +75,7 @@ public class LinkController {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
     }
 
-    @RequestMapping(value = "/links/{linkId}", method = RequestMethod.GET)
+        @RequestMapping(value = "/links/{linkId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String linkId) {
         LinkResponse linkResponse;
         try {

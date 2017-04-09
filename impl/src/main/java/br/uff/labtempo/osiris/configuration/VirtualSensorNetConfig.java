@@ -54,4 +54,7 @@ public class VirtualSensorNetConfig {
 
     @Value("${virtualsensornet.uri.function:omcp://virtualsensornet.osiris/function}")
     private String functionUri;
+
+    @Value("${virtualsensornet.uri.functionName:omcp://virtualsensornet.osiris/function/%1$s/}")
+    private String functionNameUri;
 }

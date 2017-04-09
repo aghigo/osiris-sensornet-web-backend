@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.SensorMapper;
-import br.uff.labtempo.osiris.model.generator.sensor.SensorGenerator;
+import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.repository.SensorRepository;

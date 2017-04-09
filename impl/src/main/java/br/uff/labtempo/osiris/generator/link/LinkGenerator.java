@@ -1,6 +1,7 @@
-package br.uff.labtempo.osiris.model.generator.link;
+package br.uff.labtempo.osiris.generator.link;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.model.response.DataTypeResponse;
 import br.uff.labtempo.osiris.model.response.NetworkResponse;
@@ -57,34 +58,46 @@ public class LinkGenerator {
     }
 
     private String getNetworkId() throws AbstractRequestException {
-        NetworkResponse networkResponse = this.networkService.getAll().get(0);
-        return networkResponse.getId();
+        try {
+            return this.networkService.getAll().get(0).getId();
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid network from SensorNet module.");
+        }
     }
 
     private String getCollectorId(String networkId) throws AbstractRequestException {
-         CollectorResponse collectorResponse = this.collectorService.getAllByNetworkId(networkId).get(0);
-         return collectorResponse.getId();
+        try {
+            return this.collectorService.getAllByNetworkId(networkId).get(0).getId();
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid collector from SensorNet module.");
+        }
     }
 
     private String getSensorId(String collectorId, String networkId) throws AbstractRequestException {
-        SensorResponse sensorResponse = this.sensorService.getAll().get(0);
-        return sensorResponse.getId();
+        try {
+            return this.sensorService.getAll().get(0).getId();
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid sensor from SensorNet module.");
+        }
     }
 
     private Map<String, Long> getField() throws AbstractRequestException {
-        List<DataTypeResponse> dataTypeResponseList = this.dataTypeService.getAll();
-        Map<String, Long> fieldMap = new LinkedHashMap<>();
+        try {
+            List<DataTypeResponse> dataTypeResponseList = this.dataTypeService.getAll();
+            Map<String, Long> fieldMap = new LinkedHashMap<>();
 
-        int totalFields = (int) (Math.random() * MAX_FIELDS);
+            int totalFields = (int) (Math.random() * MAX_FIELDS);
 
-        for(int i = 0; i < totalFields; i++) {
-            int p = (int) (Math.random() * (fieldMap.size()));
-            DataTypeResponse dataTypeResponse = dataTypeResponseList.get(p);
-            if(!fieldMap.containsKey(dataTypeResponse.getName())) {
-                fieldMap.put(dataTypeResponse.getName(), dataTypeResponse.getId());
+            for(int i = 0; i < totalFields; i++) {
+                int p = (int) (Math.random() * (fieldMap.size()));
+                DataTypeResponse dataTypeResponse = dataTypeResponseList.get(p);
+                if(!fieldMap.containsKey(dataTypeResponse.getName())) {
+                    fieldMap.put(dataTypeResponse.getName(), dataTypeResponse.getId());
+                }
             }
+            return fieldMap;
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid dataType from VirtualSensorNet module.");
         }
-
-        return fieldMap;
     }
 }

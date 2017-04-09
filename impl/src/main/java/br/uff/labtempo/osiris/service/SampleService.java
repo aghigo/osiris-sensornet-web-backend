@@ -5,7 +5,7 @@ import br.uff.labtempo.osiris.mapper.CollectorMapper;
 import br.uff.labtempo.osiris.mapper.NetworkMapper;
 import br.uff.labtempo.osiris.mapper.SampleMapper;
 import br.uff.labtempo.osiris.mapper.SensorMapper;
-import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
+import br.uff.labtempo.osiris.generator.sample.SampleGenerator;
 import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.repository.CollectorRepository;

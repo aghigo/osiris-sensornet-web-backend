@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,15 +15,12 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class FunctionConfig {
-    @Value("${function.uri.average:omcp://average.function.osiris}")
-    private String averageFunctionUri;
+    @Value("${function.uri:omcp://%1$s.function.osiris}")
+    private String functionUri;
 
-    @Value("${function.uri.sum:omcp://sum.function.osiris}")
-    private String sumFunctionUri;
+    @Value("${function.uri.interface}")
+    private String functionInterfaceUri;
 
-    @Value("${function.uri.min:omcp://min.function.osiris}")
-    private String minFunctionUri;
-
-    @Value("${function.uri.max:omcp://max.function.osiris}")
-    private String maxFunctionUri;
+    @Value("${function.names}")
+    private List<String> functionNames;
 }

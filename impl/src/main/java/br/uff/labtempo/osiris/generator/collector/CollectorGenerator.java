@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.generator.collector;
+package br.uff.labtempo.osiris.generator.collector;
 
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import org.springframework.stereotype.Component;

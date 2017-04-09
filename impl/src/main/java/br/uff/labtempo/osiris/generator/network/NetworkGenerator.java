@@ -1,8 +1,7 @@
-package br.uff.labtempo.osiris.model.generator.network;
+package br.uff.labtempo.osiris.generator.network;
 
 
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
-import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import org.springframework.stereotype.Component;
 
 import java.util.*;

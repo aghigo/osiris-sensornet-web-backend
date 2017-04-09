@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model.generator.sensor;
+package br.uff.labtempo.osiris.generator.sensor;
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorInfo;

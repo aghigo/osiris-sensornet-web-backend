@@ -1,11 +1,10 @@
 package br.uff.labtempo.osiris.schedule;
 
-import br.uff.labtempo.osiris.model.generator.collector.CollectorGenerator;
-import br.uff.labtempo.osiris.model.generator.network.NetworkGenerator;
-import br.uff.labtempo.osiris.model.generator.sample.SampleGenerator;
-import br.uff.labtempo.osiris.model.generator.sensor.SensorGenerator;
+import br.uff.labtempo.osiris.generator.collector.CollectorGenerator;
+import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
+import br.uff.labtempo.osiris.generator.sample.SampleGenerator;
+import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.repository.SampleRepository;
-import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 
 import org.slf4j.Logger;
