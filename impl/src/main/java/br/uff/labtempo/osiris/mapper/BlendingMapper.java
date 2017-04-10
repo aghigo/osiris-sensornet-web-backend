@@ -8,6 +8,7 @@ import java.util.List;
 
 public class BlendingMapper {
     public static BlendingVsnTo requestToVsnTo(BlendingRequest blendingRequest) {
+        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
         return null;
     }
 

@@ -1,15 +1,21 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.osiris.exception.BlendingCreationException;
+import br.uff.labtempo.osiris.exception.InterfaceFunctionException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.model.response.BlendingResponse;
 import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.repository.FunctionRepository;
+import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
+import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.ValueVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +27,9 @@ import java.util.List;
 public class BlendingService {
     @Autowired
     private BlendingRepository blendingRepository;
+
+    @Autowired
+    private VirtualSensorRepository virtualSensorRepository;
 
     @Autowired
     private FunctionRepository functionRepository;
@@ -39,21 +48,47 @@ public class BlendingService {
     }
 
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
-        //CREATE BASIC BLENDING
-        BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
-        URI uri = this.blendingRepository.create(blendingVsnTo);
+        try {
+            //CREATE BASIC BLENDING
+            BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
+            URI uri = this.blendingRepository.create(blendingVsnTo);
 
-        //GET FUNCTION INTERFACE FROM FUNCTION MODULE
-        InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
+            //GET FUNCTION INTERFACE FROM FUNCTION MODULE
+            InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
 
-        //CREATE A FUNCTION ONTO VIRTUALSENSORNET WITH THE FUNCTION INTERFACE
-        this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
-        FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(blendingRequest.getFunctionName());
+            //CREATE A FUNCTION ONTO VIRTUALSENSORNET WITH THE FUNCTION INTERFACE
+            FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(blendingRequest.getFunctionName());
 
-        //UPDATE BLENDING WITH FUNCTION DATA
-        this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
+            //UPDATE BLENDING WITH FUNCTION DATA
+            blendingVsnTo.setFunction(functionVsnTo);
+            blendingVsnTo.setCallMode(blendingRequest.getFunctionOperation());
+            blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
 
-        return uri;
+            //ADD REQUEST PARAMS
+            List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
+            for(VirtualSensorVsnTo virtualSensorVsnTo: virtualSensorVsnToList) {
+                List<ValueVsnTo> valueVsnToList = virtualSensorVsnTo.getValuesTo();
+                for(ValueVsnTo valueVsnTo : valueVsnToList) {
+                    if(blendingRequest.getFields().keySet().contains(valueVsnTo.getName())) {
+                        blendingVsnTo.addRequestParam(valueVsnTo.getId(), blendingRequest.getRequestParamName());
+                        break;
+                    }
+                }
+            }
+
+            //ADD RESPONSE PARAMS
+            List<? extends FieldTo> fieldToList = blendingVsnTo.getFields();
+            FieldTo fieldTo = fieldToList.get(0);
+            blendingVsnTo.addResponseParam(fieldTo.getId(), blendingRequest.getResponseParamName());
+
+            //UPDATE COMPLETE BLENDING WITH FUNCTION
+            this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
+
+            //RETURN NEW BLENDING URI
+            return uri;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException {

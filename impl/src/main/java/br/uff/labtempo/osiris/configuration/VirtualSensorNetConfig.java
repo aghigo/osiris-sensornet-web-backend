@@ -52,6 +52,12 @@ public class VirtualSensorNetConfig {
     @Value("${virtualsensornet.uri.blendingId:omcp://virtualsensornet.osiris/blending/%1$s/}")
     private String blendingIdUri;
 
+    @Value("${virtualsensornet.uri.virtualSensor:omcp://virtualsensornet.osiris/vsensor/}")
+    private String virtualSensorUri;
+
+    @Value("${virtualsensornet.uri.virtualSensorId:omcp://virtualsensornet.osiris/vsensor/%1$s/}")
+    private String virtualSensorIdUri;
+
     @Value("${virtualsensornet.uri.function:omcp://virtualsensornet.osiris/function}")
     private String functionUri;
 
