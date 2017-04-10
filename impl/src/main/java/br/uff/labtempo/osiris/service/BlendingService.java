@@ -1,8 +1,6 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
-import br.uff.labtempo.osiris.exception.BlendingCreationException;
-import br.uff.labtempo.osiris.exception.InterfaceFunctionException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
@@ -81,7 +79,7 @@ public class BlendingService {
             FieldTo fieldTo = fieldToList.get(0);
             blendingVsnTo.addResponseParam(fieldTo.getId(), blendingRequest.getResponseParamName());
 
-            //UPDATE COMPLETE BLENDING WITH FUNCTION
+            //UPDATE COMPLETE BLENDING WITH FUNCTION DATA
             this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
 
             //RETURN NEW BLENDING URI

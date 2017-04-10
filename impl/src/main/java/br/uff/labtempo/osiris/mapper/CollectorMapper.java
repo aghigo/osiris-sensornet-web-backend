@@ -59,4 +59,18 @@ public class CollectorMapper {
         }
         return collectorCoToList;
     }
+
+    public static CollectorCoTo responseToCoTo(CollectorResponse collectorResponse) {
+        CollectorCoTo collectorCoTo = new CollectorCoTo(collectorResponse.getId(), collectorResponse.getCaptureInterval(), collectorResponse.getCaptureIntervaltimeUnit());
+        collectorCoTo.addInfo(collectorResponse.getInfo());
+        return collectorCoTo;
+    }
+
+    public static List<CollectorCoTo> responseToCoTo(List<CollectorResponse> collectorResponseList) {
+        List<CollectorCoTo> collectorCoToList = new ArrayList<>();
+        for(CollectorResponse collectorResponse : collectorResponseList) {
+            collectorCoToList.add(responseToCoTo(collectorResponse));
+        }
+        return collectorCoToList;
+    }
 }

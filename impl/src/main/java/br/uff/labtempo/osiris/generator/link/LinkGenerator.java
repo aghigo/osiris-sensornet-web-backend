@@ -59,7 +59,9 @@ public class LinkGenerator {
 
     private String getNetworkId() throws AbstractRequestException {
         try {
-            return this.networkService.getAll().get(0).getId();
+            List<NetworkResponse> networkResponseList = this.networkService.getAll();
+            int p = (int) (Math.random() * networkResponseList.size());
+            return networkResponseList.get(p).getId();
         } catch (Exception e) {
             throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid network from SensorNet module.");
         }
@@ -67,7 +69,9 @@ public class LinkGenerator {
 
     private String getCollectorId(String networkId) throws AbstractRequestException {
         try {
-            return this.collectorService.getAllByNetworkId(networkId).get(0).getId();
+            List<CollectorResponse> collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
+            int p = (int) (Math.random() * collectorResponseList.size());
+            return collectorResponseList.get(p).getId();
         } catch (Exception e) {
             throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid collector from SensorNet module.");
         }
@@ -75,7 +79,9 @@ public class LinkGenerator {
 
     private String getSensorId(String collectorId, String networkId) throws AbstractRequestException {
         try {
-            return this.sensorService.getAll().get(0).getId();
+            List<SensorResponse> sensorResponseList = this.sensorService.getAllByCollectorIdAndNetworkId(networkId, collectorId);
+            int p = (int) (Math.random() * sensorResponseList.size());
+            return sensorResponseList.get(p).getId();
         } catch (Exception e) {
             throw new InternalServerErrorException("Failed to mock link sensor: Could not find any valid sensor from SensorNet module.");
         }
