@@ -92,10 +92,10 @@ public class LinkGenerator {
             List<DataTypeResponse> dataTypeResponseList = this.dataTypeService.getAll();
             Map<String, Long> fieldMap = new LinkedHashMap<>();
 
-            int totalFields = (int) (Math.random() * MAX_FIELDS);
+            int totalFields = ((int) (Math.random() * MAX_FIELDS)) + 1;
 
             for(int i = 0; i < totalFields; i++) {
-                int p = (int) (Math.random() * (fieldMap.size()));
+                int p = (int) (Math.random() * (fieldMap.size() + 1));
                 DataTypeResponse dataTypeResponse = dataTypeResponseList.get(p);
                 if(!fieldMap.containsKey(dataTypeResponse.getName())) {
                     fieldMap.put(dataTypeResponse.getName(), dataTypeResponse.getId());
