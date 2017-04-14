@@ -12,7 +12,12 @@
 # Manual
 
 * To see and use the endpoints, import the .json file [osiris-web-backend.postman_collection](https://github.com/aghigo/osiris-web-backend/blob/master/spec/osiris-web-backend.postman_collection.json) into your [Postman](https://www.getpostman.com/).
-* Code documentation at [/spec/javadoc](https://github.com/aghigo/osiris-web-backend/tree/master/spec/javadoc) folder.
+* Generate the code documentation with javadoc
+```
+cd ~/osiris/osiris-web-backend/impl/src/main/java
+javadoc -d ~/osiris/osiris-web-backend/spec/javadoc -subpackages br
+```
+Open ~/osiris/osiris-web-backend/spec/javadoc/index.html
 
 # About
 
