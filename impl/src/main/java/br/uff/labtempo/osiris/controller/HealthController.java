@@ -2,7 +2,6 @@ package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
-import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.FunctionConfig;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
@@ -21,6 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller to check application dependencies.
+ * test connections with SensorNet, VirtualSensorNet, Functions, RabbitMQ and Application Database
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @RestController
 @RequestMapping(value = "/health", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class HealthController {
