@@ -19,6 +19,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Class responsible for generate random Link mock objets for the VirtualSensorNet module
+ * A Link is a VirtualSensor type (from the VirtualSensorNet module) that is associated directly with one physical sensor from SensorNet module
+ * @see LinkVsnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.8
+ */
 @Component
 public class LinkGenerator {
 
@@ -53,10 +61,21 @@ public class LinkGenerator {
         }
     }
 
+    /**
+     * Generates a random unique id for the Link sensor
+     * pattern: "linkId-" + UUID
+     * @see UUID
+     * @return String with the unique Link id
+     */
     private String getId() {
         return "linkId-" + UUID.randomUUID().toString();
     }
 
+    /**
+     * Get a random existing networkId from SensorNet module
+     * @return String with an existing NetworkId randomly choosen
+     * @throws AbstractRequestException
+     */
     private String getNetworkId() throws AbstractRequestException {
         try {
             List<NetworkResponse> networkResponseList = this.networkService.getAll();
@@ -67,6 +86,12 @@ public class LinkGenerator {
         }
     }
 
+    /**
+     * Get a random existing networkId from SensorNet module, based on an existing network id
+     * @param networkId
+     * @return String with an existing CollectorId randomly choosen
+     * @throws AbstractRequestException
+     */
     private String getCollectorId(String networkId) throws AbstractRequestException {
         try {
             List<CollectorResponse> collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
@@ -77,6 +102,13 @@ public class LinkGenerator {
         }
     }
 
+    /**
+     * Get a random SensorId from SensorNet module, based on existing collector id and network id
+     * @param collectorId
+     * @param networkId
+     * @return String with an existing SensorId randomly choosen
+     * @throws AbstractRequestException
+     */
     private String getSensorId(String collectorId, String networkId) throws AbstractRequestException {
         try {
             List<SensorResponse> sensorResponseList = this.sensorService.getAllByCollectorIdAndNetworkId(networkId, collectorId);
@@ -87,6 +119,14 @@ public class LinkGenerator {
         }
     }
 
+    /**
+     * Get an random Map of Fields for a Link
+     * a Field object contains its id and an DataType id
+     * @see br.uff.labtempo.osiris.to.common.data.FieldTo
+     * @see br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo
+     * @return
+     * @throws AbstractRequestException
+     */
     private Map<String, Long> getField() throws AbstractRequestException {
         try {
             List<DataTypeResponse> dataTypeResponseList = this.dataTypeService.getAll();

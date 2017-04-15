@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class for generatic a random Collector mock object
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 public class CollectorGenerator {
 
@@ -19,12 +25,23 @@ public class CollectorGenerator {
         this.collectorInfos.put("transmission", Arrays.asList("wireless", "wired", "special fiber"));
     }
 
+    /**
+     * Generates a random Collector mock object
+     * @return CollectorCoTo
+     */
     public CollectorCoTo getCollectorCoTo() {
         CollectorCoTo collectorCoTo = new CollectorCoTo(getId(), getCaptureInterval(), getCaptureIntervalTimeUnit());
         collectorCoTo.addInfo(getRandomCollectorInfos());
         return collectorCoTo;
     }
 
+    /**
+     * Get a Map of Collector Infos
+     * The infos are populated on the constructor with fixed names and descriptions
+     * An info contains name and description
+     * @see br.uff.labtempo.osiris.to.common.data.InfoTo
+     * @return
+     */
     private Map<String, String> getRandomCollectorInfos() {
         Map<String, String> infos = new LinkedHashMap<>();
         Set<String> selectedKeys = new LinkedHashSet<>();
@@ -40,14 +57,30 @@ public class CollectorGenerator {
         return infos;
     }
 
+    /**
+     * Generates an unique id for Collector
+     * Pattern "collectorId-" + UUID
+     * @see UUID
+     * @return String with the unique CollectorId
+     */
     public String getId() {
         return "collectorId-" + UUID.randomUUID().toString();
     }
 
+    /**
+     * Generate an Capture Interval in milliseconds
+     * Default is now
+     * @return
+     */
     public long getCaptureInterval() {
         return new Date().getTime();
     }
 
+    /**
+     * Get a random TimeUnit (Second, Minute, etc)
+     * @see TimeUnit
+     * @return TimeUnit
+     */
     public TimeUnit getCaptureIntervalTimeUnit() {
         return this.timeUnits[(int) (Math.random() * this.timeUnits.length)];
     }

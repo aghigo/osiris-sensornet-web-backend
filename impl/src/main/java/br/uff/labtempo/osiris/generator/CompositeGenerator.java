@@ -14,11 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Class responsible to generate randomly Composite sensor mock objects for VirtualSensorNet module
+ * @see CompositeVsnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public class CompositeGenerator {
 
     @Autowired
     private LinkRepository linkRepository;
 
+    /**
+     * Generate a randomly Composite sensor mock object
+     * @see CompositeVsnTo
+     * @return CompositeVsnTo
+     * @throws AbstractRequestException
+     */
     public CompositeVsnTo generateCompositeVsnTo() throws AbstractRequestException {
         long id = getId();
         String label = getLabel(id);
@@ -29,14 +42,33 @@ public class CompositeGenerator {
         return compositeVsnTo;
     }
 
+    /**
+     * Generate a long random unique Id for Composite sensor
+     * @see UUID
+     * @see Long
+     * @return long value that represents a unique Composite sensor id
+     */
     private long getId() {
         return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
+    /**
+     * Generates a unique Composite sensor label based on its long id
+     * pattern: "compositeId-" + id
+     * @param id
+     * @return String with the composite label
+     */
     private String getLabel(long id) {
         return "compositeId-" + id;
     }
 
+    /**
+     * Get a random list of Field Ids
+     * @see FieldTo
+     * @see br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo
+     * @return List of Long values that represent the field ids
+     * @throws AbstractRequestException
+     */
     private List<Long> getFieldIdList() throws AbstractRequestException {
         List<Long> fieldIdList = new ArrayList<>();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();

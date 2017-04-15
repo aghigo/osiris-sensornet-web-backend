@@ -8,6 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that represents a SensorNet Sensor model
+ * @see br.uff.labtempo.osiris.to.collector.SensorCoTo
+ * @see br.uff.labtempo.osiris.to.sensornet.SensorSnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Getter
 @Setter
 @Builder

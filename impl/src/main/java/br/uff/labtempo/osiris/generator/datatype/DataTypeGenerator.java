@@ -6,6 +6,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Class responsible for Generate an DataType mock object for the VirtualSensorNet module
+ * An DataType is an data object measure information that is used on VirtualSensors (vsensor, link, blending, composite).
+ * @see DataTypeVsnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 public class DataTypeGenerator {
 
@@ -50,6 +58,11 @@ public class DataTypeGenerator {
         nameSymbolMap.put("pressure", pressureSymbolList);
     }
 
+    /**
+     * Generates a new randomly DataTypeVsnTo mock object
+     * @see DataTypeVsnTo
+     * @return DataTypeVsnTo
+     */
     public DataTypeVsnTo getDataTypeVsnTo() {
         String name = getName();
         ValueType type = getType(name);
@@ -58,20 +71,41 @@ public class DataTypeGenerator {
         return new DataTypeVsnTo(name, type, unit ,symbol);
     }
 
+    /**
+     * Get a random dataType name
+     * @return String with the name of the DataType
+     */
     private String getName() {
         int p = (int) (Math.random() * this.nameUnitMap.keySet().size());
         return (String) this.nameUnitMap.keySet().toArray()[p];
     }
 
+    /**
+     * Get a random ValueType
+     * ValueType is an enum that can be = NUMBER | LOGIC | TEXT
+     * @see ValueType
+     * @param name
+     * @return
+     */
     private ValueType getType(String name) {
         return this.nameTypeMap.get(name);
     }
 
+    /**
+     * Get an dataType Unit (e.g. Celsius, Fahrenheit, Kelvin)
+     * @param name
+     * @return String with the unit name
+     */
     private String getUnit(String name) {
         List<String> unitList = this.nameUnitMap.get(name);
         return unitList.get((int) (Math.random() * unitList.size()));
     }
 
+    /**
+     * Get a DataType unit Symbol (e.g. "ºC" for Celsius Temperature)
+     * @param name
+     * @return String with the unit symbol
+     */
     private String getSymbol(String name) {
         List<String> symbolList = this.nameSymbolMap.get(name);
         return symbolList.get((int) (Math.random() * symbolList.size()));

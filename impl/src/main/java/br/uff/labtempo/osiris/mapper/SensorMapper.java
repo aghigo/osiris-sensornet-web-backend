@@ -2,8 +2,11 @@ package br.uff.labtempo.osiris.mapper;
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorConsumableRule;
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
+import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.request.SensorRequest;
+import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
+import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
@@ -13,7 +16,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that maps and converts Sensor classes
+ * (SensorSnTo to SensorResponse)
+ * (SensorRequest to SensorCoTo)
+ * (SensorSnTo to SensorCoTo)
+ * @see SensorRequest Sensor data sent by the client on HTTP POST/PUT requests
+ * @see SensorCoTo Sensor representation to send to the SensorNet module
+ * @see SensorSnTo Sensor representation sent by the SensorNet module
+ * @see SensorResponse Sensor response data sent by the API to the Client
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public class SensorMapper {
+
+    /**
+     * Converts SensorSnTo to SensorResponse
+     * @see SensorSnTo
+     * @see SensorResponse
+     * @param sensorSnTo
+     * @return SensorResponse
+     */
     public static SensorResponse snToToResponse(SensorSnTo sensorSnTo) {
         SensorResponse sensorResponse = SensorResponse.builder()
                 .acquisitionTimestampInMillis(sensorSnTo.getAcquisitionTimestampInMillis())
@@ -43,6 +67,13 @@ public class SensorMapper {
         return sensorResponse;
     }
 
+    /**
+     * Converts a List of SensorSnTo to a List of SensorResponse
+     * @see SensorSnTo
+     * @see SensorResponse
+     * @param sensorSnToList
+     * @return List of SensorResponse
+     */
     public static List<SensorResponse> snToToResponse(List<SensorSnTo> sensorSnToList) {
         List<SensorResponse> sensorResponseList = new ArrayList<>();
         for(SensorSnTo sensorSnTo : sensorSnToList) {
@@ -51,6 +82,13 @@ public class SensorMapper {
         return sensorResponseList;
     }
 
+    /**
+     * Converts a SensorRequest to a SensorCoTo
+     * @see SensorRequest
+     * @see SensorCoTo
+     * @param sensorRequest
+     * @return SensorCoTo
+     */
     public static SensorCoTo requestToCoTo(SensorRequest sensorRequest) {
         SensorCoTo sensorCoTo = new SensorCoTo(sensorRequest.getId(), State.NEW, sensorRequest.getCaptureDateInMillis()
         , sensorRequest.getCaptureDateInNano(), sensorRequest.getAcquisitionDateInMillis());
@@ -72,6 +110,13 @@ public class SensorMapper {
         return sensorCoTo;
     }
 
+    /**
+     * Converts SensorSnTo to SensorCoTo
+     * @see SensorSnTo
+     * @see SensorCoTo
+     * @param sensorSnTo
+     * @return SensorCoTo
+     */
     public static SensorCoTo snToToCoTo(SensorSnTo sensorSnTo) {
         SensorCoTo sensorCoTo = new SensorCoTo(sensorSnTo.getId(), sensorSnTo.getState(), sensorSnTo.getCaptureTimestampInMillis(), sensorSnTo.getCapturePrecisionInNano(), sensorSnTo.getAcquisitionTimestampInMillis());
         sensorCoTo.addInfo(sensorSnTo.getInfo());
@@ -85,6 +130,13 @@ public class SensorMapper {
         return sensorCoTo;
     }
 
+    /**
+     * Converts a List of SensorSnTo to a List of SensorCoTo
+     * @see SensorSnTo
+     * @see SensorCoTo
+     * @param sensorSnToList
+     * @return List of SensorCoTo
+     */
     public static List<SensorCoTo> snToToCoTo(List<SensorSnTo> sensorSnToList) {
         List<SensorCoTo> sensorCoToList = new ArrayList<>();
         for(SensorSnTo sensorSnTo : sensorSnToList) {

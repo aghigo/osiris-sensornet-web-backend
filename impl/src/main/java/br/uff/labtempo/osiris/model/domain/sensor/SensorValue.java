@@ -7,6 +7,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Class that represents a Sensor Value model
+ * @see br.uff.labtempo.osiris.to.common.data.ValueTo
+ * @see ValueType
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Data
 @ToString
 @Builder

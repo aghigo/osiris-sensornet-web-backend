@@ -13,6 +13,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class responsible for generate random Sensor mock objects for SensorNet module
+ * @see SensorCoTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 public class SensorGenerator {
     private SensorInfoGenerator sensorInfoGenerator;
@@ -25,6 +32,11 @@ public class SensorGenerator {
         this.sensorConsumableRuleGenerator = new SensorConsumableRuleGenerator();
     }
 
+    /**
+     * Generate a random SensorCoTo mock object
+     * @see SensorCoTo
+     * @return SensorCoTo
+     */
     public SensorCoTo getSensorCoTo() {
         String id = getId();
         State state = State.NEW;
@@ -54,10 +66,21 @@ public class SensorGenerator {
         return sensorCoTo;
     }
 
+    /**
+     * Generate a random Long value from 0 to maxRange
+     * @param maxRange
+     * @return long value from 0 to maxRange
+     */
     private long randomLong(int maxRange) {
         return (long) (Math.random() * (maxRange + 1));
     }
 
+    /**
+     * Generate a random unique Sensor id
+     * Pattern: "sensorId-" + UUID
+     * @see UUID
+     * @return String with the sensor id
+     */
     private String getId() {
         return "sensorId-" + UUID.randomUUID().toString();
     }

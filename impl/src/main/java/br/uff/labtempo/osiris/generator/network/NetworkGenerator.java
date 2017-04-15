@@ -1,11 +1,18 @@
 package br.uff.labtempo.osiris.generator.network;
 
-
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Class resonsible to generate randomly Network mock objects for SensorNet module
+ * @see NetworkCoTo
+ * @see br.uff.labtempo.osiris.to.sensornet.NetworkSnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 public class NetworkGenerator {
 
@@ -20,12 +27,24 @@ public class NetworkGenerator {
         this.networkInfos.put("hardware", Arrays.asList("Arduino v6.4", "Raspberry Pi v1.6", "EmbbededTech x86"));
     }
 
+    /**
+     * Generates a random NetworkCoTo mock object
+     * @see NetworkCoTo
+     * @return networkCoTo
+     */
     public NetworkCoTo getNetworkCoto() {
         NetworkCoTo networkCoTo = new NetworkCoTo(getId());
         networkCoTo.addInfo(getInfo());
         return networkCoTo;
     }
 
+    /**
+     * Get an random Map of Network Infos
+     * Infos are previous populated on constructor with fixed values
+     * An Info contains name and description
+     * @see br.uff.labtempo.osiris.to.common.data.InfoTo
+     * @return Map<String,String> where Key is the field name and value is its possible description
+     */
     private Map<String, String> getInfo() {
         Map<String, String> infos = new LinkedHashMap<>();
         int totalKeys = this.networkInfos.size();
@@ -45,6 +64,12 @@ public class NetworkGenerator {
         return infos;
     }
 
+    /**
+     * Generates an unique random mocked id for the Network
+     * pattern: "networkId-" + UUID
+     * @see UUID
+     * @return String with the unique network Id
+     */
     private String getId() {
         return "networkId-" + UUID.randomUUID().toString();
     }

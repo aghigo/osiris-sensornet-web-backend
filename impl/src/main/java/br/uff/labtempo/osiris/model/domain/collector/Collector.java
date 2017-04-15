@@ -8,6 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class that represents a Collector
+ * @see br.uff.labtempo.osiris.to.collector.CollectorCoTo
+ * @see br.uff.labtempo.osiris.to.sensornet.CollectorSnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Builder
 @Getter
 @Setter
