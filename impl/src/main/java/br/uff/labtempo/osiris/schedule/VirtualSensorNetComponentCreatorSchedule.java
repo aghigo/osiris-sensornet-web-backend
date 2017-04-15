@@ -25,6 +25,9 @@ import java.net.URISyntaxException;
 
 /**
  * Class with Schedule Jobs that periodically creates new Datatypes and Virtual Sensors (Link, Composite and Blending)
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
  */
 @Slf4j
 @Service

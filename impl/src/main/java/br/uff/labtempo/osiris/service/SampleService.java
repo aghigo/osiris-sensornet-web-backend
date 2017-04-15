@@ -23,6 +23,15 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Service class with business rules to select/create/update/remove Samples from/on SensorNet module
+ * @see SampleRequest
+ * @see SampleCoTo
+ * @see SampleResponse
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Service
 @PropertySource(value = "classpath:application.properties")
 public class SampleService {
@@ -42,6 +51,11 @@ public class SampleService {
     @Autowired
     private SampleGenerator sampleGenerator;
 
+    /**
+     * Get a random Sample mocked object
+     * @see SampleCoTo
+     * @return SampleResponse
+     */
     public SampleResponse getRandom() {
         SampleCoTo sampleCoTo = this.sampleGenerator.getSampleCoTo();
         SampleResponse sampleResponse = SampleResponse.builder()
@@ -52,6 +66,12 @@ public class SampleService {
         return sampleResponse;
     }
 
+    /**
+     * Creates a new Sample on SensorNet module
+     * @param sampleRequest
+     * @return URI with the new Sample Location
+     * @throws URISyntaxException
+     */
     public URI create(SampleRequest sampleRequest) throws URISyntaxException {
         SampleCoTo sampleCoTo = SampleMapper.requestToCoTo(sampleRequest);
         this.sampleRepository.save(sampleCoTo);
@@ -62,6 +82,14 @@ public class SampleService {
         return uri;
     }
 
+    /**
+     * Get a Sample from SensorNet module by given a valid (networkId + collectorId + sensorId) association
+     * @param sensorId
+     * @param collectorId
+     * @param networkId
+         * @return SampleResponse
+     * @throws AbstractRequestException
+     */
     public SampleResponse getSample(String sensorId, String collectorId, String networkId) throws AbstractRequestException {
         NetworkCoTo networkCoTo = NetworkMapper.snToToCoTo(this.networkRepository.getById(networkId));
         CollectorCoTo collectorCoTo = CollectorMapper.snToToCoTo(this.collectorRepository.getByNetworkId(networkId, collectorId));

@@ -8,6 +8,13 @@ import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 
 import java.util.List;
 
+/**
+ * Collector interface that abstracts Collector DAO implementations
+ * @see br.uff.labtempo.osiris.dao.omcp.CollectorOmcpDao
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public interface CollectorRepository {
     CollectorSnTo getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException;
     List<CollectorSnTo> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException;

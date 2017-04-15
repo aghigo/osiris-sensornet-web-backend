@@ -10,6 +10,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * Interface that abstract Function DAO implementations
+ * @see br.uff.labtempo.osiris.dao.omcp.FunctionOmcpDao
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public interface FunctionRepository {
     InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
     URI createOnVirtualSensorNet(InterfaceFnTo interfaceFnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException;

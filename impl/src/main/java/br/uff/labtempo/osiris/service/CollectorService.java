@@ -16,6 +16,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service with business rules to get/create/update/remove Collectors from/on  SensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Service
 public class CollectorService {
 
@@ -30,18 +36,45 @@ public class CollectorService {
         this.collectorGenerator = collectorGenerator;
     }
 
+    /**
+     * Get a random mock of the Collector sensor
+     * @see CollectorCoTo
+     * @return CollectorCoTo
+     */
     public CollectorCoTo getRandom() {
         return this.collectorGenerator.getCollectorCoTo();
     }
 
+
+    /**
+     * Get a list of all Collectors from a given {networkId} Network from SensorNet module
+     * @param networkId
+     * @return List of CollectorResponse
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     public List<CollectorResponse> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         return CollectorMapper.snToToResponse(this.collectorRepository.getAllByNetworkId(networkId));
     }
 
+    /**
+     * Get a specific Collector from SensorNet module based on {networkId} and {collectorId}
+     * @param networkId
+     * @param collectorId
+     * @return CollectorResponse with collectorId
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     public CollectorResponse getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         return CollectorMapper.snToToResponse(this.collectorRepository.getByNetworkId(networkId, collectorId));
     }
 
+    /**
+     * Get a list of all available Collectors from SensorNet module
+     * @return List of CollectorResponse
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     public List<CollectorResponse> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         List<CollectorResponse> collectorResponseList = new ArrayList<>();
         List<NetworkSnTo> networkCoToList = this.networkRepository.getAll();

@@ -23,6 +23,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * Service with business rules to create/update/get Blending sensors from VirtualSensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Service
 public class BlendingService {
     @Autowired
@@ -33,20 +39,41 @@ public class BlendingService {
 
     @Autowired
     private FunctionRepository functionRepository;
+
+    @Autowired
     private BlendingGenerator blendingGenerator;
 
+    /**
+     * Get a list of all available Blending sensors from VirtualSensorNet module
+     * @see BlendingResponse
+     * @return List of BlendingResponse
+     * @throws AbstractRequestException
+     */
     public List<BlendingResponse> getAll() throws AbstractRequestException {
         List<BlendingVsnTo> blendingVsnToList = this.blendingRepository.getAll();
         List<BlendingResponse> blendingResponseList = BlendingMapper.vsnToToResponse(blendingVsnToList);
         return blendingResponseList;
     }
 
+    /**
+     * Get a specific Blending sensor from VirtualSensorNet by its unique Id
+     * @param blendingId
+     * @return BlendingResponse
+     * @throws AbstractRequestException
+     */
     public BlendingResponse getById(long blendingId) throws AbstractRequestException {
         BlendingVsnTo blendingVsnTo = this.blendingRepository.getById(blendingId);
         BlendingResponse blendingResponse = BlendingMapper.vsnToToResponse(blendingVsnTo);
         return blendingResponse;
     }
 
+    /**
+     * Create a new Blending sensor on VirtualSensorNet module
+     * @param blendingRequest
+     * @return URI with the new Blending location
+     * @throws URISyntaxException
+     * @throws AbstractRequestException
+     */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
         try {
             //GET FUNCTION INTERFACE FROM FUNCTION MODULE
@@ -98,15 +125,32 @@ public class BlendingService {
         }
     }
 
+    /**
+     * Update an existing Blending sensor from VirtualSensorNet module
+     * @param blendingId
+     * @param blendingRequest
+     * @throws AbstractRequestException
+     */
     public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException {
         BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
         this.blendingRepository.update(blendingId, blendingVsnTo);
     }
 
+    /**
+     * Removes an existing Blending sensor from VirtualSensorNet module
+     * @param blendingId
+     * @throws AbstractRequestException
+     */
     public void delete(long blendingId) throws AbstractRequestException {
         this.blendingRepository.delete(blendingId);
     }
 
+    /**
+     * Get a random mock Blending sensor object
+     * @see BlendingVsnTo
+     * @return BlendingVsnTo
+     * @throws AbstractRequestException
+     */
     public BlendingVsnTo getRandom() throws AbstractRequestException {
         return this.blendingGenerator.generateBlendingVsnTo();
     }

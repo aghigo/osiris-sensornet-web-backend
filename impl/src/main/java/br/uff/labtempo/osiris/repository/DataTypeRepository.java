@@ -9,6 +9,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * Interface to abstract DataType DAO implementations
+ * @see br.uff.labtempo.osiris.dao.omcp.DataTypeOmcpDao
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public interface DataTypeRepository {
     DataTypeVsnTo getById(String id) throws AbstractClientRuntimeException, AbstractRequestException;
     List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;

@@ -9,6 +9,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * Interface that abstract Blending DAO implementations
+ * @see br.uff.labtempo.osiris.dao.omcp.BlendingOmcpDao
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 public interface BlendingRepository {
     List<BlendingVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;
     BlendingVsnTo getById(long blendingId) throws AbstractClientRuntimeException, AbstractRequestException;
