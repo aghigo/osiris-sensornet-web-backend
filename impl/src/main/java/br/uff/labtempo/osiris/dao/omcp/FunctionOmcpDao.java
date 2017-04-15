@@ -21,6 +21,12 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO class for Function CRUD on Function module
+ * @author andre.ghigo
+ * @since  1.8
+ * @version  1.0
+ */
 @Component("functionOmcpDao")
 public class FunctionOmcpDao implements FunctionRepository {
 
@@ -36,6 +42,13 @@ public class FunctionOmcpDao implements FunctionRepository {
     @Autowired
     VirtualSensorNetConnection virtualSensorNetConnection;
 
+    /**
+     * Get a function Interface based on the function name
+     * @param functionName
+     * @return InterfaceFnTo (Function interface)
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     */
     @Override
     public InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
@@ -50,6 +63,14 @@ public class FunctionOmcpDao implements FunctionRepository {
         }
     }
 
+    /**
+     * Create a new Function on VirtualSensorNet module based on a function interface (from Function module)
+     * @param interfaceFnTo
+     * @return URI with the new FunctionVsnTo location
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     * @throws URISyntaxException
+     */
     @Override
     public URI createOnVirtualSensorNet(InterfaceFnTo interfaceFnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
         try {
@@ -64,6 +85,13 @@ public class FunctionOmcpDao implements FunctionRepository {
         }
     }
 
+    /**
+     * Get a function from VirtualSensorNet module based on the function Name.
+     * @param functionName
+     * @return FunctionVsnTo
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     */
     @Override
     public FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
@@ -78,6 +106,13 @@ public class FunctionOmcpDao implements FunctionRepository {
         }
     }
 
+    /**
+     * Get a list of all available functions from VirtualSensorNet module
+     * the function names are retrieved from default application.properties configuration file
+     * @return List of FunctionVsnTo
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     */
     @Override
     public List<FunctionVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         try {

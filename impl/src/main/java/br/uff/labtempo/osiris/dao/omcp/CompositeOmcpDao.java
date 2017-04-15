@@ -18,6 +18,12 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DAO class for Composite sensor CRUD on VirtualSensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component("compositeOmcpDao")
 public class CompositeOmcpDao implements CompositeRepository {
 
@@ -27,6 +33,13 @@ public class CompositeOmcpDao implements CompositeRepository {
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
 
+    /**
+     * Get a specific Composite sensor from VirtualSensorNet module based on a unique Id
+     * @param compositeId
+     * @return CompositeVsnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public CompositeVsnTo getById(String compositeId) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
@@ -41,6 +54,12 @@ public class CompositeOmcpDao implements CompositeRepository {
         }
     }
 
+    /**
+     * Get a list of all available Composite sensors from VirtualSensorNet module
+     * @return List of CompositeVsnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public List<CompositeVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         try {
@@ -56,6 +75,14 @@ public class CompositeOmcpDao implements CompositeRepository {
         }
     }
 
+    /**
+     * Create a new Composite sensor on VirtualSensorNet module
+     * @param compositeVsnTo
+     * @return URI with the new Composite location
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     * @throws URISyntaxException
+     */
     @Override
     public URI create(CompositeVsnTo compositeVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
         try {
@@ -69,6 +96,13 @@ public class CompositeOmcpDao implements CompositeRepository {
         }
     }
 
+    /**
+     * Updates an existing Composite sensor from VirtualSensorNet module
+     * @param compositeId (Composite sensor to be updated)
+     * @param compositeVsnTo (new Data to update)
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public void update(String compositeId, CompositeVsnTo compositeVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
@@ -81,6 +115,12 @@ public class CompositeOmcpDao implements CompositeRepository {
         }
     }
 
+    /**
+     * Removes an existing Composite sensor from VirtualSensorNet module
+     * @param compositeId (Composite sensor to be removed)
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public void delete(String compositeId) throws AbstractRequestException, AbstractClientRuntimeException {
         try {

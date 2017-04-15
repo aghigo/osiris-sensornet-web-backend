@@ -15,6 +15,14 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DAO class for VirtualSensor (vsensor) CRUD on VirtualSensorNet module
+ * a VirtualSensor (a.k.a vsensor) is an abstraction of all VirtualSensorNet sensor types (Link, Composite, Blending)
+ * @see VirtualSensorVsnTo
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component("virtualSensorOmpDao")
 public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     @Autowired
@@ -23,6 +31,13 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     @Autowired
     private VirtualSensorNetConfig virtualSensorNetConfig;
 
+    /**
+     * Get a VirtualSensor from VirtualSensorNet module based on its unique Id
+     * @param virtualSensorId
+     * @return VirtualSensorVsnTo
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     */
     @Override
     public VirtualSensorVsnTo getById(String virtualSensorId) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
@@ -37,6 +52,12 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
         }
     }
 
+    /**
+     * Get a list of all available VirtualSensors from VirtualSensorNet module
+     * @return List of VirtualSensorVsnTo
+     * @throws AbstractClientRuntimeException
+     * @throws AbstractRequestException
+     */
     @Override
     public List<VirtualSensorVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         try {

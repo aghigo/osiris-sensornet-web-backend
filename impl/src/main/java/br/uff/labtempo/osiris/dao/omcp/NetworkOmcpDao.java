@@ -19,6 +19,12 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DAO class for Network CRUD on SensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component("networkOmcpDao")
 public class NetworkOmcpDao implements NetworkRepository {
     @Autowired
@@ -27,6 +33,13 @@ public class NetworkOmcpDao implements NetworkRepository {
     @Autowired
     private SensorNetConnection connection;
 
+    /**
+     * Get a specifc Network from SensorNet module based on its unique id
+     * @param id
+     * @return NetworkSnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public NetworkSnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
@@ -45,6 +58,12 @@ public class NetworkOmcpDao implements NetworkRepository {
         return networkSnTo;
     }
 
+    /**
+     * Get a list of all available Networks from SensorNet module
+     * @return List of NetworkSnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public List<NetworkSnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();

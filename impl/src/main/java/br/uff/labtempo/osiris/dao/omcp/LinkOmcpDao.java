@@ -19,6 +19,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DAO class for Link sensor CRUD on VirtualSensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component("linkOmcpDao")
 public class LinkOmcpDao implements LinkRepository {
 
@@ -28,6 +34,13 @@ public class LinkOmcpDao implements LinkRepository {
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
 
+    /**
+     * Get a specific Link sensor from VirtualSensorNet module by its unique Id
+     * @param id
+     * @return LinkVsnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public LinkVsnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         String uri = String.format(this.virtualSensorNetConfig.getLinksUri(), id);
@@ -42,6 +55,12 @@ public class LinkOmcpDao implements LinkRepository {
         }
     }
 
+    /**
+     * Get a list of all available Link Sensors from VirtualSensorNet module
+     * @return List of LinkVsnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public List<LinkVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         String uri = this.virtualSensorNetConfig.getLinksUri();
@@ -57,6 +76,14 @@ public class LinkOmcpDao implements LinkRepository {
         }
     }
 
+    /**
+     * Create a new Link sensor on VirtualSensorNet module
+     * @param linkVsnTo
+     * @return URI with the new Link sensor location
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     * @throws URISyntaxException
+     */
     @Override
     public URI save(LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
@@ -71,6 +98,13 @@ public class LinkOmcpDao implements LinkRepository {
         return new URI(response.getLocation());
     }
 
+    /**
+     * Update an existing Link sensor from VirtualSensorNet module
+     * @param id (id of the Link Sensor to be updated)
+     * @param linkVsnTo (Data to update)
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
@@ -84,6 +118,12 @@ public class LinkOmcpDao implements LinkRepository {
         OmcpUtil.handleOmcpResponse(response);
     }
 
+    /**
+     * Removes an existing Link sensor from VirtualSensorNet module
+     * @param id (Link sensor to be removed)
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
@@ -97,6 +137,15 @@ public class LinkOmcpDao implements LinkRepository {
         OmcpUtil.handleOmcpResponse(response);
     }
 
+    /**
+     * Get a list of all available FieldTo from all LinkSensors from VirtualSensorNet module
+     * A Field is composed by its Id and related DataType
+     * @see DataTypeOmcpDao
+     * @see FieldTo
+     * @return List of FieldTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public List<FieldTo> getAllFields() throws AbstractRequestException, AbstractClientRuntimeException {
         List<FieldTo> fieldToList = new ArrayList<>();

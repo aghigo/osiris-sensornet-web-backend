@@ -17,6 +17,12 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DAO class for Collector CRUD on SensorNet
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component("collectorOmcpDao")
 public class CollectorOmcpDao implements CollectorRepository {
 
@@ -26,6 +32,14 @@ public class CollectorOmcpDao implements CollectorRepository {
     @Autowired
     private SensorNetConnection connection;
 
+    /**
+     * Get an specific Collector based on Network id and Collector Id
+     * @param networkId
+     * @param collectorId
+     * @return CollectorSnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public CollectorSnTo getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
@@ -41,6 +55,13 @@ public class CollectorOmcpDao implements CollectorRepository {
         return collectorSnTo;
     }
 
+    /**
+     * Get a list of all available Collectors from a specific Network
+     * @param networkId
+     * @return List of CollectorSnTo
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @Override
     public List<CollectorSnTo> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
