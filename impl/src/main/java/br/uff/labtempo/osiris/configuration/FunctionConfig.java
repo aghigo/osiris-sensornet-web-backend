@@ -15,6 +15,9 @@ import java.util.List;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class FunctionConfig {
+    @Value("${function.name:Function}")
+    private String moduleName;
+
     @Value("${function.uri:omcp://%1$s.function.osiris}")
     private String functionUri;
 

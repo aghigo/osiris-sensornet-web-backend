@@ -1,7 +1,6 @@
 package br.uff.labtempo.osiris.dao.omcp;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
-import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.SampleRepository;

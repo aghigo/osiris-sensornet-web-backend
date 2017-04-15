@@ -29,8 +29,8 @@ import java.net.URISyntaxException;
 @Slf4j
 @Service
 @EnableScheduling
-@Profile("virtualSensorNetCreateSchedule")
-public class VirtualSensorNetCreateSchedule {
+@Profile("virtualsensornet_schedule")
+public class VirtualSensorNetComponentCreatorSchedule {
     @Autowired
     private DataTypeGenerator dataTypeGenerator;
 

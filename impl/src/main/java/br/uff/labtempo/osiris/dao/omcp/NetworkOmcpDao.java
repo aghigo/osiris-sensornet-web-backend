@@ -12,6 +12,7 @@ import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,22 +39,7 @@ public class NetworkOmcpDao implements NetworkRepository {
             throw e;
         }
 
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
 
         NetworkSnTo networkSnTo = response.getContent(NetworkSnTo.class);
         return networkSnTo;
@@ -71,22 +57,7 @@ public class NetworkOmcpDao implements NetworkRepository {
             throw e;
         }
 
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
 
         NetworkSnTo[] networkSnToArray = response.getContent(NetworkSnTo[].class);
         List<NetworkSnTo> networkSnToList = Arrays.asList(networkSnToArray);

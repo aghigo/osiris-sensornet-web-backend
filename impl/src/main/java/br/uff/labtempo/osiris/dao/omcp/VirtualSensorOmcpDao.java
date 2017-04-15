@@ -8,6 +8,7 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,6 @@ import java.util.List;
 
 @Component("virtualSensorOmpDao")
 public class VirtualSensorOmcpDao implements VirtualSensorRepository {
-
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
 
@@ -29,22 +29,7 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = String.format(this.virtualSensorNetConfig.getVirtualSensorIdUri(), virtualSensorId);
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException();
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             VirtualSensorVsnTo virtualSensorVsnTo = response.getContent(VirtualSensorVsnTo.class);
             return virtualSensorVsnTo;
         } catch (AbstractClientRuntimeException e) {
@@ -58,22 +43,7 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = this.virtualSensorNetConfig.getVirtualSensorUri();
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case NOT_FOUND:
-                    throw new NotFoundException();
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             VirtualSensorVsnTo[] virtualSensorVsnToArray = response.getContent(VirtualSensorVsnTo[].class);
             List<VirtualSensorVsnTo> virtualSensorVsnToList = Arrays.asList(virtualSensorVsnToArray);
             return virtualSensorVsnToList;

@@ -10,6 +10,7 @@ import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,22 +36,7 @@ public class CollectorOmcpDao implements CollectorRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
         CollectorSnTo collectorSnTo = response.getContent(CollectorSnTo.class);
         return collectorSnTo;
     }
@@ -66,23 +52,7 @@ public class CollectorOmcpDao implements CollectorRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
-
+        OmcpUtil.handleOmcpResponse(response);
         CollectorSnTo[] collectorSnToArray = response.getContent(CollectorSnTo[].class);
         List<CollectorSnTo> collectorSnToList = Arrays.asList(collectorSnToArray);
         return collectorSnToList;

@@ -30,10 +30,10 @@ import java.util.List;
  * Creates periodically new SampleCoTo, NetworkCoTo, CollectorCoTo and SensorCoTo on SensorNet module
  */
 @Service
-@Profile("schedule")
+@Profile("sensornet_schedule")
 @EnableScheduling
-public class SensorNetCreateSchedule {
-    private static final Logger log = LoggerFactory.getLogger(SensorNetCreateSchedule.class);
+public class SensorNetComponentCreatorSchedule {
+    private static final Logger log = LoggerFactory.getLogger(SensorNetComponentCreatorSchedule.class);
 
     @Autowired
     private NetworkGenerator networkGenerator;

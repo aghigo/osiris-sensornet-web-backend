@@ -2,25 +2,33 @@ package br.uff.labtempo.osiris.dao.omcp;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.FunctionConfig;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.connection.FunctionConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.FunctionRepository;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component("functionOmcpDao")
 public class FunctionOmcpDao implements FunctionRepository {
 
     @Autowired
     FunctionConfig functionConfig;
+
+    @Autowired
+    FunctionConnection functionConnection;
 
     @Autowired
     VirtualSensorNetConfig virtualSensorNetConfig;
@@ -31,25 +39,10 @@ public class FunctionOmcpDao implements FunctionRepository {
     @Override
     public InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.functionConnection.getConnection();
             String uri = String.format(this.functionConfig.getFunctionInterfaceUri(), functionName);
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case NOT_FOUND:
-                    throw new NotFoundException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             InterfaceFnTo interfaceFnTo = response.getContent(InterfaceFnTo.class);
             return interfaceFnTo;
         } catch (AbstractClientRuntimeException e) {
@@ -64,22 +57,7 @@ public class FunctionOmcpDao implements FunctionRepository {
             String uri = this.virtualSensorNetConfig.getFunctionUri();
             FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
             Response response = omcpClient.doPost(uri, functionVsnTo);
-            switch(response.getStatusCode()) {
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case NOT_FOUND:
-                    throw new NotFoundException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             return new URI(response.getLocation());
         } catch (AbstractClientRuntimeException e) {
             throw e;
@@ -92,24 +70,30 @@ public class FunctionOmcpDao implements FunctionRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = String.format(this.virtualSensorNetConfig.getFunctionNameUri(), functionName);
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case NOT_FOUND:
-                    throw new NotFoundException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             FunctionVsnTo functionVsnTo = response.getContent(FunctionVsnTo.class);
             return functionVsnTo;
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public List<FunctionVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
+        try {
+            OmcpClient omcpClient = this.functionConnection.getConnection();
+            List<FunctionVsnTo> functionVsnToList = new ArrayList<>();
+            for(String functionName : this.functionConfig.getFunctionNames()) {
+                String uri = String.format(this.functionConfig.getFunctionUri(), functionName);
+                Response response = omcpClient.doGet(uri);
+                if(response.getStatusCode().equals(StatusCode.OK)) {
+                    FunctionVsnTo functionVsnTo = response.getContent(FunctionVsnTo.class);
+                    if(functionVsnTo != null) {
+                        functionVsnToList.add(functionVsnTo);
+                    }
+                }
+            }
+            return functionVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }

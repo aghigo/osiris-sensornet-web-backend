@@ -43,7 +43,7 @@ public class CompositeController {
         }
     }
 
-    @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/composites", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> doOptionsComposites() {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
     }
@@ -91,8 +91,9 @@ public class CompositeController {
         }
     }
 
-    @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/composites/mock", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> doOptionsMock() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
+
 }

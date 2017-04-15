@@ -21,7 +21,7 @@ public class CompositeService {
     @Autowired
     private CompositeRepository compositeRepository;
 
-    public CompositeVsnTo getRandom() {
+    public CompositeVsnTo getRandom() throws AbstractRequestException {
         return this.compositeGenerator.generateCompositeVsnTo();
     }
 

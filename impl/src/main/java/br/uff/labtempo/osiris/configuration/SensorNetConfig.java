@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class SensorNetConfig {
-    @Value("${sensornet.messgegroup.collector:omcp://collector.messagegroup/}")
-    private String collectorMessageGroupUri;
+    @Value("${sensornet.name:SensorNet}")
+    private String moduleName;
 
     @Value("${sensornet.uri:omcp://sensornet.osiris/}")
     private String moduleUri;
+
+    @Value("${sensornet.messgegroup.collector:omcp://collector.messagegroup/}")
+    private String collectorMessageGroupUri;
 
     @Value("${sensornet.uri.networks:omcp://sensornet.osiris/}")
     private String networksUri;

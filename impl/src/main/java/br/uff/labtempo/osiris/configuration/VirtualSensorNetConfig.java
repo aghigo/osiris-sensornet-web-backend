@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class VirtualSensorNetConfig {
+    @Value("${virtualsensornet.name:VirtualSensorNet}")
+    private String moduleName;
+
+    @Value("${virtualsensornet.uri:omcp://virtualsensornet.osiris/}")
+    private String moduleUri;
+
     @Value("${virtualsensornet.ip:127.0.0.1}")
     private String ip;
 
@@ -24,9 +30,6 @@ public class VirtualSensorNetConfig {
 
     @Value("${virtualsensornet.password:guest}")
     private String password;
-
-    @Value("${virtualsensornet.uri=omcp://virtualsensornet.osiris/}")
-    private String virtualSensorNetUri;
 
     @Value("${virtualsensornet.uri.datatypes:omcp://virtualsensornet.osiris/datatype}")
     private String dataTypesUri;

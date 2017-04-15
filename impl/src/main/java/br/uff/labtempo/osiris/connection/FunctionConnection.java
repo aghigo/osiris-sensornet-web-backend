@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 @PropertySource(value = "classpath:application.properties")
-public class VirtualSensorNetConnection {
-    @Value("${virtualsensornet.ip:127.0.0.1}")
+public class FunctionConnection {
+    @Value("${sensornet.ip:127.0.0.1}")
     private String ip;
 
-    @Value("${virtualsensornet.port:8091}")
+    @Value("${sensornet.port:8091}")
     private int port;
 
-    @Value("${virtualsensornet.username:guest}")
+    @Value("${sensornet.username:guest}")
     private String username;
 
-    @Value("${virtualsensornet.password:guest}")
+    @Value("${sensornet.password:guest}")
     private String password;
 
     public OmcpClient getConnection() throws ConnectionException {

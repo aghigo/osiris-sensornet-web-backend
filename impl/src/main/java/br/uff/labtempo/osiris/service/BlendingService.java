@@ -1,6 +1,8 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
+import br.uff.labtempo.omcp.common.exceptions.NotFoundException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
@@ -47,17 +49,24 @@ public class BlendingService {
 
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
         try {
-            //CREATE BASIC BLENDING
-            BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
-            URI uri = this.blendingRepository.create(blendingVsnTo);
-
             //GET FUNCTION INTERFACE FROM FUNCTION MODULE
             InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
+            if(interfaceFnTo == null) {
+                throw new NotFoundException(String.format("Failed to create Blending sensor: could not found %s function interface from Function module.", blendingRequest.getFunctionName()));
+            }
 
             //CREATE A FUNCTION ONTO VIRTUALSENSORNET WITH THE FUNCTION INTERFACE
             FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(blendingRequest.getFunctionName());
+            if(functionVsnTo == null) {
+                URI createdVsnFunctionUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
+                if(createdVsnFunctionUri == null) {
+                    throw new NotFoundException(String.format("Failed to create Blending sensor: could not found/create %s function interface from/on VirtualSensorNet module.", blendingRequest.getFunctionName()));
+                }
+            }
 
-            //UPDATE BLENDING WITH FUNCTION DATA
+            //CRETE BLENDING AND UPDATE IT WITH FUNCTION DATA
+            BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
+
             blendingVsnTo.setFunction(functionVsnTo);
             blendingVsnTo.setCallMode(blendingRequest.getFunctionOperation());
             blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
@@ -80,7 +89,7 @@ public class BlendingService {
             blendingVsnTo.addResponseParam(fieldTo.getId(), blendingRequest.getResponseParamName());
 
             //UPDATE COMPLETE BLENDING WITH FUNCTION DATA
-            this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
+            URI uri = this.blendingRepository.create(blendingVsnTo);
 
             //RETURN NEW BLENDING URI
             return uri;
@@ -98,7 +107,7 @@ public class BlendingService {
         this.blendingRepository.delete(blendingId);
     }
 
-    public BlendingVsnTo getRandom() {
+    public BlendingVsnTo getRandom() throws AbstractRequestException {
         return this.blendingGenerator.generateBlendingVsnTo();
     }
 }

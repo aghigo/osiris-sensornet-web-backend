@@ -7,12 +7,15 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.LinkRepository;
+import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,22 +34,7 @@ public class LinkOmcpDao implements LinkRepository {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case NOT_FOUND:
-                    throw new NotFoundException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             LinkVsnTo linkVsnTo = response.getContent(LinkVsnTo.class);
             return linkVsnTo;
         } catch (AbstractClientRuntimeException e) {
@@ -60,22 +48,7 @@ public class LinkOmcpDao implements LinkRepository {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             Response response = omcpClient.doGet(uri);
-            switch(response.getStatusCode()) {
-                case BAD_REQUEST:
-                    throw new BadRequestException();
-                case FORBIDDEN:
-                    throw new ForbiddenException();
-                case METHOD_NOT_ALLOWED:
-                    throw new MethodNotAllowedException();
-                case REQUEST_TIMEOUT:
-                    throw new RequestTimeoutException();
-                case NOT_IMPLEMENTED:
-                    throw new NotImplementedException();
-                case INTERNAL_SERVER_ERROR:
-                    throw new InternalServerErrorException();
-                case NOT_FOUND:
-                    throw new NotFoundException();
-            }
+            OmcpUtil.handleOmcpResponse(response);
             LinkVsnTo[] linkVsnToArray = response.getContent(LinkVsnTo[].class);
             List<LinkVsnTo> linkVsnToList = Arrays.asList(linkVsnToArray);
             return linkVsnToList;
@@ -94,22 +67,7 @@ public class LinkOmcpDao implements LinkRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
         return new URI(response.getLocation());
     }
 
@@ -123,22 +81,7 @@ public class LinkOmcpDao implements LinkRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
     }
 
     @Override
@@ -151,21 +94,15 @@ public class LinkOmcpDao implements LinkRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
+        OmcpUtil.handleOmcpResponse(response);
+    }
+
+    @Override
+    public List<FieldTo> getAllFields() throws AbstractRequestException, AbstractClientRuntimeException {
+        List<FieldTo> fieldToList = new ArrayList<>();
+        for(LinkVsnTo linkVsnTo : getAll()) {
+            fieldToList.addAll(linkVsnTo.getFields());
         }
+        return fieldToList;
     }
 }

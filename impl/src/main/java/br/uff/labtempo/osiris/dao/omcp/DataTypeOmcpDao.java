@@ -8,6 +8,7 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,22 +36,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
         DataTypeVsnTo dataTypeVsnTo = response.getContent(DataTypeVsnTo.class);
         return dataTypeVsnTo;
     }
@@ -65,22 +51,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
         DataTypeVsnTo[] dataTypeVsnToArray = response.getContent(DataTypeVsnTo[].class);
         List<DataTypeVsnTo> dataTypeVsnToList = Arrays.asList(dataTypeVsnToArray);
         return dataTypeVsnToList;
@@ -96,22 +67,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
         return new URI(response.getLocation());
     }
 
@@ -125,22 +81,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
     }
 
     @Override
@@ -153,21 +94,6 @@ public class DataTypeOmcpDao implements DataTypeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
-        switch(response.getStatusCode()) {
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-            case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-        }
+        OmcpUtil.handleOmcpResponse(response);
     }
 }

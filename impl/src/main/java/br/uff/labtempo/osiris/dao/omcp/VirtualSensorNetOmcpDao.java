@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.OmcpRepository;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,22 +25,7 @@ public class VirtualSensorNetOmcpDao<T> implements OmcpRepository<T> {
 
     public T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
         Response omcpResponse = this.virtualSensorNetConnection.getConnection().doGet(uri);
-        switch(omcpResponse.getStatusCode()) {
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case INTERNAL_SERVER_ERROR:
-                break;
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-        }
+        OmcpUtil.handleOmcpResponse(omcpResponse);
         T content = (T) omcpResponse.getContent();
         if(content == null) {
             throw new NotFoundException();
@@ -49,63 +35,18 @@ public class VirtualSensorNetOmcpDao<T> implements OmcpRepository<T> {
 
     public URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
         Response omcpResponse = this.virtualSensorNetConnection.getConnection().doPost(uri, t);
-        switch(omcpResponse.getStatusCode()) {
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case INTERNAL_SERVER_ERROR:
-                break;
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-        }
+        OmcpUtil.handleOmcpResponse(omcpResponse);
         return new URI(omcpResponse.getLocation());
     }
 
     public void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
         Response omcpResponse = this.virtualSensorNetConnection.getConnection().doPut(uri, t);
-        switch(omcpResponse.getStatusCode()) {
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case INTERNAL_SERVER_ERROR:
-                break;
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-        }
+        OmcpUtil.handleOmcpResponse(omcpResponse);
     }
 
     public void doDelete(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
         Response omcpResponse = this.virtualSensorNetConnection.getConnection().doDelete(uri);
-        switch(omcpResponse.getStatusCode()) {
-            case BAD_REQUEST:
-                throw new BadRequestException();
-            case FORBIDDEN:
-                throw new ForbiddenException();
-            case INTERNAL_SERVER_ERROR:
-                break;
-            case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
-            case NOT_FOUND:
-                throw new NotFoundException();
-            case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
-            case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
-        }
+        OmcpUtil.handleOmcpResponse(omcpResponse);
     }
 
     public void doNotify(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
