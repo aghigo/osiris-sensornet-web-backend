@@ -15,6 +15,13 @@ import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
+/**
+ * Controller class that provides REST endpoints
+ * to control and manage Networks from SensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class NetworkController {
@@ -25,17 +32,29 @@ public class NetworkController {
         this.networkService = networkService;
     }
 
+    /**
+     * Get a Network mock. Create an NetworkCoTo randomly at runtime. Not persisted.
+     * @return NetworkCoTo object
+     */
     @RequestMapping(value = "/networks/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
         NetworkCoTo networkCoTo = this.networkService.getRandom();
         return ResponseEntity.ok(networkCoTo);
     }
 
+    /**
+     * Get a List of all available HTTP methods of the /networks/mock endpoint
+     * @return List of HTTP methods
+     */
     @RequestMapping(value = "/networks/mock", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsMock() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get all available Networks from SensorNet module
+     * @return List of NetworkResponse
+     */
     @RequestMapping(value = "/networks", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         List<NetworkResponse> networkResponseList;
@@ -49,11 +68,22 @@ public class NetworkController {
         return ResponseEntity.ok(networkResponseList);
     }
 
+    /**
+     * Get a list of all available HTTP methods of the /networks endpoint
+     * @return List of HTTP methods
+     */
     @RequestMapping(value = "/networks", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsNetworks() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get a specific Network from SensorNet module based on its unique Id
+     * @param networkId
+     * @return NetworkResponse
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
     @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         NetworkResponse networkResponse = null;
@@ -67,6 +97,10 @@ public class NetworkController {
         return ResponseEntity.ok(networkResponse);
     }
 
+    /**
+     * Get a list of all available HTTP methods of the /networks/{networkId} endpoint
+     * @return List of HTTP methods
+     */
     @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsNetworkId() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);

@@ -22,6 +22,13 @@ import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
+/**
+ * Controller class responsible to provide REST endpoints
+ * to Control and manage Link sensors from VirtualSensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @RestController
 @RequestMapping(value = "/virtualsensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LinkController {
@@ -29,6 +36,10 @@ public class LinkController {
     @Autowired
     private LinkService linkService;
 
+    /**
+     * Get all available Link sensors from VirtualSensorNet module
+     * @return ResponseEntity of List<LinkResponse> (List of all available Link sensors from VirtualSensorNet module)
+     */
     @RequestMapping(value = "/links", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         List<LinkResponse> linkResponseList;
@@ -43,11 +54,20 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
     }
 
+    /**
+     * Get a list of all available HTTP methods for the /links endpoint
+     * @return list of available HTTP methods (ResponseEntity with allows Headers)
+     */
     @RequestMapping(value = "/links", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> options() {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Create a new Link sensor on VirtualSensorNet module
+     * @param linkRequest (data required to create a new Link sensor)
+     * @return URI containing the new Link location
+     */
     @RequestMapping(value = "/links", method = RequestMethod.POST)
     public ResponseEntity<?> post(@Valid LinkRequest linkRequest) {
         URI uri;
@@ -59,6 +79,11 @@ public class LinkController {
         return ResponseEntity.created(uri).build();
     }
 
+    /**
+     * Get a Link sensor created randomly at runtime.
+     * This is for mock purposes. Not persisted.
+     * @return
+     */
     @RequestMapping(value = "/links/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
         LinkVsnTo linkVsnTo;
@@ -70,6 +95,10 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
     }
 
+    /**
+     * Get a list of all available HTTP methods of the /links/mock endpoint
+     * @return list of HTTP methods
+     */
     @RequestMapping(value = "/links/mock", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsMock() {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
@@ -89,6 +118,12 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).body(linkResponse);
     }
 
+    /**
+     * Updates an existing Link sensor from VirtualSensorNet
+     * @param linkId (Link id that will be updated)
+     * @param linkRequest (data required to update the Link sensor)
+     * @return
+     */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.PUT)
     public ResponseEntity<?> put(@PathVariable String linkId, @Valid LinkRequest linkRequest) {
         try {
@@ -99,6 +134,11 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     * Removes an existing Link sensor from VirtualSensorNet module
+     * @param linkId (Link sensor to be removed)
+     * @return
+     */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable String linkId) {
         try {
@@ -109,6 +149,11 @@ public class LinkController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     * Get a list of all available HTTP methods of the /links/{linkId} endpoint
+     * @param linkId
+     * @return List of HTTP methods
+     */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> options(@PathVariable String linkId) {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.OPTIONS);

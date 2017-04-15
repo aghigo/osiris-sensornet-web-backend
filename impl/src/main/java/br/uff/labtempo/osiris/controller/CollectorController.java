@@ -15,6 +15,13 @@ import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
+/**
+ * Controller class that provide REST endpoints
+ * to control Collectors from SensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @RestController
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class CollectorController {
@@ -25,16 +32,29 @@ public class CollectorController {
         this.collectorService = collectorService;
     }
 
+    /**
+     * Creates a new Collector (CollectorCoTo object) randomly.
+     * This acts as a mock. Collector is not persisted.
+     * @return CollectorCoTo
+     */
     @RequestMapping(value = "/collectors/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
         return ResponseEntity.ok().body(this.collectorService.getRandom());
     }
 
+    /**
+     * Get a list of available HTTP methods for the /collectors/mock endpoint
+     * @return list of available HTTP methods
+     */
     @RequestMapping(value = "/collectors/mock", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsMock() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get all Collectors from SensorNet module
+     * @return List<CollectorResponse> List of all available Collectors from SensorNet
+     */
     @RequestMapping(value = "/collectors", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         List<CollectorResponse> collectorResponseList = null;
@@ -51,11 +71,20 @@ public class CollectorController {
         return ResponseEntity.ok().body(collectorResponseList);
     }
 
+    /**
+     * Get a list of available HTTP methods for the /collectors endpoint
+     * @return List of available HTTP methods
+     */
     @RequestMapping(value = "/collectors", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsCollectors() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get all Collectors based on a specific Network from SensorNet
+     * @param networkId
+     * @return List of all collectors of the {networkId} Network
+     */
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
         List<CollectorResponse> collectorResponseList = null;
@@ -72,11 +101,21 @@ public class CollectorController {
         return ResponseEntity.ok().body(collectorResponseList);
     }
 
+    /**
+     * Get a list of available HTTP methods for the /networks/{networkId}/collectors endpoint
+     * @return List of available HTTP methods.
+     */
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsNetworkIdCollectors() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get a specific Collector based on collectorId and networkId
+     * @param networkId
+     * @param collectorId
+     * @return CollectorResponse with id {collectorId} from the {networkId} Network
+     */
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId, @PathVariable String collectorId) {
         CollectorResponse collectorResponse = null;
@@ -94,6 +133,10 @@ public class CollectorController {
         return ResponseEntity.ok().body(collectorResponse);
     }
 
+    /**
+     * Get a list of available HTTP methods for the /networks/{networkId}/collectors/{collectorId} endpoint
+     * @return list of available HTTP methods.
+     */
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsCollectorId() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);

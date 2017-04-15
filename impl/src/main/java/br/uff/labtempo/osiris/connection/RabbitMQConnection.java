@@ -8,6 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+/**
+ * Class responsible for the connection to the RabbitMQ queue
+ * values are retrieved from the default application.properties configuration file
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 @Getter
 @PropertySource(value = "classpath:application.properties")
@@ -24,6 +31,13 @@ public class RabbitMQConnection {
     @Value("${rabbitmq.password:guest}")
     private String password;
 
+    /**
+     * Get a OMCP connection to the RabbitMQ
+     * @see OmcpClient
+     * @see RabbitClient
+     * @return OmcpClient connection
+     * @throws ConnectionException
+     */
     public OmcpClient getConnection() throws ConnectionException {
         return new RabbitClient(ip, username, password);
     }

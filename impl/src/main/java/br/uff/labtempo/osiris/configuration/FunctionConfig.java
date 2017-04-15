@@ -7,6 +7,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Function module configuration data
+ * values are retrieved from the application.properties configuration file
+ * module name, mapped component URIs, function names
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

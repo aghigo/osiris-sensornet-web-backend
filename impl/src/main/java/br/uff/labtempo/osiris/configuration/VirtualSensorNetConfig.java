@@ -5,6 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+/**
+ * VirtualSensorNet module configuration data
+ * values are retrieved from the application.properties configuration file
+ * module name, mapped component URIs
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,18 +26,6 @@ public class VirtualSensorNetConfig {
 
     @Value("${virtualsensornet.uri:omcp://virtualsensornet.osiris/}")
     private String moduleUri;
-
-    @Value("${virtualsensornet.ip:127.0.0.1}")
-    private String ip;
-
-    @Value("${virtualsensornet.port:8091}")
-    private int port;
-
-    @Value("${virtualsensornet.username:guest}")
-    private String username;
-
-    @Value("${virtualsensornet.password:guest}")
-    private String password;
 
     @Value("${virtualsensornet.uri.datatypes:omcp://virtualsensornet.osiris/datatype}")
     private String dataTypesUri;

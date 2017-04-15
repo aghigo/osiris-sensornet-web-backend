@@ -13,6 +13,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Class responsible for the connection to the SensorNet module
+ * values are retrieved from the default application.properties configuration file
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Component
 @Getter
 @PropertySource(value = "classpath:application.properties")
@@ -29,6 +36,13 @@ public class SensorNetConnection {
     @Value("${sensornet.password:guest}")
     private String password;
 
+    /**
+     * Connects to the SensorNet module and return a OMCP connection
+     * @see OmcpClient
+     * @see RabbitClient
+     * @return OmcpClient (OMCP connection)
+     * @throws ConnectionException
+     */
     public OmcpClient getConnection() throws ConnectionException {
         return new RabbitClient(ip, username, password);
     }

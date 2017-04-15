@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.print.attribute.standard.Media;
-
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 /**

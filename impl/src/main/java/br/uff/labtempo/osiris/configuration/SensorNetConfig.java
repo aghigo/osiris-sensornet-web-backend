@@ -5,6 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+/**
+ * SensorNet module configuration data
+ * values are retrieved from the application.properties configuration file
+ * module name, mapped component URIs
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

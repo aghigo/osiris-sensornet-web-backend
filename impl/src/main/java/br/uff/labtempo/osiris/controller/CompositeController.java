@@ -19,12 +19,23 @@ import java.net.URISyntaxException;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
+/**
+ * Controller class with REST endpoints
+ * to control Composite sensors from VirtualSensorNet module
+ * @author andre.ghigo
+ * @since 1.8
+ * @version 1.0
+ */
 @RequestMapping(value = "/virtualsensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class CompositeController {
 
     @Autowired
     private CompositeService compositeService;
 
+    /**
+     * Get all Composite sensors from VirtualSensorNet module
+     * @return List with all available Composite sensors from VirtualSensorNet module
+     */
     @RequestMapping(value = "/composites", method = RequestMethod.GET)
     public ResponseEntity<?> doGetAll() {
         try {
@@ -34,6 +45,11 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Creates a new Composite sensor on VirtualSensorNet module
+     * @param compositeRequest (data required to create a new Composite sensor)
+     * @return URI with the new Composite location
+     */
     @RequestMapping(value = "/composites", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody @Valid CompositeRequest compositeRequest) {
         try {
@@ -43,11 +59,20 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Get a list of available HTTP methods for the /composites endpoint
+     * @return list of available HTTP methods
+     */
     @RequestMapping(value = "/composites", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> doOptionsComposites() {
         return allows(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Get a specific Composite sensor based on unique Id
+     * @param compositeId
+     * @return Composite Sensor (CompositeResponse)
+     */
     @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.GET)
     public ResponseEntity<?> doGetById(@PathVariable String compositeId) {
         try {
@@ -57,6 +82,12 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Updates an existing Composite sensor from VirtualSensorNet module
+     * @param compositeId (Composite sensor that will be updated)
+     * @param compositeRequest (data to update the Composite sensor)
+     * @return
+     */
     @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.PUT)
     public ResponseEntity<?> doPut(@PathVariable String compositeId, @RequestBody @Valid CompositeRequest compositeRequest) {
         try {
@@ -67,6 +98,11 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Removes an existing Composite sensor from VirtualSensorNet module
+     * @param compositeId
+     * @return
+     */
     @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> doDelete(@PathVariable String compositeId) {
         try {
@@ -77,11 +113,20 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Get all available HTTP methods for the /composites/{compositeId} endpoint
+     * @return
+     */
     @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> doOptionsCompositeId() {
         return allows(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.OPTIONS);
     }
 
+    /**
+     * Creates a new Composite sensor randomly.
+     * This acts as a mock. The Composite is not persisted.
+     * @return CompositeVsnTo
+     */
     @RequestMapping(value = "/composites/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getMock() {
         try {
@@ -91,6 +136,10 @@ public class CompositeController {
         }
     }
 
+    /**
+     * Get a list of available HTTP methods for the /composites/mock endpoint
+     * @return List of available HTTP methods
+     */
     @RequestMapping(value = "/composites/mock", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> doOptionsMock() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
