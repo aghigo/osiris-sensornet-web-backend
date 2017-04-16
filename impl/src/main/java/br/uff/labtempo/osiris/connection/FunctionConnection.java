@@ -3,7 +3,9 @@ package br.uff.labtempo.osiris.connection;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
+import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
 import lombok.Getter;
+import org.omg.SendingContext.RunTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -19,27 +21,23 @@ import org.springframework.stereotype.Component;
 @Getter
 @PropertySource(value = "classpath:application.properties")
 public class FunctionConnection {
-    @Value("${sensornet.ip:127.0.0.1}")
-    private String ip;
-
-    @Value("${sensornet.port:8091}")
-    private int port;
-
-    @Value("${sensornet.username:guest}")
-    private String username;
-
-    @Value("${sensornet.password:guest}")
-    private String password;
 
     /**
      * Connects to the Function module using the ip, port, username and password
-     * from the application.properties configuration file.
      * @see OmcpClient
      * @see RabbitClient
+     * @see FunctionModuleConfig
+     * @param functionModuleConfig
      * @return OmcpClient connection
      * @throws ConnectionException
      */
-    public OmcpClient getConnection() throws ConnectionException {
-        return new RabbitClient(ip, username, password);
+    public OmcpClient getConnection(FunctionModuleConfig functionModuleConfig) throws ConnectionException {
+        if(functionModuleConfig != null) {
+            String ip = functionModuleConfig.getIp();
+            String username = functionModuleConfig.getUsername();
+            String password = functionModuleConfig.getPassword();
+            return new RabbitClient(ip, username, password);
+        }
+        throw new RuntimeException("FunctionConnection error: Invalid function configuration.");
     }
 }

@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.FunctionConfig;
+import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
 import br.uff.labtempo.osiris.connection.FunctionConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
@@ -52,7 +53,8 @@ public class FunctionOmcpDao implements FunctionRepository {
     @Override
     public InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.functionConnection.getConnection();
+            FunctionModuleConfig functionModuleConfig = this.functionConfig.getFunctionModuleConfig(functionName);
+            OmcpClient omcpClient = this.functionConnection.getConnection(functionModuleConfig);
             String uri = String.format(this.functionConfig.getFunctionInterfaceUri(), functionName);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
@@ -116,10 +118,10 @@ public class FunctionOmcpDao implements FunctionRepository {
     @Override
     public List<FunctionVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.functionConnection.getConnection();
             List<FunctionVsnTo> functionVsnToList = new ArrayList<>();
-            for(String functionName : this.functionConfig.getFunctionNames()) {
-                String uri = String.format(this.functionConfig.getFunctionUri(), functionName);
+            for(FunctionModuleConfig functionModuleConfig : this.functionConfig.getFunctionModuleConfigList()) {
+                OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+                String uri = String.format(this.virtualSensorNetConfig.getFunctionNameUri(), functionModuleConfig.getFunctionName());
                 Response response = omcpClient.doGet(uri);
                 if(response.getStatusCode().equals(StatusCode.OK)) {
                     FunctionVsnTo functionVsnTo = response.getContent(FunctionVsnTo.class);

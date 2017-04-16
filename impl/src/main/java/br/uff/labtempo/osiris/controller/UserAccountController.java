@@ -2,7 +2,6 @@ package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.model.request.UserAccountRequest;
 import br.uff.labtempo.osiris.service.UserAccountService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,9 @@ import javax.validation.Valid;
 
 /**
  * Controller class to provide UserAccount management REST endpoints
+ * @see UserAccountRequest (UserAccount data provided by the client on POST/PUT requests)
+ * @see br.uff.labtempo.osiris.model.domain.UserAccount (UserAccount application domain)
+ * @see br.uff.labtempo.osiris.model.response.UserAccountResponse (UserAccount response data sent by the API to the Client)
  * @author andre.ghigo
  * @version 1.0
  * @since 1.8

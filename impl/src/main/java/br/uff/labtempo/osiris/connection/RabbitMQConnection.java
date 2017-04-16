@@ -19,11 +19,17 @@ import org.springframework.stereotype.Component;
 @Getter
 @PropertySource(value = "classpath:application.properties")
 public class RabbitMQConnection {
+    @Value("${rabbitmq.moduleName:rabbitmq}")
+    private String moduleName;
+
     @Value("${rabbitmq.ip:127.0.0.1}")
     private String ip;
 
     @Value("${rabbitmq.port:5672}")
     private int port;
+
+    @Value("http://${rabbitmq.ip:127.0.0.1}:${rabbitmq.port:5672}/")
+    private String moduleUri;
 
     @Value("${rabbitmq.username:guest}")
     private String username;

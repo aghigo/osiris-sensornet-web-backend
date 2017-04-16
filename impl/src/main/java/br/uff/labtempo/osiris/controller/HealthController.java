@@ -1,15 +1,15 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.omcp.client.OmcpClient;
-import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.osiris.configuration.FunctionConfig;
+import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
 import br.uff.labtempo.osiris.configuration.SensorNetConfig;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
 import br.uff.labtempo.osiris.connection.FunctionConnection;
-import br.uff.labtempo.osiris.connection.RabbitMQConnection;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.model.HealthDependency;
+import br.uff.labtempo.osiris.service.HealthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,110 +21,74 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controller to check application dependencies.
- * test connections with SensorNet, VirtualSensorNet, Functions, RabbitMQ and Application Database
+ * Controller class that provide REST endpoints to check application dependencies status.
+ * test connections with SensorNet, VirtualSensorNet, Function modules, RabbitMQ and Application Database
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
  */
 @RestController
-@RequestMapping(value = "/health", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class HealthController {
 
-    @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private HealthService healthService;
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
-
-    @Autowired
-    private FunctionConfig functionConfig;
-
-    private SensorNetConnection sensorNetConnection;
-    private VirtualSensorNetConnection virtualSensorNetConnection;
-    private FunctionConnection functionConnection;
-    private RabbitMQConnection rabbitMQConnection;
-
-    @Autowired
-    public HealthController(RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
-        this.rabbitMQConnection = rabbitMQConnection;
-        this.functionConnection = functionConnection;
-        this.sensorNetConnection = sensorNetConnection;
-        this.virtualSensorNetConnection = virtualSensorNetConnection;
+    public HealthController(HealthService healthService) {
+        this.healthService = healthService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getHealthStatus() {
+    /**
+     * Get a health summary of application dependency modules status are functional
+     * Checks if SensorNet, VirtualSensorNet, Function modules and Application database is Online and Functional
+     * Each application dependency is mapped on HealthDependency object
+     * @see HealthDependency
+      * @return List of HealthDependency
+     */
+    @RequestMapping(value = "/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getGlobalHealthStatus() {
         List<HealthDependency> healthDependencyList = new ArrayList<>();
-        healthDependencyList.add(testRabbitMQ());
-        healthDependencyList.add(testSensorNetConnection());
-        healthDependencyList.add(testVirtualSensorNet());
-        healthDependencyList.addAll(testFunction());
+        healthDependencyList.add(this.healthService.testRabbitMQ());
+        healthDependencyList.add(this.healthService.testSensorNetConnection());
+        healthDependencyList.add(this.healthService.testVirtualSensorNet());
+        healthDependencyList.addAll(this.healthService.testFunctionModules());
         return ResponseEntity.ok(healthDependencyList);
     }
 
-    private HealthDependency testRabbitMQ() {
-        String moduleName = "RabbitMQ";
-        String ip = this.rabbitMQConnection.getIp();
-        int port = this.rabbitMQConnection.getPort();
-        try {
-            OmcpClient omcpClient = this.rabbitMQConnection.getConnection();
-            Response response = omcpClient.doGet(this.sensorNetConfig.getModuleUri());
-            return HealthDependency.builder().uri("N/A").status(response.getStatusCode().toString()).port(port).ip(ip).name(moduleName).build();
-        } catch (Exception e) {
-            return HealthDependency.builder().uri("N/A").status(e.getMessage()).port(port).ip(ip).name(moduleName).build();
-        }
+    /**
+     * Get a health status of the SensorNet module
+     * @see SensorNetConnection
+     * @see SensorNetConfig
+     * @see HealthDependency
+     * @return HealthDependency with SensorNet status
+     */
+    @RequestMapping(value = "/sensornet/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getSensorNetHealthStatus() {
+        return ResponseEntity.ok(this.healthService.testSensorNetConnection());
     }
 
-    private HealthDependency testSensorNetConnection() {
-        String moduleName = this.sensorNetConfig.getModuleName();
-        String ip = this.sensorNetConnection.getIp();
-        int port = this.sensorNetConnection.getPort();
-        String moduleLocation = this.sensorNetConfig.getModuleUri();
-        try {
-            OmcpClient omcpClient = this.sensorNetConnection.getConnection();
-            String uri = this.sensorNetConfig.getNetworksUri();
-            Response response = omcpClient.doGet(uri);
-            return HealthDependency.builder().name(moduleName).ip(ip).port(port).status(response.getStatusCode().toString()).uri(moduleLocation).build();
-        } catch (Exception e) {
-            return HealthDependency.builder().name(moduleName).ip(ip).port(port).status(e.getMessage()).uri(moduleLocation).build();
-        }
+    /**
+     * Get a health status of the VirtualSensorNet module
+     * @see VirtualSensorNetConnection
+     * @see VirtualSensorNetConfig
+     * @see HealthDependency
+     * @return HealthDependency with VirtualSensorNet status
+     */
+    @RequestMapping(value = "/virtualsensornet/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getVirtualSensorNetHealthStatus() {
+        return ResponseEntity.ok(this.healthService.testVirtualSensorNet());
     }
 
-    private HealthDependency testVirtualSensorNet() {
-        String moduleName = this.virtualSensorNetConfig.getModuleName();
-        String ip = this.virtualSensorNetConnection.getIp();
-        int port = this.virtualSensorNetConnection.getPort();
-        String moduleLocation = this.virtualSensorNetConfig.getModuleUri();
-        try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getVirtualSensorUri();
-            Response response = omcpClient.doGet(uri);
-            return HealthDependency.builder().name(moduleName).ip(ip).port(port).status(response.getStatusCode().toString()).uri(moduleLocation).build();
-        } catch (Exception e) {
-            return HealthDependency.builder().name(moduleName).ip(ip).port(port).status(e.getMessage()).uri(moduleLocation).build();
-        }
-    }
-
-    private List<HealthDependency> testFunction() {
-        List<HealthDependency> healthDependencyList = new ArrayList<>();
-        List<String> functionNameList = this.functionConfig.getFunctionNames();
-        String ip = this.functionConnection.getIp();
-        int port = this.functionConnection.getPort();
-        for(String functionName : functionNameList) {
-            String moduleName = functionName + " " + this.functionConfig.getModuleName();
-            String testUri = String.format(this.functionConfig.getFunctionInterfaceUri(), functionName);
-            String moduleUri = String.format(this.functionConfig.getFunctionUri(), functionName);
-            try {
-                OmcpClient omcpClient = this.functionConnection.getConnection();
-                Response response = omcpClient.doGet(testUri);
-                HealthDependency healthDependency = HealthDependency.builder().name(moduleName).ip(ip).port(port).status(response.getStatusCode().toString()).uri(moduleUri).build();
-                healthDependencyList.add(healthDependency);
-            } catch(Exception e) {
-                HealthDependency healthDependency = HealthDependency.builder().name(moduleName).ip(ip).port(port).status(e.getMessage()).uri(moduleUri).build();
-                healthDependencyList.add(healthDependency);
-            }
-        }
-        return healthDependencyList;
+    /**
+     * Get a health status of the Function modules
+     * @see FunctionConnection
+     * @see FunctionConfig
+     * @see FunctionModuleConfig
+     * @see HealthDependency
+     * @return List of HealthDependency with Function module status
+     */
+    @RequestMapping(value = "/function/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getFunctionModulesHealthStatus() {
+        return ResponseEntity.ok(this.healthService.testFunctionModules());
     }
 }

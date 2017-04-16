@@ -26,4 +26,5 @@ public class HealthDependency {
     private int port;
     private String uri;
     private String status;
+    private boolean active;
 }
