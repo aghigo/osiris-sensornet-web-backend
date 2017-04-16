@@ -9,6 +9,7 @@ import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import java.util.UUID;
  * @since 1.8
  * @version 1.0
  */
+@Component
 public class BlendingGenerator {
 
     private final int CALL_INTERVAL_INMILLIS_MAX_RANGE = 99999;

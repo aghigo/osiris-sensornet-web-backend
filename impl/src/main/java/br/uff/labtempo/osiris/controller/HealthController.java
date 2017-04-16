@@ -93,8 +93,8 @@ public class HealthController {
 
     private HealthDependency testVirtualSensorNet() {
         String moduleName = this.virtualSensorNetConfig.getModuleName();
-        String ip = this.virtualSensorNetConfig.getIp();
-        int port = this.virtualSensorNetConfig.getPort();
+        String ip = this.virtualSensorNetConnection.getIp();
+        int port = this.virtualSensorNetConnection.getPort();
         String moduleLocation = this.virtualSensorNetConfig.getModuleUri();
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();

@@ -35,16 +35,8 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-core</artifactId>
-			<version>1.4.2</version><!-- or latest version -->
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/de.sven-jacobs/loremipsum -->
-		<dependency>
-			<groupId>de.sven-jacobs</groupId>
-			<artifactId>loremipsum</artifactId>
-			<version>1.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
