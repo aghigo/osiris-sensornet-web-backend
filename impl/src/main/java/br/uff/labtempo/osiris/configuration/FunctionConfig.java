@@ -69,6 +69,9 @@ public class FunctionConfig {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream stream = loader.getResourceAsStream("application.properties");
             properties.load(stream);
+            if(properties.getProperty("function." + functionName + ".ip") == null) {
+                continue;
+            }
             FunctionModuleConfig functionModuleConfig = FunctionModuleConfig.builder()
                     .functionName(functionName)
                     .moduleName(String.format(this.getModuleName(), functionName))
