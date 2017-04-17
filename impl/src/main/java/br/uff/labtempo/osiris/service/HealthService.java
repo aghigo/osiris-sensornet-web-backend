@@ -116,7 +116,7 @@ public class HealthService {
         boolean isActive = false;
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getVirtualSensorUri();
+            String uri = this.virtualSensorNetConfig.getDataTypesUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;

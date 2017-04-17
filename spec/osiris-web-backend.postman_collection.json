@@ -8,6 +8,143 @@
 	},
 	"item": [
 		{
+			"name": "Function OMCP",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Function REST",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Health",
+			"description": "Health checker of the SensorNet, VirtualSensorNet, Funcion modules",
+			"item": [
+				{
+					"name": "/health",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/health",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Checks for osiris-web-backend dependencies are OK (SensorNet, VirtualSensorNet, Application Database)"
+					},
+					"response": [
+						{
+							"id": "56eeb11c-6ed2-44e8-9481-be54d9a2e910",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/health",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true,
+										"warning": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content",
+										"warning": ""
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"name": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW4="
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 16 Apr 2017 22:03:26 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-Frame-Options",
+									"key": "X-Frame-Options",
+									"value": "DENY",
+									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 1055,
+							"body": "[{\"name\":\"rabbitmq\",\"ip\":\"172.17.0.2\",\"port\":5672,\"uri\":\"http://172.17.0.2:5672/\",\"status\":\"OK\",\"active\":true},{\"name\":\"SensorNet\",\"ip\":\"127.0.0.1\",\"port\":8090,\"uri\":\"omcp://sensornet.osiris/\",\"status\":\"OK\",\"active\":true},{\"name\":\"VirtualSensorNet\",\"ip\":\"127.0.0.1\",\"port\":8091,\"uri\":\"omcp://virtualsensornet.osiris/\",\"status\":\"Module is not online\",\"active\":false},{\"name\":\"sum.function\",\"ip\":\"172.17.0.2\",\"port\":5672,\"uri\":\"omcp://sum.function/\",\"status\":\"INTERNAL SERVER ERROR\",\"active\":false}]"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "SensorNet OMCP",
 			"description": "SensorNet OMCP endpoints.",
 			"item": [
@@ -250,7 +387,7 @@
 					},
 					"response": [
 						{
-							"id": "2b870221-21db-478b-996b-32404c6bd74d",
+							"id": "6825d3e8-4adc-4a84-960e-6535df49248c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -344,7 +481,7 @@
 					},
 					"response": [
 						{
-							"id": "081fd0a7-2f5a-453b-baf1-dd5ea813137a",
+							"id": "61ac12b8-37b6-4f46-b466-5884c212c894",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -419,7 +556,7 @@
 					},
 					"response": [
 						{
-							"id": "5d3ea0a4-77cf-4ee8-98cd-4f2aa980b63f",
+							"id": "1670bdbf-2fcd-4add-8a90-5d7484b8caf5",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -522,7 +659,7 @@
 					},
 					"response": [
 						{
-							"id": "43e52ab3-8f4f-4597-8cc3-d34d16a83339",
+							"id": "6edc7d5a-36f2-4b5e-be6f-75ff00ca99e4",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -625,7 +762,7 @@
 					},
 					"response": [
 						{
-							"id": "3c4d927d-8748-46f6-bc8b-1ed0a169a326",
+							"id": "da20ef02-c6a9-4b6d-b036-487d8c7e73ba",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -728,7 +865,7 @@
 					},
 					"response": [
 						{
-							"id": "c1249766-4061-430b-a87f-490fca4bc48e",
+							"id": "76a03278-3900-4839-a842-8321301ce515",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -831,7 +968,7 @@
 					},
 					"response": [
 						{
-							"id": "4798eabb-53da-471e-9968-f8e92c0d40f8",
+							"id": "8460d381-7c9c-45c6-bc37-935049263df8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -984,7 +1121,7 @@
 					},
 					"response": [
 						{
-							"id": "d556ddd3-76f8-43aa-b712-b816165f155d",
+							"id": "a41a1412-1af3-45e1-8b8f-184a7e599da7",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -1087,7 +1224,7 @@
 					},
 					"response": [
 						{
-							"id": "0a0c4575-7b7a-4f11-a908-15917c95e387",
+							"id": "40786482-c4a1-4ada-8901-5407cc040046",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -1190,7 +1327,7 @@
 					},
 					"response": [
 						{
-							"id": "d4b25062-6c45-46e5-b6a2-6afccea024ef",
+							"id": "a0cc3314-ca1f-4be3-ab64-eb8f732d10e8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1293,7 +1430,7 @@
 					},
 					"response": [
 						{
-							"id": "c475a6b7-4913-4563-92f0-768efd2911a4",
+							"id": "1aef5c60-6485-4994-be37-18a26cfe2833",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1396,7 +1533,7 @@
 					},
 					"response": [
 						{
-							"id": "d13dbbd8-9ce1-44c3-99d1-8384b1e2361b",
+							"id": "daaf8c7d-a7db-473b-9413-e43b11d6927a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1499,7 +1636,7 @@
 					},
 					"response": [
 						{
-							"id": "4af50c32-fdbf-43e4-9b8c-bf67402b6985",
+							"id": "c77f8cc7-1904-47e0-8366-ae81a90310c6",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1602,7 +1739,7 @@
 					},
 					"response": [
 						{
-							"id": "024fa130-bd6b-4106-82a5-20e782d4e696",
+							"id": "c212caa4-3444-4ba3-b958-55f920e57650",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1688,7 +1825,7 @@
 					},
 					"response": [
 						{
-							"id": "dd35b6fa-4c80-4fd1-8f93-174bceb917eb",
+							"id": "4a7c4f1d-4120-498e-a36f-2b58892f444c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
@@ -1742,6 +1879,114 @@
 							"body": "[{\"id\":1,\"displayName\":\"pressure\",\"type\":\"number\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}]"
 						}
 					]
+				},
+				{
+					"name": "omcp://virtualsensornet.osiris/link",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://virtualsensornet.osiris/link/",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all Link sensors from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://virtualsensornet.osiris/vsensor",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://virtualsensornet.osiris/vsensor/",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all virtual sensors from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://virtualsensornet.osiris/composite",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://virtualsensornet.osiris/composite/",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all composite sensors from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "omcp://virtualsensornet.osiris/blending",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "uri",
+								"value": "omcp://virtualsensornet.osiris/blending/",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all blending sensors from VirtualSensorNet"
+					},
+					"response": []
 				}
 			]
 		},
@@ -1771,7 +2016,7 @@
 					},
 					"response": [
 						{
-							"id": "e281d026-a90c-480c-bf6e-bd7f549d1d3d",
+							"id": "68a202e7-65c7-44ad-8cf8-b27582251023",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
@@ -1822,7 +2067,7 @@
 					]
 				},
 				{
-					"name": "/virtualsensornet/datatype",
+					"name": "/virtualsensornet/datatypes",
 					"request": {
 						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
 						"method": "POST",
@@ -1863,7 +2108,7 @@
 					},
 					"response": [
 						{
-							"id": "f2ef4921-ce8d-4a6e-bb84-367e91d644fe",
+							"id": "69f152e7-0d20-4f3b-9202-d49e088ffaba",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -1935,7 +2180,7 @@
 					},
 					"response": [
 						{
-							"id": "e0e3a35e-0607-4c5c-b653-f456d342b5b5",
+							"id": "ffb1df0d-5a02-49a8-a368-a1a5f5fc5c63",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/1",
@@ -2228,28 +2473,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "/health",
-			"request": {
-				"url": "{{osiris-web-backend.endpoint}}/health",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "Checks for osiris-web-backend dependencies are OK (SensorNet, VirtualSensorNet, Application Database)"
-			},
-			"response": []
 		}
 	]
 }
