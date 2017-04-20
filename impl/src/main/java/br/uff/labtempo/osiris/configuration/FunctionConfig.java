@@ -58,6 +58,15 @@ public class FunctionConfig {
     }
 
     /**
+     * Get a list of all available FunctionConfigModules
+     * @see FunctionModuleConfig
+     * @return List of FunctionModuleConfig
+     */
+    public List<FunctionModuleConfig> getFunctionModuleConfigList() {
+        return this.getFunctionModuleConfigList();
+    }
+
+    /**
      * Get all Function modules configurations in default application.properties configuration file
      * @throws IOException
      */
