@@ -19,22 +19,22 @@ import javax.validation.constraints.NotNull;
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 /**
- * Controller class to do OMCP requests on VirtualSensorNet module
+ * Controller class for generic component management on SensorNet module
  * @author andre.ghigo
  * @version 1.0
  * @since 1.8
  */
 @RestController
-@RequestMapping(value = "/virtualsensornet/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class VirtualSensorNetOmcpControler {
+@RequestMapping(value = "/sensornet/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class SensorNetOmcpController {
     @Autowired
-    @Qualifier("virtualSensorNetOmcpDao")
+    @Qualifier("sensorNetOmcpDao")
     private OmcpRepository<String> omcpRepository;
 
     /**
-     * do a OMCP GET request on VirtualSensorNet module based on a valid OMCP URI
+     * do GET HTTP request to SensorNet module based on a valid OMCP uri
      * @param uri
-     * @return RequestEntity with the GET response
+     * @return Response with the result of the GET request
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> doGet(@RequestHeader(value = "uri") @NotEmpty @NotNull @Valid String uri) {
@@ -51,7 +51,7 @@ public class VirtualSensorNetOmcpControler {
     }
 
     /**
-     * Get a list of all available HTTP methods of the /virtualsensornet/omcp
+     * Get a list of available HTTP methods of the /sensornet/omcp endpoint
      * @return List of HTTP methods
      */
     @RequestMapping(method = RequestMethod.OPTIONS)
