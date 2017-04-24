@@ -3,16 +3,11 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
-import br.uff.labtempo.osiris.configuration.FunctionConfig;
-import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
-import br.uff.labtempo.osiris.connection.FunctionConnection;
-import br.uff.labtempo.osiris.connection.RabbitMQConnection;
-import br.uff.labtempo.osiris.connection.SensorNetConnection;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+import br.uff.labtempo.osiris.configuration.*;
+import br.uff.labtempo.osiris.connection.*;
 import br.uff.labtempo.osiris.model.HealthDependency;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,13 +33,18 @@ public class HealthService {
     @Autowired
     private FunctionConfig functionConfig;
 
+    @Autowired
+    private MessageGroupConfig messageGroupConfig;
+
     private SensorNetConnection sensorNetConnection;
     private VirtualSensorNetConnection virtualSensorNetConnection;
     private FunctionConnection functionConnection;
     private RabbitMQConnection rabbitMQConnection;
+    private MessageGroupConnection messageGroupConnection;
 
     @Autowired
-    public HealthService(RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
+    public HealthService(MessageGroupConnection messageGroupConnection, RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
+        this.messageGroupConnection = messageGroupConnection;
         this.rabbitMQConnection = rabbitMQConnection;
         this.functionConnection = functionConnection;
         this.sensorNetConnection = sensorNetConnection;
@@ -137,10 +137,10 @@ public class HealthService {
     public List<HealthDependency> testFunctionModules() {
         List<HealthDependency> healthDependencyList = new ArrayList<>();
         List<FunctionModuleConfig> functionModuleConfigList = this.functionConfig.getFunctionModuleConfigList();
-        for(FunctionModuleConfig functionModuleConfig : functionModuleConfigList) {
-            OmcpClient omcpClient = this.functionConnection.getConnection(functionModuleConfig);
+        for(FunctionModuleConfig functionModuleConfig : functionModuleConfigList) { 
             boolean isActive = false;
             try {
+                OmcpClient omcpClient = this.functionConnection.getConnection(functionModuleConfig);
                 Response response = omcpClient.doGet(functionModuleConfig.getInterfaceUri());
                 if(response.getStatusCode().equals(StatusCode.OK)) {
                     isActive = true;
@@ -165,6 +165,37 @@ public class HealthService {
                         .build();
                 healthDependencyList.add(healthDependency);
             }
+        }
+        return healthDependencyList;
+    }
+
+    /**
+     * Test connection to all available messageGroups
+     * @see MessageGroupConfig
+     * @see OsirisMessageGroupConfig
+     * @return List of HealthDependency with all messageGroups status
+     */
+    public List<HealthDependency> testMessageGroups() {
+        List<HealthDependency> healthDependencyList = new ArrayList<>();
+        for(OsirisMessageGroupConfig osirisMessageGroupConfig : this.messageGroupConfig.getOsirisMessageGroupConfigList()) {
+            String messageGroupName = osirisMessageGroupConfig.getName();
+            String uri = osirisMessageGroupConfig.getUri();
+            String ip = osirisMessageGroupConfig.getIp();
+            int port = osirisMessageGroupConfig.getPort();
+            String username = osirisMessageGroupConfig.getUsername();
+            String password = osirisMessageGroupConfig.getPassword();
+            HealthDependency healthDependency = HealthDependency.builder()
+                    .ip(ip).name(messageGroupName).port(port).uri(uri).build();
+            try {
+                OmcpClient omcpClient = this.messageGroupConnection.getConnection(osirisMessageGroupConfig);
+                Response response = omcpClient.doGet(uri);
+                healthDependency.setActive(true);
+                healthDependency.setStatus(response.getStatusCode().toString());
+            } catch (Exception e) {
+                healthDependency.setActive(false);
+                healthDependency.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.name());
+            }
+            healthDependencyList.add(healthDependency);
         }
         return healthDependencyList;
     }

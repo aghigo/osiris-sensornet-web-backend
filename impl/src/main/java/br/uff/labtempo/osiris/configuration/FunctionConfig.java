@@ -63,7 +63,7 @@ public class FunctionConfig {
      * @return List of FunctionModuleConfig
      */
     public List<FunctionModuleConfig> getFunctionModuleConfigList() {
-        return this.getFunctionModuleConfigList();
+        return this.functionModuleConfigList;
     }
 
     /**

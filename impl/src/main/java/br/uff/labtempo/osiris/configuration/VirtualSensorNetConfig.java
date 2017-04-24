@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource(value = "classpath:application.properties")
 public class VirtualSensorNetConfig {
-    @Value("${virtualsensornet.name:VirtualSensorNet}")
+    @Value("${virtualsensornet.moduleName:virtualsensornet}")
     private String moduleName;
 
     @Value("${virtualsensornet.uri:omcp://virtualsensornet.osiris/}")

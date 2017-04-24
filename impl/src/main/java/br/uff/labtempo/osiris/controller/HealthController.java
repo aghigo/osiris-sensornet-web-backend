@@ -13,6 +13,7 @@ import br.uff.labtempo.osiris.service.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@CrossOrigin(value = "*")
 public class HealthController {
 
     private HealthService healthService;
@@ -90,5 +91,18 @@ public class HealthController {
     @RequestMapping(value = "/function/health", method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionModulesHealthStatus() {
         return ResponseEntity.ok(this.healthService.testFunctionModules());
+    }
+
+    /**
+     * Get a health status of the MessageGroups
+     * @see FunctionConnection
+     * @see FunctionConfig
+     * @see FunctionModuleConfig
+     * @see HealthDependency
+     * @return List of HealthDependency with MessageGroups status
+     */
+    @RequestMapping(value = "/messagegroup/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getMessageGroupsHealth() {
+        return ResponseEntity.ok(this.healthService.testMessageGroups());
     }
 }
