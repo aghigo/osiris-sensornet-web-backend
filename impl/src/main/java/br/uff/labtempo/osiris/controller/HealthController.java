@@ -53,6 +53,7 @@ public class HealthController {
         healthDependencyList.add(this.healthService.testSensorNetConnection());
         healthDependencyList.add(this.healthService.testVirtualSensorNet());
         healthDependencyList.addAll(this.healthService.testFunctionModules());
+        healthDependencyList.addAll(this.healthService.testMessageGroups());
         return ResponseEntity.ok(healthDependencyList);
     }
 

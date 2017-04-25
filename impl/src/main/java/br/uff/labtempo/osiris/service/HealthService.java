@@ -193,7 +193,7 @@ public class HealthService {
                 healthDependency.setStatus(response.getStatusCode().toString());
             } catch (Exception e) {
                 healthDependency.setActive(false);
-                healthDependency.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.name());
+                healthDependency.setStatus(e.getMessage());
             }
             healthDependencyList.add(healthDependency);
         }
