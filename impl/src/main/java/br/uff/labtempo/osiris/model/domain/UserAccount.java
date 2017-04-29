@@ -4,10 +4,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -25,7 +22,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Entity
+@Entity(name = "UserAccount")
+@Table(name = "USER_ACCOUNT")
 public class UserAccount {
     @Min(1) @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -41,7 +39,7 @@ public class UserAccount {
     @NotNull @NotEmpty @Email
     private String email;
 
-    @NotNull @NotEmpty
+    @NotNull @NotEmpty @JoinColumn(name = "username")
     private String username;
 
     @NotNull @NotEmpty
@@ -49,4 +47,6 @@ public class UserAccount {
 
     @NotNull
     private Date birthDate;
+
+    private boolean enabled;
 }

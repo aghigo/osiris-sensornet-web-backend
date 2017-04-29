@@ -2,7 +2,9 @@ package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.model.request.UserAccountRequest;
 import br.uff.labtempo.osiris.service.UserAccountService;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +58,11 @@ public class UserAccountController {
      */
     @GetMapping(value = "/{userId}")
     public ResponseEntity<?> doGetById(@PathVariable long userId) {
-        return null;
+        try {
+            return ResponseEntity.ok(this.userAccountService.getById(userId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     /**
