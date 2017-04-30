@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.dao.omcp;
+package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;

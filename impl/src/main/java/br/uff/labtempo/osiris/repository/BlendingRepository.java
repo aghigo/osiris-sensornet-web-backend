@@ -3,6 +3,7 @@ package br.uff.labtempo.osiris.repository;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
+import br.uff.labtempo.osiris.dao.BlendingOmcpDao;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 
 import java.net.URI;
@@ -11,7 +12,7 @@ import java.util.List;
 
 /**
  * Interface that abstract Blending DAO implementations
- * @see br.uff.labtempo.osiris.dao.omcp.BlendingOmcpDao
+ * @see BlendingOmcpDao
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0

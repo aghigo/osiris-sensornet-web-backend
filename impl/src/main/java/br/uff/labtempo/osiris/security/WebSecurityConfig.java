@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.security;
 
-import br.uff.labtempo.osiris.configuration.ApplicationDatabaseConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

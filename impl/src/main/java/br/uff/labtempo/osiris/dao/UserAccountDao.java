@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.dao.omcp;
+package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.osiris.model.domain.UserAccount;
 import org.springframework.data.repository.CrudRepository;

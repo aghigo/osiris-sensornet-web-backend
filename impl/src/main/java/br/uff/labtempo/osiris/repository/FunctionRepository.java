@@ -3,6 +3,7 @@ package br.uff.labtempo.osiris.repository;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
+import br.uff.labtempo.osiris.dao.FunctionOmcpDao;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * Interface that abstract Function DAO implementations
- * @see br.uff.labtempo.osiris.dao.omcp.FunctionOmcpDao
+ * @see FunctionOmcpDao
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
