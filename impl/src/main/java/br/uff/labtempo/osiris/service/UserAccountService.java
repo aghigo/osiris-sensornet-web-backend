@@ -2,12 +2,14 @@ package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.osiris.mapper.UserAccountMapper;
 import br.uff.labtempo.osiris.model.domain.UserAccount;
+import br.uff.labtempo.osiris.model.request.UserAccountRequest;
 import br.uff.labtempo.osiris.model.response.UserAccountResponse;
 import br.uff.labtempo.osiris.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -33,7 +35,7 @@ public class UserAccountService {
      * @return UserAccountResponse
      */
     public UserAccountResponse getById(long userId) {
-        UserAccount userAccount = this.userAccountRepository.getById(userId);
+        UserAccount userAccount = this.userAccountRepository.findOne(userId);
         UserAccountResponse userAccountResponse = UserAccountMapper.toResponse(userAccount);
         return userAccountResponse;
     }
@@ -43,28 +45,30 @@ public class UserAccountService {
      * @return List of UserAccount
      */
     public List<UserAccountResponse> getAll() {
-        List<UserAccount> userAccountList = this.userAccountRepository.getAll();
+        List<UserAccount> userAccountList = (List<UserAccount>) this.userAccountRepository.findAll();
         List<UserAccountResponse> userAccountResponseList = UserAccountMapper.toResponse(userAccountList);
         return userAccountResponseList;
     }
 
     /**
      * Creates a new UserAccount into the Application
-     * @param userAccount
+     * @param userAccountRequest
      * @return URI with the new UserAccount location
      */
-    public URI create(UserAccount userAccount) {
-        URI uri = this.userAccountRepository.create(userAccount);
-        return uri;
+    public URI create(UserAccountRequest userAccountRequest) throws URISyntaxException {
+        UserAccount userAccount = UserAccountMapper.toUserAccount(userAccountRequest);
+        UserAccount u = this.userAccountRepository.save(userAccount);
+        return new URI("/users/" + u.getId());
     }
 
     /**
      * Updates an existing UserAccount from the Application
      * @param userId
-     * @param userAccount
+     * @param userAccountRequest
      */
-    public void update(long userId, UserAccount userAccount) {
-        this.userAccountRepository.update(userId, userAccount);
+    public void update(long userId, UserAccountRequest userAccountRequest) {
+        UserAccount userAccount = UserAccountMapper.toUserAccount(userAccountRequest);
+        this.userAccountRepository.save(userAccount);
     }
 
     /**

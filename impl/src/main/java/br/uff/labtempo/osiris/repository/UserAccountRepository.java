@@ -1,8 +1,10 @@
 package br.uff.labtempo.osiris.repository;
 
 import br.uff.labtempo.osiris.model.domain.UserAccount;
+import org.springframework.data.repository.CrudRepository;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -11,10 +13,5 @@ import java.util.List;
  * @version 1.0
  * @since 1.8
  */
-public interface UserAccountRepository {
-    UserAccount getById(long userId);
-    List<UserAccount> getAll();
-    URI create(UserAccount userAccount);
-    void update(long userId, UserAccount userAccount);
-    void delete(long userId);
+public interface UserAccountRepository extends CrudRepository<UserAccount, Long> {
 }

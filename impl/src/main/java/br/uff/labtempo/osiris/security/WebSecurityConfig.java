@@ -44,14 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username,password, enabled from USER_ACCOUNT where username=?")
-                .authoritiesByUsernameQuery("select username, role from AUTHORITIES where username=?");
+                .authoritiesByUsernameQuery("select username, role from USER_ACCOUNT where username=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/h2-console/**", "/health", "/resource-status").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic().and().csrf().disable();
 

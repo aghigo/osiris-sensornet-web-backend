@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.*;
 import br.uff.labtempo.osiris.connection.*;
 import br.uff.labtempo.osiris.model.HealthDependency;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,14 +37,19 @@ public class HealthService {
     @Autowired
     private MessageGroupConfig messageGroupConfig;
 
+    @Autowired
+    private ApplicationDatabaseConfig applicationDatabaseConfig;
+
     private SensorNetConnection sensorNetConnection;
     private VirtualSensorNetConnection virtualSensorNetConnection;
     private FunctionConnection functionConnection;
     private RabbitMQConnection rabbitMQConnection;
     private MessageGroupConnection messageGroupConnection;
+    private ApplicationDatabaseConnection applicationDatabaseConnection;
 
     @Autowired
-    public HealthService(MessageGroupConnection messageGroupConnection, RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
+    public HealthService(ApplicationDatabaseConnection applicationDatabaseConnection, MessageGroupConnection messageGroupConnection, RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
+        this.applicationDatabaseConnection = applicationDatabaseConnection;
         this.messageGroupConnection = messageGroupConnection;
         this.rabbitMQConnection = rabbitMQConnection;
         this.functionConnection = functionConnection;
@@ -198,5 +204,27 @@ public class HealthService {
             healthDependencyList.add(healthDependency);
         }
         return healthDependencyList;
+    }
+
+    /**
+     * Test connection to the Application main relational database
+     * @see ApplicationDatabaseConnection
+     * @see ApplicationDatabaseConfig
+     * @see br.uff.labtempo.osiris.security.WebSecurityConfig
+     * @return HealthDependency with the dependency connection status
+     */
+    public HealthDependency testApplicationDatabase() {
+        HealthDependency healthDependency = HealthDependency.builder()
+                .name(this.applicationDatabaseConfig.getDriverClassName())
+                .uri(this.applicationDatabaseConfig.getDataSourceUrl()).build();
+        try {
+            this.applicationDatabaseConnection.getJdbcTemplate().getDataSource().getConnection();
+            healthDependency.setStatus("OK");
+            healthDependency.setActive(true);
+        } catch (Exception e) {
+            healthDependency.setStatus("ERROR");
+            healthDependency.setActive(false);
+        }
+        return healthDependency;
     }
 }

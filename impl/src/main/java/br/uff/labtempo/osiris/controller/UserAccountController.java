@@ -1,8 +1,8 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.model.request.UserAccountRequest;
+import br.uff.labtempo.osiris.model.response.UserAccountResponse;
 import br.uff.labtempo.osiris.service.UserAccountService;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Controller class to provide UserAccount management REST endpoints
@@ -38,7 +39,12 @@ public class UserAccountController {
      */
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return null;
+        try {
+            List<UserAccountResponse> userAccountResponseList = this.userAccountService.getAll();
+            return ResponseEntity.ok(userAccountResponseList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     /**
@@ -48,7 +54,11 @@ public class UserAccountController {
      */
     @PostMapping
     public ResponseEntity<?> doPost(@RequestBody @Valid UserAccountRequest userAccountRequest) {
-        return null;
+        try {
+            return ResponseEntity.ok(this.userAccountService.create(userAccountRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     /**
@@ -73,7 +83,12 @@ public class UserAccountController {
      */
     @PutMapping(value = "/{userId}")
     public ResponseEntity<?> doPut(@PathVariable long userId, @RequestBody @Valid UserAccountRequest userAccountRequest) {
-        return null;
+        try {
+            this.userAccountService.update(userId, userAccountRequest);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     /**
@@ -83,6 +98,11 @@ public class UserAccountController {
      */
     @DeleteMapping(value = "/{userId}")
     public ResponseEntity<?> doDelete(@PathVariable long userId) {
-        return null;
+        try {
+            this.userAccountService.delete(userId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

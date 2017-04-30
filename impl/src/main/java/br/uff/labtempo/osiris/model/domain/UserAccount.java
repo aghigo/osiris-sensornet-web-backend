@@ -39,7 +39,7 @@ public class UserAccount {
     @NotNull @NotEmpty @Email
     private String email;
 
-    @NotNull @NotEmpty @JoinColumn(name = "username")
+    @NotNull @NotEmpty
     private String username;
 
     @NotNull @NotEmpty
@@ -49,4 +49,7 @@ public class UserAccount {
     private Date birthDate;
 
     private boolean enabled;
+
+    @NotNull @NotEmpty
+    private String role;
 }

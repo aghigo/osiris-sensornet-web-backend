@@ -54,6 +54,7 @@ public class HealthController {
         healthDependencyList.add(this.healthService.testVirtualSensorNet());
         healthDependencyList.addAll(this.healthService.testFunctionModules());
         healthDependencyList.addAll(this.healthService.testMessageGroups());
+        healthDependencyList.add(this.healthService.testApplicationDatabase());
         return ResponseEntity.ok(healthDependencyList);
     }
 
@@ -105,5 +106,14 @@ public class HealthController {
     @RequestMapping(value = "/messagegroup/health", method = RequestMethod.GET)
     public ResponseEntity<?> getMessageGroupsHealth() {
         return ResponseEntity.ok(this.healthService.testMessageGroups());
+    }
+
+    /**
+     * Get application database connection Health
+     * @return HealthDependency
+     */
+    @RequestMapping(value = "/database/health", method = RequestMethod.GET)
+    public ResponseEntity<?> getApplicationDatabaseHealth() {
+        return ResponseEntity.ok(this.healthService.testApplicationDatabase());
     }
 }
