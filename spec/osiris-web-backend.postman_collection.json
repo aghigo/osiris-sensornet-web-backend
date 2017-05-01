@@ -8,6 +8,396 @@
 	},
 	"item": [
 		{
+			"name": "Application",
+			"description": "",
+			"item": [
+				{
+					"name": "/users",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/users",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "62a9f6d4-5e45-4b31-9dc5-08ac4203c52c",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/users",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"enabled": true,
+										"warning": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"enabled": true,
+										"warning": ""
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"name": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA=="
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 30 Apr 2017 03:07:05 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 57,
+							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
+						},
+						{
+							"id": "773e9223-4f23-4580-b82f-792223374821",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/users",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"enabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 30 Apr 2017 03:43:30 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 569,
+							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
+						}
+					]
+				},
+				{
+					"name": "/users/{userId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/users/3",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get an existing UserAccount"
+					},
+					"response": [
+						{
+							"id": "5aa344ea-b3bb-49d8-a557-ed08507abd0e",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/users/3",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"enabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 30 Apr 2017 03:44:45 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 48,
+							"body": "{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}"
+						}
+					]
+				},
+				{
+					"name": "/users",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"birthDate\" : \"1988-07-28\",\n\t\"email\" : \"andreghigo@gmail.com\",\n\t\"firstName\" : \"andre\",\n\t\"lastName\" : \"ghigo\",\n\t\"middleName\" : \"mendes\",\n\t\"password\" : \"1234\",\n\t\"username\" : \"andre.ghigo\"\n}"
+						},
+						"description": "Create a new UserAccount"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/users/3",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"raphael viado\",\n    \"middleName\": \"pereira de olveira\",\n    \"lastName\": \"guerra\",\n    \"email\": \"guerra@ic.uff.br\",\n    \"username\": \"raphael.guerra\",\n    \"password\": \"1234\",\n    \"birthDate\": 30942000000\n}"
+						},
+						"description": "Update an existing UserAccount"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/users/3",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Removes an existing UserAccount"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Function OMCP",
 			"description": "",
 			"item": []
@@ -39,7 +429,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
 								"description": ""
 							}
 						],
@@ -48,7 +438,7 @@
 					},
 					"response": [
 						{
-							"id": "56eeb11c-6ed2-44e8-9481-be54d9a2e910",
+							"id": "bfc80f85-2393-439a-92ef-be7423f0276f",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/health",
@@ -387,7 +777,7 @@
 					},
 					"response": [
 						{
-							"id": "6825d3e8-4adc-4a84-960e-6535df49248c",
+							"id": "bd1036ef-a1d0-4fec-863b-0cc721b82874",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -462,7 +852,7 @@
 				{
 					"name": "/sensornet/samples",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/samples",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
 						"method": "GET",
 						"header": [
 							{
@@ -481,7 +871,7 @@
 					},
 					"response": [
 						{
-							"id": "61ac12b8-37b6-4f46-b466-5884c212c894",
+							"id": "05741d34-545c-450c-935d-40d5ef5603a2",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -556,7 +946,7 @@
 					},
 					"response": [
 						{
-							"id": "1670bdbf-2fcd-4add-8a90-5d7484b8caf5",
+							"id": "9bb75807-fd30-4de2-ae1b-f8a1c5a49231",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -659,7 +1049,7 @@
 					},
 					"response": [
 						{
-							"id": "6edc7d5a-36f2-4b5e-be6f-75ff00ca99e4",
+							"id": "5fd68b78-cfb6-452f-956b-dd8603a734e8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -762,7 +1152,7 @@
 					},
 					"response": [
 						{
-							"id": "da20ef02-c6a9-4b6d-b036-487d8c7e73ba",
+							"id": "18794db6-f863-4ba1-8c84-f5573c109f5c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -865,7 +1255,7 @@
 					},
 					"response": [
 						{
-							"id": "76a03278-3900-4839-a842-8321301ce515",
+							"id": "eea0b525-06bf-4197-a370-fff6a9b227a4",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -968,7 +1358,7 @@
 					},
 					"response": [
 						{
-							"id": "8460d381-7c9c-45c6-bc37-935049263df8",
+							"id": "05158843-7e39-4a25-83a9-78cf43500224",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -1111,6 +1501,11 @@
 								"key": "Accept",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
 							}
 						],
 						"body": {
@@ -1121,7 +1516,7 @@
 					},
 					"response": [
 						{
-							"id": "a41a1412-1af3-45e1-8b8f-184a7e599da7",
+							"id": "08fec7be-493e-4cba-af55-6d64666bb226",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -1224,7 +1619,7 @@
 					},
 					"response": [
 						{
-							"id": "40786482-c4a1-4ada-8901-5407cc040046",
+							"id": "15e453c6-ce0a-479b-9deb-e234c5c278c8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -1327,7 +1722,7 @@
 					},
 					"response": [
 						{
-							"id": "a0cc3314-ca1f-4be3-ab64-eb8f732d10e8",
+							"id": "cea9da83-deb9-488a-993d-7e85bc83575e",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1430,7 +1825,7 @@
 					},
 					"response": [
 						{
-							"id": "1aef5c60-6485-4994-be37-18a26cfe2833",
+							"id": "2eae1282-2b3b-4281-acbe-7ceced8ca2b3",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1533,7 +1928,7 @@
 					},
 					"response": [
 						{
-							"id": "daaf8c7d-a7db-473b-9413-e43b11d6927a",
+							"id": "e91a3cc4-ca7f-43da-88c8-16ea69283c72",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1636,7 +2031,7 @@
 					},
 					"response": [
 						{
-							"id": "c77f8cc7-1904-47e0-8366-ae81a90310c6",
+							"id": "8e3144c3-df25-4886-b4b0-8106e1ba7ce9",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1739,7 +2134,7 @@
 					},
 					"response": [
 						{
-							"id": "c212caa4-3444-4ba3-b958-55f920e57650",
+							"id": "5b88945b-7a90-4a05-9e8f-974350505850",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1825,7 +2220,7 @@
 					},
 					"response": [
 						{
-							"id": "4a7c4f1d-4120-498e-a36f-2b58892f444c",
+							"id": "d7948473-f3f4-4c2e-90bf-4e471cf13392",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
@@ -2016,7 +2411,7 @@
 					},
 					"response": [
 						{
-							"id": "68a202e7-65c7-44ad-8cf8-b27582251023",
+							"id": "c51db0ff-86d9-45fc-806b-dee486066cbb",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
@@ -2070,26 +2465,6 @@
 					"name": "/virtualsensornet/datatypes",
 					"request": {
 						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"pressure\",\n  \"type\": \"NUMBER\",\n  \"unit\": \"pascal\",\n  \"symbol\": \"P\"\n}"
-						},
-						"description": "Create a new DataType for VirtualSensorNet."
-					},
-					"response": []
-				},
-				{
-					"name": "/virtualsensornet/datatypes",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
 						"method": "GET",
 						"header": [
 							{
@@ -2108,7 +2483,7 @@
 					},
 					"response": [
 						{
-							"id": "69f152e7-0d20-4f3b-9202-d49e088ffaba",
+							"id": "b82c5f85-5a4a-4e49-b2e0-285133d1ec89",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2176,14 +2551,14 @@
 							}
 						],
 						"body": {},
-						"description": "Get A specific dtatype from VirtualSensorNet."
+						"description": "Get a specific datatypes from VirtualSensorNet."
 					},
 					"response": [
 						{
-							"id": "ffb1df0d-5a02-49a8-a368-a1a5f5fc5c63",
+							"id": "d25e9234-1896-4425-b6a4-cb721f37be77",
 							"name": "response_example_1",
 							"originalRequest": {
-								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/1",
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
 								"method": "GET",
 								"header": [
 									{
@@ -2214,7 +2589,7 @@
 								{
 									"name": "Date",
 									"key": "Date",
-									"value": "Sun, 09 Apr 2017 22:57:36 GMT",
+									"value": "Sun, 09 Apr 2017 22:56:52 GMT",
 									"description": "The date and time that the message was sent"
 								},
 								{
@@ -2225,10 +2600,87 @@
 								}
 							],
 							"cookie": [],
-							"responseTime": 109,
-							"body": "{\"id\":1,\"name\":\"pressure\",\"type\":\"NUMBER\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}"
+							"responseTime": 115,
+							"body": "[{\"id\":1,\"name\":\"pressure\",\"type\":\"NUMBER\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}]"
 						}
 					]
+				},
+				{
+					"name": "/virtualsensornet/datatypes",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"temperature\",\n  \"type\": \"NUMBER\",\n  \"unit\": \"fahrenheit\",\n  \"symbol\": \"Fº\"\n}"
+						},
+						"description": "Create a new DataType for VirtualSensorNet."
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/datatypes/{datatypeId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"pressaozinha\",\n  \"type\": \"NUMBER\",\n  \"unit\": \"pascal\",\n  \"symbol\": \"P\"\n}"
+						},
+						"description": "Updates a new DataType for VirtualSensorNet."
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/datatypes/{dataTypeId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/2",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Removes a specific datatypes from VirtualSensorNet."
+					},
+					"response": []
 				},
 				{
 					"name": "/virtualsensornet/links/mock",
@@ -2250,7 +2702,87 @@
 						"body": {},
 						"description": "Get a randomly crated Link Sensor."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "a37abfd5-420c-4c29-9eae-3651992a37f5",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 01 May 2017 00:31:35 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 365,
+							"body": "{\"id\":0,\"label\":\"linkId-77670397-0b11-4d23-8956-472c6ab341c8\",\"sensorId\":\"sensorId-6a8f3b15-6c83-4f28-9913-0c97c33d7315\",\"collectorId\":\"collectorId-0213eccd-d481-4d20-be91-192506090630\",\"networkId\":\"networkId-643757f4-f00c-46b3-8e3b-61d6de2879ae\",\"fields\":[{\"id\":0,\"name\":\"pressaozinha\",\"dataTypeId\":1,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0}]}"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/links",
@@ -2289,10 +2821,307 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
 							}
 						],
 						"body": {},
 						"description": "Get a specific Link Sensor from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/links",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"label\": \"linkId-39aee080-3d05-4bd8-8e3c-2d93f4452d05\",\n  \"sensorId\": \"sensorId-45625355-c2d3-4727-8580-a819f425dede\",\n  \"collectorId\": \"collectorId-3d5777ab-2bd2-492d-bbce-3f61bd0550f4\",\n  \"networkId\": \"networkId-ff26988e-f9ea-4cc2-93e8-db68b8cb80ff\",\n  \"fields\": \n    {\n      \"pressaozinha\" : 1,\n      \"temperature\" : 3\n    }\n}"
+						},
+						"description": "Create a Link Sensor on VirtualSensorNet"
+					},
+					"response": [
+						{
+							"id": "bb0658c8-6770-4350-bb2f-3881eb45b866",
+							"name": "response_example",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"name": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA=="
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sensorId\": \"sensorId-7f2c5829-6633-4fea-be65-9e10f40d3e1b\",\n  \"collectorId\": \"collectorId-ed2aa6ac-3323-4576-a888-37d785f6674e\",\n  \"networkId\": \"networkId-f4ae3c7a-a71a-4341-b4ff-efe3ef2eac52\",\n  \"fields\" : {\n  \t\t\"pressure\" : 1\n\t}\n}"
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plainText",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "0",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 01 May 2017 18:19:11 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Location",
+									"key": "Location",
+									"value": "omcp://virtualsensornet/link/1",
+									"description": "Used in redirection, or when a new resource has been created."
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 833,
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/virtualsensornet/links/{linkId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sensorId\": \"sensorId-7f2c5829-6633-4fea-be65-9e10f40d3e1b\",\n  \"collectorId\": \"collectorId-ed2aa6ac-3323-4576-a888-37d785f6674e\",\n  \"networkId\": \"networkId-f4ae3c7a-a71a-4341-b4ff-efe3ef2eac52\",\n  \"fields\" : {\n  \t\t\"passarinho\" : 1\n\t}\n}"
+						},
+						"description": "Update a Link Sensor from VirtualSensorNet"
+					},
+					"response": [
+						{
+							"id": "54fad171-2bb0-4c59-adfb-366fd3fc56aa",
+							"name": "response_example",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"name": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA=="
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sensorId\": \"sensorId-7f2c5829-6633-4fea-be65-9e10f40d3e1b\",\n  \"collectorId\": \"collectorId-ed2aa6ac-3323-4576-a888-37d785f6674e\",\n  \"networkId\": \"networkId-f4ae3c7a-a71a-4341-b4ff-efe3ef2eac52\",\n  \"fields\" : {\n  \t\t\"pressure\" : 1\n\t}\n}"
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plainText",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "0",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 01 May 2017 18:19:11 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Location",
+									"key": "Location",
+									"value": "omcp://virtualsensornet/link/1",
+									"description": "Used in redirection, or when a new resource has been created."
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 833,
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/virtualsensornet/links/{linkId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Removes a Link Sensor from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/composites/mock",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a random mocked Composite virtual sensor object"
 					},
 					"response": []
 				},
@@ -2321,7 +3150,7 @@
 				{
 					"name": "/virtualsensornet/composites/{compositeId}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/{compositeId}",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/4",
 						"method": "GET",
 						"header": [
 							{
@@ -2333,10 +3162,72 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
 							}
 						],
 						"body": {},
 						"description": "Get a specific Composite sensor from VirtualSensorNet Module"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/composites",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fields\" : [5]\n}"
+						},
+						"description": "Create a new Composite sensor on VirtualSensorNet module"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/composites/{compositeId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/4",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Remove a specific Composite sensor from VirtualSensorNet"
 					},
 					"response": []
 				},
@@ -2429,9 +3320,9 @@
 					"response": []
 				},
 				{
-					"name": "/function/{functionId}",
+					"name": "/function/{functionName}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/function/{functionId}",
+						"url": "{{osiris-web-backend.endpoint}}/function/sum",
 						"method": "GET",
 						"header": [
 							{
@@ -2451,9 +3342,9 @@
 					"response": []
 				},
 				{
-					"name": "/function/{functionId}/interface",
+					"name": "/function/{functionName}/interface",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/function/{functionId}/interface",
+						"url": "{{osiris-web-backend.endpoint}}/function/min/interface",
 						"method": "GET",
 						"header": [
 							{
