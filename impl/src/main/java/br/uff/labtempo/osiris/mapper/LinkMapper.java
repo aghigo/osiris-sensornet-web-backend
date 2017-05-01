@@ -32,7 +32,8 @@ public class LinkMapper {
      */
     public static LinkVsnTo requestToVsnTo(LinkRequest linkRequest) {
         LinkVsnTo linkVsnTo = new LinkVsnTo(linkRequest.getSensorId(), linkRequest.getCollectorId(), linkRequest.getNetworkId());
-        Map<String, Long> fields = linkRequest.getField();
+        linkVsnTo.setLabel(linkRequest.getLabel());
+        Map<String, Long> fields = linkRequest.getFields();
         for(String fieldName : fields.keySet()) {
             linkVsnTo.createField(fieldName, fields.get(fieldName));
         }
@@ -68,10 +69,7 @@ public class LinkMapper {
         linkResponse.setCollectorId(linkVsnTo.getCollectorId());
         linkResponse.setNetworkId(linkVsnTo.getNetworkId());
         linkResponse.setLabel(linkVsnTo.getLabel());
-        linkResponse.setField(new LinkedHashMap<>());
-        for(FieldTo fieldTo : linkVsnTo.getFields()) {
-            linkResponse.getField().put(fieldTo.getName(), fieldTo.getDataTypeId());
-        }
+        linkResponse.setFields((List<FieldTo>) linkVsnTo.getFields());
         return linkResponse;
     }
 

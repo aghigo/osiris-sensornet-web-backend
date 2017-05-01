@@ -30,9 +30,10 @@ public class CompositeMapper {
      */
     public static CompositeVsnTo requestToVsnTo(CompositeRequest compositeRequest) {
         CompositeVsnTo compositeVsnTo = new CompositeVsnTo();
-        for(Long fieldId : compositeRequest.getFields()) {
+        for(Long fieldId : compositeRequest.getFieldIds()) {
             compositeVsnTo.bindToField(fieldId);
         }
+        compositeVsnTo.setLabel(compositeRequest.getLabel());
         return compositeVsnTo;
     }
 
@@ -60,11 +61,9 @@ public class CompositeMapper {
      */
     public static CompositeResponse vsnToToResponse(CompositeVsnTo compositeVsnTo) {
         CompositeResponse compositeResponse = new CompositeResponse();
-        List<Long> fieldIdList = new ArrayList<>();
-        for (FieldTo fieldTo : compositeVsnTo.getBoundFields()) {
-            fieldIdList.add(fieldTo.getId());
-        }
-        compositeResponse.setFields(fieldIdList);
+        compositeResponse.setFields((List<FieldTo>) compositeVsnTo.getBoundFields());
+        compositeResponse.setId(compositeVsnTo.getId());
+        compositeResponse.setLabel(compositeVsnTo.getLabel());
         return compositeResponse;
     }
 

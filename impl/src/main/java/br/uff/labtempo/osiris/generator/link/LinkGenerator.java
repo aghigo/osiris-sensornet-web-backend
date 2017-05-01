@@ -133,9 +133,10 @@ public class LinkGenerator {
             Map<String, Long> fieldMap = new LinkedHashMap<>();
 
             int totalFields = ((int) (Math.random() * MAX_FIELDS)) + 1;
+            totalFields = totalFields > dataTypeResponseList.size() ? dataTypeResponseList.size() : totalFields;
 
             for(int i = 0; i < totalFields; i++) {
-                int p = (int) (Math.random() * (fieldMap.size() + 1));
+                int p = (int) (Math.random() * (dataTypeResponseList.size()));
                 DataTypeResponse dataTypeResponse = dataTypeResponseList.get(p);
                 if(!fieldMap.containsKey(dataTypeResponse.getName())) {
                     fieldMap.put(dataTypeResponse.getName(), dataTypeResponse.getId());

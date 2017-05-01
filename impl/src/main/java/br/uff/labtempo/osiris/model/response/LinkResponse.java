@@ -1,10 +1,12 @@
 package br.uff.labtempo.osiris.model.response;
 
+import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -31,5 +33,5 @@ public class LinkResponse {
     private String networkId;
 
     @NotNull @NotEmpty
-    private Map<String, Long> field;
+    private List<FieldTo> fields;
 }

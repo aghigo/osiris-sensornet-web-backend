@@ -8,6 +8,7 @@ import br.uff.labtempo.osiris.model.response.CompositeResponse;
 import br.uff.labtempo.osiris.repository.CompositeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +20,7 @@ import java.util.List;
  * @since 1.8
  * @version 1.0
  */
+@Service
 public class CompositeService {
 
     @Autowired

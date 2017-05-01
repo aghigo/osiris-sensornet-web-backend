@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.model.response;
 
+import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompositeResponse {
-    List<Long> fields;
+    private long id;
+    private String label;
+    private List<FieldTo> fields;
 }

@@ -44,7 +44,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public CompositeVsnTo getById(String compositeId) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), compositeId);
+            String uri = String.format(this.virtualSensorNetConfig.getCompositeIdUri(), compositeId);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
             CompositeVsnTo compositeVsnTo = response.getContent(CompositeVsnTo.class);

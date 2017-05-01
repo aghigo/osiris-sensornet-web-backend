@@ -23,6 +23,8 @@ import java.util.List;
 @NoArgsConstructor
 public class CompositeRequest {
 
+    private String label;
+
     /**
      * List of Field ids to be binded with CompositeVsnTo.bindToField method
      * A field contains its unique long id and related DataType id
@@ -30,5 +32,5 @@ public class CompositeRequest {
      * @see br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo
      */
     @NotNull @NotEmpty
-    private List<Long> fields;
+    private List<Long> fieldIds;
 }

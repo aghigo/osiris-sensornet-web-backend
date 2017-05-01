@@ -10,12 +10,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -45,13 +43,12 @@ public class LinkController {
         List<LinkResponse> linkResponseList;
         try {
             linkResponseList = this.linkService.getAll();
+            return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        if(linkResponseList == null || linkResponseList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
     }
 
     /**
@@ -69,14 +66,16 @@ public class LinkController {
      * @return URI containing the new Link location
      */
     @RequestMapping(value = "/links", method = RequestMethod.POST)
-    public ResponseEntity<?> post(@Valid LinkRequest linkRequest) {
+    public ResponseEntity<?> post(@RequestBody @Valid LinkRequest linkRequest) {
         URI uri;
         try {
             uri = this.linkService.create(linkRequest);
-        } catch (AbstractRequestException | URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.created(uri).build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.created(uri).build();
     }
 
     /**
@@ -89,10 +88,12 @@ public class LinkController {
         LinkVsnTo linkVsnTo;
         try {
             linkVsnTo = this.linkService.getRandom();
+            return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
         } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
     }
 
     /**
@@ -109,13 +110,12 @@ public class LinkController {
         LinkResponse linkResponse;
         try {
             linkResponse = this.linkService.getById(linkId);
+            return ResponseEntity.status(HttpStatus.OK).body(linkResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        if(linkResponse == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(linkResponse);
     }
 
     /**
@@ -125,13 +125,15 @@ public class LinkController {
      * @return
      */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> put(@PathVariable String linkId, @Valid LinkRequest linkRequest) {
+    public ResponseEntity<?> put(@PathVariable String linkId, @RequestBody @Valid LinkRequest linkRequest) {
         try {
             this.linkService.update(linkId, linkRequest);
+            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     /**
@@ -143,10 +145,12 @@ public class LinkController {
     public ResponseEntity<?> delete(@PathVariable String linkId) {
         try {
             this.linkService.delete(linkId);
+            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     /**

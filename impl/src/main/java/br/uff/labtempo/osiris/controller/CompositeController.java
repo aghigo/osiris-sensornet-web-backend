@@ -2,20 +2,21 @@ package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.CompositeRequest;
+import br.uff.labtempo.osiris.model.response.CompositeResponse;
 import br.uff.labtempo.osiris.service.CompositeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import sun.reflect.annotation.ExceptionProxy;
 
 import javax.validation.Valid;
 
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
@@ -26,6 +27,7 @@ import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
  * @since 1.8
  * @version 1.0
  */
+@RestController
 @RequestMapping(value = "/virtualsensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class CompositeController {
 
@@ -39,9 +41,12 @@ public class CompositeController {
     @RequestMapping(value = "/composites", method = RequestMethod.GET)
     public ResponseEntity<?> doGetAll() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(this.compositeService.getAll());
+            List<CompositeResponse> compositeResponseList = this.compositeService.getAll();
+            return ResponseEntity.ok(compositeResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -53,9 +58,12 @@ public class CompositeController {
     @RequestMapping(value = "/composites", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody @Valid CompositeRequest compositeRequest) {
         try {
-            return ResponseEntity.created(this.compositeService.create(compositeRequest)).build();
-        } catch (URISyntaxException | AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            URI uri = this.compositeService.create(compositeRequest);
+            return ResponseEntity.created(uri).build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -76,9 +84,12 @@ public class CompositeController {
     @RequestMapping(value = "/composites/{compositeId}", method = RequestMethod.GET)
     public ResponseEntity<?> doGetById(@PathVariable String compositeId) {
         try {
-            return ResponseEntity.ok(this.compositeService.getById(compositeId));
+            CompositeResponse compositeResponse = this.compositeService.getById(compositeId);
+            return ResponseEntity.ok(compositeResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -94,7 +105,9 @@ public class CompositeController {
             this.compositeService.update(compositeId, compositeRequest);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -109,7 +122,9 @@ public class CompositeController {
             this.compositeService.delete(compositeId);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -131,8 +146,10 @@ public class CompositeController {
     public ResponseEntity<?> getMock() {
         try {
             return ResponseEntity.ok(this.compositeService.getRandom());
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 

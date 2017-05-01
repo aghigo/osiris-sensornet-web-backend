@@ -38,8 +38,8 @@ public class CompositeGenerator {
         long id = getId();
         String label = getLabel(id);
         CompositeVsnTo compositeVsnTo = new CompositeVsnTo(id, label);
-        for(Long fieldId : getFieldIdList()) {
-            compositeVsnTo.bindToField(fieldId);
+        for(FieldTo fieldTo : getFieldIdList()) {
+            compositeVsnTo.bindToField(fieldTo);
         }
         return compositeVsnTo;
     }
@@ -65,25 +65,23 @@ public class CompositeGenerator {
     }
 
     /**
-     * Get a random list of Field Ids
+     * Get a random list of FieldTos
      * @see FieldTo
      * @see br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo
-     * @return List of Long values that represent the field ids
+     * @return List of FieldTo
      * @throws AbstractRequestException
      */
-    private List<Long> getFieldIdList() throws AbstractRequestException {
-        List<Long> fieldIdList = new ArrayList<>();
+    private List<FieldTo> getFieldIdList() throws AbstractRequestException {
+        List<FieldTo> fieldToList = new ArrayList<>();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
         if(linkVsnToList.isEmpty()) {
             throw new InternalServerErrorException("Failed to mock Composite sensor: could not found any valid Link sensor for field binding.");
         }
         for(LinkVsnTo linkVsnTo : linkVsnToList) {
             for(FieldTo fieldTo : linkVsnTo.getFields()) {
-                fieldIdList.add(fieldTo.getId());
+                fieldToList.add(fieldTo);
             }
         }
-        int min = (int) (Math.random() * linkVsnToList.size());
-        int max = min + (int) (Math.random() * (linkVsnToList.size() - min));
-        return fieldIdList.subList(min, max);
+        return fieldToList;
     }
 }

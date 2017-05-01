@@ -33,10 +33,10 @@ public class VirtualSensorNetConfig {
     @Value("${virtualsensornet.uri.datatypeId:omcp://virtualsensornet.osiris/datatype/%1$s/}")
     private String dataTypeIdUri;
 
-    @Value("${virtualsensornet.uri.links:omcp://virtualsensornet.osiris/vsensor/}")
+    @Value("${virtualsensornet.uri.links:omcp://virtualsensornet.osiris/link/}")
     private String linksUri;
 
-    @Value("${virtualsensornet.uri.linkId:omcp://virtualsensornet.osiris/vsensor/%1$s/}")
+    @Value("${virtualsensornet.uri.linkId:omcp://virtualsensornet.osiris/link/%1$s/}")
     private String linkIdUri;
 
     @Value("${virtualsensornet.uri.composites:omcp://virtualsensornet.osiris/composite}")

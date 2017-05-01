@@ -14,6 +14,9 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LinkRequest {
+
+    private String label;
+
     @NotNull @NotEmpty
     private String sensorId;
 
@@ -24,5 +27,5 @@ public class LinkRequest {
     private String networkId;
 
     @NotNull @NotEmpty
-    private Map<String, Long> field;
+    private Map<String, Long> fields;
 }
