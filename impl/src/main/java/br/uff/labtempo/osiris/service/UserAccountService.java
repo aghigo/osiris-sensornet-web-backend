@@ -57,6 +57,7 @@ public class UserAccountService {
      */
     public URI create(UserAccountRequest userAccountRequest) throws URISyntaxException {
         UserAccount userAccount = UserAccountMapper.toUserAccount(userAccountRequest);
+        userAccount.setEnabled(true);
         UserAccount u = this.userAccountRepository.save(userAccount);
         return new URI("/users/" + u.getId());
     }

@@ -90,7 +90,7 @@ public class LinkController {
         try {
             linkVsnTo = this.linkService.getRandom();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
         return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
     }

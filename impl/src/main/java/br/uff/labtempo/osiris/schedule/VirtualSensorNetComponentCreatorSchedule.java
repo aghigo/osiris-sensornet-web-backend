@@ -58,21 +58,21 @@ public class VirtualSensorNetComponentCreatorSchedule {
     @Autowired
     private BlendingRepository blendingRepository;
 
-    @Scheduled(cron="${virtualsensornet.schedule.create.datatype.cron:*/9 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.create.datatype.cron:*/2 * * * * ?}")
     public void createDataType() throws URISyntaxException, AbstractRequestException {
         DataTypeVsnTo dataTypeVsnTo = this.dataTypeGenerator.getDataTypeVsnTo();
         URI uri = this.dataTypeRepository.insert(dataTypeVsnTo);
         log.info(String.format("DataType created [%s] on VirtualSensorNet module.", uri.getPath()));
     }
 
-    @Scheduled(cron="${virtualsensornet.schedule.create.link.cron:*/9 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.create.link.cron:*/4 * * * * ?}")
     public void createLink() throws AbstractRequestException, URISyntaxException {
         LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo();
         URI uri = this.linkRepository.save(linkVsnTo);
         log.info(String.format("Link sensor created [%s] on VirtualSensorNet module.", uri.getPath()));
     }
 
-    @Scheduled(cron="virtualsensornet.schedule.create.composite.cron:*/9 * * * * ?")
+    @Scheduled(cron="virtualsensornet.schedule.create.composite.cron:*/6 * * * * ?")
     public void createComposite() throws URISyntaxException, AbstractRequestException {
         CompositeVsnTo compositeVsnTo = this.compositeGenerator.generateCompositeVsnTo();
         URI uri = this.compositeRepository.create(compositeVsnTo);

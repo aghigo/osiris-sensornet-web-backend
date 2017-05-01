@@ -79,7 +79,7 @@ public class DataTypeController {
     }
 
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> doPut(@PathVariable String dataTypeId, @Valid DataTypeRequest dataTypeRequest) {
+    public ResponseEntity<?> doPut(@PathVariable String dataTypeId, @RequestBody @Valid DataTypeRequest dataTypeRequest) {
         DataTypeResponse dataTypeResponse;
         try {
             this.dataTypeService.update(dataTypeId, dataTypeRequest);

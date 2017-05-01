@@ -74,10 +74,10 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), id);
         Response response;
         try {
-            response = omcpClient.doPut(id, dataTypeVsnTo);
+            response = omcpClient.doPut(uri, dataTypeVsnTo);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -87,10 +87,10 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public void delete(String id) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), id);
         Response response;
         try {
-            response = omcpClient.doDelete(id);
+            response = omcpClient.doDelete(uri);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
