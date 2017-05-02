@@ -60,12 +60,12 @@ public class NetworkController {
         List<NetworkResponse> networkResponseList;
         try {
             networkResponseList = this.networkService.getAll();
+            return ResponseEntity.ok(networkResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).build();
-        } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok(networkResponseList);
     }
 
     /**
@@ -89,12 +89,12 @@ public class NetworkController {
         NetworkResponse networkResponse = null;
         try {
             networkResponse = this.networkService.getById(networkId);
+            return ResponseEntity.ok(networkResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).build();
-        } catch (AbstractClientRuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok(networkResponse);
     }
 
     /**

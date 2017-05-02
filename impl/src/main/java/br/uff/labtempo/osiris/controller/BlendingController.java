@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.model.response.BlendingResponse;
 import br.uff.labtempo.osiris.service.BlendingService;
@@ -41,6 +42,8 @@ public class BlendingController {
         try {
             List<BlendingResponse> blendingResponseList = this.blendingService.getAll();
             return ResponseEntity.ok(blendingResponseList);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -56,6 +59,8 @@ public class BlendingController {
         try {
             URI uri = this.blendingService.create(blendingRequest);
             return ResponseEntity.created(uri).build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -80,6 +85,8 @@ public class BlendingController {
         try {
             BlendingVsnTo blendingVsnTo = this.blendingService.getRandom();
             return ResponseEntity.ok(blendingVsnTo);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -105,6 +112,8 @@ public class BlendingController {
         try {
             URI uri = this.blendingService.create(blendingRequest);
             return ResponseEntity.created(uri).build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -120,6 +129,8 @@ public class BlendingController {
         try {
             this.blendingService.delete(blendingId);
             return ResponseEntity.ok().build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

@@ -60,15 +60,12 @@ public class CollectorController {
         List<CollectorResponse> collectorResponseList = null;
         try {
             collectorResponseList = this.collectorService.getAll();
+            return ResponseEntity.ok().body(collectorResponseList);
         } catch (AbstractRequestException e) {
-            ResponseEntity.status(e.getStatusCode().toCode()).body(e);
-        } catch (AbstractClientRuntimeException e) {
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        if(collectorResponseList == null || collectorResponseList.isEmpty()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok().body(collectorResponseList);
     }
 
     /**
@@ -90,15 +87,12 @@ public class CollectorController {
         List<CollectorResponse> collectorResponseList = null;
         try {
             collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
+            return ResponseEntity.ok().body(collectorResponseList);
         } catch (AbstractRequestException e) {
-            ResponseEntity.status(e.getStatusCode().toCode()).build();
-        } catch (AbstractClientRuntimeException e) {
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        if(collectorResponseList == null || collectorResponseList.isEmpty()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok().body(collectorResponseList);
     }
 
     /**
@@ -121,16 +115,12 @@ public class CollectorController {
         CollectorResponse collectorResponse = null;
         try {
             collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
+            return ResponseEntity.ok().body(collectorResponse);
         } catch (AbstractRequestException e) {
-            ResponseEntity.status(e.getStatusCode().toCode()).build();
-        } catch (AbstractClientRuntimeException e) {
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage()
-            );
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        if(collectorResponse == null) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok().body(collectorResponse);
     }
 
     /**

@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -40,14 +41,13 @@ public class VirtualSensorNetOmcpController {
     public ResponseEntity<?> doGet(@RequestHeader(value = "uri") @NotEmpty @NotNull @Valid String uri) {
         String responseContent = null;
         try {
-            responseContent = (String) this.omcpRepository.doGet(uri);
-        } catch(AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).build();
+            responseContent = this.omcpRepository.doGet(uri);
+            return ResponseEntity.ok().body(responseContent);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        if(responseContent == null || responseContent.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok().body(responseContent);
     }
 
     /**

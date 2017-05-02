@@ -70,4 +70,9 @@ public class FunctionService {
     public FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractRequestException {
         return this.functionRepository.getFromVirtualSensorNet(functionName);
     }
+
+    public List<FunctionVsnTo> getAllFromVirtualSensorNet() throws AbstractRequestException {
+        List<FunctionVsnTo> functionVsnToList = this.functionRepository.getAllFromVirtualSensorNet();
+        return functionVsnToList;
+    }
 }

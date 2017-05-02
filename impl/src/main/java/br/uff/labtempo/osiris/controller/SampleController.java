@@ -1,10 +1,12 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,8 +43,12 @@ public class SampleController {
 
     @RequestMapping(value ="/samples", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody(required = true) @Valid SampleRequest sampleRequest) throws URISyntaxException {
-        URI uri = this.sampleService.create(sampleRequest);
-        return ResponseEntity.created(uri).build();
+        try {
+            URI uri = this.sampleService.create(sampleRequest);
+            return ResponseEntity.created(uri).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     @RequestMapping(value = "/samples", method = RequestMethod.OPTIONS)

@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Controller class to serve REST endpoints
@@ -29,12 +32,12 @@ public class FunctionController {
      * Get a list of all available Functions names
      * @return ResponseEntity with List<String> (list of functionNames)
      */
-    @RequestMapping(value = "/function", method = RequestMethod.GET)
+    @RequestMapping(value = "/functions", method = RequestMethod.GET)
     public ResponseEntity<?> getAvailableFunctionList() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.functionService.getAvailableFunctionsUri());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -43,13 +46,15 @@ public class FunctionController {
      * @param functionName
      * @return FunctionVsnTo
      */
-    @RequestMapping(value = "/function/{functionName}", method = RequestMethod.GET)
-    public ResponseEntity<?> getByName(String functionName) {
+    @RequestMapping(value = "/functions/{functionName}", method = RequestMethod.GET)
+    public ResponseEntity<?> getByName(@PathVariable String functionName) {
         try {
             FunctionVsnTo functionVsnTo = this.functionService.getByName(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -59,13 +64,15 @@ public class FunctionController {
      * @return InterfaceFnTo (Function interface)
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/function/{functionName}/interface", method = RequestMethod.GET)
-    public ResponseEntity<?> getInterface(String functionName) throws AbstractRequestException {
+    @RequestMapping(value = "/functions/{functionName}/interface", method = RequestMethod.GET)
+    public ResponseEntity<?> getInterface(@PathVariable String functionName) throws AbstractRequestException {
         try {
             InterfaceFnTo interfaceFnTo = this.functionService.getInterface(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -76,12 +83,31 @@ public class FunctionController {
      * @throws AbstractRequestException
      */
     @RequestMapping(value = "/virtualsensornet/functions/{functionName}", method = RequestMethod.GET)
-    public ResponseEntity<?> getFromVirtualSensorNet(String functionName) throws AbstractRequestException {
+    public ResponseEntity<?> getFromVirtualSensorNet(@PathVariable String functionName) throws AbstractRequestException {
         try {
             FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
+     * Get all functions from VirtualSensorNet module
+     * @return List<FunctionVsnTo>
+     * @throws AbstractRequestException
+     */
+    @RequestMapping(value = "/virtualsensornet/functions", method = RequestMethod.GET)
+    public ResponseEntity<?> getFromVirtualSensorNet() throws AbstractRequestException {
+        try {
+            List<FunctionVsnTo> functionVsnToList = this.functionService.getAllFromVirtualSensorNet();
+            return ResponseEntity.status(HttpStatus.OK).body(functionVsnToList);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 }

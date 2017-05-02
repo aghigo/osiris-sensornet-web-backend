@@ -23,4 +23,5 @@ public interface FunctionRepository {
     URI createOnVirtualSensorNet(InterfaceFnTo interfaceFnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException;
     FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
     List<FunctionVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;
+    List<FunctionVsnTo> getAllFromVirtualSensorNet() throws AbstractClientRuntimeException, AbstractRequestException;
 }

@@ -36,12 +36,14 @@ public class VirtualSensorController {
      * Get a list of all available Virtual Sensors from VirtualSensorNet module
      * @return List of VirtualSensors
      */
-    @RequestMapping(value = "/virtualsensor", method = RequestMethod.GET)
+    @RequestMapping(value = "/virtualsensors", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         try {
             List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorService.getAll();
             return ResponseEntity.ok(virtualSensorVsnToList);
         } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
@@ -50,7 +52,7 @@ public class VirtualSensorController {
      * Get a list of all available HTTP methods of the /virtualsensor endpoint
      * @return list of HTTP methods
      */
-    @RequestMapping(value = "/virtualsensor", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/virtualsensors", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> getOptions() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
@@ -60,12 +62,14 @@ public class VirtualSensorController {
      * @param virtualSensorId
      * @return VirtualSensorVsnTo
      */
-    @RequestMapping(value = "/virtualsensor/{virtualSensorId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/virtualsensors/{virtualSensorId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String virtualSensorId) {
         try {
             VirtualSensorVsnTo virtualSensorVsnTo = this.virtualSensorService.getById(virtualSensorId);
             return ResponseEntity.ok(virtualSensorVsnTo);
         } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
@@ -74,7 +78,7 @@ public class VirtualSensorController {
      * Get a list of all available HTTP methods of the /virtualsensor/{virtualsensorId} endpoint
      * @return List of HTTP methods
      */
-    @RequestMapping(value = "/virtualsensor/{virtualSensorId}", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/virtualsensors/{virtualSensorId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> getOptionsById() {
         return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,7 +78,7 @@ public class FunctionOmcpDao implements FunctionRepository {
     public URI createOnVirtualSensorNet(InterfaceFnTo interfaceFnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getFunctionUri();
+            String uri = this.virtualSensorNetConfig.getFunctionIdUri() ;
             FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
             Response response = omcpClient.doPost(uri, functionVsnTo);
             OmcpUtil.handleOmcpResponse(response);
@@ -98,7 +99,7 @@ public class FunctionOmcpDao implements FunctionRepository {
     public FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getFunctionNameUri(), functionName);
+            String uri = String.format(this.virtualSensorNetConfig.getFunctionIdUri(), functionName);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
             FunctionVsnTo functionVsnTo = response.getContent(FunctionVsnTo.class);
@@ -121,7 +122,7 @@ public class FunctionOmcpDao implements FunctionRepository {
             List<FunctionVsnTo> functionVsnToList = new ArrayList<>();
             for(FunctionModuleConfig functionModuleConfig : this.functionConfig.getFunctionModuleConfigList()) {
                 OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-                String uri = String.format(this.virtualSensorNetConfig.getFunctionNameUri(), functionModuleConfig.getFunctionName());
+                String uri = String.format(this.virtualSensorNetConfig.getFunctionIdUri(), functionModuleConfig.getFunctionName());
                 Response response = omcpClient.doGet(uri);
                 if(response.getStatusCode().equals(StatusCode.OK)) {
                     FunctionVsnTo functionVsnTo = response.getContent(FunctionVsnTo.class);
@@ -130,6 +131,20 @@ public class FunctionOmcpDao implements FunctionRepository {
                     }
                 }
             }
+            return functionVsnToList;
+        } catch (AbstractClientRuntimeException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public List<FunctionVsnTo> getAllFromVirtualSensorNet() throws AbstractClientRuntimeException, AbstractRequestException {
+        try {
+            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            String uri = this.virtualSensorNetConfig.getFunctionsUri();
+            Response response = omcpClient.doGet(uri);
+            OmcpUtil.handleOmcpResponse(response);
+            List<FunctionVsnTo> functionVsnToList = Arrays.asList(response.getContent(FunctionVsnTo[].class));
             return functionVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;

@@ -39,12 +39,12 @@ public class DataTypeController {
         List<DataTypeResponse> dataTypeResponseList;
         try {
             dataTypeResponseList = this.dataTypeService.getAll();
+            return ResponseEntity.ok(dataTypeResponseList);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok(dataTypeResponseList);
     }
 
     @RequestMapping(value = "/datatypes", method = RequestMethod.POST)
@@ -52,12 +52,12 @@ public class DataTypeController {
         URI uri = null;
         try {
             uri = this.dataTypeService.create(dataTypeRequest);
+            return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/datatypes", method = RequestMethod.OPTIONS)
@@ -70,12 +70,13 @@ public class DataTypeController {
         DataTypeResponse dataTypeResponse;
         try {
             dataTypeResponse = this.dataTypeService.getById(dataTypeId);
+            return ResponseEntity.ok(dataTypeResponse);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok(dataTypeResponse);
+
     }
 
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.PUT)
@@ -83,12 +84,12 @@ public class DataTypeController {
         DataTypeResponse dataTypeResponse;
         try {
             this.dataTypeService.update(dataTypeId, dataTypeRequest);
+            return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.DELETE)
@@ -96,12 +97,12 @@ public class DataTypeController {
         DataTypeResponse dataTypeResponse;
         try {
             this.dataTypeService.delete(dataTypeId);
+            return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.OPTIONS)
