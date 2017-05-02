@@ -42,9 +42,9 @@ public class VirtualSensorController {
             List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorService.getAll();
             return ResponseEntity.ok(virtualSensorVsnToList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -68,9 +68,9 @@ public class VirtualSensorController {
             VirtualSensorVsnTo virtualSensorVsnTo = this.virtualSensorService.getById(virtualSensorId);
             return ResponseEntity.ok(virtualSensorVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 

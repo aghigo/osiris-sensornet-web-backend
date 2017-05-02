@@ -4,6 +4,8 @@ import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.service.SensorService;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_EXCLUSIONPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -39,7 +41,12 @@ public class SensorController {
      */
     @RequestMapping(value = "/sensors/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        return ResponseEntity.ok(this.sensorService.getRandom());
+        try {
+            SensorCoTo sensorCoTo = this.sensorService.getRandom();
+            return ResponseEntity.ok(sensorCoTo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -57,12 +64,11 @@ public class SensorController {
      */
     @RequestMapping(value = "/sensors", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        List<SensorResponse> sensorResponseList = null;
         try {
-            sensorResponseList = this.sensorService.getAll();
+            List<SensorResponse> sensorResponseList = this.sensorService.getAll();
             return ResponseEntity.ok(sensorResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -89,7 +95,7 @@ public class SensorController {
             sensorResponseList = this.sensorService.getAllByNetworkId(networkId);
             return ResponseEntity.ok(sensorResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -117,9 +123,9 @@ public class SensorController {
             sensorResponseList = this.sensorService.getAllByCollectorIdAndNetworkId(networkId, collectorId);
             return ResponseEntity.ok(sensorResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
@@ -146,9 +152,9 @@ public class SensorController {
             sensorResponse = this.sensorService.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId);
             return ResponseEntity.ok(sensorResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 

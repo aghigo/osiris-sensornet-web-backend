@@ -44,9 +44,9 @@ public class VirtualSensorNetOmcpController {
             responseContent = this.omcpRepository.doGet(uri);
             return ResponseEntity.ok().body(responseContent);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 

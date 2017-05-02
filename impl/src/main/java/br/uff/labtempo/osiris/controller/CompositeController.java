@@ -44,7 +44,7 @@ public class CompositeController {
             List<CompositeResponse> compositeResponseList = this.compositeService.getAll();
             return ResponseEntity.ok(compositeResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -61,7 +61,7 @@ public class CompositeController {
             URI uri = this.compositeService.create(compositeRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -87,7 +87,7 @@ public class CompositeController {
             CompositeResponse compositeResponse = this.compositeService.getById(compositeId);
             return ResponseEntity.ok(compositeResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -105,7 +105,7 @@ public class CompositeController {
             this.compositeService.update(compositeId, compositeRequest);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -122,7 +122,7 @@ public class CompositeController {
             this.compositeService.delete(compositeId);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -147,7 +147,7 @@ public class CompositeController {
         try {
             return ResponseEntity.ok(this.compositeService.getRandom());
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

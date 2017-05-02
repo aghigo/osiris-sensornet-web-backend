@@ -62,7 +62,7 @@ public class CollectorController {
             collectorResponseList = this.collectorService.getAll();
             return ResponseEntity.ok().body(collectorResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -89,7 +89,7 @@ public class CollectorController {
             collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
             return ResponseEntity.ok().body(collectorResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -117,7 +117,7 @@ public class CollectorController {
             collectorResponse = this.collectorService.getByNetworkId(networkId, collectorId);
             return ResponseEntity.ok().body(collectorResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

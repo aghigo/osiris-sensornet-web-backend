@@ -11,6 +11,7 @@ import br.uff.labtempo.osiris.model.HealthDependency;
 import br.uff.labtempo.osiris.service.HealthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,18 +45,22 @@ public class HealthController {
      * Checks if SensorNet, VirtualSensorNet, Function modules and Application database is Online and Functional
      * Each application dependency is mapped on HealthDependency object
      * @see HealthDependency
-      * @return List of HealthDependency
+     * @return List of HealthDependency
      */
     @RequestMapping(value = "/health", method = RequestMethod.GET)
     public ResponseEntity<?> getGlobalHealthStatus() {
-        List<HealthDependency> healthDependencyList = new ArrayList<>();
-        healthDependencyList.add(this.healthService.testRabbitMQ());
-        healthDependencyList.add(this.healthService.testSensorNetConnection());
-        healthDependencyList.add(this.healthService.testVirtualSensorNet());
-        healthDependencyList.addAll(this.healthService.testFunctionModules());
-        healthDependencyList.addAll(this.healthService.testMessageGroups());
-        healthDependencyList.add(this.healthService.testApplicationDatabase());
-        return ResponseEntity.ok(healthDependencyList);
+        try {
+            List<HealthDependency> healthDependencyList = new ArrayList<>();
+            healthDependencyList.add(this.healthService.testRabbitMQ());
+            healthDependencyList.add(this.healthService.testSensorNetConnection());
+            healthDependencyList.add(this.healthService.testVirtualSensorNet());
+            healthDependencyList.addAll(this.healthService.testFunctionModules());
+            healthDependencyList.addAll(this.healthService.testMessageGroups());
+            healthDependencyList.add(this.healthService.testApplicationDatabase());
+            return ResponseEntity.ok(healthDependencyList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -67,7 +72,12 @@ public class HealthController {
      */
     @RequestMapping(value = "/sensornet/health", method = RequestMethod.GET)
     public ResponseEntity<?> getSensorNetHealthStatus() {
-        return ResponseEntity.ok(this.healthService.testSensorNetConnection());
+        try {
+            HealthDependency healthDependency = this.healthService.testSensorNetConnection();
+            return ResponseEntity.ok(healthDependency);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -79,7 +89,12 @@ public class HealthController {
      */
     @RequestMapping(value = "/virtualsensornet/health", method = RequestMethod.GET)
     public ResponseEntity<?> getVirtualSensorNetHealthStatus() {
-        return ResponseEntity.ok(this.healthService.testVirtualSensorNet());
+        try {
+            HealthDependency healthDependency = this.healthService.testVirtualSensorNet();
+            return ResponseEntity.ok(healthDependency);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -92,7 +107,12 @@ public class HealthController {
      */
     @RequestMapping(value = "/function/health", method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionModulesHealthStatus() {
-        return ResponseEntity.ok(this.healthService.testFunctionModules());
+        try {
+            List<HealthDependency> healthDependencyList = this.healthService.testFunctionModules();
+            return ResponseEntity.ok(healthDependencyList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -105,7 +125,12 @@ public class HealthController {
      */
     @RequestMapping(value = "/messagegroup/health", method = RequestMethod.GET)
     public ResponseEntity<?> getMessageGroupsHealth() {
-        return ResponseEntity.ok(this.healthService.testMessageGroups());
+        try {
+            List<HealthDependency> healthDependencyList = this.healthService.testMessageGroups();
+            return ResponseEntity.ok(healthDependencyList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     /**
@@ -114,6 +139,11 @@ public class HealthController {
      */
     @RequestMapping(value = "/database/health", method = RequestMethod.GET)
     public ResponseEntity<?> getApplicationDatabaseHealth() {
-        return ResponseEntity.ok(this.healthService.testApplicationDatabase());
+        try {
+            HealthDependency healthDependency = this.healthService.testApplicationDatabase();
+            return ResponseEntity.ok(healthDependency);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 }

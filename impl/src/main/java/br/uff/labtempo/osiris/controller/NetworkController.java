@@ -62,7 +62,7 @@ public class NetworkController {
             networkResponseList = this.networkService.getAll();
             return ResponseEntity.ok(networkResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -86,12 +86,11 @@ public class NetworkController {
      */
     @RequestMapping(value = "/networks/{networkId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
-        NetworkResponse networkResponse = null;
         try {
-            networkResponse = this.networkService.getById(networkId);
+            NetworkResponse networkResponse = this.networkService.getById(networkId);
             return ResponseEntity.ok(networkResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

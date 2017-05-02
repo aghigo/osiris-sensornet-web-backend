@@ -32,8 +32,12 @@ public class SampleController {
 
     @RequestMapping(value ="/samples/mock", method = RequestMethod.GET)
     public ResponseEntity<?> getRandom() {
-        SampleResponse sampleResponse = this.sampleService.getRandom();
-        return ResponseEntity.ok(sampleResponse);
+        try {
+            SampleResponse sampleResponse = this.sampleService.getRandom();
+            return ResponseEntity.ok(sampleResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
     }
 
     @RequestMapping(value = "/samples/mock", method = RequestMethod.OPTIONS)

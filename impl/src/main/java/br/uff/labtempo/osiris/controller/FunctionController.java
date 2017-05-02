@@ -35,7 +35,8 @@ public class FunctionController {
     @RequestMapping(value = "/functions", method = RequestMethod.GET)
     public ResponseEntity<?> getAvailableFunctionList() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(this.functionService.getAvailableFunctionsUri());
+            List<String> availableFunctionList = this.functionService.getAvailableFunctionsUri();
+            return ResponseEntity.status(HttpStatus.OK).body(availableFunctionList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -52,7 +53,7 @@ public class FunctionController {
             FunctionVsnTo functionVsnTo = this.functionService.getByName(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -70,7 +71,7 @@ public class FunctionController {
             InterfaceFnTo interfaceFnTo = this.functionService.getInterface(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -88,7 +89,7 @@ public class FunctionController {
             FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

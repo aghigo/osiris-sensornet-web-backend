@@ -45,7 +45,7 @@ public class LinkController {
             linkResponseList = this.linkService.getAll();
             return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -72,7 +72,7 @@ public class LinkController {
             uri = this.linkService.create(linkRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -112,7 +112,7 @@ public class LinkController {
             linkResponse = this.linkService.getById(linkId);
             return ResponseEntity.status(HttpStatus.OK).body(linkResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -130,7 +130,7 @@ public class LinkController {
             this.linkService.update(linkId, linkRequest);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -147,7 +147,7 @@ public class LinkController {
             this.linkService.delete(linkId);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

@@ -41,7 +41,7 @@ public class DataTypeController {
             dataTypeResponseList = this.dataTypeService.getAll();
             return ResponseEntity.ok(dataTypeResponseList);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -54,7 +54,7 @@ public class DataTypeController {
             uri = this.dataTypeService.create(dataTypeRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -72,7 +72,7 @@ public class DataTypeController {
             dataTypeResponse = this.dataTypeService.getById(dataTypeId);
             return ResponseEntity.ok(dataTypeResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -86,7 +86,7 @@ public class DataTypeController {
             this.dataTypeService.update(dataTypeId, dataTypeRequest);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -99,7 +99,7 @@ public class DataTypeController {
             this.dataTypeService.delete(dataTypeId);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e.getMessage());
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
