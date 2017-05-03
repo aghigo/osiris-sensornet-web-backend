@@ -63,6 +63,7 @@ public class SensorController {
      * Get all available Sensors from SensorNet module
      * @return List of SensorResponse
      */
+    @CrossOrigin
     @RequestMapping(value = "/sensors", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
         try {
