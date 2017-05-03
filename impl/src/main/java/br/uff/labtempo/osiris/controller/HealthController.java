@@ -30,7 +30,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@CrossOrigin(value = "*")
+@CrossOrigin
 public class HealthController {
 
     private HealthService healthService;

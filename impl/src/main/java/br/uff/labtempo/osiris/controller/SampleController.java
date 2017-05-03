@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.SampleRequest;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
@@ -9,10 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,6 +17,7 @@ import java.net.URISyntaxException;
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SampleController {
     private SampleService sampleService;

@@ -45,7 +45,7 @@ public class FunctionService {
      * @return FunctionVsnTo
      * @throws AbstractRequestException
      */
-    public FunctionVsnTo getByName(String functionName) throws AbstractRequestException {
+    public FunctionVsnTo getFromVirtualSensorNetByName(String functionName) throws AbstractRequestException {
         return this.functionRepository.getFromVirtualSensorNet(functionName);
     }
 

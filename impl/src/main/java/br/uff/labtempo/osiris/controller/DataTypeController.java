@@ -18,6 +18,7 @@ import java.util.List;
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/virtualsensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class DataTypeController {
 

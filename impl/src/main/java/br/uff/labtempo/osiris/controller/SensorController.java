@@ -25,6 +25,7 @@ import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
  * @version 1.0
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/sensornet", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SensorController {
     private SensorService sensorService;

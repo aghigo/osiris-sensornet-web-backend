@@ -23,6 +23,7 @@ import java.util.List;
  * @since 1.8
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserAccountController {
 
