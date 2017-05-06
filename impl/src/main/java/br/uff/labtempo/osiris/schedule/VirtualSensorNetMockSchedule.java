@@ -61,30 +61,6 @@ public class VirtualSensorNetMockSchedule {
     @Autowired
     private BlendingRepository blendingRepository;
 
-    @Scheduled(cron="${virtualsensornet.schedule.create.datatype.cron:*/1 * * * * ?}")
-    public void loadDataTypes() throws URISyntaxException, AbstractRequestException {
-        try {
-            log.info("Loading VirtualSensorNet with default DataTypes");
-            List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
-            if(dataTypeVsnToList == null || dataTypeVsnToList.isEmpty()) {
-                List<DataTypeVsnTo> dataTypeList = new ArrayList<>();
-                dataTypeList.add(new DataTypeVsnTo("temperature", ValueType.NUMBER, "celsius", "Cº"));
-                dataTypeList.add(new DataTypeVsnTo("temperature", ValueType.NUMBER, "fahrenheit", "Fº"));
-                dataTypeList.add(new DataTypeVsnTo("temperature", ValueType.NUMBER, "kelvin", "K"));
-                dataTypeList.add(new DataTypeVsnTo("pressure", ValueType.NUMBER, "pascal", "P"));
-                dataTypeList.add(new DataTypeVsnTo("luminosity", ValueType.NUMBER, "candela", "C"));
-                for(DataTypeVsnTo dataTypeVsnTo : dataTypeList) {
-                    this.dataTypeRepository.insert(dataTypeVsnTo);
-                    log.info(String.format("DataType created [%s]", dataTypeVsnTo.toString()));
-                }
-                log.info("DataTypes loaded successfully.");
-            }
-        } catch (Exception e) {
-            log.error("Loading VirtualSensorNet with default DataTypes");
-            throw e;
-        }
-    }
-
     @Scheduled(cron="${virtualsensornet.schedule.create.link.cron:*/2 * * * * ?}")
     public void createLink() throws AbstractRequestException, URISyntaxException {
         LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo();

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
@@ -35,10 +36,14 @@ public class VirtualSensorController {
      * @return List of VirtualSensors
      */
     @RequestMapping(value = "/virtualsensors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         try {
             List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorService.getAll();
-            return ResponseEntity.ok(virtualSensorVsnToList);
+            if(count) {
+                return ResponseEntity.ok(virtualSensorVsnToList.size());
+            } else {
+                return ResponseEntity.ok(virtualSensorVsnToList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

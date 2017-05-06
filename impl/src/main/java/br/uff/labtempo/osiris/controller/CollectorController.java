@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
@@ -57,11 +59,15 @@ public class CollectorController {
      * @return List<CollectorResponse> List of all available Collectors from SensorNet
      */
     @RequestMapping(value = "/collectors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<CollectorResponse> collectorResponseList = null;
         try {
             collectorResponseList = this.collectorService.getAll();
-            return ResponseEntity.ok().body(collectorResponseList);
+            if(count) {
+                return ResponseEntity.ok().body(collectorResponseList.size());
+            } else {
+                return ResponseEntity.ok().body(collectorResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
@@ -84,11 +90,15 @@ public class CollectorController {
      * @return List of all collectors of the {networkId} Network
      */
     @RequestMapping(value = "/networks/{networkId}/collectors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
+    public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId, @RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<CollectorResponse> collectorResponseList = null;
         try {
             collectorResponseList = this.collectorService.getAllByNetworkId(networkId);
-            return ResponseEntity.ok().body(collectorResponseList);
+            if(count) {
+                return ResponseEntity.ok().body(collectorResponseList.size());
+            } else {
+                return ResponseEntity.ok().body(collectorResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

@@ -40,11 +40,15 @@ public class LinkController {
      * @return ResponseEntity of List<LinkResponse> (List of all available Link sensors from VirtualSensorNet module)
      */
     @RequestMapping(value = "/links", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<LinkResponse> linkResponseList;
         try {
             linkResponseList = this.linkService.getAll();
-            return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
+            if(count) {
+                return ResponseEntity.status(HttpStatus.OK).body(linkResponseList.size());
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(linkResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

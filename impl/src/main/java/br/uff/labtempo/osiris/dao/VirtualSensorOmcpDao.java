@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
@@ -12,6 +13,7 @@ import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -64,6 +66,9 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = this.virtualSensorNetConfig.getVirtualSensorUri();
             Response response = omcpClient.doGet(uri);
+            if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
+                return new ArrayList<>();
+            }
             OmcpUtil.handleOmcpResponse(response);
             VirtualSensorVsnTo[] virtualSensorVsnToArray = response.getContent(VirtualSensorVsnTo[].class);
             List<VirtualSensorVsnTo> virtualSensorVsnToList = Arrays.asList(virtualSensorVsnToArray);

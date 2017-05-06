@@ -1,7 +1,11 @@
 package br.uff.labtempo.osiris;
 
+import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.osiris.schedule.VirtualSensorNetLoaderSchedule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.net.URISyntaxException;
 
 /**
  * Main class to start the application

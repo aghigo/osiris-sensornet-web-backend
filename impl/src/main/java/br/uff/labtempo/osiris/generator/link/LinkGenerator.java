@@ -10,6 +10,7 @@ import br.uff.labtempo.osiris.service.CollectorService;
 import br.uff.labtempo.osiris.service.DataTypeService;
 import br.uff.labtempo.osiris.service.NetworkService;
 import br.uff.labtempo.osiris.service.SensorService;
+import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

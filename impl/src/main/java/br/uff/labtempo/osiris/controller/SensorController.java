@@ -5,6 +5,7 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import com.sun.scenario.effect.impl.sw.java.JSWBlend_EXCLUSIONPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
@@ -63,12 +65,35 @@ public class SensorController {
      * Get all available Sensors from SensorNet module
      * @return List of SensorResponse
      */
-    @CrossOrigin
     @RequestMapping(value = "/sensors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         try {
             List<SensorResponse> sensorResponseList = this.sensorService.getAll();
-            return ResponseEntity.ok(sensorResponseList);
+            if(count) {
+                return ResponseEntity.ok(sensorResponseList.size());
+            } else {
+                return ResponseEntity.ok(sensorResponseList);
+            }
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
+     * Get all available Sensors from SensorNet module
+     * @return List of SensorResponse
+     */
+    @RequestMapping(value = "/non-linked-sensors", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllNonLinkedSensors(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
+        try {
+            List<SensorSnTo> sensorSnToList = this.sensorService.getAllNonLinkedSensors();
+            if(count) {
+                return ResponseEntity.ok(sensorSnToList.size());
+            } else {
+                return ResponseEntity.ok(sensorSnToList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
@@ -91,11 +116,15 @@ public class SensorController {
      * @return List of SensorResponses (SensorSnTo from a {networkId} Network)
      */
     @RequestMapping(value = "/networks/{networkId}/sensors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId) {
+    public ResponseEntity<?> getAllByNetworkId(@PathVariable String networkId, @RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<SensorResponse> sensorResponseList;
         try {
             sensorResponseList = this.sensorService.getAllByNetworkId(networkId);
-            return ResponseEntity.ok(sensorResponseList);
+            if(count) {
+                return ResponseEntity.ok(sensorResponseList.size());
+            } else {
+                return ResponseEntity.ok(sensorResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
@@ -119,11 +148,15 @@ public class SensorController {
      * @return List of Sensors from {collectorId} Collector from {networkId} Network
      */
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}/sensors", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllByCollectorIdAndNetworkId(@PathVariable String networkId, @PathVariable String collectorId) {
+    public ResponseEntity<?> getAllByCollectorIdAndNetworkId(@PathVariable String networkId, @PathVariable String collectorId, @RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<SensorResponse> sensorResponseList;
         try {
             sensorResponseList = this.sensorService.getAllByCollectorIdAndNetworkId(networkId, collectorId);
-            return ResponseEntity.ok(sensorResponseList);
+            if(count) {
+                return ResponseEntity.ok(sensorResponseList.size());
+            } else {
+                return ResponseEntity.ok(sensorResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

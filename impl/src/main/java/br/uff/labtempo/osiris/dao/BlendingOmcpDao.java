@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,6 +47,9 @@ public class BlendingOmcpDao implements BlendingRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = this.virtualSensorNetConfig.getBlendingsUri();
             Response response = omcpClient.doGet(uri);
+            if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
+                return new ArrayList<>();
+            }
             OmcpUtil.handleOmcpResponse(response);
             BlendingVsnTo[] blendingVsnToArray = response.getContent(BlendingVsnTo[].class);
             List<BlendingVsnTo> blendingVsnToList = Arrays.asList(blendingVsnToArray);

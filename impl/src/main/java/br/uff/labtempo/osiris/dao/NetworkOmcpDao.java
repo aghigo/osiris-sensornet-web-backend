@@ -4,6 +4,7 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.OmpRabbitExceptionThrowerClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.omcp.common.exceptions.client.UnreachableModuleException;
@@ -16,6 +17,7 @@ import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,6 +78,9 @@ public class NetworkOmcpDao implements NetworkRepository {
             throw e;
         }
 
+        if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
+            return new ArrayList<>();
+        }
         OmcpUtil.handleOmcpResponse(response);
 
         NetworkSnTo[] networkSnToArray = response.getContent(NetworkSnTo[].class);

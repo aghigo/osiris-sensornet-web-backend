@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
@@ -57,11 +59,15 @@ public class NetworkController {
      * @return List of NetworkResponse
      */
     @RequestMapping(value = "/networks", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         List<NetworkResponse> networkResponseList;
         try {
             networkResponseList = this.networkService.getAll();
-            return ResponseEntity.ok(networkResponseList);
+            if(count) {
+                return ResponseEntity.ok(networkResponseList.size());
+            } else {
+                return ResponseEntity.ok(networkResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

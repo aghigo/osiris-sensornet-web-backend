@@ -143,6 +143,9 @@ public class FunctionOmcpDao implements FunctionRepository {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             String uri = this.virtualSensorNetConfig.getFunctionsUri();
             Response response = omcpClient.doGet(uri);
+            if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
+                return new ArrayList<>();
+            }
             OmcpUtil.handleOmcpResponse(response);
             List<FunctionVsnTo> functionVsnToList = Arrays.asList(response.getContent(FunctionVsnTo[].class));
             return functionVsnToList;

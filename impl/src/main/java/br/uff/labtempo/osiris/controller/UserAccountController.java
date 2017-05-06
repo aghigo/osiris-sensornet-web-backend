@@ -40,10 +40,14 @@ public class UserAccountController {
      * @return List of UserAccount
      */
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         try {
             List<UserAccountResponse> userAccountResponseList = this.userAccountService.getAll();
-            return ResponseEntity.ok(userAccountResponseList);
+            if(count) {
+                return ResponseEntity.ok(userAccountResponseList.size());
+            } else {
+                return ResponseEntity.ok(userAccountResponseList);
+            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

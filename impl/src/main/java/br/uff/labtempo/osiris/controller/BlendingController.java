@@ -39,10 +39,14 @@ public class BlendingController {
      * @return List of Blending sensors.
      */
     @RequestMapping(value = "/blendings", method = RequestMethod.GET)
-    public ResponseEntity<?> doGetAll() {
+    public ResponseEntity<?> doGetAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         try {
             List<BlendingResponse> blendingResponseList = this.blendingService.getAll();
-            return ResponseEntity.ok(blendingResponseList);
+            if(count) {
+                return ResponseEntity.ok(blendingResponseList.size());
+            } else {
+                return ResponseEntity.ok(blendingResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

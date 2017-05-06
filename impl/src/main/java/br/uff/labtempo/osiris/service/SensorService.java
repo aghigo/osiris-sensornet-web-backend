@@ -5,10 +5,13 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
+import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +30,14 @@ import java.util.List;
  */
 @Service
 public class SensorService {
-
+    private LinkRepository linkRepository;
     private NetworkRepository networkRepository;
     private SensorRepository sensorRepository;
     private SensorGenerator sensorGenerator;
 
     @Autowired
-    public SensorService(NetworkRepository networkRepository, SensorRepository sensorRepository, SensorGenerator sensorGenerator) {
+    public SensorService(LinkRepository linkRepository, NetworkRepository networkRepository, SensorRepository sensorRepository, SensorGenerator sensorGenerator) {
+        this.linkRepository = linkRepository;
         this.networkRepository = networkRepository;
         this.sensorRepository = sensorRepository;
         this.sensorGenerator = sensorGenerator;
@@ -97,5 +101,60 @@ public class SensorService {
             sensorResponseList.addAll(SensorMapper.snToToResponse(this.sensorRepository.getAllByNetworkId(networkSnTo.getId())));
         }
         return sensorResponseList;
+    }
+
+    /**
+     * Get all Sensors from SensorNet that are not linked to any Virtual Sensor yet (Link Sensor from VirtualSensorNet)
+     * @return List<SensorSnTo> List containing all sensors from SensorNet that are not Linked on VirtualSensorNet module yet
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
+    public List<SensorSnTo> getAllNonLinkedSensors() throws AbstractRequestException, AbstractClientRuntimeException {
+        List<SensorSnTo> nonLinkedSensorList = new ArrayList<>();
+        List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
+        boolean isLinked = false;
+        for(NetworkSnTo networkSnTo : this.networkRepository.getAll()) {
+            for(SensorSnTo sensorSnTo : this.sensorRepository.getAllByNetworkId(networkSnTo.getId())) {
+                for(LinkVsnTo linkVsnTo : linkVsnToList) {
+                    if(linkVsnTo.getSensorId().equals(sensorSnTo.getId())) {
+                        isLinked = true;
+                        break;
+                    }
+                }
+                if(!isLinked) {
+                    nonLinkedSensorList.add(sensorSnTo);
+                } else {
+                    isLinked = false;
+                }
+            }
+        }
+        return nonLinkedSensorList;
+    }
+
+    /**
+     * Get all Sensors from SensorNet that are linked to any Virtual Sensor (Link Sensor from VirtualSensorNet)
+     * @return List<SensorSnTo> List containing all sensors from SensorNet that are Linked on VirtualSensorNet module
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
+    public List<SensorSnTo> getAllLinkedSensors() throws AbstractRequestException, AbstractClientRuntimeException {
+        List<SensorSnTo> linkedSensorList = new ArrayList<>();
+        List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
+        boolean isLinked = false;
+        for(NetworkSnTo networkSnTo : this.networkRepository.getAll()) {
+            for(SensorSnTo sensorSnTo : this.sensorRepository.getAllByNetworkId(networkSnTo.getId())) {
+                for(LinkVsnTo linkVsnTo : linkVsnToList) {
+                    if(linkVsnTo.getSensorId().equals(sensorSnTo.getId())) {
+                        isLinked = true;
+                        break;
+                    }
+                }
+                if(isLinked) {
+                    linkedSensorList.add(sensorSnTo);
+                    isLinked = false;
+                }
+            }
+        }
+        return linkedSensorList;
     }
 }

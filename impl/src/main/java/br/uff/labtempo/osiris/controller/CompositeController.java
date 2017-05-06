@@ -40,10 +40,14 @@ public class CompositeController {
      * @return List with all available Composite sensors from VirtualSensorNet module
      */
     @RequestMapping(value = "/composites", method = RequestMethod.GET)
-    public ResponseEntity<?> doGetAll() {
+    public ResponseEntity<?> doGetAll(@RequestParam(required = false, defaultValue = "false") boolean count) {
         try {
             List<CompositeResponse> compositeResponseList = this.compositeService.getAll();
-            return ResponseEntity.ok(compositeResponseList);
+            if(count) {
+                return ResponseEntity.ok(compositeResponseList.size());
+            } else {
+                return ResponseEntity.ok(compositeResponseList);
+            }
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

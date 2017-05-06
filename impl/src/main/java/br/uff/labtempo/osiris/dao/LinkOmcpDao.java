@@ -2,6 +2,7 @@ package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
@@ -67,6 +68,9 @@ public class LinkOmcpDao implements LinkRepository {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             Response response = omcpClient.doGet(uri);
+            if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
+                return new ArrayList<>();
+            }
             OmcpUtil.handleOmcpResponse(response);
             LinkVsnTo[] linkVsnToArray = response.getContent(LinkVsnTo[].class);
             List<LinkVsnTo> linkVsnToList = Arrays.asList(linkVsnToArray);
