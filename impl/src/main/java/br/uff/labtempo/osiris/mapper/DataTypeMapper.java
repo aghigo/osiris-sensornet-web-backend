@@ -2,7 +2,9 @@ package br.uff.labtempo.osiris.mapper;
 
 import br.uff.labtempo.osiris.model.request.DataTypeRequest;
 import br.uff.labtempo.osiris.model.response.DataTypeResponse;
+import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.ValueVsnTo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,5 +78,16 @@ public class DataTypeMapper {
             dataTypeResponseList.add(vsnToToResponse(dataTypeVsnTo));
         }
         return dataTypeResponseList;
+    }
+
+    /**
+     * Converts a ValueTo into a DataTypeVsnTo object
+     * @param valueTo
+     * @return DataTYpeVsnTo
+     */
+    public static DataTypeVsnTo valueToToVsnTo(ValueTo valueTo) {
+        DataTypeVsnTo dataTypeVsnTo = new DataTypeVsnTo(valueTo.getName(), valueTo.getType(), valueTo.getUnit(), valueTo.getSymbol());
+        dataTypeVsnTo.setUsedBy(0);
+        return dataTypeVsnTo;
     }
 }

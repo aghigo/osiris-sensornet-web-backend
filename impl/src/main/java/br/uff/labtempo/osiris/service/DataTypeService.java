@@ -7,12 +7,15 @@ import br.uff.labtempo.osiris.generator.datatype.DataTypeGenerator;
 import br.uff.labtempo.osiris.model.request.DataTypeRequest;
 import br.uff.labtempo.osiris.model.response.DataTypeResponse;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
+import br.uff.labtempo.osiris.to.common.data.ValueTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,5 +100,54 @@ public class DataTypeService {
      */
     public void delete(String id) throws AbstractRequestException {
         this.dataTypeRepository.delete(id);
+    }
+
+    /**
+     * Get a list of the best appropiate DataTypes for a SensorNet Sensor ValueTos
+     * @param sensorSnTo
+     * @return List<DataTypeVsnTo>
+     * @throws AbstractRequestException
+     * @throws AbstractClientRuntimeException
+     */
+    public List<DataTypeVsnTo> getAppropiateList(SensorSnTo sensorSnTo) throws AbstractRequestException, AbstractClientRuntimeException {
+        List<DataTypeVsnTo> appropiateDataTypeList = new ArrayList<>();
+        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
+        for(ValueTo valueTo : sensorSnTo.getValuesTo()) {
+            for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
+                if(valueTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueTo.getSymbol().equals(dataTypeVsnTo.getSymbol())
+                        && valueTo.getUnit().equals(dataTypeVsnTo.getUnit()) && valueTo.getType().equals(dataTypeVsnTo.getType()) ) {
+                    appropiateDataTypeList.add(dataTypeVsnTo);
+                    break;
+                }
+            }
+        }
+        return appropiateDataTypeList;
+    }
+
+    public DataTypeVsnTo getByFilter(DataTypeRequest dataTypeRequest) throws AbstractRequestException {
+        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
+        for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
+            if(dataTypeVsnTo.getDisplayName().equals(dataTypeRequest.getName())
+                    && dataTypeVsnTo.getUnit().equals(dataTypeRequest.getUnit())
+                    && dataTypeVsnTo.getType().equals(dataTypeRequest.getType())
+                    && dataTypeVsnTo.getSymbol().equals(dataTypeRequest.getSymbol())) {
+                return dataTypeVsnTo;
+            }
+        }
+        return null;
+    }
+
+    public List<DataTypeVsnTo> getLikeFilter(DataTypeRequest dataTypeRequest) throws AbstractRequestException {
+        List<DataTypeVsnTo> dataTypeFilterList = new ArrayList<>();
+        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
+        for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
+            if(dataTypeVsnTo.getDisplayName().equals(dataTypeRequest.getName())
+                    || dataTypeVsnTo.getUnit().equals(dataTypeRequest.getUnit())
+                    || dataTypeVsnTo.getType().equals(dataTypeRequest.getType())
+                    || dataTypeVsnTo.getSymbol().equals(dataTypeRequest.getSymbol())) {
+                dataTypeFilterList.add(dataTypeVsnTo);
+            }
+        }
+        return dataTypeFilterList;
     }
 }

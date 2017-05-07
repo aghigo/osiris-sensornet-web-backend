@@ -11,6 +11,7 @@ import br.uff.labtempo.osiris.service.DataTypeService;
 import br.uff.labtempo.osiris.service.NetworkService;
 import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,6 +53,26 @@ public class LinkGenerator {
             String collectorId = getCollectorId(networkId);
             String sensorId = getSensorId(collectorId, networkId);
             Map<String, Long> fieldMap = getField();
+            LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
+            for(String fieldName : fieldMap.keySet()) {
+                linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
+            }
+            return linkVsnTo;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public LinkVsnTo generateVsnTo(SensorSnTo sensorSnTo) throws AbstractRequestException {
+        try {
+
+            String id = getId();
+            String networkId = sensorSnTo.getNetworkId();
+            String collectorId = sensorSnTo.getCollectorId();
+            String sensorId = sensorSnTo.getId();
+
+            Map<String, Long> fieldMap = getField();
+
             LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
             for(String fieldName : fieldMap.keySet()) {
                 linkVsnTo.createField(fieldName, fieldMap.get(fieldName));

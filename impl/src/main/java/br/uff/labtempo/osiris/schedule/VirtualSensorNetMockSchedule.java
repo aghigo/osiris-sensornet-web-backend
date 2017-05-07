@@ -9,7 +9,9 @@ import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.repository.CompositeRepository;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
 import br.uff.labtempo.osiris.repository.LinkRepository;
+import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.common.definitions.ValueType;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class with Schedule Jobs that periodically creates new mocked Datatypes and Virtual Sensors (Link, Composite and Blending) on VirtualSensorNet module
+ * Class with Schedule Jobs that periodically creates new randomly mocked Datatypes and Virtual Sensors (Link, Composite and Blending) on VirtualSensorNet module
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -56,13 +58,26 @@ public class VirtualSensorNetMockSchedule {
     private CompositeRepository compositeRepository;
 
     @Autowired
+    private SensorService sensorService;
+
+    @Autowired
     private BlendingGenerator blendingGenerator;
 
     @Autowired
     private BlendingRepository blendingRepository;
 
+    /**
+     * Creates Link Sensors on VirtualSensorNet module based on Sensors, from SensorNet module, that
+     * are not linked to any virtual sensors yet.
+     * @throws AbstractRequestException
+     * @throws URISyntaxException
+     */
     @Scheduled(cron="${virtualsensornet.schedule.create.link.cron:*/2 * * * * ?}")
-    public void createLink() throws AbstractRequestException, URISyntaxException {
+    public void createLinksBasedOnNonLinkedSensors() throws AbstractRequestException, URISyntaxException {
+        List<SensorSnTo> sensorSnToList = this.sensorService.getAllNonLinkedSensors();
+        for(SensorSnTo sensorSnTo : sensorSnToList) {
+
+        }
         LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo();
         URI uri = this.linkRepository.save(linkVsnTo);
         log.info(String.format("Link sensor created [%s] on VirtualSensorNet module.", uri.getPath()));

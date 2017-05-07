@@ -82,13 +82,33 @@ public class SensorController {
     }
 
     /**
-     * Get all available Sensors from SensorNet module
+     * Get all available Sensors from SensorNet module that are not linked to Virtual Sensors
      * @return List of SensorResponse
      */
     @RequestMapping(value = "/non-linked-sensors", method = RequestMethod.GET)
     public ResponseEntity<?> getAllNonLinkedSensors(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
         try {
             List<SensorSnTo> sensorSnToList = this.sensorService.getAllNonLinkedSensors();
+            if(count) {
+                return ResponseEntity.ok(sensorSnToList.size());
+            } else {
+                return ResponseEntity.ok(sensorSnToList);
+            }
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
+     * Get all available Sensors from SensorNet module that are linked to Virtual Sensors
+     * @return List of SensorResponse
+     */
+    @RequestMapping(value = "/linked-sensors", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllLinkedSensors(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
+        try {
+            List<SensorSnTo> sensorSnToList = this.sensorService.getAllLinkedSensors();
             if(count) {
                 return ResponseEntity.ok(sensorSnToList.size());
             } else {

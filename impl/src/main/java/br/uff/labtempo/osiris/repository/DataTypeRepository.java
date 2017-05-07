@@ -4,6 +4,7 @@ package br.uff.labtempo.osiris.repository;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.dao.DataTypeOmcpDao;
+import br.uff.labtempo.osiris.model.request.DataTypeRequest;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 
 import java.net.URI;

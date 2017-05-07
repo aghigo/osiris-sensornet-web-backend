@@ -6,12 +6,10 @@ import br.uff.labtempo.osiris.generator.sample.SampleGenerator;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.mapper.CollectorMapper;
 import br.uff.labtempo.osiris.mapper.NetworkMapper;
-import br.uff.labtempo.osiris.model.domain.collector.Collector;
 import br.uff.labtempo.osiris.model.response.CollectorResponse;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.repository.SampleRepository;
-import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.service.CollectorService;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
@@ -19,7 +17,6 @@ import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
-import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +30,7 @@ import java.util.List;
 
 /**
  * Schedule Jobs to mock Collector
- * Creates periodically new mocked SampleCoTo, NetworkCoTo, CollectorCoTo and SensorCoTo objects on SensorNet module
+ * Creates periodically new randomly mocked SampleCoTo, NetworkCoTo, CollectorCoTo and SensorCoTo objects on SensorNet module
  */
 @Service
 @Profile("sensornet_mock_schedule")
