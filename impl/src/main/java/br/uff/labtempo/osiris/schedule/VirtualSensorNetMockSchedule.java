@@ -72,7 +72,7 @@ public class VirtualSensorNetMockSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron="${virtualsensornet.schedule.create.link.cron:*/2 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.mock.link.cron:*/2 * * * * ?}")
     public void createLinksBasedOnNonLinkedSensors() throws AbstractRequestException, URISyntaxException {
         List<SensorSnTo> sensorSnToList = this.sensorService.getAllNonLinkedSensors();
         for(SensorSnTo sensorSnTo : sensorSnToList) {
@@ -83,14 +83,14 @@ public class VirtualSensorNetMockSchedule {
         log.info(String.format("Link sensor created [%s] on VirtualSensorNet module.", uri.getPath()));
     }
 
-    @Scheduled(cron="virtualsensornet.schedule.create.composite.cron:*/3 * * * * ?")
+    @Scheduled(cron="virtualsensornet.schedule.mock.composite.cron:*/3 * * * * ?")
     public void createComposite() throws URISyntaxException, AbstractRequestException {
         CompositeVsnTo compositeVsnTo = this.compositeGenerator.generateCompositeVsnTo();
         URI uri = this.compositeRepository.create(compositeVsnTo);
         log.info(String.format("Composite sensor created [%s] on VirtualSensorNet module.", uri.getPath()));
     }
 
-//    @Scheduled(cron="${virtualsensornet.schedule.create.blending.cron:*/9 * * * * ?}")
+//    @Scheduled(cron="${virtualsensornet.schedule.mock.blending.cron:*/9 * * * * ?}")
 //    public void createBlending() throws URISyntaxException, AbstractRequestException {
 //        BlendingVsnTo blendingVsnTo = this.blendingGenerator.generateBlendingVsnTo();
 //        URI uri = this.blendingRepository.create(blendingVsnTo);

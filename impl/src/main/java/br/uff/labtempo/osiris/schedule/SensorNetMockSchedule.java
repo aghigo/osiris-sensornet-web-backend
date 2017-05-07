@@ -59,14 +59,14 @@ public class SensorNetMockSchedule {
     @Autowired
     private NetworkRepository networkRepository;
 
-    @Scheduled(cron="${sensornet.schedule.create.sample.cron:*/10 * * * * ?}")
+    @Scheduled(cron="${sensornet.schedule.mock.sample.cron:*/10 * * * * ?}")
     public void createNewSample() throws URISyntaxException {
         SampleCoTo sampleCoTo = this.sampleGenerator.getSampleCoTo();
         this.sampleRepository.save(sampleCoTo);
         log.info(String.format(String.format("SampleCoTo Created (network [%s], collector [%s], sensor [%s]).", sampleCoTo.getNetwork().getId(), sampleCoTo.getCollector().getId(), sampleCoTo.getSensor().getId())));
     }
 
-    @Scheduled(cron="${sensornet.schedule.create.networkAndSensor.cron:*/10 * * * * ?}")
+    @Scheduled(cron="${sensornet.schedule.mock.networkAndSensor.cron:*/10 * * * * ?}")
     public void createNewNetworkAndNewSensorOnExistingCollector() throws AbstractRequestException {
         NetworkCoTo networkCoTo = this.networkGenerator.getNetworkCoto();
         SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
@@ -78,7 +78,7 @@ public class SensorNetMockSchedule {
         log.info(String.format("New Network [%s] and new Sensor [%s] created from existing Collector [%s]", networkCoTo.getId(), sensorCoTo.getId(), collectorCoTo.getId()));
     }
 
-    @Scheduled(cron="${sensornet.schedule.create.sensor.cron:*/10 * * * * ?}")
+    @Scheduled(cron="${sensornet.schedule.mock.sensor.cron:*/10 * * * * ?}")
     public void createNewSensorOnExistingCollectorAndNetwork() throws AbstractRequestException {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         int p = (int) (Math.random() * networkSnToList.size());
