@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
@@ -31,7 +31,7 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     private VirtualSensorNetConnection virtualSensorNetConnection;
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
+    private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     /**
      * Get a VirtualSensor from VirtualSensorNet module based on its unique Id
@@ -44,7 +44,7 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     public VirtualSensorVsnTo getById(String virtualSensorId) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getVirtualSensorIdUri(), virtualSensorId);
+            String uri = String.format(this.virtualSensorNetModuleConfig.getVirtualSensorIdUri(), virtualSensorId);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
             VirtualSensorVsnTo virtualSensorVsnTo = response.getContent(VirtualSensorVsnTo.class);
@@ -64,7 +64,7 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     public List<VirtualSensorVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getVirtualSensorUri();
+            String uri = this.virtualSensorNetModuleConfig.getVirtualSensorUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
                 return new ArrayList<>();

@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
@@ -30,7 +30,7 @@ import java.util.List;
 public class LinkOmcpDao implements LinkRepository {
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
+    private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
@@ -44,7 +44,7 @@ public class LinkOmcpDao implements LinkRepository {
      */
     @Override
     public LinkVsnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
-        String uri = String.format(this.virtualSensorNetConfig.getLinkIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             Response response = omcpClient.doGet(uri);
@@ -64,7 +64,7 @@ public class LinkOmcpDao implements LinkRepository {
      */
     @Override
     public List<LinkVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
-        String uri = this.virtualSensorNetConfig.getLinksUri();
+        String uri = this.virtualSensorNetModuleConfig.getLinksUri();
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
             Response response = omcpClient.doGet(uri);
@@ -91,7 +91,7 @@ public class LinkOmcpDao implements LinkRepository {
     @Override
     public URI save(LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getLinksUri();
+        String uri = this.virtualSensorNetModuleConfig.getLinksUri();
         Response response;
         try {
             response = omcpClient.doPost(uri, linkVsnTo);
@@ -112,7 +112,7 @@ public class LinkOmcpDao implements LinkRepository {
     @Override
     public void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = String.format(this.virtualSensorNetConfig.getLinkIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
         try {
             response = omcpClient.doPut(uri, linkVsnTo);
@@ -131,7 +131,7 @@ public class LinkOmcpDao implements LinkRepository {
     @Override
     public void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = String.format(this.virtualSensorNetConfig.getLinkIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
         try {
             response = omcpClient.doDelete(uri);

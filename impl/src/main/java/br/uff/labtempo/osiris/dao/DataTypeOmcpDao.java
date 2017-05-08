@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
@@ -23,7 +23,7 @@ import java.util.List;
 public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
+    private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
@@ -31,7 +31,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public DataTypeVsnTo getById(String id) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doGet(uri);
@@ -46,7 +46,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
         Response response;
         try {
             response = omcpClient.doGet(uri);
@@ -65,7 +65,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public URI insert(DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = this.virtualSensorNetConfig.getDataTypesUri();
+        String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
         Response response;
         try {
             response = omcpClient.doPost(uri, dataTypeVsnTo);
@@ -79,7 +79,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doPut(uri, dataTypeVsnTo);
@@ -92,7 +92,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     @Override
     public void delete(String id) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-        String uri = String.format(this.virtualSensorNetConfig.getDataTypeIdUri(), id);
+        String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doDelete(uri);

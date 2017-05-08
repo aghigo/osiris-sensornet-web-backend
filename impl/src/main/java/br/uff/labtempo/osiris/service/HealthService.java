@@ -6,9 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.*;
 import br.uff.labtempo.osiris.connection.*;
 import br.uff.labtempo.osiris.model.HealthDependency;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,16 +24,16 @@ import java.util.List;
 public class HealthService {
 
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
+    private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private FunctionConfig functionConfig;
+    private AvailableFunctionListConfig availableFunctionListConfig;
 
     @Autowired
-    private MessageGroupConfig messageGroupConfig;
+    private AvailableMessageGroupListConfig availableMessageGroupListConfig;
 
     @Autowired
     private ApplicationDatabaseConfig applicationDatabaseConfig;
@@ -71,7 +69,7 @@ public class HealthService {
         boolean isActive = false;
         try {
             OmcpClient omcpClient = this.rabbitMQConnection.getConnection();
-            Response response = omcpClient.doGet(this.sensorNetConfig.getModuleUri());
+            Response response = omcpClient.doGet(this.sensorNetModuleConfig.getModuleUri());
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
             }
@@ -85,18 +83,18 @@ public class HealthService {
      * Test connection to SensorNet module
      * @see HealthDependency
      * @see SensorNetConnection
-     * @see SensorNetConfig
+     * @see SensorNetModuleConfig
      * @return HealthDependency with SensorNet status
      */
     public HealthDependency testSensorNetConnection() {
-        String moduleName = this.sensorNetConfig.getModuleName();
+        String moduleName = this.sensorNetModuleConfig.getModuleName();
         String ip = this.sensorNetConnection.getIp();
         int port = this.sensorNetConnection.getPort();
-        String moduleLocation = this.sensorNetConfig.getModuleUri();
+        String moduleLocation = this.sensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
             OmcpClient omcpClient = this.sensorNetConnection.getConnection();
-            String uri = this.sensorNetConfig.getNetworksUri();
+            String uri = this.sensorNetModuleConfig.getNetworksUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
@@ -110,19 +108,19 @@ public class HealthService {
     /**
      * Test connection to VirtualSensorNet module
      * @see VirtualSensorNetConnection
-     * @see VirtualSensorNetConfig
+     * @see VirtualSensorNetModuleConfig
      * @see HealthDependency
      * @return HealthDependency with VirtualSensorNet status
      */
     public HealthDependency testVirtualSensorNet() {
-        String moduleName = this.virtualSensorNetConfig.getModuleName();
+        String moduleName = this.virtualSensorNetModuleConfig.getModuleName();
         String ip = this.virtualSensorNetConnection.getIp();
         int port = this.virtualSensorNetConnection.getPort();
-        String moduleLocation = this.virtualSensorNetConfig.getModuleUri();
+        String moduleLocation = this.virtualSensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getDataTypesUri();
+            String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
@@ -136,13 +134,13 @@ public class HealthService {
     /**
      * Test connection to all available Function modules
      * @see FunctionModuleConfig
-     * @see FunctionConfig
+     * @see AvailableFunctionListConfig
      * @see FunctionConnection
      * @return List of HealthDependency with all Function modules status
      */
     public List<HealthDependency> testFunctionModules() {
         List<HealthDependency> healthDependencyList = new ArrayList<>();
-        List<FunctionModuleConfig> functionModuleConfigList = this.functionConfig.getFunctionModuleConfigList();
+        List<FunctionModuleConfig> functionModuleConfigList = this.availableFunctionListConfig.getFunctionModuleConfigList();
         for(FunctionModuleConfig functionModuleConfig : functionModuleConfigList) { 
             boolean isActive = false;
             try {
@@ -177,23 +175,23 @@ public class HealthService {
 
     /**
      * Test connection to all available messageGroups
+     * @see AvailableMessageGroupListConfig
      * @see MessageGroupConfig
-     * @see OsirisMessageGroupConfig
      * @return List of HealthDependency with all messageGroups status
      */
     public List<HealthDependency> testMessageGroups() {
         List<HealthDependency> healthDependencyList = new ArrayList<>();
-        for(OsirisMessageGroupConfig osirisMessageGroupConfig : this.messageGroupConfig.getOsirisMessageGroupConfigList()) {
-            String messageGroupName = osirisMessageGroupConfig.getName();
-            String uri = osirisMessageGroupConfig.getUri();
-            String ip = osirisMessageGroupConfig.getIp();
-            int port = osirisMessageGroupConfig.getPort();
-            String username = osirisMessageGroupConfig.getUsername();
-            String password = osirisMessageGroupConfig.getPassword();
+        for(MessageGroupConfig messageGroupConfig : this.availableMessageGroupListConfig.getMessageGroupConfigList()) {
+            String messageGroupName = messageGroupConfig.getName();
+            String uri = messageGroupConfig.getUri();
+            String ip = messageGroupConfig.getIp();
+            int port = messageGroupConfig.getPort();
+            String username = messageGroupConfig.getUsername();
+            String password = messageGroupConfig.getPassword();
             HealthDependency healthDependency = HealthDependency.builder()
                     .ip(ip).name(messageGroupName).port(port).uri(uri).build();
             try {
-                OmcpClient omcpClient = this.messageGroupConnection.getConnection(osirisMessageGroupConfig);
+                OmcpClient omcpClient = this.messageGroupConnection.getConnection(messageGroupConfig);
                 Response response = omcpClient.doGet(uri);
                 healthDependency.setActive(true);
                 healthDependency.setStatus(response.getStatusCode().toString());

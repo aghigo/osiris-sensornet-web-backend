@@ -1,7 +1,7 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
-import br.uff.labtempo.osiris.configuration.FunctionConfig;
+import br.uff.labtempo.osiris.configuration.AvailableFunctionListConfig;
 import br.uff.labtempo.osiris.repository.FunctionRepository;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * Service class with business rules to select/create/select/remove Function from Function and VirtualSensorNet modueles
+ * @see InterfaceFnTo
+ * @see FunctionVsnTo
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -21,7 +23,7 @@ import java.util.List;
 public class FunctionService {
 
     @Autowired
-    private FunctionConfig functionConfig;
+    private AvailableFunctionListConfig availableFunctionListConfig;
 
     @Autowired
     private FunctionRepository functionRepository;
@@ -32,10 +34,30 @@ public class FunctionService {
      */
     public List<String> getAvailableFunctionsUri() {
         List<String> functionUriList = new ArrayList<>();
-        for(String functionName : functionConfig.getFunctionNames()) {
-            functionUriList.add(String.format(functionConfig.getFunctionUri(), functionName));
+        for(String functionName : availableFunctionListConfig.getFunctionNames()) {
+            functionUriList.add(String.format(availableFunctionListConfig.getFunctionUri(), functionName));
         }
         return functionUriList;
+    }
+
+    /**
+     * Get a list of Available Functions modules Interfaces
+     * @see InterfaceFnTo
+     * @return List<InterfaceFnTo>
+     * @throws AbstractRequestException
+     */
+    public List<InterfaceFnTo> getAvailableFunctionsInterface() {
+        List<InterfaceFnTo> interfaceFnToList = new ArrayList<>();
+        for(String functionName : availableFunctionListConfig.getFunctionNames()) {
+            InterfaceFnTo interfaceFnTo = null;
+            try {
+                interfaceFnTo = this.getInterface(functionName);
+                interfaceFnToList.add(interfaceFnTo);
+            } catch (Exception e) {
+
+            }
+        }
+        return interfaceFnToList;
     }
 
     /**

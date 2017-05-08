@@ -1,9 +1,9 @@
 package br.uff.labtempo.osiris.controller;
 
-import br.uff.labtempo.osiris.configuration.FunctionConfig;
+import br.uff.labtempo.osiris.configuration.AvailableFunctionListConfig;
 import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
+import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.FunctionConnection;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
@@ -12,7 +12,6 @@ import br.uff.labtempo.osiris.service.HealthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +65,7 @@ public class HealthController {
     /**
      * Get a health status of the SensorNet module
      * @see SensorNetConnection
-     * @see SensorNetConfig
+     * @see SensorNetModuleConfig
      * @see HealthDependency
      * @return HealthDependency with SensorNet status
      */
@@ -83,7 +82,7 @@ public class HealthController {
     /**
      * Get a health status of the VirtualSensorNet module
      * @see VirtualSensorNetConnection
-     * @see VirtualSensorNetConfig
+     * @see VirtualSensorNetModuleConfig
      * @see HealthDependency
      * @return HealthDependency with VirtualSensorNet status
      */
@@ -100,7 +99,7 @@ public class HealthController {
     /**
      * Get a health status of the Function modules
      * @see FunctionConnection
-     * @see FunctionConfig
+     * @see AvailableFunctionListConfig
      * @see FunctionModuleConfig
      * @see HealthDependency
      * @return List of HealthDependency with Function module status
@@ -118,7 +117,7 @@ public class HealthController {
     /**
      * Get a health status of the MessageGroups
      * @see FunctionConnection
-     * @see FunctionConfig
+     * @see AvailableFunctionListConfig
      * @see FunctionModuleConfig
      * @see HealthDependency
      * @return List of HealthDependency with MessageGroups status

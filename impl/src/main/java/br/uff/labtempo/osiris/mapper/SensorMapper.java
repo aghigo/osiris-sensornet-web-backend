@@ -12,9 +12,7 @@ import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class that maps and converts Sensor classes
@@ -143,5 +141,29 @@ public class SensorMapper {
             sensorCoToList.add(snToToCoTo(sensorSnTo));
         }
         return sensorCoToList;
+    }
+
+    public static SensorSnTo responseToSnTo(SensorResponse sensorResponse) {
+        Calendar lastModifiedCalendar = Calendar.getInstance();
+        lastModifiedCalendar.setTimeInMillis(sensorResponse.getLastModified());
+        SensorSnTo sensorSnTo = new SensorSnTo(sensorResponse.getId(), sensorResponse.getState(), sensorResponse.getCaptureTimestampInMillis(),
+                (int) sensorResponse.getCapturePrecisionInNano(), sensorResponse.getAcquisitionTimestampInMillis(), sensorResponse.getStorageTimestampInMillis(), lastModifiedCalendar, sensorResponse.getNetworkId(), sensorResponse.getCollectorId());
+        sensorSnTo.addInfo(sensorResponse.getInfo());
+        for(String consumableName : sensorResponse.getConsumables().keySet()) {
+            sensorSnTo.addConsumable(consumableName, sensorResponse.getConsumables().get(consumableName));
+        }
+        for(SensorValue sensorValue : sensorResponse.getValues()) {
+            sensorSnTo.addValue(sensorValue.getName(), sensorValue.getType(), new Long(sensorValue.getValue()).toString(), sensorValue.getUnit(), sensorValue.getSymbol());
+        }
+        return sensorSnTo;
+    }
+
+    public static List<SensorSnTo> responseToSnTo(List<SensorResponse> sensorResponseList) {
+        List<SensorSnTo> sensorSnToList = new ArrayList<>();
+        for(SensorResponse sensorResponse : sensorResponseList) {
+            SensorSnTo sensorSnTo = responseToSnTo(sensorResponse);
+            sensorSnToList.add(sensorSnTo);
+        }
+        return sensorSnToList;
     }
 }

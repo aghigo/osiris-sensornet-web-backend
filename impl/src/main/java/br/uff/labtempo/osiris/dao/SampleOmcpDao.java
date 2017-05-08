@@ -1,7 +1,7 @@
 package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class SampleOmcpDao implements SampleRepository {
 
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
     private SensorNetConnection connection;
@@ -31,7 +31,7 @@ public class SampleOmcpDao implements SampleRepository {
      */
     @Override
     public void save(SampleCoTo sample) {
-        String uri = sensorNetConfig.getCollectorMessageGroupUri();
+        String uri = sensorNetModuleConfig.getCollectorMessageGroupUri();
         OmcpClient omcpClient = this.connection.getConnection();
         omcpClient.doNofity(uri, sample);
     }

@@ -12,14 +12,12 @@ import br.uff.labtempo.osiris.service.NetworkService;
 import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Class responsible for generate random Link mock objets for the VirtualSensorNet module
@@ -31,7 +29,6 @@ import java.util.UUID;
  */
 @Component
 public class LinkGenerator {
-
     private final int MAX_FIELDS = 3;
 
     @Autowired
@@ -46,51 +43,64 @@ public class LinkGenerator {
     @Autowired
     private DataTypeService dataTypeService;
 
+    /**
+     * Generate a random mock object for Link sensor
+     * @return LinkVsnTo
+     * @throws Exception
+     */
     public LinkVsnTo generateVsnTo() throws AbstractRequestException {
-        try {
-            String id = getId();
-            String networkId = getNetworkId();
-            String collectorId = getCollectorId(networkId);
-            String sensorId = getSensorId(collectorId, networkId);
-            Map<String, Long> fieldMap = getField();
-            LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
-            for(String fieldName : fieldMap.keySet()) {
-                linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
-            }
-            return linkVsnTo;
-        } catch (Exception e) {
-            throw e;
+        long id = getId();
+        String networkId = getNetworkId();
+        String collectorId = getCollectorId(networkId);
+        String sensorId = getSensorId(collectorId, networkId);
+        String label = getLabel(id);
+        LinkVsnTo linkVsnTo = new LinkVsnTo(id, label, sensorId, collectorId, networkId);
+        Map<String, Long> fieldMap = getField();
+        for(String fieldName : fieldMap.keySet()) {
+            linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
         }
+        return linkVsnTo;
     }
 
-    public LinkVsnTo generateVsnTo(SensorSnTo sensorSnTo) throws AbstractRequestException {
-        try {
+    /**
+     * Generate a Link sensor associated to an existing sensor from SensorNet module
+     * @param sensorSnTo
+     * @return LinkVsnTo with associated data of the SensorSnTo
+     * @throws Exception
+     */
+    public LinkVsnTo generateVsnTo(SensorSnTo sensorSnTo) throws Exception {
+        String networkId = sensorSnTo.getNetworkId();
+        String collectorId = sensorSnTo.getCollectorId();
+        String sensorId = sensorSnTo.getId();
 
-            String id = getId();
-            String networkId = sensorSnTo.getNetworkId();
-            String collectorId = sensorSnTo.getCollectorId();
-            String sensorId = sensorSnTo.getId();
-
-            Map<String, Long> fieldMap = getField();
-
-            LinkVsnTo linkVsnTo = new LinkVsnTo(id, sensorId, collectorId, networkId);
-            for(String fieldName : fieldMap.keySet()) {
-                linkVsnTo.createField(fieldName, fieldMap.get(fieldName));
-            }
-            return linkVsnTo;
-        } catch (Exception e) {
-            throw e;
+        LinkVsnTo linkVsnTo = new LinkVsnTo(sensorId, collectorId, networkId);
+        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeService.getAppropiateList(sensorSnTo);
+        if(dataTypeVsnToList == null || dataTypeVsnToList.isEmpty()) {
+            throw new Exception(String.format("generateVsnTo: Failed to generate Link sensor. There are no appropiate datatype for sensor [%s]", sensorSnTo.getId()));
         }
+
+        for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
+            linkVsnTo.createField(dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getId());
+        }
+
+        return linkVsnTo;
     }
 
     /**
      * Generates a random unique id for the Link sensor
-     * pattern: "linkId-" + UUID
      * @see UUID
      * @return String with the unique Link id
      */
-    private String getId() {
-        return "linkId-" + UUID.randomUUID().toString();
+    private long getId() {
+        return UUID.randomUUID().getMostSignificantBits();
+    }
+
+    /**
+     * Generate a random label for a new Link sensor
+     * @return
+     */
+    private String getLabel(long id) {
+        return "linkId-" + id;
     }
 
     /**
@@ -146,7 +156,7 @@ public class LinkGenerator {
      * a Field object contains its id and an DataType id
      * @see br.uff.labtempo.osiris.to.common.data.FieldTo
      * @see br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo
-     * @return
+     * @return Map<String, Long> with the Fields
      * @throws AbstractRequestException
      */
     private Map<String, Long> getField() throws AbstractRequestException {

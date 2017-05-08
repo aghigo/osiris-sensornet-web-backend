@@ -1,15 +1,13 @@
 package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
-import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
-import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ import java.util.List;
 public class CollectorOmcpDao implements CollectorRepository {
 
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
     private SensorNetConnection connection;
@@ -45,7 +43,7 @@ public class CollectorOmcpDao implements CollectorRepository {
     @Override
     public CollectorSnTo getByNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorIdUri(), networkId, collectorId);
         Response response;
         try {
             response = omcpClient.doGet(uri);
@@ -68,7 +66,7 @@ public class CollectorOmcpDao implements CollectorRepository {
     public List<CollectorSnTo> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
 
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorsUri(), networkId);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorsUri(), networkId);
         Response response;
         try {
             response = omcpClient.doGet(uri);

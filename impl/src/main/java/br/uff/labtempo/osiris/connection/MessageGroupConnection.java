@@ -2,7 +2,7 @@ package br.uff.labtempo.osiris.connection;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
-import br.uff.labtempo.osiris.configuration.OsirisMessageGroupConfig;
+import br.uff.labtempo.osiris.configuration.MessageGroupConfig;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,15 +16,15 @@ public class MessageGroupConnection {
 
     /**
      * Get a OMCP connection to a MessageGroup
-     * @param osirisMessageGroupConfig
+     * @param messageGroupConfig
      * @return Connection to the MessageGroup
      */
-    public OmcpClient getConnection(OsirisMessageGroupConfig osirisMessageGroupConfig) {
-        if(osirisMessageGroupConfig != null) {
-            String ip = osirisMessageGroupConfig.getIp();
-            int port = osirisMessageGroupConfig.getPort();
-            String username = osirisMessageGroupConfig.getUsername();
-            String password = osirisMessageGroupConfig.getPassword();
+    public OmcpClient getConnection(MessageGroupConfig messageGroupConfig) {
+        if(messageGroupConfig != null) {
+            String ip = messageGroupConfig.getIp();
+            int port = messageGroupConfig.getPort();
+            String username = messageGroupConfig.getUsername();
+            String password = messageGroupConfig.getPassword();
             return new RabbitClient(ip, username, password);
         }
         throw new RuntimeException("MessageGroupConnection error: Invalid MessageGroup configuration.");

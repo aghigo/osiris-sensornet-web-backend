@@ -82,6 +82,22 @@ public class SensorController {
     }
 
     /**
+     * Get specifc Sensor based on Id
+     * @return SensorResponse
+     */
+    @RequestMapping(value = "/sensors/{sensorId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAll(@PathVariable String sensorId) {
+        try {
+            SensorResponse sensorResponse = this.sensorService.getById(sensorId);
+            return ResponseEntity.ok(sensorResponse);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
      * Get all available Sensors from SensorNet module that are not linked to Virtual Sensors
      * @return List of SensorResponse
      */

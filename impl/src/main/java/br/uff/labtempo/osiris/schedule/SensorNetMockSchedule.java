@@ -67,10 +67,13 @@ public class SensorNetMockSchedule {
     }
 
     @Scheduled(cron="${sensornet.schedule.mock.networkAndSensor.cron:*/10 * * * * ?}")
-    public void createNewNetworkAndNewSensorOnExistingCollector() throws AbstractRequestException {
+    public void createNewNetworkAndNewSensorOnExistingCollector() throws Exception {
         NetworkCoTo networkCoTo = this.networkGenerator.getNetworkCoto();
         SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
         List<CollectorResponse> collectorResponseList = this.collectorService.getAll();
+        if(collectorResponseList == null || collectorResponseList.isEmpty()) {
+            throw new Exception("Failed to create Network and Sensor: No Collector found.");
+        }
         int p = (int) (Math.random() * collectorResponseList.size());
         CollectorCoTo collectorCoTo = CollectorMapper.responseToCoTo(collectorResponseList.get(p));
         SampleCoTo sampleCoTo = new SampleCoTo(networkCoTo, collectorCoTo, sensorCoTo);
@@ -79,11 +82,17 @@ public class SensorNetMockSchedule {
     }
 
     @Scheduled(cron="${sensornet.schedule.mock.sensor.cron:*/10 * * * * ?}")
-    public void createNewSensorOnExistingCollectorAndNetwork() throws AbstractRequestException {
+    public void createNewSensorOnExistingCollectorAndNetwork() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
+        if(networkSnToList == null || networkSnToList.isEmpty()) {
+            throw new Exception("Failed to create new Sensor: No networks found.");
+        }
         int p = (int) (Math.random() * networkSnToList.size());
         NetworkCoTo networkCoTo = NetworkMapper.snToToCoTo(networkSnToList.get(p));
         List<CollectorSnTo> collectorSnToList = this.collectorRepository.getAllByNetworkId(networkCoTo.getId());
+        if(collectorSnToList == null || collectorSnToList.isEmpty()) {
+            throw new Exception("Failed to create new Sensor: No collectors found.");
+        }
         p = (int) (Math.random() * collectorSnToList.size());
         CollectorCoTo collectorCoTo = CollectorMapper.snToToCoTo(collectorSnToList.get(p));
         SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();

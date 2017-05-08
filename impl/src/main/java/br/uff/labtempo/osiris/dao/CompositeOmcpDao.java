@@ -5,12 +5,11 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.VirtualSensorNetConfig;
+import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
 import br.uff.labtempo.osiris.repository.CompositeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
-import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,7 @@ import java.util.List;
 public class CompositeOmcpDao implements CompositeRepository {
 
     @Autowired
-    private VirtualSensorNetConfig virtualSensorNetConfig;
+    private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
     private VirtualSensorNetConnection virtualSensorNetConnection;
@@ -46,7 +45,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public CompositeVsnTo getById(String compositeId) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getCompositeIdUri(), compositeId);
+            String uri = String.format(this.virtualSensorNetModuleConfig.getCompositeIdUri(), compositeId);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
             CompositeVsnTo compositeVsnTo = response.getContent(CompositeVsnTo.class);
@@ -66,7 +65,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public List<CompositeVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getCompositesUri();
+            String uri = this.virtualSensorNetModuleConfig.getCompositesUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
                 return new ArrayList<>();
@@ -92,7 +91,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public URI create(CompositeVsnTo compositeVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = this.virtualSensorNetConfig.getCompositesUri();
+            String uri = this.virtualSensorNetModuleConfig.getCompositesUri();
             Response response = omcpClient.doPost(uri, compositeVsnTo);
             OmcpUtil.handleOmcpResponse(response);
             return new URI(response.getLocation());
@@ -112,7 +111,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public void update(String compositeId, CompositeVsnTo compositeVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getCompositeIdUri(), compositeId);
+            String uri = String.format(this.virtualSensorNetModuleConfig.getCompositeIdUri(), compositeId);
             Response response = omcpClient.doPut(uri, compositeVsnTo);
             OmcpUtil.handleOmcpResponse(response);
         } catch (AbstractClientRuntimeException e) {
@@ -130,7 +129,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     public void delete(String compositeId) throws AbstractRequestException, AbstractClientRuntimeException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetConfig.getCompositeIdUri(), compositeId);
+            String uri = String.format(this.virtualSensorNetModuleConfig.getCompositeIdUri(), compositeId);
             Response response = omcpClient.doDelete(uri);
             OmcpUtil.handleOmcpResponse(response);
         } catch (AbstractClientRuntimeException e) {

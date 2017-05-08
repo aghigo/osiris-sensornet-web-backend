@@ -57,7 +57,7 @@ public class VirtualSensorNetSyncSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron = "* */10 * * * ?")
+    @Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:* */60 * * * ?}")
     public void syncSensorValuesWithDataTypes() throws AbstractRequestException, URISyntaxException {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
@@ -92,8 +92,8 @@ public class VirtualSensorNetSyncSchedule {
     /**
      * Synchronize all Sensors from SensorNet with Link sensors on VirtualSensorNet
      */
-    @Scheduled(cron = "* */10 * * * ?")
-    public void syncSensorsWithLinks() throws AbstractRequestException, URISyntaxException {
+    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:* */10 * * * ?}")
+    public void syncSensorsWithLinks() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
         boolean found = false;
@@ -110,7 +110,7 @@ public class VirtualSensorNetSyncSchedule {
                 if(!found) {
                     LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo(sensorSnTo);
                     this.linkRepository.save(linkVsnTo);
-                    log.info(String.format("Link sensor created based on SensorNet sensor [%s]", sensorSnTo.getId()));
+                    log.info(String.format("Link sensor [%s] created based on SensorNet sensor [%s]", linkVsnTo.getId(), sensorSnTo.getId()));
                 } else {
                     found = false;
                 }

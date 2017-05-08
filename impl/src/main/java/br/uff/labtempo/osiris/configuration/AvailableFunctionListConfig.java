@@ -27,7 +27,7 @@ import java.util.Properties;
 @ToString
 @Component
 @PropertySource(value = "classpath:application.properties")
-public class FunctionConfig {
+public class AvailableFunctionListConfig {
     @Value("${function.name:%1$s.function}")
     private String moduleName;
 

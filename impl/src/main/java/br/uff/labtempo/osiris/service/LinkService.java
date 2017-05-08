@@ -4,8 +4,10 @@ import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.osiris.mapper.LinkMapper;
 import br.uff.labtempo.osiris.generator.link.LinkGenerator;
+import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.model.request.LinkRequest;
 import br.uff.labtempo.osiris.model.response.LinkResponse;
+import br.uff.labtempo.osiris.model.response.SensorResponse;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
@@ -43,6 +45,9 @@ public class LinkService {
 
     @Autowired
     private SensorRepository sensorRepository;
+
+    @Autowired
+    private SensorService sensorService;
 
     /**
      * Get a random LinkVsnTo mocked object
@@ -138,5 +143,12 @@ public class LinkService {
     private boolean validateLink(String networkId, String collectorId, String sensorId) throws AbstractRequestException {
         SensorSnTo sensorSnTo = this.sensorRepository.getByCollectorIdAndNetworkId(networkId, collectorId, sensorId);
         return sensorSnTo != null && sensorSnTo.getId() != null && !sensorSnTo.getId().isEmpty();
+    }
+
+    public LinkVsnTo getRandomById(String sensorId) throws Exception {
+        SensorResponse sensorResponse = this.sensorService.getById(sensorId);
+        SensorSnTo sensorSnTo = SensorMapper.responseToSnTo(sensorResponse);
+        LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo(sensorSnTo);
+        return linkVsnTo;
     }
 }

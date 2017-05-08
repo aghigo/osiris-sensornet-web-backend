@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.NotFoundException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
@@ -156,5 +157,19 @@ public class SensorService {
             }
         }
         return linkedSensorList;
+    }
+
+    public SensorResponse getById(String sensorId) throws AbstractRequestException {
+        List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
+        for(NetworkSnTo networkSnTo : networkSnToList) {
+            List<SensorSnTo> sensorSnToList = this.sensorRepository.getAllByNetworkId(networkSnTo.getId());
+            for(SensorSnTo sensorSnTo : sensorSnToList) {
+                if(sensorSnTo.getId().equals(sensorId)) {
+                    SensorResponse sensorResponse = SensorMapper.snToToResponse(sensorSnTo);
+                    return sensorResponse;
+                }
+            }
+        }
+        throw new NotFoundException(String.format("Error: Sensor [%s] does not exist on SensorNet module.", sensorId));
     }
 }

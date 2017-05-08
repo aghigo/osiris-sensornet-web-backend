@@ -3,7 +3,6 @@ package br.uff.labtempo.osiris.generator.sensor;
 
 import br.uff.labtempo.osiris.model.domain.sensor.SensorValue;
 import br.uff.labtempo.osiris.to.common.definitions.ValueType;
-import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 import lombok.Data;
 
 import java.util.ArrayList;

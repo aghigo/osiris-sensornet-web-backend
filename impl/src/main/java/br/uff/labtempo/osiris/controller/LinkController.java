@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import javax.xml.ws.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -93,6 +94,24 @@ public class LinkController {
         LinkVsnTo linkVsnTo;
         try {
             linkVsnTo = this.linkService.getRandom();
+            return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
+     * Get a Link sensor created based on an existing SensorNet sensor.
+     * This is for mock purposes. Not persisted.
+     * @return
+     */
+    @RequestMapping(value = "/links/mock/{sensorId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getRandomBySensor(@PathVariable @Valid String sensorId) {
+        LinkVsnTo linkVsnTo;
+        try {
+            linkVsnTo = this.linkService.getRandomById(sensorId);
             return ResponseEntity.status(HttpStatus.OK).body(linkVsnTo);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);

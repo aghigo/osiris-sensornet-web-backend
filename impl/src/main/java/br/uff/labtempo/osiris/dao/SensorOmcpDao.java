@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
@@ -21,7 +21,7 @@ import java.util.List;
 public class SensorOmcpDao implements SensorRepository {
 
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
     private SensorNetConnection connection;
@@ -29,7 +29,7 @@ public class SensorOmcpDao implements SensorRepository {
     @Override
     public SensorSnTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
         Response response;
         try {
             response = omcpClient.doGet(uri);
@@ -44,7 +44,7 @@ public class SensorOmcpDao implements SensorRepository {
     @Override
     public List<SensorSnTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorIdSensorsUri(), networkId, collectorId);
 
         Response response;
         try {
@@ -64,7 +64,7 @@ public class SensorOmcpDao implements SensorRepository {
     @Override
     public List<SensorSnTo> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdSensorsUri(), networkId);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdSensorsUri(), networkId);
         Response response;
         try {
             response = omcpClient.doGet(uri);

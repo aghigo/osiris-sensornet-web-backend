@@ -36,7 +36,8 @@ public class VirtualSensorNetLoaderSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron = "* */10 * * * ?")
+    //@Scheduled(cron = "${sensornet.schedule.loader.datatype.cron:* */10 * * * ?}")
+    @Scheduled(fixedDelay = 9999999)
     public void loadDefaultDataTypes() throws AbstractRequestException, URISyntaxException {
         if(!hasLoadedDataTypes) {
             List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();

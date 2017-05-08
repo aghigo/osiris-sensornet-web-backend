@@ -1,17 +1,13 @@
 package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
-import br.uff.labtempo.omcp.client.rabbitmq.OmpRabbitExceptionThrowerClient;
-import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.omcp.common.exceptions.client.UnreachableModuleException;
-import br.uff.labtempo.osiris.configuration.SensorNetConfig;
+import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
-import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +26,7 @@ import java.util.List;
 @Component("networkOmcpDao")
 public class NetworkOmcpDao implements NetworkRepository {
     @Autowired
-    private SensorNetConfig sensorNetConfig;
+    private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
     private SensorNetConnection connection;
@@ -45,7 +41,7 @@ public class NetworkOmcpDao implements NetworkRepository {
     @Override
     public NetworkSnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = String.format(this.sensorNetConfig.getNetworkIdUri(), id);
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdUri(), id);
         Response response;
 
         try {
@@ -69,7 +65,7 @@ public class NetworkOmcpDao implements NetworkRepository {
     @Override
     public List<NetworkSnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.connection.getConnection();
-        String uri = this.sensorNetConfig.getNetworksUri();
+        String uri = this.sensorNetModuleConfig.getNetworksUri();
         Response response;
 
         try {

@@ -27,7 +27,6 @@ import java.util.List;
  */
 @Service
 public class DataTypeService {
-
     private DataTypeRepository dataTypeRepository;
 
     private DataTypeGenerator dataTypeGenerator;
@@ -122,32 +121,5 @@ public class DataTypeService {
             }
         }
         return appropiateDataTypeList;
-    }
-
-    public DataTypeVsnTo getByFilter(DataTypeRequest dataTypeRequest) throws AbstractRequestException {
-        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
-        for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
-            if(dataTypeVsnTo.getDisplayName().equals(dataTypeRequest.getName())
-                    && dataTypeVsnTo.getUnit().equals(dataTypeRequest.getUnit())
-                    && dataTypeVsnTo.getType().equals(dataTypeRequest.getType())
-                    && dataTypeVsnTo.getSymbol().equals(dataTypeRequest.getSymbol())) {
-                return dataTypeVsnTo;
-            }
-        }
-        return null;
-    }
-
-    public List<DataTypeVsnTo> getLikeFilter(DataTypeRequest dataTypeRequest) throws AbstractRequestException {
-        List<DataTypeVsnTo> dataTypeFilterList = new ArrayList<>();
-        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
-        for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
-            if(dataTypeVsnTo.getDisplayName().equals(dataTypeRequest.getName())
-                    || dataTypeVsnTo.getUnit().equals(dataTypeRequest.getUnit())
-                    || dataTypeVsnTo.getType().equals(dataTypeRequest.getType())
-                    || dataTypeVsnTo.getSymbol().equals(dataTypeRequest.getSymbol())) {
-                dataTypeFilterList.add(dataTypeVsnTo);
-            }
-        }
-        return dataTypeFilterList;
     }
 }

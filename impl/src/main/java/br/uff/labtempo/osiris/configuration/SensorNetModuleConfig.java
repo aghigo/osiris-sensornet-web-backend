@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @Component
 @PropertySource(value = "classpath:application.properties")
-public class SensorNetConfig {
+public class SensorNetModuleConfig {
     @Value("${sensornet.moduleName:sensornet}")
     private String moduleName;
 

@@ -41,6 +41,21 @@ public class FunctionController {
     }
 
     /**
+     * Get a list of all available Functions interfaces
+     * @see InterfaceFnTo
+     * @return ResponseEntity with List<InterfaceFnTo>
+     */
+    @RequestMapping(value = "/functions/interface", method = RequestMethod.GET)
+    public ResponseEntity<?> getAvailableFunctionInterfaceList() {
+        try {
+            List<InterfaceFnTo> availableFunctionInterfaceList = this.functionService.getAvailableFunctionsInterface();
+            return ResponseEntity.status(HttpStatus.OK).body(availableFunctionInterfaceList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
      * Get a Function interface based on the function name
      * @param functionName
      * @return InterfaceFnTo (Function interface)
