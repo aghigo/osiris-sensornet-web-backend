@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.schedule;
+package br.uff.labtempo.osiris.schedule.loader;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
@@ -36,7 +36,6 @@ public class VirtualSensorNetLoaderSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    //@Scheduled(cron = "${sensornet.schedule.loader.datatype.cron:* */10 * * * ?}")
     @Scheduled(fixedDelay = 9999999)
     public void loadDefaultDataTypes() throws AbstractRequestException, URISyntaxException {
         if(!hasLoadedDataTypes) {

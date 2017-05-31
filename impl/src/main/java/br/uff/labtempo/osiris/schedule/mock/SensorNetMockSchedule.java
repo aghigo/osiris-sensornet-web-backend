@@ -1,6 +1,5 @@
-package br.uff.labtempo.osiris.schedule;
+package br.uff.labtempo.osiris.schedule.mock;
 
-import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
 import br.uff.labtempo.osiris.generator.sample.SampleGenerator;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
@@ -59,15 +58,38 @@ public class SensorNetMockSchedule {
     @Autowired
     private NetworkRepository networkRepository;
 
-    @Scheduled(cron="${sensornet.schedule.mock.sample.cron:*/10 * * * * ?}")
-    public void createNewSample() throws URISyntaxException {
+    /**
+     * Creates ammount of mocked data (sensor, collector, network) on SensorNet module
+     */
+    @Scheduled(fixedDelay = 999999999)
+    public void loadInitialSensorNetMockedData() throws Exception {
+        log.info("initializing SensorNet database with mocked Sensors, Collectors and Networks...");
+        for(int i = 0; i < ((int) Math.random() * 90) + 1; i++) {
+            this.createNewSample();
+        }
+        for(int i = 0; i < ((int) Math.random() * 90) + 1; i++) {
+            this.createNewNetworkAndNewSensorOnExistingCollector();
+        }
+        for(int i = 0; i < ((int) Math.random() * 90) + 1; i++) {
+            this.createNewSensorOnExistingCollectorAndNetwork();
+        }
+    }
+
+    /**
+     * Periodically creates a new mocked sample (network + collector + sensor) object periodically onto SensorNet module
+     * @throws URISyntaxException
+     */
+    private void createNewSample() throws URISyntaxException {
         SampleCoTo sampleCoTo = this.sampleGenerator.getSampleCoTo();
         this.sampleRepository.save(sampleCoTo);
         log.info(String.format(String.format("SampleCoTo Created (network [%s], collector [%s], sensor [%s]).", sampleCoTo.getNetwork().getId(), sampleCoTo.getCollector().getId(), sampleCoTo.getSensor().getId())));
     }
 
-    @Scheduled(cron="${sensornet.schedule.mock.networkAndSensor.cron:*/10 * * * * ?}")
-    public void createNewNetworkAndNewSensorOnExistingCollector() throws Exception {
+    /**
+     * Periodically creates a new mocked Network and Sensor objects associated to existing Collector onto SensorNet module
+     * @throws Exception
+     */
+    private void createNewNetworkAndNewSensorOnExistingCollector() throws Exception {
         NetworkCoTo networkCoTo = this.networkGenerator.getNetworkCoto();
         SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
         List<CollectorResponse> collectorResponseList = this.collectorService.getAll();
@@ -81,8 +103,11 @@ public class SensorNetMockSchedule {
         log.info(String.format("New Network [%s] and new Sensor [%s] created from existing Collector [%s]", networkCoTo.getId(), sensorCoTo.getId(), collectorCoTo.getId()));
     }
 
-    @Scheduled(cron="${sensornet.schedule.mock.sensor.cron:*/10 * * * * ?}")
-    public void createNewSensorOnExistingCollectorAndNetwork() throws Exception {
+    /**
+     * Periodically creates a new mocked Sensor object from associated to existing Collector and Network onto SensorNet module
+     * @throws Exception
+     */
+    private void createNewSensorOnExistingCollectorAndNetwork() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         if(networkSnToList == null || networkSnToList.isEmpty()) {
             throw new Exception("Failed to create new Sensor: No networks found.");

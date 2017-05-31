@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.schedule;
+package br.uff.labtempo.osiris.schedule.sync;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.generator.link.LinkGenerator;
