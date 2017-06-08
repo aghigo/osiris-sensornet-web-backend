@@ -74,15 +74,15 @@ public class FunctionController {
     }
 
     /**
-     * Get a function from VirtualSensorNet module based on its name
-     * @param functionName
+     * Get a function from VirtualSensorNet module based on its id
+     * @param functionId
      * @return FunctionVsnTo (Function from VirtualSensorNet module)
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/virtualsensornet/functions/{functionName}", method = RequestMethod.GET)
-    public ResponseEntity<?> getFromVirtualSensorNet(@PathVariable String functionName) throws AbstractRequestException {
+    @RequestMapping(value = "/virtualsensornet/functions/{functionId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getFromVirtualSensorNet(@PathVariable long functionId) throws AbstractRequestException {
         try {
-            FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionName);
+            FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionId);
             return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);

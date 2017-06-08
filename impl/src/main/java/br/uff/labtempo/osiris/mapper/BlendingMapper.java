@@ -2,6 +2,8 @@ package br.uff.labtempo.osiris.mapper;
 
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.model.response.BlendingResponse;
+import br.uff.labtempo.osiris.to.common.data.FieldTo;
+import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 
 import java.util.ArrayList;
@@ -32,12 +34,9 @@ public class BlendingMapper {
      */
     public static BlendingVsnTo requestToVsnTo(BlendingRequest blendingRequest) {
         BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
-        blendingVsnTo.setCallMode(blendingRequest.getFunctionOperation());
+        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
         blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-        Map<String, Long> fieldMap = blendingRequest.getFields();
-        for(String fieldName : fieldMap.keySet()) {
-            blendingVsnTo.createField(fieldName, fieldMap.get(fieldName));
-        }
+        blendingVsnTo.createField(blendingRequest.getResponseParamName(), blendingRequest.getResponseDataTypeId());
         return blendingVsnTo;
     }
 
@@ -62,7 +61,16 @@ public class BlendingMapper {
      * @return BlendingResponse
      */
     public static BlendingResponse vsnToToResponse(BlendingVsnTo blendingVsnTo) {
-        return null;
+        FunctionOperation functionOperation = blendingVsnTo.getCallMode();
+        return BlendingResponse.builder()
+                .callIntervalInMillis(blendingVsnTo.getCallIntervalInMillis())
+                .fields(blendingVsnTo.getFields())
+                .functionId(blendingVsnTo.getFunctionId())
+                .id(blendingVsnTo.getId())
+                .label(blendingVsnTo.getLabel())
+                .requestParams(blendingVsnTo.getRequestParams())
+                .responseParams(blendingVsnTo.getResponseParams())
+                .build();
     }
 
     /**
@@ -73,6 +81,10 @@ public class BlendingMapper {
      * @return List of BlendingResponse
      */
     public static List<BlendingResponse> vsnToToResponse(List<BlendingVsnTo> blendingVsnToList) {
-        return null;
+        List<BlendingResponse> blendingResponseList = new ArrayList<>();
+        for(BlendingVsnTo blendingVsnTo : blendingVsnToList) {
+            blendingResponseList.add(vsnToToResponse(blendingVsnTo));
+        }
+        return blendingResponseList;
     }
 }

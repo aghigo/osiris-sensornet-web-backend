@@ -22,7 +22,7 @@
 		<repository>
 			<id>osiris-binaries</id>
 			<name>osiris-binaries</name>
-			<url>file://${user.home}/osiris/osiris-binaries/api/mvn-repo</url>
+			<url>file://${user.home}/Server/osiris-binaries/api/mvn-repo</url>
 		</repository>
 	</repositories>
 

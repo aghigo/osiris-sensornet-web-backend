@@ -61,14 +61,14 @@ public class FunctionService {
     }
 
     /**
-     * Get a function from VirtualSensorNet module by its name
+     * Get a function from VirtualSensorNet module by its id
      * @see FunctionVsnTo
-     * @param functionName
+     * @param functionId
      * @return FunctionVsnTo
      * @throws AbstractRequestException
      */
-    public FunctionVsnTo getFromVirtualSensorNetByName(String functionName) throws AbstractRequestException {
-        return this.functionRepository.getFromVirtualSensorNet(functionName);
+    public FunctionVsnTo getFromVirtualSensorNet(long functionId) throws AbstractRequestException {
+        return this.functionRepository.getFromVirtualSensorNet(functionId);
     }
 
     /**
@@ -80,17 +80,6 @@ public class FunctionService {
      */
     public InterfaceFnTo getInterface(String functionName) throws AbstractRequestException {
         return this.functionRepository.getInterface(functionName);
-    }
-
-    /**
-     * Get function from VirtualSensorNet module by its name
-     * @see FunctionVsnTo
-     * @param functionName
-     * @return FunctionVsnTo
-     * @throws AbstractRequestException
-     */
-    public FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractRequestException {
-        return this.functionRepository.getFromVirtualSensorNet(functionName);
     }
 
     public List<FunctionVsnTo> getAllFromVirtualSensorNet() throws AbstractRequestException {

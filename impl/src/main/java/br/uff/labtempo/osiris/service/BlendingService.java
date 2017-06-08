@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
 import br.uff.labtempo.omcp.common.exceptions.NotFoundException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
@@ -11,6 +12,7 @@ import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.repository.FunctionRepository;
 import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
+import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
@@ -76,50 +78,64 @@ public class BlendingService {
      */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
         try {
+            //CREATE BLENDING RESOURCE
+            BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
+            URI newBlendingUri = this.blendingRepository.create(blendingVsnTo);
+
+            //RETRIEVE CREATED BLENDING
+            String path = newBlendingUri.getPath();
+            String idStr = path.substring(path.lastIndexOf('/') + 1);
+            long newBlendingId = Integer.parseInt(idStr);
+            blendingVsnTo = this.blendingRepository.getById(newBlendingId);
+
             //GET FUNCTION INTERFACE FROM FUNCTION MODULE
             InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
             if(interfaceFnTo == null) {
                 throw new NotFoundException(String.format("Failed to create Blending sensor: could not found %s function interface from Function module.", blendingRequest.getFunctionName()));
             }
 
-            //CREATE A FUNCTION ONTO VIRTUALSENSORNET WITH THE FUNCTION INTERFACE
-            FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(blendingRequest.getFunctionName());
-            if(functionVsnTo == null) {
-                URI createdVsnFunctionUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
-                if(createdVsnFunctionUri == null) {
-                    throw new NotFoundException(String.format("Failed to create Blending sensor: could not found/create %s function interface from/on VirtualSensorNet module.", blendingRequest.getFunctionName()));
-                }
+            //CREATE A FUNCTION INTO VIRTUALSENSORNET BASED ON THE FUNCTION INTERFACE
+            URI createdVsnFunctionUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
+            if(createdVsnFunctionUri == null) {
+                throw new NotFoundException(String.format("Failed to create Blending sensor: could not found/create %s function interface from/on VirtualSensorNet module.", blendingRequest.getFunctionName()));
             }
 
-            //CRETE BLENDING AND UPDATE IT WITH FUNCTION DATA
-            BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
+            //GET CREATED FUNCTION FROM VIRTUALSENSORNET
+            path = createdVsnFunctionUri.getPath();
+            idStr = path.substring(path.lastIndexOf('/') + 1);
+            long functionVsnId = Integer.parseInt(idStr);
+            FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(functionVsnId);
 
+            //UPDATE BLENDING WITH FUNCTION DATA
             blendingVsnTo.setFunction(functionVsnTo);
-            blendingVsnTo.setCallMode(blendingRequest.getFunctionOperation());
+            blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
             blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
 
-            //ADD REQUEST PARAMS
+            //ADD REQUEST PARAMETERS
             List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
             for(VirtualSensorVsnTo virtualSensorVsnTo: virtualSensorVsnToList) {
                 List<ValueVsnTo> valueVsnToList = virtualSensorVsnTo.getValuesTo();
                 for(ValueVsnTo valueVsnTo : valueVsnToList) {
-                    if(blendingRequest.getFields().keySet().contains(valueVsnTo.getName())) {
-                        blendingVsnTo.addRequestParam(valueVsnTo.getId(), blendingRequest.getRequestParamName());
+                    if(blendingRequest.getResponseParamName().equals(valueVsnTo.getName())){
+                        blendingVsnTo.addRequestParam(valueVsnTo.getId(), valueVsnTo.getName());
                         break;
                     }
                 }
             }
+            if(blendingVsnTo.getRequestParams().isEmpty()) {
+                throw new BadRequestException("Failed to create new Blending sensor: there are no fields associated with request parameters.");
+            }
 
-            //ADD RESPONSE PARAMS
+            //ADD RESPONSE PARAM (associated with the Blending first field)
             List<? extends FieldTo> fieldToList = blendingVsnTo.getFields();
             FieldTo fieldTo = fieldToList.get(0);
-            blendingVsnTo.addResponseParam(fieldTo.getId(), blendingRequest.getResponseParamName());
+            blendingVsnTo.addResponseParam(fieldTo.getId(), fieldTo.getName());
 
-            //UPDATE COMPLETE BLENDING WITH FUNCTION DATA
-            URI uri = this.blendingRepository.create(blendingVsnTo);
+            //UPDATE BLENDING WITH FUNCTION DATA
+            this.blendingRepository.update(newBlendingId, blendingVsnTo);
 
             //RETURN NEW BLENDING URI
-            return uri;
+            return newBlendingUri;
         } catch (Exception e) {
             throw e;
         }

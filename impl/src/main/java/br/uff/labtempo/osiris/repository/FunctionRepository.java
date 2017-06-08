@@ -21,7 +21,7 @@ import java.util.List;
 public interface FunctionRepository {
     InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
     URI createOnVirtualSensorNet(InterfaceFnTo interfaceFnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException;
-    FunctionVsnTo getFromVirtualSensorNet(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
+    FunctionVsnTo getFromVirtualSensorNet(long functionId) throws AbstractClientRuntimeException, AbstractRequestException;
     List<FunctionVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;
     List<FunctionVsnTo> getAllFromVirtualSensorNet() throws AbstractClientRuntimeException, AbstractRequestException;
 }

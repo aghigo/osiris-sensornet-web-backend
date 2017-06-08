@@ -69,7 +69,7 @@ public class BlendingOmcpDao implements BlendingRepository {
     public BlendingVsnTo getById(long blendingId) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
             OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetModuleConfig.getBlendingsUri(), blendingId);
+            String uri = String.format(this.virtualSensorNetModuleConfig.getBlendingIdUri(), blendingId);
             Response response = omcpClient.doGet(uri);
             OmcpUtil.handleOmcpResponse(response);
             BlendingVsnTo blendingVsnTo = response.getContent(BlendingVsnTo.class);
