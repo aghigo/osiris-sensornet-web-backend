@@ -55,6 +55,23 @@ public class BlendingController {
     }
 
     /**
+     * Get a specific Blending Sensor from VirtualSensorNet based on Id
+     * @param blendingId
+     * @return Blending sensor.
+     */
+    @RequestMapping(value = "/blendings/{blendingId}", method = RequestMethod.GET)
+    public ResponseEntity<?> doGetById(@PathVariable long blendingId) {
+        try {
+            BlendingResponse blendingResponse = this.blendingService.getById(blendingId);
+            return ResponseEntity.ok(blendingResponse);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
      * Creates a new Blending sensor on VirtualSensorNet module
      * @param blendingRequest (Data required to create new Blending)
      * @return URI with new Blending location

@@ -148,7 +148,14 @@ public class BlendingService {
      * @throws AbstractRequestException
      */
     public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException {
-        BlendingVsnTo blendingVsnTo = BlendingMapper.requestToVsnTo(blendingRequest);
+        BlendingVsnTo blendingVsnTo = this.blendingRepository.getById(blendingId);
+//        blendingVsnTo.removeFields();
+//        blendingVsnTo.setCallIntervalInMillis();
+//        blendingVsnTo.setFunction();
+//        blendingVsnTo.setLabel();
+//        blendingVsnTo.createField();
+//        blendingVsnTo.addRequestParam();
+//        blendingVsnTo.addResponseParam();
         this.blendingRepository.update(blendingId, blendingVsnTo);
     }
 

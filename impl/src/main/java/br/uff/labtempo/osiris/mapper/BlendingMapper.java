@@ -61,7 +61,6 @@ public class BlendingMapper {
      * @return BlendingResponse
      */
     public static BlendingResponse vsnToToResponse(BlendingVsnTo blendingVsnTo) {
-        FunctionOperation functionOperation = blendingVsnTo.getCallMode();
         return BlendingResponse.builder()
                 .callIntervalInMillis(blendingVsnTo.getCallIntervalInMillis())
                 .fields(blendingVsnTo.getFields())
