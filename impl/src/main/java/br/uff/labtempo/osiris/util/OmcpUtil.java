@@ -5,6 +5,8 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import org.springframework.http.HttpStatus;
 
+import java.net.URI;
+
 /**
  * Utilitary class to handle common OMCP protocol operations
  * @see Response
@@ -61,5 +63,16 @@ public class OmcpUtil {
             case METHOD_NOT_ALLOWED:
                 throw new MethodNotAllowedException();
         }
+    }
+
+    /**
+     * Gets the id of an URI of created resource
+     * e.g. /virtualsensornet/link/2
+     * returns 2
+     * @param uri
+     * @return id
+     */
+    public static long getIdFromUri(URI uri) {
+        return Long.parseLong(uri.getPath().substring(uri.getPath().lastIndexOf('/') + 1));
     }
 }
