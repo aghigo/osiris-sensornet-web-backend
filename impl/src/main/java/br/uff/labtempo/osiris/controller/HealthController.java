@@ -7,7 +7,7 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.connection.FunctionConnection;
 import br.uff.labtempo.osiris.connection.SensorNetConnection;
 import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
-import br.uff.labtempo.osiris.model.HealthDependency;
+import br.uff.labtempo.osiris.model.health.HealthDependency;
 import br.uff.labtempo.osiris.service.HealthService;
 
 import org.springframework.beans.factory.annotation.Autowired;

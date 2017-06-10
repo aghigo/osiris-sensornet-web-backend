@@ -2,8 +2,6 @@ package br.uff.labtempo.osiris.service;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
-import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
-import br.uff.labtempo.omcp.common.exceptions.NotFoundException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
@@ -14,7 +12,6 @@ import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.*;
 import br.uff.labtempo.osiris.util.OmcpUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,10 +78,6 @@ public class BlendingService {
      */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
         BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
-        blendingVsnTo.createField(blendingRequest.getResponseParamName(), blendingRequest.getResponseDataTypeId());
-        URI createdBlendingUri = this.blendingRepository.create(blendingVsnTo);
-        long createdBlendingId = OmcpUtil.getIdFromUri(createdBlendingUri);
-        blendingVsnTo = this.blendingRepository.getById(createdBlendingId);
         InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
         URI createdFunctionVsnToUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
         long createdFunctionVsnToId = OmcpUtil.getIdFromUri(createdFunctionVsnToUri);
@@ -92,7 +85,9 @@ public class BlendingService {
         blendingVsnTo.setFunction(functionVsnTo);
         blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
         blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), blendingRequest.getResponseParamName());
+
+        blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), blendingRequest.getResponseDataTypeId());
+        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), blendingVsnTo.getFields().get(0).getName());
 
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
         for(LinkVsnTo linkVsnTo : linkVsnToList) {
@@ -128,7 +123,7 @@ public class BlendingService {
             throw new BadRequestException(String.format("Failed to create blending sensor: there are no virtual sensors with field of type [%s]", blendingRequest.getResponseParamName()));
         }
 
-        this.blendingRepository.update(createdBlendingId, blendingVsnTo);
+        URI createdBlendingUri = this.blendingRepository.create(blendingVsnTo);
         return createdBlendingUri;
 
 //        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();

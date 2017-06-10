@@ -5,7 +5,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.*;
 import br.uff.labtempo.osiris.connection.*;
-import br.uff.labtempo.osiris.model.HealthDependency;
+import br.uff.labtempo.osiris.model.health.HealthDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Service class with business rules to Check application dependency health status
  * (SensorNet, VirtualSensorNet, RabbitMQ, Functions (average, min, max, sum), Application database)
- * @see br.uff.labtempo.osiris.model.HealthDependency
+ * @see HealthDependency
  * @author andre.ghigo
  * @version 1.0
  * @since 1.8

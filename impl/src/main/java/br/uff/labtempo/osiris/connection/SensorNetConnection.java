@@ -3,15 +3,10 @@ package br.uff.labtempo.osiris.connection;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
-import br.uff.labtempo.osiris.model.HealthDependency;
-import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
-import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Class responsible for the connection to the SensorNet module

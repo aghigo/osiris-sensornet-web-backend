@@ -1,4 +1,4 @@
-package br.uff.labtempo.osiris.model;
+package br.uff.labtempo.osiris.model.health;
 
 import lombok.*;
 
