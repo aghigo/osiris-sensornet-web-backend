@@ -155,15 +155,22 @@ public class VirtualSensorNetSyncSchedule {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();
         log.info("Beginning synchornization between Function modules...");
-        for(FunctionFactory functionFactory : this.runningFunctionModuleList) {
-            while(functionDataIterator.hasNext()) {
-                //se existe no banco
-                    //se estiver rodando entao OK
-                    //se estiver pausado entao start
-                //se nao existe no banco
-                    //se estiver rodando entao stop e remove
-                    //se estiver pausado entao remove
+        while(functionDataIterator.hasNext()) {
+            boolean found = false;
+            FunctionData currentFunctionData = functionDataIterator.next();
+            FunctionFactory currentFunctionFactory = null;
+            for(FunctionFactory functionFactory : this.runningFunctionModuleList) {
+                if(functionFactory.getName().equals(currentFunctionData.getName())) {
+                    currentFunctionFactory = functionFactory;
+                    found = true;
+                    break;
+                }
             }
+            //se existe no banco
+                //se estiver rodando entao OK
+                //se estiver pausado entao start
+            //se nao existe no banco e existe rodando
+                //entao stop e remove
         }
         log.info("Function module synchronization completed.");
     }

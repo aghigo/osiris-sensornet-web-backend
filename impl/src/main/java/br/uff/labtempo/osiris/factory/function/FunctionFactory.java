@@ -24,13 +24,18 @@ import java.util.List;
 @Setter
 public class FunctionFactory {
     private final ValueType DEFAULT_FUNCTION_TYPE = ValueType.NUMBER;
-    private final String DEFAULT_FUNCTION_NAME_TEMPLATE = "%s.function";
-    private final String FUNCTION_MODULE_TEMPLATE_URI = "omcp://%s.function.osiris/";
+    private final String DEFAULT_FUNCTION_FULLNAME_TEMPLATE = "%s.function";
+    private final String FUNCTION_MODULE_TEMPLATE_OMCP_URI = "omcp://%s.function.osiris/";
+    private final String FUNCTION_MODULE_TEMPLATE_DATA_URI = "/function/data/%s";
+    private final String FUNCTION_MODULE_TEMPLATE_INTERFACE_URI = "/function/interface/%s";
     private final FunctionOperation DEFAULT_FUNCTION_OPERATION = FunctionOperation.SYNCHRONOUS;
 
     private final ValueType type;
     private String name;
-    private String address;
+    private String fullName;
+    private String dataUri;
+    private String interfaceUri;
+    private String omcpUri;
     private String implementation;
     private FunctionOperation operation;
     private InterfaceFnTo interfaceFnTo;
@@ -58,18 +63,28 @@ public class FunctionFactory {
         this.validateImplementation(implementation);
         this.implementation = implementation;
 
+        this.name = name;
         this.type = this.DEFAULT_FUNCTION_TYPE;
         this.operation = this.DEFAULT_FUNCTION_OPERATION;
-        String functionName = String.format(this.DEFAULT_FUNCTION_NAME_TEMPLATE, name.trim().toLowerCase());
-        this.name = functionName;
-        String address = String.format(this.FUNCTION_MODULE_TEMPLATE_URI, name.trim().toLowerCase());
-        this.address = address;
+
+        String fullName = String.format(this.DEFAULT_FUNCTION_FULLNAME_TEMPLATE, name.trim().toLowerCase());
+        this.fullName = fullName;
+
+        String omcpUri = String.format(this.FUNCTION_MODULE_TEMPLATE_OMCP_URI, name.trim().toLowerCase());
+        this.omcpUri = omcpUri;
+
+        String interfaceUri = String.format(this.FUNCTION_MODULE_TEMPLATE_INTERFACE_URI, name.trim().toLowerCase());
+        this.interfaceUri = interfaceUri;
+
+        String dataUri = String.format(this.FUNCTION_MODULE_TEMPLATE_DATA_URI, name.trim().toLowerCase());
+        this.dataUri = dataUri;
+
         List<FunctionOperation> functionOperationList = new ArrayList<>();
         functionOperationList.add(this.DEFAULT_FUNCTION_OPERATION);
-        this.interfaceFnTo = new InterfaceFnTo(functionName, description, address, functionOperationList, requestParams, responseParams);
+        this.interfaceFnTo = new InterfaceFnTo(name, description, omcpUri, functionOperationList, requestParams, responseParams);
     }
 
-    public OmcpServer createOmcpServer(String host, String username, String password) {
+    public OmcpServer getInstance(String host, String username, String password) {
         this.omcpServer = new RabbitServer(this.name, host, username, password);
         FunctionDefaultControllerImpl functionDefaultControllerImpl = new FunctionDefaultControllerImpl(new RabbitClient(host, username, password), this.interfaceFnTo, this.implementation);
         this.omcpServer.setHandler(functionDefaultControllerImpl);

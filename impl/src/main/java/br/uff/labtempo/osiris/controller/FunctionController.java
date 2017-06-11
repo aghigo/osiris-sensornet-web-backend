@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.request.FunctionRequest;
 import br.uff.labtempo.osiris.service.FunctionService;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/functions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/function", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class FunctionController {
 
     @Autowired
@@ -34,11 +35,21 @@ public class FunctionController {
      * Get a list of all available Functions modules interfaces
      * @return ResponseEntity with status OK and body with List<InterfaceFnTo>
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/interface", method = RequestMethod.GET)
     public ResponseEntity<?> getAllInterfaces() {
         try {
             List<InterfaceFnTo> interfaceFnToList = this.functionService.getAllInterfaces();
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnToList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    @RequestMapping(value = "/data", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllFunctionData() {
+        try {
+            List<FunctionData> functionDataList = this.functionService.getAllFunctionData();
+            return ResponseEntity.status(HttpStatus.OK).body(functionDataList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
@@ -50,11 +61,23 @@ public class FunctionController {
      * @return ResponseEntity with status 200 OK and body with an InterfaceFnTo (FunctionFactory interface)
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/{functionName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/interface/{functionName}", method = RequestMethod.GET)
     public ResponseEntity<?> getInterface(@PathVariable String functionName) throws AbstractRequestException {
         try {
             InterfaceFnTo interfaceFnTo = this.functionService.getInterfaceByName(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnTo);
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    @RequestMapping(value = "/data/{functionName}", method = RequestMethod.GET)
+    public ResponseEntity<?> getFunctionData(@PathVariable String functionName) throws AbstractRequestException {
+        try {
+            FunctionData functionData = this.functionService.getFunctionData(functionName);
+            return ResponseEntity.status(HttpStatus.OK).body(functionData);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
@@ -71,8 +94,8 @@ public class FunctionController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createFunctionData(@RequestBody @Valid FunctionRequest functionRequest) throws AbstractRequestException {
         try {
-            this.functionService.createFunctionData(functionRequest);
-            return ResponseEntity.ok().build();
+            URI uri = this.functionService.createFunctionData(functionRequest);
+            return ResponseEntity.created(uri).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

@@ -37,7 +37,13 @@ public class FunctionData {
     private String fullName;
 
     @NotNull @NotEmpty
-    private String moduleUri;
+    private String interfaceUri;
+
+    @NotNull @NotEmpty
+    private String dataUri;
+
+    @NotNull @NotEmpty
+    private String omcpUri;
 
     @NotNull @NotEmpty
     private String description;
@@ -47,18 +53,6 @@ public class FunctionData {
 
     @NotNull
     private FunctionOperation operation;
-
-    @NotNull
-    private ValueType type;
-
-    @NotNull @NotEmpty
-    private String unit;
-
-    @NotNull @NotEmpty
-    private String requestParamName;
-
-    @NotNull @NotEmpty
-    private String responseParamName;
 
     private long dataTypeId;
 }

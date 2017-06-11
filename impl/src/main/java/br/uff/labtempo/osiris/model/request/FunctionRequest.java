@@ -37,22 +37,6 @@ public class FunctionRequest {
     @NotNull @NotEmpty
     private String description;
 
-    /**
-     * Example: temperature
-     */
-    @NotNull @NotEmpty
-    private String requestParamName;
-
-    @NotNull @NotEmpty
-    private String responseParamName;
-
-    @NotNull @NotEmpty
-    private String unit;
-
-    @NotNull
-    private ValueType type;
-
-    @Min(1)
     private long dataTypeId;
 
     /**
