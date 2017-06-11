@@ -39,7 +39,7 @@ public class BlendingController {
      * @return List of Blending sensors.
      */
     @RequestMapping(value = "/blendings", method = RequestMethod.GET)
-    public ResponseEntity<?> doGetAll(@RequestParam(required = false, defaultValue = "false") @Valid boolean count) {
+    public ResponseEntity<?> doGetAll(@RequestParam(required = false, defaultValue = "false") boolean count) {
         try {
             List<BlendingResponse> blendingResponseList = this.blendingService.getAll();
             if(count) {
@@ -79,7 +79,7 @@ public class BlendingController {
     @RequestMapping(value = "/blendings", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody @Valid BlendingRequest blendingRequest) {
         try {
-            URI uri = this.blendingService.create(blendingRequest);
+            URI uri = this.blendingService.createWithSteps(blendingRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);

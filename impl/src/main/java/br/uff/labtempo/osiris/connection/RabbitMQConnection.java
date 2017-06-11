@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.connection;
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
-import lombok.Getter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Getter
+@Setter
+@ToString
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class RabbitMQConnection {
     @Value("${rabbitmq.moduleName:rabbitmq}")

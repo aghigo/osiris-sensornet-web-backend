@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.uff.labtempo.osiris.model.domain.function;
+package br.uff.labtempo.osiris.factory.function;
 
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.Request;
@@ -39,13 +39,13 @@ import java.util.*;
  * @version 1.0
  * @since 1.8
  */
-public class MainController extends Controller {
+public class FunctionDefaultControllerImpl extends Controller {
     public static final String PROTOCOL_VERSION = "1.0";
     private final RabbitClient client;
     private final InterfaceFnTo interfaceFnTo;
     private final String implementation;
 
-    public MainController(RabbitClient omcpClient, InterfaceFnTo interfaceFnTo, String implementation) {
+    public FunctionDefaultControllerImpl(RabbitClient omcpClient, InterfaceFnTo interfaceFnTo, String implementation) {
         this.client = omcpClient;
         this.interfaceFnTo = interfaceFnTo;
         this.implementation = implementation;

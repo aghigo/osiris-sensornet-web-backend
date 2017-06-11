@@ -42,16 +42,13 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
      */
     @Override
     public VirtualSensorVsnTo getById(String virtualSensorId) throws AbstractClientRuntimeException, AbstractRequestException {
-        try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
-            String uri = String.format(this.virtualSensorNetModuleConfig.getVirtualSensorIdUri(), virtualSensorId);
-            Response response = omcpClient.doGet(uri);
-            OmcpUtil.handleOmcpResponse(response);
-            VirtualSensorVsnTo virtualSensorVsnTo = response.getContent(VirtualSensorVsnTo.class);
-            return virtualSensorVsnTo;
-        } catch (AbstractClientRuntimeException e) {
-            throw e;
-        }
+        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        String uri = String.format(this.virtualSensorNetModuleConfig.getVirtualSensorIdUri(), virtualSensorId);
+        Response response = omcpClient.doGet(uri);
+        OmcpUtil.handleOmcpResponse(response);
+        VirtualSensorVsnTo virtualSensorVsnTo = response.getContent(VirtualSensorVsnTo.class);
+        return virtualSensorVsnTo;
+
     }
 
     /**

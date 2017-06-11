@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * Controller class that provide REST endpoints to check application dependencies status.
- * test connections with SensorNet, VirtualSensorNet, Function modules, RabbitMQ and Application Database
+ * test connections with SensorNet, VirtualSensorNet, FunctionFactory modules, RabbitMQ and Application Database
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -41,7 +41,7 @@ public class HealthController {
 
     /**
      * Get a health summary of application dependency modules status are functional
-     * Checks if SensorNet, VirtualSensorNet, Function modules and Application database is Online and Functional
+     * Checks if SensorNet, VirtualSensorNet, FunctionFactory modules and Application database is Online and Functional
      * Each application dependency is mapped on HealthDependency object
      * @see HealthDependency
      * @return List of HealthDependency
@@ -97,12 +97,12 @@ public class HealthController {
     }
 
     /**
-     * Get a health status of the Function modules
+     * Get a health status of the FunctionFactory modules
      * @see FunctionConnection
      * @see AvailableFunctionListConfig
      * @see FunctionModuleConfig
      * @see HealthDependency
-     * @return List of HealthDependency with Function module status
+     * @return List of HealthDependency with FunctionFactory module status
      */
     @RequestMapping(value = "/function/health", method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionModulesHealthStatus() {

@@ -132,11 +132,11 @@ public class HealthService {
     }
 
     /**
-     * Test connection to all available Function modules
+     * Test connection to all available FunctionFactory modules
      * @see FunctionModuleConfig
      * @see AvailableFunctionListConfig
      * @see FunctionConnection
-     * @return List of HealthDependency with all Function modules status
+     * @return List of HealthDependency with all FunctionFactory modules status
      */
     public List<HealthDependency> testFunctionModules() {
         List<HealthDependency> healthDependencyList = new ArrayList<>();

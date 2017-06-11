@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Function module configuration data with all Function modules
+ * FunctionFactory module configuration data with all FunctionFactory modules
  * values are retrieved from the application.properties configuration file
  * module name, mapped component URIs, function names
  * @author andre.ghigo
@@ -43,7 +43,7 @@ public class AvailableFunctionListConfig {
     private List<FunctionModuleConfig> functionModuleConfigList;
 
     /**
-     * Get a Function module configuration based on the function name
+     * Get a FunctionFactory module configuration based on the function name
      * @param functionName
      * @see FunctionModuleConfig
      * @return FunctionModuleConfig
@@ -54,7 +54,7 @@ public class AvailableFunctionListConfig {
                 return functionModuleConfig;
             }
         }
-        throw new RuntimeException(String.format("Function %s configuration could not be found in default application.properties file.", functionName));
+        throw new RuntimeException(String.format("FunctionFactory %s configuration could not be found in default application.properties file.", functionName));
     }
 
     /**
@@ -67,7 +67,7 @@ public class AvailableFunctionListConfig {
     }
 
     /**
-     * Get all Function modules configurations in default application.properties configuration file
+     * Get all FunctionFactory modules configurations in default application.properties configuration file
      * @throws IOException
      */
     @PostConstruct

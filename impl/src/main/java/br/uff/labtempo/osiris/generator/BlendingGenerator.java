@@ -2,7 +2,7 @@ package br.uff.labtempo.osiris.generator;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
-import br.uff.labtempo.osiris.repository.FunctionRepository;
+import br.uff.labtempo.osiris.repository.FunctionModuleRepository;
 import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
@@ -28,16 +28,18 @@ public class BlendingGenerator {
     private FunctionOperation[] functionOperationArray = FunctionOperation.values();
 
     @Autowired
-    private FunctionRepository functionRepository;
+    private FunctionModuleRepository functionModuleRepository;
 
     @Autowired
     private LinkRepository linkRepository;
+    private FunctionVsnTo function;
 
     /**
      * Generates a random Blending sensor mocked object
-     * @see BlendingVsnTo
+     *
      * @return BlendingVsnTo
      * @throws AbstractRequestException
+     * @see BlendingVsnTo
      */
     public BlendingVsnTo generateBlendingVsnTo() throws AbstractRequestException {
         long id = getId();
@@ -48,7 +50,7 @@ public class BlendingGenerator {
         blendingVsnTo.setFunction(functionVsnTo);
         blendingVsnTo.setCallMode(getFunctionOperation());
         List<FieldTo> fieldToList = getFieldToList();
-        for(FieldTo fieldTo : fieldToList) {
+        for (FieldTo fieldTo : fieldToList) {
             blendingVsnTo.addRequestParam(fieldTo.getId(), fieldTo.getName());
         }
         blendingVsnTo.addResponseParam(fieldToList.get(0).getId(), functionVsnTo.getName());
@@ -73,20 +75,6 @@ public class BlendingGenerator {
      */
     private String getLabel(long id) {
         return "blendingId-" + id;
-    }
-
-    /**
-     * Randomly choose one Function randomly from the VirtualSensorNet module
-     * @return FunctionVsnTo
-     * @throws AbstractRequestException
-     */
-    private FunctionVsnTo getFunction() throws AbstractRequestException {
-        List<FunctionVsnTo> functionVsnToList = this.functionRepository.getAll();
-        if(functionVsnToList == null || functionVsnToList.isEmpty()) {
-            throw new InternalServerErrorException("Failed to mock Blending Sensor: could not find any function.");
-        }
-        int p = (int) (Math.random() * functionVsnToList.size());
-        return functionVsnToList.get(p);
     }
 
     /**
@@ -125,5 +113,9 @@ public class BlendingGenerator {
         int min = (int) (Math.random() * fieldToList.size());
         int max = min + (int) (Math.random() * (fieldToList.size() - min));
         return fieldToList.subList(min, max);
+    }
+
+    public FunctionVsnTo getFunction() {
+        return null;
     }
 }

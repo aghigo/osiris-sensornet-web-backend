@@ -1,5 +1,9 @@
 package br.uff.labtempo.osiris.service;
 
+import br.uff.labtempo.omcp.client.OmcpClient;
+import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
+import br.uff.labtempo.omcp.common.Response;
+import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
@@ -37,7 +41,10 @@ public class BlendingService {
     private CompositeRepository compositeRepository;
 
     @Autowired
-    private FunctionRepository functionRepository;
+    private FunctionModuleRepository functionModuleRepository;
+
+    @Autowired
+    private VsnFunctionRepository vsnFunctionRepository;
 
     @Autowired
     private VirtualSensorRepository virtualSensorRepository;
@@ -53,8 +60,7 @@ public class BlendingService {
      */
     public List<BlendingResponse> getAll() throws AbstractRequestException {
         List<BlendingVsnTo> blendingVsnToList = this.blendingRepository.getAll();
-        List<BlendingResponse> blendingResponseList = BlendingMapper.vsnToToResponse(blendingVsnToList);
-        return blendingResponseList;
+        return BlendingMapper.vsnToToResponse(blendingVsnToList);
     }
 
     /**
@@ -65,8 +71,7 @@ public class BlendingService {
      */
     public BlendingResponse getById(long blendingId) throws AbstractRequestException {
         BlendingVsnTo blendingVsnTo = this.blendingRepository.getById(blendingId);
-        BlendingResponse blendingResponse = BlendingMapper.vsnToToResponse(blendingVsnTo);
-        return blendingResponse;
+        return BlendingMapper.vsnToToResponse(blendingVsnTo);
     }
 
     /**
@@ -77,23 +82,27 @@ public class BlendingService {
      * @throws AbstractRequestException
      */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
-        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
-        InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
-        URI createdFunctionVsnToUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
+        InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
+        if(interfaceFnTo == null) {
+            throw new IllegalArgumentException(String.format("Failed to create Blending sensor: no interface found for function with name '%s'", blendingRequest.getFunctionName()));
+        }
+        URI createdFunctionVsnToUri = this.vsnFunctionRepository.create(new FunctionVsnTo(interfaceFnTo));
         long createdFunctionVsnToId = OmcpUtil.getIdFromUri(createdFunctionVsnToUri);
-        FunctionVsnTo functionVsnTo = this.functionRepository.getFromVirtualSensorNet(createdFunctionVsnToId);
-        blendingVsnTo.setFunction(functionVsnTo);
+        FunctionVsnTo functionVsnTo = this.vsnFunctionRepository.getById(createdFunctionVsnToId);
+
+        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
+        blendingVsnTo.setFunction(functionVsnTo.getId());
         blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
         blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-
         blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), blendingRequest.getResponseDataTypeId());
-        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), blendingVsnTo.getFields().get(0).getName());
+        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), blendingRequest.getResponseParamName());
 
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
         for(LinkVsnTo linkVsnTo : linkVsnToList) {
             for(FieldTo fieldTo : linkVsnTo.getFields()) {
                 if(fieldTo.getDataTypeId() == blendingRequest.getResponseDataTypeId()
                         && fieldTo.getName().equals(blendingRequest.getResponseParamName())) {
+                    blendingVsnTo.createField(fieldTo.getName(), fieldTo.getDataTypeId());
                     blendingVsnTo.addRequestParam(fieldTo.getId(), fieldTo.getName());
                     break;
                 }
@@ -104,16 +113,18 @@ public class BlendingService {
             for(FieldTo fieldTo : compositeVsnTo.getBoundFields()) {
                 if(fieldTo.getDataTypeId() == blendingRequest.getResponseDataTypeId()
                         && fieldTo.getName().equals(blendingRequest.getResponseParamName())) {
+                    blendingVsnTo.createField(fieldTo.getName(), fieldTo.getDataTypeId());
                     blendingVsnTo.addRequestParam(fieldTo.getId(), fieldTo.getName());
                     break;
                 }
             }
         }
         List<BlendingVsnTo> blendingVsnToList = this.blendingRepository.getAll();
-        for(BlendingVsnTo blendingVsnTo1 : blendingVsnToList) {
-            for(FieldTo fieldTo : blendingVsnTo1.getFields()) {
+        for(BlendingVsnTo blendingSensor : blendingVsnToList) {
+            for(FieldTo fieldTo : blendingSensor.getFields()) {
                 if(fieldTo.getDataTypeId() == blendingRequest.getResponseDataTypeId()
                         && fieldTo.getName().equals(blendingRequest.getResponseParamName())) {
+                    blendingVsnTo.createField(fieldTo.getName(), fieldTo.getDataTypeId());
                     blendingVsnTo.addRequestParam(fieldTo.getId(), fieldTo.getName());
                     break;
                 }
@@ -125,26 +136,66 @@ public class BlendingService {
 
         URI createdBlendingUri = this.blendingRepository.create(blendingVsnTo);
         return createdBlendingUri;
+    }
 
-//        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
-//        InterfaceFnTo interfaceFnTo = this.functionRepository.getInterface(blendingRequest.getFunctionName());
-//        URI createdVsnFunctionUri = this.functionRepository.createOnVirtualSensorNet(interfaceFnTo);
-//        long functionId = OmcpUtil.getIdFromUri(createdVsnFunctionUri);
-//        blendingVsnTo.setFunction(functionId);
-//        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-//        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
-//        blendingVsnTo.createField(blendingRequest.getResponseParamName(), blendingRequest.getResponseDataTypeId());
-//        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), blendingVsnTo.getFields().get(0).getName());
+    /**
+     * Create a new Blending sensor on VirtualSensorNet module
+     * @param blendingRequest
+     * @return URI with the new Blending location
+     * @throws URISyntaxException
+     * @throws AbstractRequestException
+     */
+    public URI createWithSteps(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
+        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
+        blendingVsnTo.createField("temperature", 1);
+        OmcpClient omcpClient = new RabbitClient("localhost", "guest", "guest");
+        Response omcpResponse =  omcpClient.doPost("omcp://virtualsensornet.osiris/blending/", blendingVsnTo);
+        if(omcpResponse.getStatusCode() == StatusCode.CREATED) {
+            omcpResponse = omcpClient.doGet(omcpResponse.getLocation());
+        }
+        blendingVsnTo = omcpResponse.getContent(BlendingVsnTo.class);
 
-//        List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
-//        for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
-//            for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
-//                if(valueVsnTo.getName().equals(blendingRequest.getResponseParamName())) {
-//                    blendingVsnTo.addRequestParam(valueVsnTo.getId(), blendingRequest.getResponseParamName());
-//                    break;
-//                }
-//            }
-//        }
+        omcpResponse = omcpClient.doGet("omcp://sum.function/interface");
+        InterfaceFnTo interfaceFnTo = null;
+        if(omcpResponse.getStatusCode() == StatusCode.OK) {
+            interfaceFnTo = omcpResponse.getContent(InterfaceFnTo.class);
+        }
+
+        FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+        omcpResponse = omcpClient.doPost("omcp://virtualsensornet.osiris/function/", functionVsnTo);
+        if(omcpResponse.getStatusCode() == StatusCode.CREATED) {
+            omcpResponse = omcpClient.doGet(omcpResponse.getLocation());
+            functionVsnTo = omcpResponse.getContent(FunctionVsnTo.class);
+        }
+        blendingVsnTo.setFunction(functionVsnTo);
+        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
+        blendingVsnTo.setCallIntervalInMillis(6000);
+
+        omcpResponse = omcpClient.doGet("omcp://virtualsensornet.osiris/vsensor/");
+        if(omcpResponse.getStatusCode() == StatusCode.OK) {
+            VirtualSensorVsnTo[] virtualSensorVsnTos = omcpResponse.getContent(VirtualSensorVsnTo[].class);
+            for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnTos) {
+                List<ValueVsnTo> valueVsnTos = virtualSensorVsnTo.getValuesTo();
+                for(ValueVsnTo valueVsnTo : valueVsnTos) {
+                    if(valueVsnTo.getName().equals("temperature")) {
+                        blendingVsnTo.addRequestParam(valueVsnTo.getId(), "input");
+                        break;
+                    }
+                }
+            }
+        }
+
+        List<? extends FieldTo> fields = blendingVsnTo.getFields();
+        FieldTo fieldTo = fields.get(0);
+        blendingVsnTo.addResponseParam(fieldTo.getId(), "output");
+
+        String address = "omcp://virtualsensornet.osiris/blending/" + blendingVsnTo.getId() + "/";
+        omcpResponse = omcpClient.doPut(address, blendingVsnTo);
+        if(omcpResponse.getStatusCode() == StatusCode.OK) {
+            omcpResponse = omcpClient.doGet(address);
+            blendingVsnTo = omcpResponse.getContent(BlendingVsnTo.class);
+        }
+        return new URI(address);
     }
 
     /**

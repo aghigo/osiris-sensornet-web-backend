@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.configuration;
 import lombok.*;
 
 /**
- * Class to map a specific Function module configuration
+ * Class to map a specific FunctionFactory module configuration
  * @author andre.ghigo
  * @version 1.0
  * @since 1.8

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * Class responsible for the connection to the Function module
+ * Class responsible for the connection to the FunctionFactory module
  * Default configuration is the same as VirtualSensorNet
  * @author andre.ghigo
  * @since 1.8
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class FunctionConnection {
 
     /**
-     * Connects to the Function module using the ip, port, username and password
+     * Connects to the FunctionFactory module using the ip, port, username and password
      * @see OmcpClient
      * @see RabbitClient
      * @see FunctionModuleConfig

@@ -1,6 +1,7 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.osiris.model.request.FunctionRequest;
 import br.uff.labtempo.osiris.service.FunctionService;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
@@ -10,61 +11,49 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 /**
  * Controller class to serve REST endpoints
- * to control and manage functions from the OSIRIS Function module
+ * to control and manage functions from the OSIRIS FunctionFactory module
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
  */
 @RestController
 @CrossOrigin
-@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/functions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class FunctionController {
+
     @Autowired
     private FunctionService functionService;
 
     /**
-     * Get a list of all available Functions names
-     * @return ResponseEntity with List<String> (list of functionNames)
+     * Get a list of all available Functions modules interfaces
+     * @return ResponseEntity with status OK and body with List<InterfaceFnTo>
      */
-    @RequestMapping(value = "/functions", method = RequestMethod.GET)
-    public ResponseEntity<?> getAvailableFunctionList() {
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getAllInterfaces() {
         try {
-            List<String> availableFunctionList = this.functionService.getAvailableFunctionsUri();
-            return ResponseEntity.status(HttpStatus.OK).body(availableFunctionList);
+            List<InterfaceFnTo> interfaceFnToList = this.functionService.getAllInterfaces();
+            return ResponseEntity.status(HttpStatus.OK).body(interfaceFnToList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
     }
 
     /**
-     * Get a list of all available Functions interfaces
-     * @see InterfaceFnTo
-     * @return ResponseEntity with List<InterfaceFnTo>
-     */
-    @RequestMapping(value = "/functions/interface", method = RequestMethod.GET)
-    public ResponseEntity<?> getAvailableFunctionInterfaceList() {
-        try {
-            List<InterfaceFnTo> availableFunctionInterfaceList = this.functionService.getAvailableFunctionsInterface();
-            return ResponseEntity.status(HttpStatus.OK).body(availableFunctionInterfaceList);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
-    }
-
-    /**
-     * Get a Function interface based on the function name
+     * Get a FunctionFactory interface based on the function name
      * @param functionName
-     * @return InterfaceFnTo (Function interface)
+     * @return ResponseEntity with status 200 OK and body with an InterfaceFnTo (FunctionFactory interface)
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/functions/{functionName}/interface", method = RequestMethod.GET)
+    @RequestMapping(value = "/{functionName}", method = RequestMethod.GET)
     public ResponseEntity<?> getInterface(@PathVariable String functionName) throws AbstractRequestException {
         try {
-            InterfaceFnTo interfaceFnTo = this.functionService.getInterface(functionName);
+            InterfaceFnTo interfaceFnTo = this.functionService.getInterfaceByName(functionName);
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnTo);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
@@ -74,35 +63,16 @@ public class FunctionController {
     }
 
     /**
-     * Get a function from VirtualSensorNet module based on its id
-     * @param functionId
-     * @return FunctionVsnTo (Function from VirtualSensorNet module)
+     * Creates a new FunctionFactory module on OSIRIS
+     * @param functionRequest
+     * @return ResponseEntity with status 201 Created and body with URI of the created resource
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/virtualsensornet/functions/{functionId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getFromVirtualSensorNet(@PathVariable long functionId) throws AbstractRequestException {
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> getInterface(@RequestBody @Valid FunctionRequest functionRequest) throws AbstractRequestException {
         try {
-            FunctionVsnTo functionVsnTo = this.functionService.getFromVirtualSensorNet(functionId);
-            return ResponseEntity.status(HttpStatus.OK).body(functionVsnTo);
-        } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
-    }
-
-    /**
-     * Get all functions from VirtualSensorNet module
-     * @return List<FunctionVsnTo>
-     * @throws AbstractRequestException
-     */
-    @RequestMapping(value = "/virtualsensornet/functions", method = RequestMethod.GET)
-    public ResponseEntity<?> getFromVirtualSensorNet() throws AbstractRequestException {
-        try {
-            List<FunctionVsnTo> functionVsnToList = this.functionService.getAllFromVirtualSensorNet();
-            return ResponseEntity.status(HttpStatus.OK).body(functionVsnToList);
-        } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            this.functionService.createFunctionModule(functionRequest);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }

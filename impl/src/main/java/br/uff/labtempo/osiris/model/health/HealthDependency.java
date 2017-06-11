@@ -4,7 +4,7 @@ import lombok.*;
 
 /**
  * Class that represent a Osiris web application dependency
- * e.g. (SensorNet module, VirtualSensorNet module, Function Module, RabbitMQ queue, Application database, etc)
+ * e.g. (SensorNet module, VirtualSensorNet module, FunctionFactory Module, RabbitMQ queue, Application database, etc)
  * @see br.uff.labtempo.osiris.connection.SensorNetConnection
  * @see br.uff.labtempo.osiris.connection.VirtualSensorNetConnection
  * @see br.uff.labtempo.osiris.connection.FunctionConnection
