@@ -22,6 +22,7 @@ import sun.awt.image.ImageWatched;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,14 +87,10 @@ public class BlendingService {
      * @throws AbstractRequestException
      */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
-        DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
-
-        InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
-        if(interfaceFnTo == null) {
-            throw new IllegalArgumentException(String.format("Failed to create Blending sensor: no interface found for function with name '%s'.", blendingRequest.getFunctionName()));
-        }
-
         BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
+        DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
+        InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
+
         blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), blendingRequest.getDataTypeId());
         URI blendingUri = this.blendingRepository.create(blendingVsnTo);
         long blendingId = OmcpUtil.getIdFromUri(blendingUri);
@@ -108,7 +105,6 @@ public class BlendingService {
         blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
         blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
 
-        String functionRequestParameterName = interfaceFnTo.getRequestParams().get(0).getName();
         List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
         for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
             for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
@@ -143,12 +139,6 @@ public class BlendingService {
         InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
         FunctionVsnTo functionVsnTo = this.vsnFunctionRepository.getById(blendingVsnTo.getFunctionId());
 
-        this.vsnFunctionRepository.delete(functionVsnTo.getId());
-        functionVsnTo = new FunctionVsnTo(interfaceFnTo);
-        URI vsnFunctionUri = this.vsnFunctionRepository.create(functionVsnTo);
-        long vsnFunctionId = OmcpUtil.getIdFromUri(vsnFunctionUri);
-        functionVsnTo = this.vsnFunctionRepository.getById(vsnFunctionId);
-
         for(BlendingBondVsnTo blendingBondVsnTo : blendingVsnTo.getRequestParams()) {
             blendingVsnTo.removeRequestParam(blendingBondVsnTo.getFieldId());
         }
@@ -156,13 +146,6 @@ public class BlendingService {
             blendingVsnTo.removeResponseParam(blendingBondVsnTo.getFieldId());
         }
         blendingVsnTo.removeFields();
-
-        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
-        blendingVsnTo.setFunction(functionVsnTo);
-
-        blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), dataTypeVsnTo.getId());
-        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), interfaceFnTo.getResponseParams().get(0).getName());
 
         List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
         for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
@@ -173,6 +156,21 @@ public class BlendingService {
                 }
             }
         }
+        if(blendingVsnTo.getRequestParams().isEmpty()) {
+            throw new BadRequestException(String.format("Could not update Blending sensor with id '%s': no virtual sensor with field of type '%s' was found for the request parameters", blendingId, dataTypeVsnTo.getDisplayName()));
+        }
+
+        blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), dataTypeVsnTo.getId());
+        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), interfaceFnTo.getResponseParams().get(0).getName());
+
+        functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+        URI vsnFunctionUri = this.vsnFunctionRepository.create(functionVsnTo);
+        long vsnFunctionId = OmcpUtil.getIdFromUri(vsnFunctionUri);
+        functionVsnTo = this.vsnFunctionRepository.getById(vsnFunctionId);
+
+        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
+        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
+        blendingVsnTo.setFunction(functionVsnTo);
 
         this.blendingRepository.update(blendingId, blendingVsnTo);
     }
