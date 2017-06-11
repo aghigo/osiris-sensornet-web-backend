@@ -18,6 +18,7 @@ import br.uff.labtempo.osiris.to.virtualsensornet.*;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.awt.image.ImageWatched;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -136,15 +137,43 @@ public class BlendingService {
      * @param blendingRequest
      * @throws AbstractRequestException
      */
-    public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException {
+    public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException, URISyntaxException {
         BlendingVsnTo blendingVsnTo = this.blendingRepository.getById(blendingId);
-//        blendingVsnTo.removeFields();
-//        blendingVsnTo.setCallIntervalInMillis();
-//        blendingVsnTo.setFunction();
-//        blendingVsnTo.setLabel();
-//        blendingVsnTo.createField();
-//        blendingVsnTo.addRequestParam();
-//        blendingVsnTo.addResponseParam();
+        DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
+        InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
+        FunctionVsnTo functionVsnTo = this.vsnFunctionRepository.getById(blendingVsnTo.getFunctionId());
+
+        this.vsnFunctionRepository.delete(functionVsnTo.getId());
+        functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+        URI vsnFunctionUri = this.vsnFunctionRepository.create(functionVsnTo);
+        long vsnFunctionId = OmcpUtil.getIdFromUri(vsnFunctionUri);
+        functionVsnTo = this.vsnFunctionRepository.getById(vsnFunctionId);
+
+        for(BlendingBondVsnTo blendingBondVsnTo : blendingVsnTo.getRequestParams()) {
+            blendingVsnTo.removeRequestParam(blendingBondVsnTo.getFieldId());
+        }
+        for(BlendingBondVsnTo blendingBondVsnTo : blendingVsnTo.getResponseParams()) {
+            blendingVsnTo.removeResponseParam(blendingBondVsnTo.getFieldId());
+        }
+        blendingVsnTo.removeFields();
+
+        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
+        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
+        blendingVsnTo.setFunction(functionVsnTo);
+
+        blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), dataTypeVsnTo.getId());
+        blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), interfaceFnTo.getResponseParams().get(0).getName());
+
+        List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
+        for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
+            for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
+                if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName())) {
+                    blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
+                    break;
+                }
+            }
+        }
+
         this.blendingRepository.update(blendingId, blendingVsnTo);
     }
 
