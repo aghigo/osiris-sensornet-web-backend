@@ -79,7 +79,7 @@ public class BlendingController {
     @RequestMapping(value = "/blendings", method = RequestMethod.POST)
     public ResponseEntity<?> doPost(@RequestBody @Valid BlendingRequest blendingRequest) {
         try {
-            URI uri = this.blendingService.createWithSteps(blendingRequest);
+            URI uri = this.blendingService.create(blendingRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
@@ -130,10 +130,10 @@ public class BlendingController {
      * @return
      */
     @RequestMapping(value = "/blendings/{blendingId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> doPut(@PathVariable String blendingId, @RequestBody @Valid BlendingRequest blendingRequest) {
+    public ResponseEntity<?> doPut(@PathVariable long blendingId, @RequestBody @Valid BlendingRequest blendingRequest) {
         try {
-            URI uri = this.blendingService.create(blendingRequest);
-            return ResponseEntity.created(uri).build();
+            this.blendingService.update(blendingId, blendingRequest);
+            return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {

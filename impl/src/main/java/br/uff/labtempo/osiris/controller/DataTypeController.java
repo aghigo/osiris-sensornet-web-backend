@@ -109,7 +109,7 @@ public class DataTypeController {
      * @return DataTypeVsnTo
      */
     @RequestMapping(value = "/datatypes/{dataTypeId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getById(@PathVariable String dataTypeId) {
+    public ResponseEntity<?> getById(@PathVariable long dataTypeId) {
         DataTypeResponse dataTypeResponse;
         try {
             dataTypeResponse = this.dataTypeService.getById(dataTypeId);

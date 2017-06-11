@@ -29,7 +29,7 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     private VirtualSensorNetConnection virtualSensorNetConnection;
 
     @Override
-    public DataTypeVsnTo getById(String id) throws AbstractClientRuntimeException, AbstractRequestException {
+    public DataTypeVsnTo getById(long id) throws AbstractClientRuntimeException, AbstractRequestException {
         OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;

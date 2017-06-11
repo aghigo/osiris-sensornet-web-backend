@@ -38,9 +38,6 @@ public class BlendingRequest {
     @Min(1)
     private long callIntervalInMillis;
 
-    @NotNull @NotEmpty
-    private String responseParamName;
-
     @Min(1)
-    private long responseDataTypeId;
+    private long dataTypeId;
 }

@@ -53,7 +53,7 @@ public class DataTypeService {
      * @throws AbstractClientRuntimeException
      * @throws AbstractRequestException
      */
-    public DataTypeResponse getById(String id) throws AbstractClientRuntimeException, AbstractRequestException {
+    public DataTypeResponse getById(long id) throws AbstractClientRuntimeException, AbstractRequestException {
         DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(id);
         return DataTypeMapper.vsnToToResponse(dataTypeVsnTo);
     }

@@ -19,7 +19,7 @@ import java.util.List;
  * @version 1.0
  */
 public interface DataTypeRepository {
-    DataTypeVsnTo getById(String id) throws AbstractClientRuntimeException, AbstractRequestException;
+    DataTypeVsnTo getById(long id) throws AbstractClientRuntimeException, AbstractRequestException;
     List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException;
     URI insert(DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException;
     void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException;

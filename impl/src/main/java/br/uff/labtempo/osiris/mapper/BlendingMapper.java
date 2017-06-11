@@ -26,34 +26,6 @@ import java.util.Map;
 public class BlendingMapper {
 
     /**
-     * Converts BlendingRequest to BlendingVsnTo
-     * @see BlendingVsnTo
-     * @see BlendingRequest
-     * @param blendingRequest
-     * @return BlendingVsnTo
-     */
-    public static BlendingVsnTo requestToVsnTo(BlendingRequest blendingRequest) {
-        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
-        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
-        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
-        blendingVsnTo.createField(blendingRequest.getResponseParamName(), blendingRequest.getResponseDataTypeId());
-        return blendingVsnTo;
-    }
-
-    /**
-     * Converts a list of BlendingRequest to a list of BlendingVsnTo
-     * @param blendingRequestList
-     * @return List of BlendingVsnTo
-     */
-    public static List<BlendingVsnTo> requestToVsnTo(List<BlendingRequest> blendingRequestList) {
-        List<BlendingVsnTo> blendingVsnToList = new ArrayList<>();
-        for(BlendingRequest blendingRequest : blendingRequestList) {
-            blendingVsnToList.add(requestToVsnTo(blendingRequest));
-        }
-        return blendingVsnToList;
-    }
-
-    /**
      * Converts a BlendingVsnTo to a BlendingResponse
      * @see BlendingVsnTo
      * @see BlendingResponse
