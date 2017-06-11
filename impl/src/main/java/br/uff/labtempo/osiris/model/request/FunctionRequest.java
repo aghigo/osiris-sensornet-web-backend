@@ -4,6 +4,7 @@ import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -50,6 +51,9 @@ public class FunctionRequest {
 
     @NotNull
     private ValueType type;
+
+    @Min(1)
+    private long dataTypeId;
 
     /**
      * Basic Java syntax code of the formula implementation

@@ -59,4 +59,6 @@ public class FunctionData {
 
     @NotNull @NotEmpty
     private String responseParamName;
+
+    private long dataTypeId;
 }

@@ -5,11 +5,14 @@ import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.osiris.factory.function.FunctionFactory;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.request.FunctionRequest;
+import br.uff.labtempo.osiris.repository.DataTypeRepository;
 import br.uff.labtempo.osiris.repository.FunctionDataRepository;
 import br.uff.labtempo.osiris.repository.FunctionModuleRepository;
 import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
+import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.function.ParamFnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,9 @@ import java.util.List;
 public class FunctionService {
     @Autowired
     private FunctionDataRepository functionDataRepository;
+
+    @Autowired
+    private DataTypeRepository dataTypeRepository;
 
     @Autowired
     private FunctionModuleRepository functionModuleRepository;
@@ -55,13 +61,16 @@ public class FunctionService {
         return interfaceFnTo;
     }
 
-    public void createFunctionModule(FunctionRequest functionRequest) throws URISyntaxException, BadRequestException {
+    public void createFunctionData(FunctionRequest functionRequest) throws URISyntaxException, AbstractRequestException, IllegalArgumentException {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionRequest.getFunctionName());
         if(functionDataList.isEmpty()) {
+            DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(functionRequest.getDataTypeId());
             List<ParamFnTo> requestParams = new ArrayList<>();
-            requestParams.add(new ParamFnTo(functionRequest.getRequestParamName(), functionRequest.getUnit(), functionRequest.getType(), true));
+            requestParams.add(new ParamFnTo(dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit(), ValueType.NUMBER, true));
+
             List<ParamFnTo> responseParams = new ArrayList<>();
-            responseParams.add(new ParamFnTo(functionRequest.getResponseParamName(), functionRequest.getUnit(), functionRequest.getType(), false));
+            responseParams.add(new ParamFnTo(functionRequest.getFunctionName(), dataTypeVsnTo.getUnit(), ValueType.NUMBER, false));
+
             FunctionFactory functionFactory = new FunctionFactory(functionRequest.getFunctionName(),
                     functionRequest.getDescription(), functionRequest.getImplementation(), requestParams, responseParams);
 
@@ -71,25 +80,16 @@ public class FunctionService {
                     .description(functionRequest.getDescription())
                     .implementation(functionRequest.getImplementation())
                     .moduleUri(functionFactory.getInterfaceFnTo().getAddress())
-                    .operation(FunctionOperation.SYNCHRONOUS)
+                    .operation(functionFactory.getOperation())
                     .requestParamName(functionRequest.getRequestParamName())
                     .responseParamName(functionRequest.getResponseParamName())
-                    .type(functionRequest.getType())
+                    .type(functionFactory.getType())
                     .unit(functionRequest.getUnit())
                     .build();
 
             this.functionDataRepository.save(functionData);
-
-            functionFactory.createOmcpServer("localhost", "guest", "guest").start();
         } else {
             throw new BadRequestException(String.format("Failed to create function module: Function module %s already exists.", functionRequest.getFunctionName()));
-        }
-    }
-
-    public void deleteData(String functionName) {
-        List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionName);
-        if(functionDataList != null && !functionDataList.isEmpty()) {
-            this.functionDataRepository.delete(functionDataList.get(0));
         }
     }
 }

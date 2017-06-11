@@ -69,9 +69,9 @@ public class FunctionController {
      * @throws AbstractRequestException
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> getInterface(@RequestBody @Valid FunctionRequest functionRequest) throws AbstractRequestException {
+    public ResponseEntity<?> createFunctionData(@RequestBody @Valid FunctionRequest functionRequest) throws AbstractRequestException {
         try {
-            this.functionService.createFunctionModule(functionRequest);
+            this.functionService.createFunctionData(functionRequest);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);

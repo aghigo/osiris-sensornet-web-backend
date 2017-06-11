@@ -4,6 +4,7 @@ import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.server.OmcpServer;
 import br.uff.labtempo.omcp.server.rabbitmq.RabbitServer;
 import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
+import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.function.ParamFnTo;
 import bsh.EvalError;
@@ -22,19 +23,23 @@ import java.util.List;
 @Getter
 @Setter
 public class FunctionFactory {
+    private final ValueType DEFAULT_FUNCTION_TYPE = ValueType.NUMBER;
     private final String DEFAULT_FUNCTION_NAME_TEMPLATE = "%s.function";
     private final String FUNCTION_MODULE_TEMPLATE_URI = "omcp://%s.function.osiris/";
     private final FunctionOperation DEFAULT_FUNCTION_OPERATION = FunctionOperation.SYNCHRONOUS;
 
+    private final ValueType type;
     private String name;
     private String address;
     private String implementation;
     private FunctionOperation operation;
     private InterfaceFnTo interfaceFnTo;
 
+    private boolean running = false;
+
     private OmcpServer omcpServer;
 
-    public FunctionFactory(String name, String description, String implementation, List<ParamFnTo> requestParams, List<ParamFnTo> responseParams) {
+    public FunctionFactory(String name, String description, String implementation, List<ParamFnTo> requestParams, List<ParamFnTo> responseParams) throws IllegalArgumentException {
         if(name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Failed to create FunctionFactory module: empty name.");
         }
@@ -53,6 +58,8 @@ public class FunctionFactory {
         this.validateImplementation(implementation);
         this.implementation = implementation;
 
+        this.type = this.DEFAULT_FUNCTION_TYPE;
+        this.operation = this.DEFAULT_FUNCTION_OPERATION;
         String functionName = String.format(this.DEFAULT_FUNCTION_NAME_TEMPLATE, name.trim().toLowerCase());
         this.name = functionName;
         String address = String.format(this.FUNCTION_MODULE_TEMPLATE_URI, name.trim().toLowerCase());
@@ -89,9 +96,11 @@ public class FunctionFactory {
 
     public void start() {
         this.omcpServer.start();
+        this.running = true;
     }
 
     public void close() throws Exception {
         this.omcpServer.close();
+        this.running = false;
     }
 }
