@@ -97,7 +97,7 @@ public class FunctionModuleFactory {
         String username = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getUsername();
         String password = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getPassword();
 
-        OmcpServer omcpServer = new RabbitServer(name, host, username, password);
+        OmcpServer omcpServer = new RabbitServer(functionData.getFullName(), host, username, password);
         omcpServer.setHandler(functionModuleDefaultImpl);
 
         FunctionModule functionModule = FunctionModule.builder()
