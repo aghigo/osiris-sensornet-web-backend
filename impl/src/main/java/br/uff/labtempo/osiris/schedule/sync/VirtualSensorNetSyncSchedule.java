@@ -58,6 +58,8 @@ public class VirtualSensorNetSyncSchedule {
 
     private List<FunctionModule> functionModuleList = new ArrayList<>();
 
+    private List<Thread> threadList = new ArrayList<>();
+
     /**
      * Synchronize SensorNet Sensors Values with VirtualSensorNet DataTypes
      * Search for all Sensors from SensorNet, for each sensor, check for its ValueTos
@@ -162,7 +164,7 @@ public class VirtualSensorNetSyncSchedule {
             FunctionModule functionModule = null;
             boolean found = false;
             for(FunctionModule module : this.functionModuleList) {
-                if(functionModule.getFunctionData().getName().equals(functionData.getName())) {
+                if(module.getFunctionData().getName().equals(functionData.getName())) {
                     found = true;
                     functionModule = module;
                     break;
@@ -170,7 +172,9 @@ public class VirtualSensorNetSyncSchedule {
             }
             if(!found) {
                 FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
-                new Thread(newModule, newModule.getFunctionData().getFullName()).start();
+                Thread functionThread = new Thread(newModule, newModule.getFunctionData().getFullName());
+                this.threadList.add(functionThread);
+                functionThread.start();
                 this.functionModuleList.add(newModule);
                 log.info(String.format("Started new thread for function module '%s'", newModule.getFunctionData().getName()));
             }

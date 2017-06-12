@@ -34,7 +34,7 @@ public class FunctionModuleConfig {
     private final ValueType defaultParamType = ValueType.NUMBER;
     private final String fullNameTemplate = "%s.function";
 
-    @Value("${function.uri:omcp://%1$s.function.osiris/}")
+    @Value("${function.uri:omcp://%1$s.function/}")
     private String omcpUriTemplate;
 
     @Value("${function.uri.interface:omcp://%1$s.function/interface/}")
