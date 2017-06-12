@@ -8,6 +8,7 @@ import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
+import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.model.response.BlendingResponse;
 import br.uff.labtempo.osiris.repository.*;
@@ -23,6 +24,7 @@ import sun.awt.image.ImageWatched;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -57,6 +59,9 @@ public class BlendingService {
     @Autowired
     private BlendingGenerator blendingGenerator;
 
+    @Autowired
+    private FunctionDataRepository functionDataRepository;
+
     /**
      * Get a list of all available Blending sensors from VirtualSensorNet module
      * @see BlendingResponse
@@ -87,6 +92,11 @@ public class BlendingService {
      * @throws AbstractRequestException
      */
     public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
+        List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
+        if(functionDataList.isEmpty()) {
+            throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));
+        }
+
         BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
         DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
         InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
@@ -134,10 +144,14 @@ public class BlendingService {
      * @throws AbstractRequestException
      */
     public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException, URISyntaxException {
+        List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
+        if(functionDataList.isEmpty()) {
+            throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));
+        }
+
         BlendingVsnTo blendingVsnTo = this.blendingRepository.getById(blendingId);
         DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
         InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
-        FunctionVsnTo functionVsnTo = this.vsnFunctionRepository.getById(blendingVsnTo.getFunctionId());
 
         for(BlendingBondVsnTo blendingBondVsnTo : blendingVsnTo.getRequestParams()) {
             blendingVsnTo.removeRequestParam(blendingBondVsnTo.getFieldId());
@@ -163,7 +177,7 @@ public class BlendingService {
         blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), dataTypeVsnTo.getId());
         blendingVsnTo.addResponseParam(blendingVsnTo.getFields().get(0).getId(), interfaceFnTo.getResponseParams().get(0).getName());
 
-        functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+        FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
         URI vsnFunctionUri = this.vsnFunctionRepository.create(functionVsnTo);
         long vsnFunctionId = OmcpUtil.getIdFromUri(vsnFunctionUri);
         functionVsnTo = this.vsnFunctionRepository.getById(vsnFunctionId);

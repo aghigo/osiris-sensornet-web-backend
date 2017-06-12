@@ -16,8 +16,13 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class FunctionModule {
+public class FunctionModule implements Runnable {
     private FunctionData functionData;
     private boolean running;
     private OmcpServer omcpServer;
+
+    @Override
+    public void run() {
+        this.omcpServer.start();
+    }
 }

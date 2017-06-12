@@ -66,7 +66,7 @@ public class VirtualSensorNetSyncSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:* */60 * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:* */60 * * * ?}")
     public void syncSensorValueWithDataType() throws AbstractRequestException, URISyntaxException {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
@@ -105,7 +105,7 @@ public class VirtualSensorNetSyncSchedule {
      * if does not exist any associated virtual Link sensor, create on VirtualSensorNet
      * a new Link sensor with Sensor data (sensor id, collector id, network id).
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:* */60 * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.link.cron:* */60 * * * ?}")
     public void syncSensorWithLink() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
@@ -137,7 +137,7 @@ public class VirtualSensorNetSyncSchedule {
      * VirtualSensorNet Link sensor compositions
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.composite.cron:* */60 * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.composite.cron:* */60 * * * ?}")
     public void syncLinkWithComposite() throws Exception {
         log.info("Beginnning synchronization between Link and Composite sensors...");
         log.info("Composite synchronization completed...");
@@ -151,7 +151,7 @@ public class VirtualSensorNetSyncSchedule {
      * because it was removed by another service.
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/5 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/2 * * * * ?}")
     public void syncFunctionDataWithFunctionModules() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();
@@ -168,17 +168,11 @@ public class VirtualSensorNetSyncSchedule {
                     break;
                 }
             }
-            if(found) {
-                if(!functionModule.isRunning()) {
-                    functionModule.getOmcpServer().start();
-                    found = false;
-                }
-            } else {
+            if(!found) {
                 FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
-                newModule.getOmcpServer().start();
-                newModule.setRunning(true);
+                new Thread(newModule, newModule.getFunctionData().getFullName()).start();
                 this.functionModuleList.add(newModule);
-                total++;
+                log.info(String.format("Started new thread for function module '%s'", newModule.getFunctionData().getName()));
             }
         }
         log.info(String.format("Function module synchronization completed. Total = %s", total));
@@ -202,7 +196,7 @@ public class VirtualSensorNetSyncSchedule {
      *
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.blending.cron:* */60 * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.blending.cron:* */60 * * * ?}")
     public void syncVSensorWithBlendingAndFunction() throws Exception {
         log.info("Beginning synchronization between VSensors and Blendings...");
         log.info("Blending synchronization completed.");

@@ -61,7 +61,7 @@ public class FunctionModuleDefaultImpl extends Controller {
         }
     }
 
-    public Response routing(Request request) throws MethodNotAllowedException, NotFoundException, InternalServerErrorException, NotImplementedException, BadRequestException {
+    private Response routing(Request request) throws MethodNotAllowedException, NotFoundException, InternalServerErrorException, NotImplementedException, BadRequestException {
         String contentType = request.getContentType();
         if (match(request.getResource(), Path.RESOURCE_FUNCTION_REQUEST.toString())) {
             Map<String, String> urlParams = super.extractParams(request.getResource(), Path.RESOURCE_FUNCTION_REQUEST.toString());
@@ -116,7 +116,7 @@ public class FunctionModuleDefaultImpl extends Controller {
         return null;
     }
 
-    public synchronized ResponseFnTo execute(RequestFnTo requestFnTo, Calendar calendar) throws NotFoundException, InternalServerErrorException, BadRequestException {
+    private synchronized ResponseFnTo execute(RequestFnTo requestFnTo, Calendar calendar) throws NotFoundException, InternalServerErrorException, BadRequestException {
         List<Double> values = getValuesFromRequest(requestFnTo);
         Double result = calculate(values);
         return createResponseFnTo(result, calendar);
