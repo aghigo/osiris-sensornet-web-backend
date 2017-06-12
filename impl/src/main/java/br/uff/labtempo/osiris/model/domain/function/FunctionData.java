@@ -35,7 +35,10 @@ public class FunctionData {
     private String fullName;
 
     @NotNull @NotEmpty
-    private String interfaceUri;
+    private String omcpInterfaceUri;
+
+    @NotNull @NotEmpty
+    private String restInterfaceUri;
 
     @NotNull @NotEmpty
     private String dataUri;

@@ -89,7 +89,7 @@ public class FunctionService {
         if(functionDataList.isEmpty()) {
             FunctionModule functionModule = this.functionModuleFactory.getInstance(functionRequest.getFunctionName(), functionRequest.getDescription(), functionRequest.getImplementation(), functionRequest.getDataTypeId());
             this.functionDataRepository.save(functionModule.getFunctionData());
-            return new URI(functionModule.getFunctionData().getInterfaceUri());
+            return new URI(functionModule.getFunctionData().getRestInterfaceUri());
         } else {
             throw new BadRequestException(String.format("Failed to create function module: Function module with name '%s' already exists.", functionRequest.getFunctionName()));
         }

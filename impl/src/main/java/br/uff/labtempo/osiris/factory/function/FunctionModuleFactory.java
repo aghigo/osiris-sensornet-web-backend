@@ -76,7 +76,8 @@ public class FunctionModuleFactory {
         functionData.setFullName(String.format(this.functionModuleConfig.getFullNameTemplate(), name));
         functionData.setOperation(this.functionModuleConfig.getDefaultOperation());
         functionData.setOmcpUri(String.format(this.functionModuleConfig.getOmcpUriTemplate(), name));
-        functionData.setInterfaceUri(String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), name));
+        functionData.setOmcpInterfaceUri((String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), name)));
+        functionData.setRestInterfaceUri(String.format(this.functionModuleConfig.getRestInterfaceUriTemplate(), name));
         functionData.setDataUri(String.format(this.functionModuleConfig.getRestDataUriTemplate(), name));
 
         List<FunctionOperation> functionOperationList = new ArrayList<>();
