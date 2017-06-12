@@ -6,7 +6,8 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+
+import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.CompositeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -32,7 +33,7 @@ public class CompositeOmcpDao implements CompositeRepository {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConnection virtualSensorNetConnection;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
 
     /**
      * Get a specific Composite sensor from VirtualSensorNet module based on a unique Id

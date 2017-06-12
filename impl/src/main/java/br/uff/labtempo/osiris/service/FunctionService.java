@@ -3,17 +3,13 @@ package br.uff.labtempo.osiris.service;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
 import br.uff.labtempo.omcp.common.exceptions.NotFoundException;
-import br.uff.labtempo.osiris.factory.function.FunctionFactory;
+import br.uff.labtempo.osiris.factory.function.FunctionModuleFactory;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
+import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.model.request.FunctionRequest;
-import br.uff.labtempo.osiris.repository.DataTypeRepository;
-import br.uff.labtempo.osiris.repository.FunctionDataRepository;
-import br.uff.labtempo.osiris.repository.FunctionModuleRepository;
-import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
-import br.uff.labtempo.osiris.to.common.definitions.ValueType;
+import br.uff.labtempo.osiris.repository.*;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
-import br.uff.labtempo.osiris.to.function.ParamFnTo;
-import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Service class with business rules to select/create/select/remove FunctionFactory from FunctionFactory modules
+ * Service class with business rules to select/create/select/remove FunctionModuleFactory from FunctionModuleFactory modules
  * @see InterfaceFnTo
  * @see FunctionVsnTo
  * @author andre.ghigo
@@ -38,11 +34,16 @@ public class FunctionService {
     private FunctionDataRepository functionDataRepository;
 
     @Autowired
-    private DataTypeRepository dataTypeRepository;
+    private FunctionModuleRepository functionModuleRepository;
 
     @Autowired
-    private FunctionModuleRepository functionModuleRepository;
-    private List<InterfaceFnTo> allFunctionData;
+    private BlendingRepository blendingRepository;
+
+    @Autowired
+    private VsnFunctionRepository vsnFunctionRepository;
+
+    @Autowired
+    private FunctionModuleFactory functionModuleFactory;
 
     /**
      * Get all interfaces from all available function modules
@@ -86,30 +87,9 @@ public class FunctionService {
     public URI createFunctionData(FunctionRequest functionRequest) throws URISyntaxException, AbstractRequestException, IllegalArgumentException {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionRequest.getFunctionName().trim().toLowerCase());
         if(functionDataList.isEmpty()) {
-            DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(functionRequest.getDataTypeId());
-            List<ParamFnTo> requestParams = new ArrayList<>();
-            requestParams.add(new ParamFnTo(dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit(), ValueType.NUMBER, true));
-
-            List<ParamFnTo> responseParams = new ArrayList<>();
-            responseParams.add(new ParamFnTo(functionRequest.getFunctionName().trim().toLowerCase(), dataTypeVsnTo.getUnit(), ValueType.NUMBER, false));
-
-            FunctionFactory functionFactory = new FunctionFactory(functionRequest.getFunctionName().trim().toLowerCase(),
-                    functionRequest.getDescription(), functionRequest.getImplementation(), requestParams, responseParams);
-
-            FunctionData functionData = FunctionData.builder()
-                    .name(functionRequest.getFunctionName())
-                    .fullName(functionFactory.getFullName())
-                    .description(functionRequest.getDescription())
-                    .implementation(functionRequest.getImplementation())
-                    .dataUri(functionFactory.getDataUri())
-                    .omcpUri(functionFactory.getOmcpUri())
-                    .interfaceUri(functionFactory.getInterfaceUri())
-                    .operation(functionFactory.getOperation())
-                    .dataTypeId(dataTypeVsnTo.getId())
-                    .build();
-
-            this.functionDataRepository.save(functionData);
-            return new URI(functionData.getInterfaceUri());
+            FunctionModule functionModule = this.functionModuleFactory.getInstance(functionRequest.getFunctionName(), functionRequest.getDescription(), functionRequest.getImplementation(), functionRequest.getDataTypeId());
+            this.functionDataRepository.save(functionModule.getFunctionData());
+            return new URI(functionModule.getFunctionData().getInterfaceUri());
         } else {
             throw new BadRequestException(String.format("Failed to create function module: Function module with name '%s' already exists.", functionRequest.getFunctionName()));
         }
@@ -127,12 +107,15 @@ public class FunctionService {
         while(functionDataIterator.hasNext()) {
             functionDataList.add(functionDataIterator.next());
         }
-        if(functionDataList.isEmpty()) {
-            throw new NotFoundException("No function module found.");
-        }
         return functionDataList;
     }
 
+    /**
+     * Get function data from osiris web applicaton database
+     * @param functionName
+     * @return FunctionData
+     * @throws NotFoundException
+     */
     public FunctionData getFunctionData(String functionName) throws NotFoundException {
         Iterable<FunctionData> functionDataIterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataIterable.iterator();
@@ -145,9 +128,22 @@ public class FunctionService {
         throw new NotFoundException(String.format("No function module data found for name '%s'.", functionName));
     }
 
-    public void deleteFunctionData(String functionName) {
-        //verify if functionName already exist
-        //if exist
-            //verify ir there are blendings using it
+    /**
+     * Remove data of function module from osiris web application database
+     * @param functionName
+     * @throws AbstractRequestException
+     */
+    public void deleteFunctionData(String functionName) throws AbstractRequestException {
+        List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionName);
+        if(functionDataList != null && !functionDataList.isEmpty()) {
+            List<BlendingVsnTo> blendingVsnToList = this.blendingRepository.getAll();
+            for(BlendingVsnTo blendingVsnTo : blendingVsnToList) {
+                FunctionVsnTo functionVsnTo = this.vsnFunctionRepository.getById(blendingVsnTo.getFunctionId());
+                if(functionVsnTo.getName().equals(functionName)) {
+                    throw new BadRequestException(String.format("Failed to remove function %s data: function %s module is being used by one or more blending sensors.", functionName));
+                }
+            }
+            this.functionDataRepository.delete(functionDataList.get(0));
+        }
     }
 }

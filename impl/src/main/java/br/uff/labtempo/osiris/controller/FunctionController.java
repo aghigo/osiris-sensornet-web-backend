@@ -1,5 +1,6 @@
 package br.uff.labtempo.osiris.controller;
 
+import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.request.FunctionRequest;
@@ -18,7 +19,7 @@ import java.util.List;
 
 /**
  * Controller class to serve REST endpoints
- * to control and manage functions from the OSIRIS FunctionFactory module
+ * to control and manage functions from the OSIRIS FunctionModuleFactory module
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -39,6 +40,9 @@ public class FunctionController {
     public ResponseEntity<?> getAllInterfaces() {
         try {
             List<InterfaceFnTo> interfaceFnToList = this.functionService.getAllInterfaces();
+            if(interfaceFnToList.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(interfaceFnToList);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(interfaceFnToList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
@@ -49,6 +53,9 @@ public class FunctionController {
     public ResponseEntity<?> getAllFunctionData() {
         try {
             List<FunctionData> functionDataList = this.functionService.getAllFunctionData();
+            if(functionDataList.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(functionDataList);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(functionDataList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
@@ -56,9 +63,9 @@ public class FunctionController {
     }
 
     /**
-     * Get a FunctionFactory interface based on the function name
-     * @param functionName
-     * @return ResponseEntity with status 200 OK and body with an InterfaceFnTo (FunctionFactory interface)
+     * Get a FunctionModuleFactory interface based on the function name
+         * @param functionName
+     * @return ResponseEntity with status 200 OK and body with an InterfaceFnTo (FunctionModuleFactory interface)
      * @throws AbstractRequestException
      */
     @RequestMapping(value = "/interface/{functionName}", method = RequestMethod.GET)
@@ -86,7 +93,7 @@ public class FunctionController {
     }
 
     /**
-     * Creates a new FunctionFactory module on OSIRIS
+     * Creates a new FunctionModuleFactory module on OSIRIS
      * @param functionRequest
      * @return ResponseEntity with status 201 Created and body with URI of the created resource
      * @throws AbstractRequestException

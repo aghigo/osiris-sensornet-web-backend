@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * FunctionFactory data required to do HTTP requests on FunctionFactory module
+ * FunctionModuleFactory data required to do HTTP requests on FunctionModuleFactory module
  * @see br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo
  * @see br.uff.labtempo.osiris.to.function.InterfaceFnTo
  * @author andre.ghigo
@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class FunctionRequest {
     /**
-     * FunctionFactory name
+     * FunctionModuleFactory name
      * example: sum, average, min, max
      */
     @NotNull @NotEmpty
@@ -32,7 +32,7 @@ public class FunctionRequest {
 
     /**
      * Example:
-     * FunctionFactory that calculates the average/sum/min/max of virtual sensors
+     * FunctionModuleFactory that calculates the average/sum/min/max of virtual sensors
      */
     @NotNull @NotEmpty
     private String description;

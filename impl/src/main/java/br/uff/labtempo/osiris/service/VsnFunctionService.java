@@ -47,8 +47,8 @@ public class VsnFunctionService {
     }
 
     /**
-     * Creates a new FunctionFactory into VirtualSensorNet module
-     * by FunctionFactory module interface
+     * Creates a new FunctionModuleFactory into VirtualSensorNet module
+     * by FunctionModuleFactory module interface
      * @param interfaceFnTo
      * @return URI with new resource location
      * @throws URISyntaxException
@@ -60,7 +60,7 @@ public class VsnFunctionService {
     }
 
     /**
-     * Creates a new FunctionFactory into VirtualSensorNet module
+     * Creates a new FunctionModuleFactory into VirtualSensorNet module
      * @param functionVsnTo
      * @return URI with new resource location
      * @throws URISyntaxException
@@ -72,7 +72,7 @@ public class VsnFunctionService {
 
     /**
      * Updates an existing function from VirtualSensorNet module
-     * by a FunctionFactory interface
+     * by a FunctionModuleFactory interface
      * @param functionId
      * @param interfaceFnTo
      * @throws AbstractRequestException

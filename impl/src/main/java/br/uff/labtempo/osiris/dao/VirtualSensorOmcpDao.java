@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -28,7 +28,7 @@ import java.util.List;
 @Component("virtualSensorOmpDao")
 public class VirtualSensorOmcpDao implements VirtualSensorRepository {
     @Autowired
-    private VirtualSensorNetConnection virtualSensorNetConnection;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
 
     @Autowired
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;

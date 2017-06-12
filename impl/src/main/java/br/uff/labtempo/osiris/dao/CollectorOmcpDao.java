@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.SensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.SensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.CollectorRepository;
 import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -30,7 +30,7 @@ public class CollectorOmcpDao implements CollectorRepository {
     private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
-    private SensorNetConnection connection;
+    private SensorNetConnectionFactory connection;
 
     /**
      * Get an specific Collector based on Network id and Collector Id

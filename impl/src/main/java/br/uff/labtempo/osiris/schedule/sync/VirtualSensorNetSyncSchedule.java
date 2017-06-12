@@ -1,12 +1,12 @@
 package br.uff.labtempo.osiris.schedule.sync;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
-import br.uff.labtempo.osiris.factory.function.FunctionFactory;
+import br.uff.labtempo.osiris.factory.function.FunctionModuleFactory;
 import br.uff.labtempo.osiris.generator.link.LinkGenerator;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
+import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.repository.*;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
-import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
@@ -19,11 +19,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
-
-import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
 
 /**
  * Perform synchonizations between SensorNet and VirtualSensorNet
@@ -55,7 +53,10 @@ public class VirtualSensorNetSyncSchedule {
     @Autowired
     private LinkGenerator linkGenerator;
 
-    private List<FunctionFactory> runningFunctionModuleList;
+    @Autowired
+    private FunctionModuleFactory functionModuleFactory;
+
+    private List<FunctionModule> functionModuleList = new ArrayList<>();
 
     /**
      * Synchronize SensorNet Sensors Values with VirtualSensorNet DataTypes
@@ -104,7 +105,7 @@ public class VirtualSensorNetSyncSchedule {
      * if does not exist any associated virtual Link sensor, create on VirtualSensorNet
      * a new Link sensor with Sensor data (sensor id, collector id, network id).
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:* */10 * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:* */60 * * * ?}")
     public void syncSensorWithLink() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
@@ -136,7 +137,7 @@ public class VirtualSensorNetSyncSchedule {
      * VirtualSensorNet Link sensor compositions
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.composite.cron:* */10 * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.composite.cron:* */60 * * * ?}")
     public void syncLinkWithComposite() throws Exception {
         log.info("Beginnning synchronization between Link and Composite sensors...");
         log.info("Composite synchronization completed...");
@@ -150,29 +151,37 @@ public class VirtualSensorNetSyncSchedule {
      * because it was removed by another service.
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:* */10 * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/5 * * * * ?}")
     public void syncFunctionDataWithFunctionModules() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();
         log.info("Beginning synchornization between Function modules...");
+        long total = 0;
         while(functionDataIterator.hasNext()) {
+            FunctionData functionData = functionDataIterator.next();
+            FunctionModule functionModule = null;
             boolean found = false;
-            FunctionData currentFunctionData = functionDataIterator.next();
-            FunctionFactory currentFunctionFactory = null;
-            for(FunctionFactory functionFactory : this.runningFunctionModuleList) {
-                if(functionFactory.getName().equals(currentFunctionData.getName())) {
-                    currentFunctionFactory = functionFactory;
+            for(FunctionModule module : this.functionModuleList) {
+                if(functionModule.getFunctionData().getName().equals(functionData.getName())) {
                     found = true;
+                    functionModule = module;
                     break;
                 }
             }
-            //se existe no banco
-                //se estiver rodando entao OK
-                //se estiver pausado entao start
-            //se nao existe no banco e existe rodando
-                //entao stop e remove
+            if(found) {
+                if(!functionModule.isRunning()) {
+                    functionModule.getOmcpServer().start();
+                    found = false;
+                }
+            } else {
+                FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
+                newModule.getOmcpServer().start();
+                newModule.setRunning(true);
+                this.functionModuleList.add(newModule);
+                total++;
+            }
         }
-        log.info("Function module synchronization completed.");
+        log.info(String.format("Function module synchronization completed. Total = %s", total));
     }
 
     /**
@@ -193,7 +202,7 @@ public class VirtualSensorNetSyncSchedule {
      *
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.blending.cron:* */10 * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.blending.cron:* */60 * * * ?}")
     public void syncVSensorWithBlendingAndFunction() throws Exception {
         log.info("Beginning synchronization between VSensors and Blendings...");
         log.info("Blending synchronization completed.");

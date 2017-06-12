@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 /**
- * Repository inteface to abstract VirtualSensorNet FunctionFactory DAO implementations
+ * Repository inteface to abstract VirtualSensorNet FunctionModuleFactory DAO implementations
  * @see FunctionVsnTo
  * @author andre.ghigo
  * @version 1.0

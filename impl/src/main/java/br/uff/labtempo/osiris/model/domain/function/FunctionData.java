@@ -1,6 +1,5 @@
 package br.uff.labtempo.osiris.model.domain.function;
 
-import br.uff.labtempo.osiris.factory.function.FunctionFactory;
 import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import br.uff.labtempo.osiris.to.common.definitions.ValueType;
 import lombok.*;
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotNull;
 /**
  * FunctionData module configuration representation on Osiris Web application
  * to manage FunctionData modules on OSIRIS.
- * @see FunctionFactory
  * @see br.uff.labtempo.osiris.to.function.InterfaceFnTo
  * @see br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo
  * @author andre.ghigo
@@ -52,7 +50,17 @@ public class FunctionData {
     private String implementation;
 
     @NotNull
+    private ValueType paramType;
+
+    @NotNull
     private FunctionOperation operation;
 
+    @Min(0)
     private long dataTypeId;
+
+    @NotNull @NotEmpty
+    private String dataTypeUnit;
+
+    @NotNull @NotEmpty
+    private String dataTypeName;
 }

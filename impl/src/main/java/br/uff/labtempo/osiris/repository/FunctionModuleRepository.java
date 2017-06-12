@@ -9,7 +9,7 @@ import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import java.util.List;
 
 /**
- * Interface that abstract FunctionFactory DAO implementations
+ * Interface that abstract FunctionModuleFactory DAO implementations
  * @see FunctionModuleOmcpDao
  * @author andre.ghigo
  * @since 1.8
@@ -17,5 +17,4 @@ import java.util.List;
  */
 public interface FunctionModuleRepository {
     InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
-    List<InterfaceFnTo> getAllInterfaces() throws AbstractClientRuntimeException, AbstractRequestException;
 }

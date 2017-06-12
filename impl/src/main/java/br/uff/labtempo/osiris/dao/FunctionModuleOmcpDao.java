@@ -4,8 +4,9 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.configuration.AvailableFunctionListConfig;
-import br.uff.labtempo.osiris.connection.RabbitMQConnection;
+import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
+
+import br.uff.labtempo.osiris.factory.connection.CommunicationLayerConnectionFactory;
 import br.uff.labtempo.osiris.repository.FunctionModuleRepository;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -16,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * DAO class for FunctionFactory CRUD on FunctionFactory module
+ * DAO class for FunctionModuleFactory CRUD on FunctionModuleFactory module
  * @author andre.ghigo
  * @since  1.8
  * @version  1.0
@@ -25,36 +26,25 @@ import java.util.List;
 public class FunctionModuleOmcpDao implements FunctionModuleRepository {
 
     @Autowired
-    AvailableFunctionListConfig availableFunctionListConfig;
+    FunctionModuleConfig functionModuleConfig;
 
     @Autowired
-    RabbitMQConnection rabbitMQConnection;
+    CommunicationLayerConnectionFactory communicationLayerConnectionFactory;
 
     /**
      * Get a function Interface based on the function name
      * @param functionName
-     * @return InterfaceFnTo (FunctionFactory interface)
+     * @return InterfaceFnTo (FunctionModuleFactory interface)
      * @throws AbstractClientRuntimeException
      * @throws AbstractRequestException
      */
     @Override
     public InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.rabbitMQConnection.getConnection();
-        String uri = String.format(this.availableFunctionListConfig.getFunctionInterfaceUri(), functionName);
+        OmcpClient omcpClient = this.communicationLayerConnectionFactory.getConnection();
+        String uri = String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), functionName);
         Response response = omcpClient.doGet(uri);
         OmcpUtil.handleOmcpResponse(response);
         InterfaceFnTo interfaceFnTo = response.getContent(InterfaceFnTo.class);
         return interfaceFnTo;
-    }
-
-    @Override
-    public List<InterfaceFnTo> getAllInterfaces() throws AbstractRequestException {
-        OmcpClient omcpClient = this.rabbitMQConnection.getConnection();
-        String uri = this.availableFunctionListConfig.getFunctionInterfaceUri();
-        Response response = omcpClient.doGet(uri);
-        OmcpUtil.handleOmcpResponse(response);
-        InterfaceFnTo[] interfaceFnToArray = response.getContent(InterfaceFnTo[].class);
-        List<InterfaceFnTo> interfaceFnToList = Arrays.asList(interfaceFnToArray);
-        return interfaceFnToList;
     }
 }

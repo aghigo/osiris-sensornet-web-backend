@@ -4,13 +4,10 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.*;
-import br.uff.labtempo.osiris.connection.*;
+import br.uff.labtempo.osiris.factory.connection.*;
 import br.uff.labtempo.osiris.model.health.HealthDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Service class with business rules to Check application dependency health status
@@ -30,45 +27,39 @@ public class HealthService {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private AvailableFunctionListConfig availableFunctionListConfig;
-
-    @Autowired
-    private AvailableMessageGroupListConfig availableMessageGroupListConfig;
+    private FunctionModuleConfig functionModuleConfig;
 
     @Autowired
     private ApplicationDatabaseConfig applicationDatabaseConfig;
 
-    private SensorNetConnection sensorNetConnection;
-    private VirtualSensorNetConnection virtualSensorNetConnection;
-    private FunctionConnection functionConnection;
-    private RabbitMQConnection rabbitMQConnection;
-    private MessageGroupConnection messageGroupConnection;
-    private ApplicationDatabaseConnection applicationDatabaseConnection;
+    private SensorNetConnectionFactory sensorNetConnectionFactory;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnectionFactory;
+    private FunctionConnectionFactory functionConnectionFactory;
+    private CommunicationLayerConnectionFactory communicationLayerConnectionFactory;
+    private ApplicationDatabaseConnectionFactory applicationDatabaseConnectionFactory;
 
     @Autowired
-    public HealthService(ApplicationDatabaseConnection applicationDatabaseConnection, MessageGroupConnection messageGroupConnection, RabbitMQConnection rabbitMQConnection, SensorNetConnection sensorNetConnection, VirtualSensorNetConnection virtualSensorNetConnection, FunctionConnection functionConnection) {
-        this.applicationDatabaseConnection = applicationDatabaseConnection;
-        this.messageGroupConnection = messageGroupConnection;
-        this.rabbitMQConnection = rabbitMQConnection;
-        this.functionConnection = functionConnection;
-        this.sensorNetConnection = sensorNetConnection;
-        this.virtualSensorNetConnection = virtualSensorNetConnection;
+    public HealthService(ApplicationDatabaseConnectionFactory applicationDatabaseConnectionFactory, CommunicationLayerConnectionFactory communicationLayerConnectionFactory, SensorNetConnectionFactory sensorNetConnectionFactory, VirtualSensorNetConnectionFactory virtualSensorNetConnectionFactory, FunctionConnectionFactory functionConnectionFactory) {
+        this.applicationDatabaseConnectionFactory = applicationDatabaseConnectionFactory;
+        this.communicationLayerConnectionFactory = communicationLayerConnectionFactory;
+        this.functionConnectionFactory = functionConnectionFactory;
+        this.sensorNetConnectionFactory = sensorNetConnectionFactory;
+        this.virtualSensorNetConnectionFactory = virtualSensorNetConnectionFactory;
     }
 
     /**
      * Test connection to RabbitMQ Queue
-     * @see RabbitMQConnection
      * @see HealthDependency
      * @return HealthDependency with RabbitMQ status
      */
     public HealthDependency testRabbitMQ() {
-        String moduleName = this.rabbitMQConnection.getModuleName();
-        String uri = this.rabbitMQConnection.getModuleUri();
-        String ip = this.rabbitMQConnection.getIp();
-        int port = this.rabbitMQConnection.getPort();
+        String moduleName = this.communicationLayerConnectionFactory.getModuleName();
+        String uri = this.communicationLayerConnectionFactory.getModuleUri();
+        String ip = this.communicationLayerConnectionFactory.getIp();
+        int port = this.communicationLayerConnectionFactory.getPort();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.rabbitMQConnection.getConnection();
+            OmcpClient omcpClient = this.communicationLayerConnectionFactory.getConnection();
             Response response = omcpClient.doGet(this.sensorNetModuleConfig.getModuleUri());
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
@@ -82,18 +73,18 @@ public class HealthService {
     /**
      * Test connection to SensorNet module
      * @see HealthDependency
-     * @see SensorNetConnection
+     * @see SensorNetConnectionFactory
      * @see SensorNetModuleConfig
      * @return HealthDependency with SensorNet status
      */
     public HealthDependency testSensorNetConnection() {
         String moduleName = this.sensorNetModuleConfig.getModuleName();
-        String ip = this.sensorNetConnection.getIp();
-        int port = this.sensorNetConnection.getPort();
+        String ip = this.sensorNetConnectionFactory.getIp();
+        int port = this.sensorNetConnectionFactory.getPort();
         String moduleLocation = this.sensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.sensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.sensorNetConnectionFactory.getConnection();
             String uri = this.sensorNetModuleConfig.getNetworksUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.OK)) {
@@ -107,19 +98,19 @@ public class HealthService {
 
     /**
      * Test connection to VirtualSensorNet module
-     * @see VirtualSensorNetConnection
+     * @see VirtualSensorNetConnectionFactory
      * @see VirtualSensorNetModuleConfig
      * @see HealthDependency
      * @return HealthDependency with VirtualSensorNet status
      */
     public HealthDependency testVirtualSensorNet() {
         String moduleName = this.virtualSensorNetModuleConfig.getModuleName();
-        String ip = this.virtualSensorNetConnection.getIp();
-        int port = this.virtualSensorNetConnection.getPort();
+        String ip = this.virtualSensorNetConnectionFactory.getIp();
+        int port = this.virtualSensorNetConnectionFactory.getPort();
         String moduleLocation = this.virtualSensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.virtualSensorNetConnectionFactory.getConnection();
             String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
             Response response = omcpClient.doGet(uri);
             if(response.getStatusCode().equals(StatusCode.OK)) {
@@ -132,81 +123,8 @@ public class HealthService {
     }
 
     /**
-     * Test connection to all available FunctionFactory modules
-     * @see FunctionModuleConfig
-     * @see AvailableFunctionListConfig
-     * @see FunctionConnection
-     * @return List of HealthDependency with all FunctionFactory modules status
-     */
-    public List<HealthDependency> testFunctionModules() {
-        List<HealthDependency> healthDependencyList = new ArrayList<>();
-        List<FunctionModuleConfig> functionModuleConfigList = this.availableFunctionListConfig.getFunctionModuleConfigList();
-        for(FunctionModuleConfig functionModuleConfig : functionModuleConfigList) { 
-            boolean isActive = false;
-            try {
-                OmcpClient omcpClient = this.functionConnection.getConnection(functionModuleConfig);
-                Response response = omcpClient.doGet(functionModuleConfig.getInterfaceUri());
-                if(response.getStatusCode().equals(StatusCode.OK)) {
-                    isActive = true;
-                }
-                HealthDependency healthDependency = HealthDependency.builder()
-                        .ip(functionModuleConfig.getIp())
-                        .name(functionModuleConfig.getModuleName())
-                        .port(functionModuleConfig.getPort())
-                        .status(response.getStatusCode().toString())
-                        .uri(functionModuleConfig.getModuleUri())
-                        .active(isActive)
-                        .build();
-                healthDependencyList.add(healthDependency);
-            } catch (Exception e) {
-                HealthDependency healthDependency = HealthDependency.builder()
-                        .ip(functionModuleConfig.getIp())
-                        .name(functionModuleConfig.getModuleName())
-                        .port(functionModuleConfig.getPort())
-                        .status(e.getMessage())
-                        .uri(functionModuleConfig.getModuleUri())
-                        .active(isActive)
-                        .build();
-                healthDependencyList.add(healthDependency);
-            }
-        }
-        return healthDependencyList;
-    }
-
-    /**
-     * Test connection to all available messageGroups
-     * @see AvailableMessageGroupListConfig
-     * @see MessageGroupConfig
-     * @return List of HealthDependency with all messageGroups status
-     */
-    public List<HealthDependency> testMessageGroups() {
-        List<HealthDependency> healthDependencyList = new ArrayList<>();
-        for(MessageGroupConfig messageGroupConfig : this.availableMessageGroupListConfig.getMessageGroupConfigList()) {
-            String messageGroupName = messageGroupConfig.getName();
-            String uri = messageGroupConfig.getUri();
-            String ip = messageGroupConfig.getIp();
-            int port = messageGroupConfig.getPort();
-            String username = messageGroupConfig.getUsername();
-            String password = messageGroupConfig.getPassword();
-            HealthDependency healthDependency = HealthDependency.builder()
-                    .ip(ip).name(messageGroupName).port(port).uri(uri).build();
-            try {
-                OmcpClient omcpClient = this.messageGroupConnection.getConnection(messageGroupConfig);
-                Response response = omcpClient.doGet(uri);
-                healthDependency.setActive(true);
-                healthDependency.setStatus(response.getStatusCode().toString());
-            } catch (Exception e) {
-                healthDependency.setActive(false);
-                healthDependency.setStatus(e.getMessage());
-            }
-            healthDependencyList.add(healthDependency);
-        }
-        return healthDependencyList;
-    }
-
-    /**
      * Test connection to the Application main relational database
-     * @see ApplicationDatabaseConnection
+     * @see ApplicationDatabaseConnectionFactory
      * @see ApplicationDatabaseConfig
      * @see br.uff.labtempo.osiris.security.WebSecurityConfig
      * @return HealthDependency with the dependency connection status
@@ -216,7 +134,7 @@ public class HealthService {
                 .name(this.applicationDatabaseConfig.getDriverClassName())
                 .uri(this.applicationDatabaseConfig.getDataSourceUrl()).build();
         try {
-            this.applicationDatabaseConnection.getJdbcTemplate().getDataSource().getConnection();
+            this.applicationDatabaseConnectionFactory.getJdbcTemplate().getDataSource().getConnection();
             healthDependency.setStatus("OK");
             healthDependency.setActive(true);
         } catch (Exception e) {

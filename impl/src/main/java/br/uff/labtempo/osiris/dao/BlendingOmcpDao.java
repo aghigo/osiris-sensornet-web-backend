@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -32,7 +32,7 @@ public class BlendingOmcpDao implements BlendingRepository {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConnection virtualSensorNetConnection;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
 
     /**
      * Get all Blending sensors from VirtualSensorNet module

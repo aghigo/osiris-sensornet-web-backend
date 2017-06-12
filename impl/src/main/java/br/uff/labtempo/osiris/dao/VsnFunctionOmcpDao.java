@@ -5,9 +5,8 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.VsnFunctionRepository;
-import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import java.util.List;
 public class VsnFunctionOmcpDao implements VsnFunctionRepository {
 
     @Autowired
-    private VirtualSensorNetConnection virtualSensorNetConnection;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
 
     @Autowired
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;

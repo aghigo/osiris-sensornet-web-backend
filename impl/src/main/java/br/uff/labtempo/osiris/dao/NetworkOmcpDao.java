@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
-import br.uff.labtempo.osiris.connection.SensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.SensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -29,7 +29,7 @@ public class NetworkOmcpDao implements NetworkRepository {
     private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
-    private SensorNetConnection connection;
+    private SensorNetConnectionFactory connection;
 
     /**
      * Get a specifc Network from SensorNet module based on its unique id

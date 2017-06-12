@@ -3,7 +3,7 @@ package br.uff.labtempo.osiris.dao;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
-import br.uff.labtempo.osiris.connection.VirtualSensorNetConnection;
+import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
 import br.uff.labtempo.osiris.repository.OmcpRepository;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,11 @@ import java.net.URISyntaxException;
 @Component("virtualSensorNetOmcpDao")
 public class VirtualSensorNetOmcpDao<T> implements OmcpRepository<T> {
 
-    private VirtualSensorNetConnection virtualSensorNetConnection;
+    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
 
     @Autowired
-    public VirtualSensorNetOmcpDao(VirtualSensorNetConnection virtualSensorNetConnection) {
-        this.virtualSensorNetConnection = virtualSensorNetConnection;
+    public VirtualSensorNetOmcpDao(VirtualSensorNetConnectionFactory virtualSensorNetConnectionFactory) {
+        this.virtualSensorNetConnection = virtualSensorNetConnectionFactory;
     }
 
     /**
