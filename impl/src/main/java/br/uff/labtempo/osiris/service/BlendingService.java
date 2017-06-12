@@ -164,14 +164,14 @@ public class BlendingService {
         List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
         for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
             for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
-                if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName())) {
+                if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueVsnTo.getUnit().equals(dataTypeVsnTo.getUnit())) {
                     blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
                     break;
                 }
             }
         }
         if(blendingVsnTo.getRequestParams().isEmpty()) {
-            throw new BadRequestException(String.format("Could not update Blending sensor with id '%s': no virtual sensor with field of type '%s' was found for the request parameters", blendingId, dataTypeVsnTo.getDisplayName()));
+            throw new BadRequestException(String.format("Could not update Blending sensor with id '%s': no virtual sensor with field of type '%s' and unit '%s' was found for the request parameters", blendingId, dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit()));
         }
 
         blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), dataTypeVsnTo.getId());
