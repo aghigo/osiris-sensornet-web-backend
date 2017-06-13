@@ -17,17 +17,17 @@ import javax.validation.constraints.NotNull;
 import static br.uff.labtempo.osiris.util.AllowHeaderUtil.allows;
 
 /**
- * Controller class for generic component management on SensorNet module
+ * Controller to call OMCP modules directly
  * @author andre.ghigo
  * @version 1.0
  * @since 1.8
  */
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/sensornet/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class SensorNetOmcpController {
+@RequestMapping(value = "/omcp", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class OmcpController {
     @Autowired
-    @Qualifier("sensorNetOmcpDao")
+    @Qualifier("genericOmcpDao")
     private OmcpRepository<String> omcpRepository;
 
     /**
@@ -39,21 +39,12 @@ public class SensorNetOmcpController {
     public ResponseEntity<?> doGet(@RequestHeader(value = "uri") @NotEmpty @NotNull @Valid String uri) {
         String responseContent = null;
         try {
-            responseContent = (String) this.omcpRepository.doGet(uri);
+            responseContent = this.omcpRepository.doGet(uri);
             return ResponseEntity.ok().body(responseContent);
         } catch (AbstractRequestException e) {
             return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
-    }
-
-    /**
-     * Get a list of available HTTP methods of the /sensornet/omcp endpoint
-     * @return List of HTTP methods
-     */
-    @RequestMapping(method = RequestMethod.OPTIONS)
-    public ResponseEntity<?> optionsNetworkIdCollectorIdSensorId() {
-        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
     }
 }

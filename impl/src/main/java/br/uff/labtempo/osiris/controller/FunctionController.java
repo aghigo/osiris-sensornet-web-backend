@@ -68,7 +68,7 @@ public class FunctionController {
      * @return ResponseEntity with status 200 OK and body with an InterfaceFnTo (FunctionModuleFactory interface)
      * @throws AbstractRequestException
      */
-    @RequestMapping(value = "/interface/{functionName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/interface/{functionName}/", method = RequestMethod.GET)
     public ResponseEntity<?> getInterface(@PathVariable String functionName) throws AbstractRequestException {
         try {
             InterfaceFnTo interfaceFnTo = this.functionService.getInterfaceByName(functionName);
@@ -80,7 +80,7 @@ public class FunctionController {
         }
     }
 
-    @RequestMapping(value = "/data/{functionName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/data/{functionName}/", method = RequestMethod.GET)
     public ResponseEntity<?> getFunctionData(@PathVariable String functionName) throws AbstractRequestException {
         try {
             FunctionData functionData = this.functionService.getFunctionData(functionName);
