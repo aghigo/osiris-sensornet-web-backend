@@ -13,12 +13,12 @@ import lombok.*;
 @Setter
 @Builder
 @ToString
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class FunctionModule implements Runnable {
     private FunctionData functionData;
-    private boolean running;
+    Thread thread;
     private OmcpServer omcpServer;
 
     @Override

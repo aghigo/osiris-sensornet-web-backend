@@ -1,14 +1,10 @@
 package br.uff.labtempo.osiris.model.request;
 
-import br.uff.labtempo.osiris.to.common.data.FieldTo;
-import br.uff.labtempo.osiris.to.common.definitions.FunctionOperation;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Map;
 
 /**
  * Request data required to create/update Blending Sensors on VirtualSensorNet Module.

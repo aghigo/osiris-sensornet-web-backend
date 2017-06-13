@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,8 +58,6 @@ public class VirtualSensorNetSyncSchedule {
     private FunctionModuleFactory functionModuleFactory;
 
     private List<FunctionModule> functionModuleList = new ArrayList<>();
-
-    private List<Thread> threadList = new ArrayList<>();
 
     /**
      * Synchronize SensorNet Sensors Values with VirtualSensorNet DataTypes
@@ -154,10 +153,9 @@ public class VirtualSensorNetSyncSchedule {
      * @throws Exception
      */
     @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/2 * * * * ?}")
-    public void syncFunctionDataWithFunctionModules() throws Exception {
+    public void syncFunctionDataWithFunctionModuleThreads() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();
-        log.info("Beginning synchornization between Function modules...");
         long total = 0;
         while(functionDataIterator.hasNext()) {
             FunctionData functionData = functionDataIterator.next();
@@ -171,16 +169,22 @@ public class VirtualSensorNetSyncSchedule {
                 }
             }
             if(!found) {
-                FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
-                Thread functionThread = new Thread(newModule, newModule.getFunctionData().getFullName());
-                this.threadList.add(functionThread);
-                functionThread.start();
+                FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getOperationName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
+                Thread functionThread = new Thread(newModule, newModule.getFunctionData().getName());
+                newModule.setThread(functionThread);
                 this.functionModuleList.add(newModule);
-                log.info(String.format("Started new thread for function module '%s'", newModule.getFunctionData().getName()));
+                newModule.getThread().start();
+                log.info(String.format("New thread started for function module with name '%s'", newModule.getFunctionData().getName()));
             }
         }
-        log.info(String.format("Function module synchronization completed. Total = %s", total));
     }
+
+    /**
+     * Creates new Function Modules based on available DataTypes from VirtualSensorNet module
+     * (if does not exist yet).
+     *
+     */
+    public void syncDataTypeWithFunctionModules() {}
 
     /**
      * Synchronize every Function Module with Blending Sensors.

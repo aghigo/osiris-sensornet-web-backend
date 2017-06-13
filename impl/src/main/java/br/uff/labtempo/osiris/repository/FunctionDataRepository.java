@@ -16,4 +16,5 @@ import java.util.List;
  */
 public interface FunctionDataRepository extends CrudRepository<FunctionData, Long> {
     List<FunctionData> findByName(String Name);
+    List<FunctionData> findByOperationName(String operationName);
 }

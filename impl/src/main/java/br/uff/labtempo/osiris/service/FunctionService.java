@@ -85,13 +85,13 @@ public class FunctionService {
      * @throws IllegalArgumentException
      */
     public URI createFunctionData(FunctionRequest functionRequest) throws URISyntaxException, AbstractRequestException, IllegalArgumentException {
-        List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionRequest.getFunctionName().trim().toLowerCase());
+        FunctionModule functionModule = this.functionModuleFactory.getInstance(functionRequest.getOperationName(), functionRequest.getDescription(), functionRequest.getImplementation(), functionRequest.getDataTypeId());
+        List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionModule.getFunctionData().getName());
         if(functionDataList.isEmpty()) {
-            FunctionModule functionModule = this.functionModuleFactory.getInstance(functionRequest.getFunctionName(), functionRequest.getDescription(), functionRequest.getImplementation(), functionRequest.getDataTypeId());
             this.functionDataRepository.save(functionModule.getFunctionData());
             return new URI(functionModule.getFunctionData().getRestInterfaceUri());
         } else {
-            throw new BadRequestException(String.format("Failed to create function module: Function module with name '%s' already exists.", functionRequest.getFunctionName()));
+            throw new BadRequestException(String.format("Failed to create function module: Function module with name '%s' already exists.", functionModule.getFunctionData().getName()));
         }
     }
 

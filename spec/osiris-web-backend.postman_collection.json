@@ -34,11 +34,95 @@
 							}
 						],
 						"body": {},
-						"description": ""
+						"description": "Get a list with all User Accounts of the OSIRIS Web application."
 					},
 					"response": [
 						{
-							"id": "02957c88-5ab6-4b4b-9f34-075a1a0be191",
+							"id": "ab777e39-5c15-4541-93ef-e294d19b4186",
+							"name": "response_example_01",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/users",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"enabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 30 Apr 2017 03:43:30 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "569",
+							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
+						},
+						{
+							"id": "3d926a22-e318-4369-8429-b56323cfde2f",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users",
@@ -76,137 +160,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 30 Apr 2017 03:07:05 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 57,
-							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
-						},
-						{
-							"id": "7af0f632-8673-40fe-aca3-59091c2ad5ac",
-							"name": "response_example_01",
-							"originalRequest": {
-								"url": "{{osiris-web-backend.endpoint}}/users",
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"enabled": true,
-										"description": "The mime type of this content"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"enabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
-										"enabled": true
-									}
-								],
-								"body": {}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"name": "Cache-Control",
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"name": "Content-Type",
-									"key": "Content-Type",
-									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
-								},
-								{
-									"name": "Date",
-									"key": "Date",
-									"value": "Sun, 30 Apr 2017 03:43:30 GMT",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"name": "Expires",
-									"key": "Expires",
-									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
-								},
-								{
-									"name": "Pragma",
-									"key": "Pragma",
-									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
-								},
-								{
-									"name": "Transfer-Encoding",
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"name": "X-Content-Type-Options",
-									"key": "X-Content-Type-Options",
-									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
-								},
-								{
-									"name": "X-XSS-Protection",
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
-								}
-							],
-							"cookie": [],
-							"responseTime": 569,
+							"responseTime": "57",
 							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
 						}
 					]
@@ -238,7 +238,7 @@
 					},
 					"response": [
 						{
-							"id": "9ae5ff04-7d22-4c94-9388-434823739c73",
+							"id": "5f8abff1-1f7e-4bbb-a39f-0976bd55d3ca",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users/3",
@@ -272,53 +272,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 30 Apr 2017 03:44:45 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 48,
+							"responseTime": "48",
 							"body": "{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}"
 						}
 					]
@@ -342,7 +342,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"birthDate\" : \"1988-07-28\",\n\t\"email\" : \"andreghigo@gmail.com\",\n\t\"firstName\" : \"andre\",\n\t\"lastName\" : \"ghigo\",\n\t\"middleName\" : \"mendes\",\n\t\"password\" : \"1234\",\n\t\"username\" : \"andre.ghigo\"\n}"
+							"raw": "{\n  \"birthDate\" : \"1988-07-28\",\n  \"email\" : \"andreghigo@gmail.com\",\n  \"firstName\" : \"andre\",\n  \"lastName\" : \"ghigo\",\n  \"middleName\" : \"mendes\",\n  \"password\" : \"1234\",\n  \"username\" : \"andre.ghigo\"\n}"
 						},
 						"description": "Create a new UserAccount"
 					},
@@ -394,175 +394,7 @@
 						"description": "Removes an existing UserAccount"
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Function OMCP",
-			"description": "",
-			"item": []
-		},
-		{
-			"name": "Function REST",
-			"description": "",
-			"item": [
-				{
-					"name": "/functions",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/functions",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get a list of available Functions from the FUNCTION Module."
-					},
-					"response": []
 				},
-				{
-					"name": "/functions/interface",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/functions/interface",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get a list of all available function module interfaces"
-					},
-					"response": []
-				},
-				{
-					"name": "/functions/{functionName}/interface",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get function Interface from Function Module"
-					},
-					"response": [
-						{
-							"id": "2dbf6773-e958-4c8a-bb43-ddc67d1918f4",
-							"name": "response_example",
-							"originalRequest": {
-								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"enabled": true
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"enabled": true,
-										"description": "The mime type of this content"
-									}
-								],
-								"body": {}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"name": "Cache-Control",
-									"key": "Cache-Control",
-									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-								},
-								{
-									"name": "Content-Type",
-									"key": "Content-Type",
-									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
-								},
-								{
-									"name": "Date",
-									"key": "Date",
-									"value": "Mon, 08 May 2017 01:44:35 GMT",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"name": "Expires",
-									"key": "Expires",
-									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
-								},
-								{
-									"name": "Pragma",
-									"key": "Pragma",
-									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
-								},
-								{
-									"name": "Transfer-Encoding",
-									"key": "Transfer-Encoding",
-									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-								},
-								{
-									"name": "X-Content-Type-Options",
-									"key": "X-Content-Type-Options",
-									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
-								},
-								{
-									"name": "X-XSS-Protection",
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
-								}
-							],
-							"cookie": [],
-							"responseTime": 257,
-							"body": "{\"name\":\"sum\",\"description\":\"sum of all values\",\"address\":\"omcp://sum.function/\",\"operations\":[\"SYNCHRONOUS\",\"ASYNCHRONOUS\"],\"requestParams\":[{\"name\":\"input\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":true}],\"responseParams\":[{\"name\":\"output\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":false}]}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Health",
-			"description": "Health checker of the SensorNet, VirtualSensorNet, Funcion modules",
-			"item": [
 				{
 					"name": "/health",
 					"request": {
@@ -590,7 +422,7 @@
 					},
 					"response": [
 						{
-							"id": "fbedcdab-3925-434e-98c2-96ca5bb5a99c",
+							"id": "d65f7f68-06d8-42cd-8213-720be80d78e8",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/health",
@@ -627,59 +459,59 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 16 Apr 2017 22:03:26 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-Frame-Options",
 									"key": "X-Frame-Options",
 									"value": "DENY",
-									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 1055,
+							"responseTime": "1055",
 							"body": "[{\"name\":\"rabbitmq\",\"ip\":\"172.17.0.2\",\"port\":5672,\"uri\":\"http://172.17.0.2:5672/\",\"status\":\"OK\",\"active\":true},{\"name\":\"SensorNet\",\"ip\":\"127.0.0.1\",\"port\":8090,\"uri\":\"omcp://sensornet.osiris/\",\"status\":\"OK\",\"active\":true},{\"name\":\"VirtualSensorNet\",\"ip\":\"127.0.0.1\",\"port\":8091,\"uri\":\"omcp://virtualsensornet.osiris/\",\"status\":\"Module is not online\",\"active\":false},{\"name\":\"sum.function\",\"ip\":\"172.17.0.2\",\"port\":5672,\"uri\":\"omcp://sum.function/\",\"status\":\"INTERNAL SERVER ERROR\",\"active\":false}]"
 						}
 					]
@@ -687,40 +519,33 @@
 			]
 		},
 		{
-			"name": "SensorNet OMCP",
-			"description": "SensorNet OMCP endpoints.",
+			"name": "Function",
+			"description": "",
 			"item": [
 				{
-					"name": "omcp://sensornet.osiris/",
+					"name": "/function",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
-						"method": "GET",
+						"url": "{{osiris-web-backend.endpoint}}/function",
+						"method": "POST",
 						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
 							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/",
-								"description": ""
 							}
 						],
-						"body": {},
-						"description": "GET all networks from SensorNet."
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"operationName\" : \"sum\",\n\t\"description\" : \"function that calculates the sum of a given list of temperatures\",\n\t\"dataTypeId\" : 1,\n\t\"implementation\" : \"result = 0; for(Double value : values) { result = result + value; } return result;\"\n}"
+						},
+						"description": "Creates a new Function module on OSIRIS framework."
 					},
 					"response": []
 				},
 				{
-					"name": "omcp://sensornet.osiris/{networkId}",
+					"name": "/function/data",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
+						"url": "{{osiris-web-backend.endpoint}}/function/data",
 						"method": "GET",
 						"header": [
 							{
@@ -732,49 +557,44 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871",
-								"description": ""
 							}
 						],
 						"body": {},
-						"description": "Get a specific network from SensorNet"
+						"description": "Get all function modules data of the Osiris Web Application database."
 					},
 					"response": []
 				},
 				{
-					"name": "omcp://sensornet.osiris/{networkId}/collector",
+					"name": "/function/interface",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
+						"url": "{{osiris-web-backend.endpoint}}/function/interface",
 						"method": "GET",
 						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
 							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
 							},
 							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector",
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
 								"description": ""
 							}
 						],
 						"body": {},
-						"description": "Get all collectors from a specific network."
+						"description": "Get a list of interfaces from all available function modules."
 					},
 					"response": []
 				},
 				{
-					"name": "omcp://sensornet.osiris/{networkId}/sensor",
+					"name": "/function/interface/{functionName}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
+						"url": "{{osiris-web-backend.endpoint}}/function/interface/{functionName}",
 						"method": "GET",
 						"header": [
 							{
@@ -786,22 +606,97 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/sensor",
-								"description": ""
 							}
 						],
 						"body": {},
-						"description": "Get all sensors from a specific network."
+						"description": "Get function Interface from Function Module"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "5aba1a43-916d-4da6-8e2b-8e7f37934db3",
+							"name": "response_example",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 08 May 2017 01:44:35 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "257",
+							"body": "{\"name\":\"sum\",\"description\":\"sum of all values\",\"address\":\"omcp://sum.function/\",\"operations\":[\"SYNCHRONOUS\",\"ASYNCHRONOUS\"],\"requestParams\":[{\"name\":\"input\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":true}],\"responseParams\":[{\"name\":\"output\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":false}]}"
+						}
+					]
 				},
 				{
-					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}",
+					"name": "/function/data/{functionName}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
+						"url": "{{osiris-web-backend.endpoint}}/function/data/{functionName}",
 						"method": "GET",
 						"header": [
 							{
@@ -813,76 +708,97 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37",
-								"description": ""
 							}
 						],
 						"body": {},
-						"description": "Get a specific collector from a specific network."
+						"description": "Get function data of the Osiris web application."
 					},
-					"response": []
-				},
-				{
-					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}/sensor",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
+					"response": [
+						{
+							"id": "69503f89-0822-47b5-9a67-bfdfbe5ecb1d",
+							"name": "response_example",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"enabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"enabled": true,
+										"description": "The mime type of this content"
+									}
+								],
+								"body": {}
 							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensor",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all sensors from a specific collector from a specific network."
-					},
-					"response": []
-				},
-				{
-					"name": "omcp://sensornet.osiris/{networkId}/collector/{collectorId}/sensor/{sensorId}",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/sensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://sensornet.osiris/networkId-a06bfe6f-f152-41b3-bb8d-89b761306871/collector/collectorId-206a5eec-297f-40d5-bff2-2ba625458b37/sensor/sensorId-41bf8bce-58a0-4867-87e6-1726742598b9",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get a specific sensor from a specific collector from a specific network."
-					},
-					"response": []
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 08 May 2017 01:44:35 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": "257",
+							"body": "{\"name\":\"sum\",\"description\":\"sum of all values\",\"address\":\"omcp://sum.function/\",\"operations\":[\"SYNCHRONOUS\",\"ASYNCHRONOUS\"],\"requestParams\":[{\"name\":\"input\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":true}],\"responseParams\":[{\"name\":\"output\",\"type\":\"NUMBER\",\"unit\":null,\"collection\":false}]}"
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "SensorNet REST",
+			"name": "SensorNet",
 			"description": "SensorNet REST endpoints.",
 			"item": [
 				{
@@ -912,7 +828,7 @@
 					},
 					"response": [
 						{
-							"id": "37e87166-f5f6-402f-a88f-f2bdd7e5e4df",
+							"id": "82dc417a-09fb-4bc3-9418-d01610928d4d",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -987,7 +903,7 @@
 					},
 					"response": [
 						{
-							"id": "b9eb2eee-31b9-4a43-a215-5885df17621b",
+							"id": "1b7160f6-8808-429f-bfb6-ee37801b27a1",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -1065,7 +981,7 @@
 					},
 					"response": [
 						{
-							"id": "f66da267-d740-4dc1-816f-ac356033884e",
+							"id": "7618e8b3-eb0e-4c11-9693-67362ce10cc7",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -1143,7 +1059,7 @@
 					},
 					"response": [
 						{
-							"id": "b61a723a-e7b7-4963-9601-e607660f6147",
+							"id": "a91347df-c7e1-4714-81e6-81affbeb6f33",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -1221,7 +1137,7 @@
 					},
 					"response": [
 						{
-							"id": "34bc23e7-f937-46cb-ac24-c7a6da9b85b3",
+							"id": "277daa2c-b73f-4837-b7a2-dab143be0309",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -1304,7 +1220,7 @@
 					},
 					"response": [
 						{
-							"id": "67000f72-bba2-460e-9f9c-079f20cf49d1",
+							"id": "56124702-66b8-460d-b526-921c9c700114",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -1472,7 +1388,7 @@
 					},
 					"response": [
 						{
-							"id": "b81c0f52-2c05-4f3e-adfc-02cc74f3e935",
+							"id": "5f59a0bb-63a8-4b17-9502-43bad6e97e58",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -1550,7 +1466,7 @@
 					},
 					"response": [
 						{
-							"id": "f2dc47d9-c37a-4bf4-8692-93a16d0e97c4",
+							"id": "0f576ddb-8cfa-45e8-8e2f-e681f786d440",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -1628,7 +1544,7 @@
 					},
 					"response": [
 						{
-							"id": "51a7312e-b638-4992-84a3-fb5697f0b65b",
+							"id": "cbc09b96-0854-49c0-b9a2-f57b5ace1913",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1706,7 +1622,7 @@
 					},
 					"response": [
 						{
-							"id": "fad2142b-abb8-480c-bb76-5cc412f56f52",
+							"id": "ef31be6e-805f-41ea-b197-b85b42a83f06",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1784,7 +1700,7 @@
 					},
 					"response": [
 						{
-							"id": "a6ce7e21-f067-4fd5-8329-c5be19ac68d7",
+							"id": "939777db-df8a-4c21-bbc3-8162d9ec2e67",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1862,7 +1778,7 @@
 					},
 					"response": [
 						{
-							"id": "26bcd79d-f979-4a1a-8940-908f55d69f5f",
+							"id": "8f20f445-290b-484c-bfca-3e6dffb7b2ac",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1940,7 +1856,7 @@
 					},
 					"response": [
 						{
-							"id": "9f93f607-2521-4bb7-b853-b738c5246c99",
+							"id": "4ee4f623-c8e7-4c4b-8861-260b50167832",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1996,230 +1912,7 @@
 			]
 		},
 		{
-			"name": "VirtualSensorNet OMCP",
-			"description": "VirtualSensorNet OMCP endponts.",
-			"item": [
-				{
-					"name": "omcp://virtualsensornet.osiris/datatype",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/datatype/",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all DataTypes from VirtualSensorNet"
-					},
-					"response": [
-						{
-							"id": "2ecdf30d-fb1b-421a-90ad-70358dd2e523",
-							"name": "response_example_1",
-							"originalRequest": {
-								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"enabled": true,
-										"description": "The mime type of this content"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"enabled": true
-									},
-									{
-										"key": "uri",
-										"value": "omcp://virtualsensornet.osiris/datatype/",
-										"enabled": true
-									}
-								],
-								"body": {}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"_postman_previewtype": "text",
-							"header": [
-								{
-									"name": "Content-Length",
-									"key": "Content-Length",
-									"value": "91",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"name": "Content-Type",
-									"key": "Content-Type",
-									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
-								},
-								{
-									"name": "Date",
-									"key": "Date",
-									"value": "Sun, 09 Apr 2017 22:57:22 GMT",
-									"description": "The date and time that the message was sent"
-								}
-							],
-							"cookie": [],
-							"responseTime": 64,
-							"body": "[{\"id\":1,\"displayName\":\"pressure\",\"type\":\"number\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}]"
-						}
-					]
-				},
-				{
-					"name": "omcp://virtualsensornet.osiris/link",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/link/",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all Link sensors from VirtualSensorNet"
-					},
-					"response": []
-				},
-				{
-					"name": "omcp://virtualsensornet.osiris/vsensor",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/vsensor/",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all virtual sensors from VirtualSensorNet"
-					},
-					"response": []
-				},
-				{
-					"name": "omcp://virtualsensornet.osiris/composite",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/composite/",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all composite sensors from VirtualSensorNet"
-					},
-					"response": []
-				},
-				{
-					"name": "omcp://virtualsensornet.osiris/blending",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/blending/",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all blending sensors from VirtualSensorNet"
-					},
-					"response": []
-				},
-				{
-					"name": "omcp://virtualsensornet.osiris/function",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/omcp",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
-							},
-							{
-								"key": "uri",
-								"value": "omcp://virtualsensornet.osiris/function",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get all functions from VirtualSensorNet"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "VirtualSensorNet REST",
+			"name": "VirtualSensorNet",
 			"description": "VirtualSensorNet REST endponits.",
 			"item": [
 				{
@@ -2244,7 +1937,7 @@
 					},
 					"response": [
 						{
-							"id": "d10d2afc-40c7-43e5-91ed-c22b44865b09",
+							"id": "ac2c5da5-8fb0-4412-b663-c792484e4760",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/virtualsensors",
@@ -2273,53 +1966,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Tue, 02 May 2017 02:39:30 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 122,
+							"responseTime": "122",
 							"body": "[{\"id\":6,\"label\":\"composite-Tue, 02 May 2017 02:34:53 GMT\",\"state\":\"UPDATED\",\"creationTimestampInMillis\":0,\"creationPrecisionInNano\":0,\"acquisitionTimestampInMillis\":0,\"storageTimestampInMillis\":0,\"creationInterval\":0,\"creationIntervalTimeUnit\":\"MILLISECONDS\",\"lastModified\":1493692493907,\"sensorType\":\"COMPOSITE\",\"packingTimestampInMillis\":1493692770469,\"valuesTo\":[{\"name\":\"pressaozinha\",\"type\":\"NUMBER\",\"value\":null,\"unit\":\"pascal\",\"symbol\":\"P\",\"id\":6}],\"creationTimestampInNano\":0,\"fetchingTimestampInMillis\":0},{\"id\":5,\"label\":\"link-Mon, 01 May 2017 19:55:22 GMT\",\"state\":\"NEW\",\"creationTimestampInMillis\":0,\"creationPrecisionInNano\":0,\"acquisitionTimestampInMillis\":0,\"storageTimestampInMillis\":0,\"creationInterval\":0,\"creationIntervalTimeUnit\":\"MILLISECONDS\",\"lastModified\":1493668522161,\"sensorType\":\"LINK\",\"packingTimestampInMillis\":1493692770469,\"valuesTo\":[{\"name\":\"temperature\",\"type\":\"NUMBER\",\"value\":null,\"unit\":\"fahrenheit\",\"symbol\":\"Fº\",\"id\":7},{\"name\":\"pressaozinha\",\"type\":\"NUMBER\",\"value\":null,\"unit\":\"pascal\",\"symbol\":\"P\",\"id\":6}],\"creationTimestampInNano\":0,\"fetchingTimestampInMillis\":0},{\"id\":3,\"label\":\"link-Mon, 01 May 2017 18:37:40 GMT\",\"state\":\"NEW\",\"creationTimestampInMillis\":0,\"creationPrecisionInNano\":0,\"acquisitionTimestampInMillis\":0,\"storageTimestampInMillis\":0,\"creationInterval\":0,\"creationIntervalTimeUnit\":\"MILLISECONDS\",\"lastModified\":1493663860864,\"sensorType\":\"LINK\",\"packingTimestampInMillis\":1493692770469,\"valuesTo\":[{\"name\":\"pressure\",\"type\":\"NUMBER\",\"value\":null,\"unit\":\"pascal\",\"symbol\":\"P\",\"id\":5}],\"creationTimestampInNano\":0,\"fetchingTimestampInMillis\":0}]"
 						}
 					]
@@ -2373,7 +2066,7 @@
 					},
 					"response": [
 						{
-							"id": "c45829c4-7ba8-4033-90fd-af4af8eccb6d",
+							"id": "8726a469-005d-4692-b203-6b9323795e70",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
@@ -2402,23 +2095,23 @@
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 09 Apr 2017 22:57:10 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 40,
+							"responseTime": "40",
 							"body": "{\"id\":0,\"displayName\":\"luminosity\",\"type\":\"NUMBER\",\"unit\":\"candela\",\"symbol\":\"C\",\"usedBy\":0}"
 						}
 					]
@@ -2445,7 +2138,7 @@
 					},
 					"response": [
 						{
-							"id": "95b4644d-7acb-4c83-8acf-5b1968a0dfae",
+							"id": "4c0232f2-60d9-49b0-b1b7-99a60a13a022",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2474,23 +2167,23 @@
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 09 Apr 2017 22:56:52 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 115,
+							"responseTime": "115",
 							"body": "[{\"id\":1,\"name\":\"pressure\",\"type\":\"NUMBER\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}]"
 						}
 					]
@@ -2517,7 +2210,7 @@
 					},
 					"response": [
 						{
-							"id": "80ea2d5a-a51f-4edd-90a5-de982ece16a1",
+							"id": "665d6b88-eb0a-452a-8eac-3a8aee4ee958",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2546,23 +2239,23 @@
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Sun, 09 Apr 2017 22:56:52 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 115,
+							"responseTime": "115",
 							"body": "[{\"id\":1,\"name\":\"pressure\",\"type\":\"NUMBER\",\"unit\":\"pascal\",\"symbol\":\"P\",\"usedBy\":0}]"
 						}
 					]
@@ -2666,7 +2359,7 @@
 					},
 					"response": [
 						{
-							"id": "ce338d1e-5fbe-4752-b5dc-730e5c081018",
+							"id": "1e3fb4c6-f71a-4452-858e-c21ed7365e8c",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
@@ -2695,53 +2388,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Mon, 01 May 2017 00:31:35 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 365,
+							"responseTime": "365",
 							"body": "{\"id\":0,\"label\":\"linkId-77670397-0b11-4d23-8956-472c6ab341c8\",\"sensorId\":\"sensorId-6a8f3b15-6c83-4f28-9913-0c97c33d7315\",\"collectorId\":\"collectorId-0213eccd-d481-4d20-be91-192506090630\",\"networkId\":\"networkId-643757f4-f00c-46b3-8e3b-61d6de2879ae\",\"fields\":[{\"id\":0,\"name\":\"pressaozinha\",\"dataTypeId\":1,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0}]}"
 						}
 					]
@@ -2749,7 +2442,7 @@
 				{
 					"name": "/virtualsensornet/links/mock/{sensorId}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock/sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e",
 						"method": "GET",
 						"header": [
 							{
@@ -2768,10 +2461,10 @@
 					},
 					"response": [
 						{
-							"id": "153b1f2b-0adc-4a73-a1f0-b84e60f5e238",
-							"name": "response_example_01",
+							"id": "95e5c0e3-820e-4583-ae79-bc594397b73c",
+							"name": "response_example",
 							"originalRequest": {
-								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock/sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e",
 								"method": "GET",
 								"header": [
 									{
@@ -2797,54 +2490,54 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Type",
 									"key": "Content-Type",
 									"value": "application/json;charset=UTF-8",
-									"description": "The mime type of this content"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
-									"value": "Mon, 01 May 2017 00:31:35 GMT",
-									"description": "The date and time that the message was sent"
+									"value": "Mon, 08 May 2017 18:50:38 GMT",
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "Transfer-Encoding",
 									"key": "Transfer-Encoding",
 									"value": "chunked",
-									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 365,
-							"body": "{\"id\":0,\"label\":\"linkId-77670397-0b11-4d23-8956-472c6ab341c8\",\"sensorId\":\"sensorId-6a8f3b15-6c83-4f28-9913-0c97c33d7315\",\"collectorId\":\"collectorId-0213eccd-d481-4d20-be91-192506090630\",\"networkId\":\"networkId-643757f4-f00c-46b3-8e3b-61d6de2879ae\",\"fields\":[{\"id\":0,\"name\":\"pressaozinha\",\"dataTypeId\":1,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0}]}"
+							"responseTime": "338",
+							"body": "{\"id\":0,\"label\":\"link-Mon, 08 May 2017 18:50:37 GMT\",\"sensorId\":\"sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e\",\"collectorId\":\"collectorId-db0e3119-a875-4c3b-9aa7-7649ca01441c\",\"networkId\":\"networkId-d3555779-dccf-4ca6-b495-eb8f40da935a\",\"fields\":[{\"id\":0,\"name\":\"temperature\",\"dataTypeId\":1,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0},{\"id\":0,\"name\":\"luminosity\",\"dataTypeId\":4,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0}]}"
 						}
 					]
 				},
@@ -2921,13 +2614,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"label\": \"linkId-39aee080-3d05-4bd8-8e3c-2d93f4452d05\",\n  \"sensorId\": \"sensorId-45625355-c2d3-4727-8580-a819f425dede\",\n  \"collectorId\": \"collectorId-3d5777ab-2bd2-492d-bbce-3f61bd0550f4\",\n  \"networkId\": \"networkId-ff26988e-f9ea-4cc2-93e8-db68b8cb80ff\",\n  \"fields\": \n    {\n      \"pressaozinha\" : 1,\n      \"temperature\" : 3\n    }\n}"
+							"raw": "{\n  \"label\": \"link-Mon, 08 May 2017 19:17:15 GMT\",\n  \"sensorId\": \"sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e\",\n  \"collectorId\": \"collectorId-db0e3119-a875-4c3b-9aa7-7649ca01441c\",\n  \"networkId\": \"networkId-d3555779-dccf-4ca6-b495-eb8f40da935a\",\n  \"fields\": \n    {\n      \"temperature\" : 1,\n      \"luminosity\" : 4\n    }\n}"
 						},
 						"description": "Create a Link Sensor on VirtualSensorNet"
 					},
 					"response": [
 						{
-							"id": "7b79d79b-dab2-430e-bbee-2f81c29c1b91",
+							"id": "d009c034-33e1-4f55-85fe-0a5af1c15ef7",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -2965,53 +2658,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Length",
 									"key": "Content-Length",
 									"value": "0",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Mon, 01 May 2017 18:19:11 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Location",
 									"key": "Location",
 									"value": "omcp://virtualsensornet/link/1",
-									"description": "Used in redirection, or when a new resource has been created."
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 833,
+							"responseTime": "833",
 							"body": ""
 						}
 					]
@@ -3040,13 +2733,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"sensorId\": \"sensorId-7f2c5829-6633-4fea-be65-9e10f40d3e1b\",\n  \"collectorId\": \"collectorId-ed2aa6ac-3323-4576-a888-37d785f6674e\",\n  \"networkId\": \"networkId-f4ae3c7a-a71a-4341-b4ff-efe3ef2eac52\",\n  \"fields\" : {\n  \t\t\"passarinho\" : 1\n\t}\n}"
+							"raw": "{\n  \"sensorId\": \"sensorId-7f2c5829-6633-4fea-be65-9e10f40d3e1b\",\n  \"collectorId\": \"collectorId-ed2aa6ac-3323-4576-a888-37d785f6674e\",\n  \"networkId\": \"networkId-f4ae3c7a-a71a-4341-b4ff-efe3ef2eac52\",\n  \"fields\" : {\n      \"passarinho\" : 1\n  }\n}"
 						},
 						"description": "Update a Link Sensor from VirtualSensorNet"
 					},
 					"response": [
 						{
-							"id": "b46214fe-371d-4b42-9697-53686a5d0777",
+							"id": "c0843eed-3687-4f06-84f2-cb6ac179f6f5",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -3084,53 +2777,53 @@
 									"name": "Cache-Control",
 									"key": "Cache-Control",
 									"value": "no-cache, no-store, max-age=0, must-revalidate",
-									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+									"description": ""
 								},
 								{
 									"name": "Content-Length",
 									"key": "Content-Length",
 									"value": "0",
-									"description": "The length of the response body in octets (8-bit bytes)"
+									"description": ""
 								},
 								{
 									"name": "Date",
 									"key": "Date",
 									"value": "Mon, 01 May 2017 18:19:11 GMT",
-									"description": "The date and time that the message was sent"
+									"description": ""
 								},
 								{
 									"name": "Expires",
 									"key": "Expires",
 									"value": "0",
-									"description": "Gives the date/time after which the response is considered stale"
+									"description": ""
 								},
 								{
 									"name": "Location",
 									"key": "Location",
 									"value": "omcp://virtualsensornet/link/1",
-									"description": "Used in redirection, or when a new resource has been created."
+									"description": ""
 								},
 								{
 									"name": "Pragma",
 									"key": "Pragma",
 									"value": "no-cache",
-									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+									"description": ""
 								},
 								{
 									"name": "X-Content-Type-Options",
 									"key": "X-Content-Type-Options",
 									"value": "nosniff",
-									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+									"description": ""
 								},
 								{
 									"name": "X-XSS-Protection",
 									"key": "X-XSS-Protection",
 									"value": "1; mode=block",
-									"description": "Cross-site scripting (XSS) filter"
+									"description": ""
 								}
 							],
 							"cookie": [],
-							"responseTime": 833,
+							"responseTime": "833",
 							"body": ""
 						}
 					]
@@ -3186,6 +2879,36 @@
 						],
 						"body": {},
 						"description": "Get a random mocked Composite virtual sensor object"
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/composites/mock",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/mock",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[1]"
+						},
+						"description": "Get a mocked Composite sensor based on a list of existing virtual sensors ids."
 					},
 					"response": []
 				},
@@ -3262,7 +2985,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"fieldIds\" : [5,7]\n}"
+							"raw": "{\n  \"fieldIds\" : [2,1]\n}"
 						},
 						"description": "Create a new Composite sensor on VirtualSensorNet module"
 					},
@@ -3372,7 +3095,7 @@
 				{
 					"name": "/virtualsensornet/blendings/{blendingId}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/{blendingId}",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/88",
 						"method": "GET",
 						"header": [
 							{
@@ -3388,6 +3111,75 @@
 						],
 						"body": {},
 						"description": "Get a specific blending sensor from VirtualSensorNet module."
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/blendings",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"functionName\" : \"sum.temperature.celsius\",\n\t\"callIntervalInMillis\" : 1,\n\t\"dataTypeId\" : 1\n}"
+						},
+						"description": "Creates a new Blending sensor on VirtualSensorNet module."
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/blendings/{blendingId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/{blendingId}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Updates an existing Blending sensor from VirtualSensorNet module."
+					},
+					"response": []
+				},
+				{
+					"name": "/virtualsensornet/blendings/{blendingId}",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/{blendingId}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Removes an existing Blending sensor from VirtualSensorNet module."
 					},
 					"response": []
 				},

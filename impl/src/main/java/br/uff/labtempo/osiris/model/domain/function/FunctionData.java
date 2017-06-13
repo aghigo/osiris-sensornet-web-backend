@@ -32,7 +32,7 @@ public class FunctionData {
     private String name;
 
     @NotNull @NotEmpty
-    private String fullName;
+    private String operationName;
 
     @NotNull @NotEmpty
     private String omcpInterfaceUri;

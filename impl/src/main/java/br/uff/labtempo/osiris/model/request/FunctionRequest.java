@@ -24,19 +24,24 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class FunctionRequest {
     /**
-     * FunctionModuleFactory name
+     * Function operation name
      * example: sum, average, min, max
      */
     @NotNull @NotEmpty
-    private String functionName;
+    private String operationName;
 
     /**
+     * Function module brief description
      * Example:
-     * FunctionModuleFactory that calculates the average/sum/min/max of virtual sensors
+     * FunctionModuleFactory that calculates the average/sum/min/max of temperatures
      */
     @NotNull @NotEmpty
     private String description;
 
+    /**
+     * valid DataTypeId that represents the unit of the values to be calculated by the function
+     * e.g.: temperature, pressure, etc.
+     */
     private long dataTypeId;
 
     /**

@@ -43,11 +43,11 @@ public class FunctionModuleFactory {
     @Autowired
     private DataTypeRepository dataTypeRepository;
 
-    public FunctionModule getInstance(String name, String description, String implementation, long dataTypeId) throws IllegalArgumentException, AbstractRequestException {
-        if(name == null || name.trim().isEmpty()) {
+    public FunctionModule getInstance(String operationName, String description, String implementation, long dataTypeId) throws IllegalArgumentException, AbstractRequestException {
+        if(operationName == null || operationName.trim().isEmpty()) {
             throw new IllegalArgumentException("Empty name.");
         }
-        name = name.trim().toLowerCase();
+        operationName = operationName.trim().toLowerCase();
 
         if(description == null || description.trim().isEmpty()) {
             throw new IllegalArgumentException("No description provided.");
@@ -66,19 +66,19 @@ public class FunctionModuleFactory {
         }
 
         FunctionData functionData = new FunctionData();
-        functionData.setName(name);
+        functionData.setOperationName(operationName);
+        functionData.setName(this.getCompleteName(operationName, dataTypeVsnTo));
         functionData.setDescription(description);
         functionData.setImplementation(implementation);
         functionData.setParamType(this.functionModuleConfig.getDefaultParamType());
         functionData.setDataTypeId(dataTypeVsnTo.getId());
         functionData.setDataTypeName(dataTypeVsnTo.getDisplayName());
         functionData.setDataTypeUnit(dataTypeVsnTo.getUnit());
-        functionData.setFullName(String.format(this.functionModuleConfig.getFullNameTemplate(), name));
         functionData.setOperation(this.functionModuleConfig.getDefaultOperation());
-        functionData.setOmcpUri(String.format(this.functionModuleConfig.getOmcpUriTemplate(), name));
-        functionData.setOmcpInterfaceUri((String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), name)));
-        functionData.setRestInterfaceUri(String.format(this.functionModuleConfig.getRestInterfaceUriTemplate(), name));
-        functionData.setDataUri(String.format(this.functionModuleConfig.getRestDataUriTemplate(), name));
+        functionData.setOmcpUri(String.format(this.functionModuleConfig.getOmcpUriTemplate(), functionData.getName()));
+        functionData.setOmcpInterfaceUri((String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), functionData.getName())));
+        functionData.setRestInterfaceUri(String.format(this.functionModuleConfig.getRestInterfaceUriTemplate(), functionData.getName()));
+        functionData.setDataUri(String.format(this.functionModuleConfig.getRestDataUriTemplate(), functionData.getName()));
 
         List<FunctionOperation> functionOperationList = new ArrayList<>();
         functionOperationList.add(this.functionModuleConfig.getDefaultOperation());
@@ -87,9 +87,9 @@ public class FunctionModuleFactory {
         requestParams.add(new ParamFnTo(dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit(), this.functionModuleConfig.getDefaultParamType(), true));
 
         List<ParamFnTo> responseParams = new ArrayList<>();
-        responseParams.add(new ParamFnTo(name, dataTypeVsnTo.getUnit(), this.functionModuleConfig.getDefaultParamType(), false));
+        responseParams.add(new ParamFnTo(operationName, dataTypeVsnTo.getUnit(), this.functionModuleConfig.getDefaultParamType(), false));
 
-        InterfaceFnTo interfaceFnTo = new InterfaceFnTo(name, description, String.format(this.functionModuleConfig.getOmcpUriTemplate(), name), functionOperationList, requestParams, responseParams);
+        InterfaceFnTo interfaceFnTo = new InterfaceFnTo(functionData.getName(), description, String.format(this.functionModuleConfig.getOmcpUriTemplate(), functionData.getName()), functionOperationList, requestParams, responseParams);
 
         FunctionModuleDefaultImpl functionModuleDefaultImpl = new FunctionModuleDefaultImpl((RabbitClient) this.functionConnectionFactory.getConnection(), interfaceFnTo, implementation);
 
@@ -97,13 +97,12 @@ public class FunctionModuleFactory {
         String username = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getUsername();
         String password = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getPassword();
 
-        OmcpServer omcpServer = new RabbitServer(functionData.getFullName(), host, username, password);
+        OmcpServer omcpServer = new RabbitServer(functionData.getName() + ".function", host, username, password);
         omcpServer.setHandler(functionModuleDefaultImpl);
 
         FunctionModule functionModule = FunctionModule.builder()
                 .functionData(functionData)
                 .omcpServer(omcpServer)
-                .running(false)
                 .build();
 
         return functionModule;
@@ -126,5 +125,9 @@ public class FunctionModuleFactory {
         } catch (EvalError evalError) {
             throw new IllegalArgumentException("Invalid formula implementation syntax ("+ evalError.getMessage() + ")");
         }
+    }
+
+    private String getCompleteName(String operationName, DataTypeVsnTo dataTypeVsnTo) {
+        return operationName + "." + dataTypeVsnTo.getDisplayName() + "." + dataTypeVsnTo.getUnit();
     }
 }

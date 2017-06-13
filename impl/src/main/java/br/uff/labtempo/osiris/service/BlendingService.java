@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.common.exceptions.BadRequestException;
+import br.uff.labtempo.omcp.common.exceptions.InternalServerErrorException;
 import br.uff.labtempo.osiris.generator.BlendingGenerator;
 import br.uff.labtempo.osiris.mapper.BlendingMapper;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
@@ -104,37 +105,48 @@ public class BlendingService {
         blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), blendingRequest.getDataTypeId());
         URI blendingUri = this.blendingRepository.create(blendingVsnTo);
         long blendingId = OmcpUtil.getIdFromUri(blendingUri);
-        blendingVsnTo = this.blendingRepository.getById(blendingId);
 
-        FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
-        URI functionVsnuri = this.vsnFunctionRepository.create(functionVsnTo);
-        long functionVsnId = OmcpUtil.getIdFromUri(functionVsnuri);
-        functionVsnTo = this.vsnFunctionRepository.getById(functionVsnId);
+        try {
+            blendingVsnTo = this.blendingRepository.getById(blendingId);
 
-        blendingVsnTo.setFunction(functionVsnTo);
-        blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
-        blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
+            FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+            URI functionVsnuri = this.vsnFunctionRepository.create(functionVsnTo);
+            long functionVsnId = OmcpUtil.getIdFromUri(functionVsnuri);
+            functionVsnTo = this.vsnFunctionRepository.getById(functionVsnId);
 
-        List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
-        for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
-            for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
-                if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueVsnTo.getUnit().equals(interfaceFnTo.getRequestParams().get(0).getUnit())) {
-                    blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
-                    break;
+            blendingVsnTo.setFunction(functionVsnTo);
+            blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
+            blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
+
+            List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
+            for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
+                for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
+                    if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueVsnTo.getUnit().equals(interfaceFnTo.getRequestParams().get(0).getUnit())) {
+                        blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
+                        break;
+                    }
                 }
             }
+            if(blendingVsnTo.getRequestParams().isEmpty()) {
+                throw new BadRequestException(String.format("Could not create Blending sensor: no virtual sensor with field of type '%s' and unit '%s' was found for the request parameters", dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit()));
+            }
+
+            List<? extends FieldTo> fields = blendingVsnTo.getFields();
+            FieldTo fieldTo = fields.get(0);
+            blendingVsnTo.addResponseParam(fieldTo.getId(), interfaceFnTo.getResponseParams().get(0).getName());
+
+            this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
+
+            return blendingUri;
+        } catch (Exception exc) {
+            try {
+                this.blendingRepository.delete(blendingId);
+                this.vsnFunctionRepository.delete(blendingVsnTo.getFunctionId());
+                throw new InternalServerErrorException("Failed to create blending sensor. rollback performed.");
+            } catch (Exception e) {
+                   throw new InternalServerErrorException("Failed to create blending sensor. Failed to perform rollback.");
+            }
         }
-        if(blendingVsnTo.getRequestParams().isEmpty()) {
-            throw new BadRequestException(String.format("Could not create Blending sensor: no virtual sensor with field of type '%s' and unit '%s' was found for the request parameters", dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit()));
-        }
-
-        List<? extends FieldTo> fields = blendingVsnTo.getFields();
-        FieldTo fieldTo = fields.get(0);
-        blendingVsnTo.addResponseParam(fieldTo.getId(), interfaceFnTo.getResponseParams().get(0).getName());
-
-        this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
-
-        return blendingUri;
     }
 
     /**
