@@ -67,6 +67,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>22.0</version>
+		</dependency>
+
+
 		<!-- H2 in-memory relational database (local development/test purposes only) -->
 		<!--<dependency>-->
 			<!--<groupId>com.h2database</groupId>-->

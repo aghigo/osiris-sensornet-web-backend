@@ -18,7 +18,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class FunctionModule implements Runnable {
     private FunctionData functionData;
-    Thread thread;
     private OmcpServer omcpServer;
 
     @Override

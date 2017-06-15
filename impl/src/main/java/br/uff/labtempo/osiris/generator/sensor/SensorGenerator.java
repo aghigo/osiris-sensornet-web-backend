@@ -32,13 +32,16 @@ public class SensorGenerator {
         this.sensorConsumableRuleGenerator = new SensorConsumableRuleGenerator();
     }
 
+    public SensorCoTo getSensorCoTo() {
+        return this.getSensorCoTo(this.getId());
+    }
+
     /**
      * Generate a random SensorCoTo mock object
      * @see SensorCoTo
      * @return SensorCoTo
      */
-    public SensorCoTo getSensorCoTo() {
-        String id = getId();
+    public SensorCoTo getSensorCoTo(String id) {
         State state = State.NEW;
         long captureDateInMillis = new Date().getTime();
         int captureDateInNano = (int) TimeUnit.MILLISECONDS.convert(captureDateInMillis, TimeUnit.NANOSECONDS);
