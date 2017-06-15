@@ -3,9 +3,7 @@ package br.uff.labtempo.osiris.schedule.mock;
 import br.uff.labtempo.osiris.generator.collector.CollectorGenerator;
 import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
-import br.uff.labtempo.osiris.model.domain.sensor.Sensor;
 import br.uff.labtempo.osiris.repository.SampleRepository;
-import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
@@ -13,8 +11,6 @@ import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.data.ConsumableRuleTo;
 import br.uff.labtempo.osiris.to.common.data.ConsumableTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
-import br.uff.labtempo.osiris.utils.announcement.Announcement;
-import br.uff.labtempo.osiris.utils.announcement.core.AnnouncementManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -48,18 +44,15 @@ public class CollectorModuleMockSchedule {
     @Autowired
     private SampleRepository sampleRepository;
 
-    @Scheduled(cron="${virtualsensornet.schedule.mock.link.cron:*/2 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/2 * * * * ?}")
     public void collectMockSensors() {
-        if(this.sampleCoToList == null) {
-            this.sampleCoToList = new ArrayList<>();
-        }
         if(this.sampleCoToList.size() < MAX_SENSORS) {
             SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
             SampleCoTo sampleCoTo = new SampleCoTo(this.networkCoTo, this.collectorCoTo, sensorCoTo);
             this.sampleCoToList.add(sampleCoTo);
-        }
-        if(this.sampleCoToList.size() == 1) {
-            return;
+            if(this.sampleCoToList.size() == 1) {
+                return;
+            }
         }
         for(int i = 0; i < this.sampleCoToList.size(); i++) {
             SampleCoTo sample = this.sampleCoToList.get(i);

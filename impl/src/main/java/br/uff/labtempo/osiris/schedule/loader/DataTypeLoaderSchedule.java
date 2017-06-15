@@ -23,8 +23,8 @@ import java.util.List;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("virtualsensornet_loader_schedule")
-public class VirtualSensorNetLoaderSchedule {
+@Profile("datatype_loader_schedule")
+public class DataTypeLoaderSchedule {
 
     @Autowired
     private DataTypeRepository dataTypeRepository;
