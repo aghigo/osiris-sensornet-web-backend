@@ -54,18 +54,28 @@ public class CompositeFromLinkSyncSchedule {
         log.info("Beginnning synchronization between Link and Composite sensors...");
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
-            List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
-            CompositeVsnTo compositeVsnTo = new CompositeVsnTo();
-            for(LinkVsnTo linkVsnTo : linkVsnToList) {
-                for(FieldTo fieldTo : linkVsnTo.getFields()) {
-                    if(fieldTo.getDataTypeId() == dataTypeVsnTo.getId()) {
-                        compositeVsnTo.bindToField(fieldTo);
-                    }
+            List<CompositeVsnTo> compositeVsnToList = this.compositeRepository.getAll();
+            boolean found = false;
+            for(CompositeVsnTo compositeVsnTo : compositeVsnToList) {
+                if(compositeVsnTo.getBoundFields().get(0).getDataTypeId() == dataTypeVsnTo.getId()) {
+                    found = true;
+                    break;
                 }
             }
-            if(!compositeVsnTo.getBoundFields().isEmpty()) {
-                URI uri = this.compositeRepository.create(compositeVsnTo);
-                log.info(String.format("Composite sensor created [%s]", uri.getPath()));
+            if(!found) {
+                List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
+                CompositeVsnTo compositeVsnTo = new CompositeVsnTo();
+                for(LinkVsnTo linkVsnTo : linkVsnToList) {
+                    for(FieldTo fieldTo : linkVsnTo.getFields()) {
+                        if(fieldTo.getDataTypeId() == dataTypeVsnTo.getId()) {
+                            compositeVsnTo.bindToField(fieldTo);
+                        }
+                    }
+                }
+                if(!compositeVsnTo.getBoundFields().isEmpty()) {
+                    URI uri = this.compositeRepository.create(compositeVsnTo);
+                    log.info(String.format("Composite sensor created [%s]", uri.getPath()));
+                }
             }
         }
         log.info("Composite synchronization completed...");

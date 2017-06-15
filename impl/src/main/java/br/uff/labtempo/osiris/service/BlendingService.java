@@ -87,6 +87,7 @@ public class BlendingService {
 
     /**
      * Create a new Blending sensor on VirtualSensorNet module
+     * based on a datatype, one function module and all virtual sensors field of the correspondent dataType
      * @param blendingRequest
      * @return URI with the new Blending location
      * @throws URISyntaxException
@@ -145,6 +146,76 @@ public class BlendingService {
                 throw new InternalServerErrorException("Failed to create blending sensor. rollback performed.");
             } catch (Exception e) {
                    throw new InternalServerErrorException("Failed to create blending sensor. Failed to perform rollback.");
+            }
+        }
+    }
+
+    /**
+     * Creates a new Blending sensor on VirtualSensorNet module
+     * based on an existing and running function module,
+     * one datatype and all composite sensors with fields of the
+     * corresponding datatype id.
+     *
+     * @param blendingRequest
+     * @return
+     * @throws URISyntaxException
+     * @throws AbstractRequestException
+     */
+    public URI createByComposite(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
+        List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
+        if(functionDataList.isEmpty()) {
+            throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));
+        }
+
+        BlendingVsnTo blendingVsnTo = new BlendingVsnTo();
+        DataTypeVsnTo dataTypeVsnTo = this.dataTypeRepository.getById(blendingRequest.getDataTypeId());
+        InterfaceFnTo interfaceFnTo = this.functionModuleRepository.getInterface(blendingRequest.getFunctionName());
+
+        blendingVsnTo.createField(interfaceFnTo.getResponseParams().get(0).getName(), blendingRequest.getDataTypeId());
+        URI blendingUri = this.blendingRepository.create(blendingVsnTo);
+        long blendingId = OmcpUtil.getIdFromUri(blendingUri);
+
+        try {
+            blendingVsnTo = this.blendingRepository.getById(blendingId);
+
+            FunctionVsnTo functionVsnTo = new FunctionVsnTo(interfaceFnTo);
+            URI functionVsnuri = this.vsnFunctionRepository.create(functionVsnTo);
+            long functionVsnId = OmcpUtil.getIdFromUri(functionVsnuri);
+            functionVsnTo = this.vsnFunctionRepository.getById(functionVsnId);
+
+            blendingVsnTo.setFunction(functionVsnTo);
+            blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
+            blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
+
+            List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
+            for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
+                if(virtualSensorVsnTo.getSensorType().equals(VirtualSensorType.COMPOSITE)) {
+                    for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
+                        if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueVsnTo.getUnit().equals(interfaceFnTo.getRequestParams().get(0).getUnit())) {
+                            blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
+                            break;
+                        }
+                    }
+                }
+            }
+            if(blendingVsnTo.getRequestParams().isEmpty()) {
+                throw new BadRequestException(String.format("Could not create Blending sensor: no virtual sensor with field of type '%s' and unit '%s' was found for the request parameters", dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getUnit()));
+            }
+
+            List<? extends FieldTo> fields = blendingVsnTo.getFields();
+            FieldTo fieldTo = fields.get(0);
+            blendingVsnTo.addResponseParam(fieldTo.getId(), interfaceFnTo.getResponseParams().get(0).getName());
+
+            this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
+
+            return blendingUri;
+        } catch (Exception exc) {
+            try {
+                this.blendingRepository.delete(blendingId);
+                this.vsnFunctionRepository.delete(blendingVsnTo.getFunctionId());
+                throw new InternalServerErrorException("Failed to create blending sensor. rollback performed.");
+            } catch (Exception e) {
+                throw new InternalServerErrorException("Failed to create blending sensor. Failed to perform rollback.");
             }
         }
     }
