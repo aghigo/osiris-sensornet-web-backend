@@ -32,7 +32,7 @@ import java.util.List;
 @Profile("collector_mock_schedule")
 @EnableScheduling
 public class CollectorModuleMockSchedule {
-    private final long MAX_SENSORS = 50;
+    private final long MAX_SENSORS = 25;
     private List<SampleCoTo> sampleCoToList = new ArrayList<>();
     private NetworkCoTo networkCoTo = new NetworkGenerator().getNetworkCoto();
     private CollectorCoTo collectorCoTo = new CollectorGenerator().getCollectorCoTo();
