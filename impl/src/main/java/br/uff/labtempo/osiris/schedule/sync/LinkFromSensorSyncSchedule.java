@@ -1,9 +1,6 @@
 package br.uff.labtempo.osiris.schedule.sync;
 
-import br.uff.labtempo.osiris.factory.function.FunctionModuleFactory;
 import br.uff.labtempo.osiris.generator.link.LinkGenerator;
-import br.uff.labtempo.osiris.model.domain.function.FunctionData;
-import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.repository.*;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
@@ -15,13 +12,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Perform synchonizations between SensorNet and VirtualSensorNet
+ * Perform synchonizations between Link sensors and SensorNet sensors
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -29,11 +23,8 @@ import java.util.Map;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("virtualsensornet_sync_schedule")
+@Profile("link_sync_schedule")
 public class LinkFromSensorSyncSchedule {
-
-    @Autowired
-    private FunctionDataRepository functionDataRepository;
 
     @Autowired
     private NetworkRepository networkRepository;
@@ -50,18 +41,13 @@ public class LinkFromSensorSyncSchedule {
     @Autowired
     private LinkGenerator linkGenerator;
 
-    @Autowired
-    private FunctionModuleFactory functionModuleFactory;
-
-    private Map<FunctionModule, Thread> functionModuleThreadMap = new HashMap<>();
-
     /**
      * Synchronize all Sensors from SensorNet with Link sensors on VirtualSensorNet
      * Verify each sensor from SensorNet
      * if does not exist any associated virtual Link sensor, create on VirtualSensorNet
      * a new Link sensor with Sensor data (sensor id, collector id, network id).
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/2 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/5 * * * * ?}")
     public void createLinkSensorsFromSensorNetSensors() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();

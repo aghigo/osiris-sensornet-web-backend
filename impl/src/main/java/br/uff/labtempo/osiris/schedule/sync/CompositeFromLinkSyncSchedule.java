@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Perform synchonizations between SensorNet and VirtualSensorNet
+ * Perform synchonizations between Composite and Link sensors
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -25,41 +25,17 @@ import java.util.Map;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("virtualsensornet_sync_schedule")
+@Profile("composite_sync_schedule")
 public class CompositeFromLinkSyncSchedule {
-
-    @Autowired
-    private FunctionDataRepository functionDataRepository;
-
-    @Autowired
-    private NetworkRepository networkRepository;
-
-    @Autowired
-    private SensorRepository sensorRepository;
-
-    @Autowired
-    private DataTypeRepository dataTypeRepository;
-
-    @Autowired
-    private LinkRepository linkRepository;
-
-    @Autowired
-    private LinkGenerator linkGenerator;
-
-    @Autowired
-    private FunctionModuleFactory functionModuleFactory;
-
-    private Map<FunctionModule, Thread> functionModuleThreadMap = new HashMap<>();
 
     /**
      * Creates Composite sensors on VirtualSensorNet based on
      * VirtualSensorNet Link sensor compositions of the same DataType
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.composite.cron:*/2 * * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.composite.cron:*/5 * * * * ?}")
     public void createCompositeSensorsFromLinkSensors() throws Exception {
         log.info("Beginnning synchronization between Link and Composite sensors...");
-
         log.info("Composite synchronization completed...");
     }
 }

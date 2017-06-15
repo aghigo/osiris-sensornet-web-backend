@@ -1,16 +1,9 @@
 package br.uff.labtempo.osiris.schedule.sync;
 
-import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.factory.function.FunctionModuleFactory;
-import br.uff.labtempo.osiris.generator.link.LinkGenerator;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.repository.*;
-import br.uff.labtempo.osiris.to.common.data.ValueTo;
-import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
-import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
-import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
-import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -18,10 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,7 +24,7 @@ import java.util.Map;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("virtualsensornet_sync_schedule")
+@Profile("function_thread_sync_schedule")
 public class FunctionModuleThreadSyncSchedule {
 
     @Autowired
@@ -52,7 +43,7 @@ public class FunctionModuleThreadSyncSchedule {
      * because it was removed by another service.
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/2 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.function.thread.cron:*/5 * * * * ?}")
     public void handleFunctionModuleThreadsFromFunctionData() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();

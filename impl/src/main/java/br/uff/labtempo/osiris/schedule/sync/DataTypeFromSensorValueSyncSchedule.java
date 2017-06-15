@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Perform synchonizations between SensorNet and VirtualSensorNet
+ * Perform synchonizations between DataTypes and Sensors from SensorNet
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -33,7 +33,7 @@ import java.util.Map;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("virtualsensornet_sync_schedule")
+@Profile("datatype_sync_schedule")
 public class DataTypeFromSensorValueSyncSchedule {
 
     @Autowired
@@ -53,7 +53,7 @@ public class DataTypeFromSensorValueSyncSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:*/10 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:*/5 * * * * ?}")
     public void createDataTypesFromSensorValues() throws AbstractRequestException, URISyntaxException {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();

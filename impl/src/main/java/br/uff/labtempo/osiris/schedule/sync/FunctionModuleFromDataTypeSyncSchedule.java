@@ -12,12 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
- * Perform synchonizations between SensorNet and VirtualSensorNet
+ * Perform synchonizations between Function Modules and DataTypes
  * @author andre.ghigo
  * @since 1.8
  * @version 1.0
@@ -25,7 +26,7 @@ import java.util.*;
 @EnableScheduling
 @Service
 @Slf4j
-@Profile("function_from_datatype_sync_schedule")
+@Profile("function_sync_schedule")
 public class FunctionModuleFromDataTypeSyncSchedule {
 
     @Autowired
@@ -48,8 +49,8 @@ public class FunctionModuleFromDataTypeSyncSchedule {
     /**
      * Creates new Function Modules based on available DataTypes from VirtualSensorNet module
      * (if does not exist yet).
-     *
      */
+    @Scheduled(cron = "${sensornet.schedule.sync.function.cron:*/5 * * * * ?}")
     public void createFunctionModulesFromDataTypes() throws AbstractRequestException {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         Iterator<FunctionData> functionDataIterator = this.functionDataRepository.findAll().iterator();
