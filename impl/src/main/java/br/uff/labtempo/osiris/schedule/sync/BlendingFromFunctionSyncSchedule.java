@@ -4,17 +4,13 @@ import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.repository.*;
 import br.uff.labtempo.osiris.service.BlendingService;
-import br.uff.labtempo.osiris.service.FunctionService;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingBondVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.Iterator;
@@ -26,10 +22,8 @@ import java.util.List;
  * @since 1.8
  * @version 1.0
  */
-@EnableScheduling
-@Service
+@Component
 @Slf4j
-@Profile("blending_sync_schedule")
 public class BlendingFromFunctionSyncSchedule {
 
     private final long defaultCallIntervalInMillis = 2000;
@@ -64,7 +58,7 @@ public class BlendingFromFunctionSyncSchedule {
      *
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.blending.cron:*/5 * * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.blending.cron:*/5 * * * * ?}")
     public void createBlendingSensorsFromFunctionModules() throws Exception {
         log.info("Beginning synchronization between VSensors and Blendings...");
         List<CompositeVsnTo> compositeVsnToList = this.compositeRepository.getAll();

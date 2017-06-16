@@ -73,7 +73,7 @@ public class CollectorGenerator {
      * @return
      */
     public long getCaptureInterval() {
-        return new Date().getTime();
+        return 200;
     }
 
     /**
@@ -82,6 +82,6 @@ public class CollectorGenerator {
      * @return TimeUnit
      */
     public TimeUnit getCaptureIntervalTimeUnit() {
-        return this.timeUnits[(int) (Math.random() * this.timeUnits.length)];
+        return TimeUnit.MILLISECONDS;
     }
 }

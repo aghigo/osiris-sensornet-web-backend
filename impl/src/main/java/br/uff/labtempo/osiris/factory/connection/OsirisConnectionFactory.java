@@ -54,9 +54,7 @@ public class OsirisConnectionFactory {
     @PostConstruct
     public void createPool() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxIdle(10);
-        genericObjectPoolConfig.setMaxTotal(40);
-        genericObjectPoolConfig.setMinIdle(1);
+        genericObjectPoolConfig.setMaxTotal(100);
         this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password), genericObjectPoolConfig);
     }
 

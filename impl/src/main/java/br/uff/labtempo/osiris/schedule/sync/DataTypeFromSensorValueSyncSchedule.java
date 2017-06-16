@@ -1,28 +1,17 @@
 package br.uff.labtempo.osiris.schedule.sync;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
-import br.uff.labtempo.osiris.factory.function.FunctionModuleFactory;
-import br.uff.labtempo.osiris.generator.link.LinkGenerator;
-import br.uff.labtempo.osiris.model.domain.function.FunctionData;
-import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.repository.*;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
-import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Perform synchonizations between DataTypes and Sensors from SensorNet
@@ -30,10 +19,8 @@ import java.util.Map;
  * @since 1.8
  * @version 1.0
  */
-@EnableScheduling
-@Service
+@Component
 @Slf4j
-@Profile("datatype_sync_schedule")
 public class DataTypeFromSensorValueSyncSchedule {
 
     @Autowired
@@ -53,7 +40,7 @@ public class DataTypeFromSensorValueSyncSchedule {
      * @throws AbstractRequestException
      * @throws URISyntaxException
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:*/5 * * * * ?}")
+    //@Scheduled(cron = "${sensornet.schedule.sync.datatype.cron:*/5 * * * * ?}")
     public void createDataTypesFromSensorValues() throws AbstractRequestException, URISyntaxException {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();

@@ -129,6 +129,6 @@ public class FunctionModuleFactory {
     }
 
     private String getCompleteName(String operationName, DataTypeVsnTo dataTypeVsnTo) {
-        return operationName + "." + dataTypeVsnTo.getDisplayName() + "." + dataTypeVsnTo.getUnit();
+        return operationName + "-" + dataTypeVsnTo.getDisplayName() + "-" + dataTypeVsnTo.getUnit();
     }
 }

@@ -8,9 +8,7 @@ import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -20,10 +18,9 @@ import java.util.List;
  * @since 1.8
  * @version 1.0
  */
-@EnableScheduling
-@Service
+
+@Component
 @Slf4j
-@Profile("link_sync_schedule")
 public class LinkFromSensorSyncSchedule {
 
     @Autowired
@@ -47,7 +44,6 @@ public class LinkFromSensorSyncSchedule {
      * if does not exist any associated virtual Link sensor, create on VirtualSensorNet
      * a new Link sensor with Sensor data (sensor id, collector id, network id).
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/5 * * * * ?}")
     public void createLinkSensorsFromSensorNetSensors() throws Exception {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
         List<LinkVsnTo> linkVsnToList = this.linkRepository.getAll();
