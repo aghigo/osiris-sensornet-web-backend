@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -32,7 +32,7 @@ public class BlendingOmcpDao implements BlendingRepository {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
+    private OsirisConnectionFactory connection;
 
     /**
      * Get all Blending sensors from VirtualSensorNet module
@@ -43,9 +43,10 @@ public class BlendingOmcpDao implements BlendingRepository {
     @Override
     public List<BlendingVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.connection.getConnection();
             String uri = this.virtualSensorNetModuleConfig.getBlendingsUri();
             Response response = omcpClient.doGet(uri);
+            this.connection.closeConnection(omcpClient);
             if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
                 return new ArrayList<>();
             }
@@ -68,9 +69,10 @@ public class BlendingOmcpDao implements BlendingRepository {
     @Override
     public BlendingVsnTo getById(long blendingId) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.connection.getConnection();
             String uri = String.format(this.virtualSensorNetModuleConfig.getBlendingIdUri(), blendingId);
             Response response = omcpClient.doGet(uri);
+            this.connection.closeConnection(omcpClient);
             OmcpUtil.handleOmcpResponse(response);
             BlendingVsnTo blendingVsnTo = response.getContent(BlendingVsnTo.class);
             return blendingVsnTo;
@@ -90,9 +92,10 @@ public class BlendingOmcpDao implements BlendingRepository {
     @Override
     public URI create(BlendingVsnTo blendingVsnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.connection.getConnection();
             String uri = this.virtualSensorNetModuleConfig.getBlendingsUri();
             Response response = omcpClient.doPost(uri, blendingVsnTo);
+            this.connection.closeConnection(omcpClient);
             OmcpUtil.handleOmcpResponse(response);
             URI createdUri = new URI(response.getLocation());
             return createdUri;
@@ -111,9 +114,10 @@ public class BlendingOmcpDao implements BlendingRepository {
     @Override
     public void update(long blendingId, BlendingVsnTo blendingVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.connection.getConnection();
             String uri = String.format(this.virtualSensorNetModuleConfig.getBlendingIdUri(), blendingId);
             Response response = omcpClient.doPut(uri, blendingVsnTo);
+            this.connection.closeConnection(omcpClient);
             OmcpUtil.handleOmcpResponse(response);
         } catch (AbstractClientRuntimeException e) {
             throw e;
@@ -129,9 +133,10 @@ public class BlendingOmcpDao implements BlendingRepository {
     @Override
     public void delete(long blendingId) throws AbstractClientRuntimeException, AbstractRequestException {
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.connection.getConnection();
             String uri = String.format(this.virtualSensorNetModuleConfig.getBlendingIdUri(), blendingId);
             Response response = omcpClient.doDelete(uri);
+            this.connection.closeConnection(omcpClient);
             OmcpUtil.handleOmcpResponse(response);
         } catch (AbstractClientRuntimeException e) {
             throw e;

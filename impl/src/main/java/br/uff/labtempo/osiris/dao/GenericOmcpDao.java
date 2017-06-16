@@ -1,10 +1,11 @@
 package br.uff.labtempo.osiris.dao;
 
+import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 
-import br.uff.labtempo.osiris.factory.connection.SensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.OmcpRepository;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,8 @@ import java.net.URISyntaxException;
 @Component("genericOmcpDao")
 public class GenericOmcpDao<T> implements OmcpRepository<T> {
 
-    private SensorNetConnectionFactory sensorNetConnection;
-
     @Autowired
-    public GenericOmcpDao(SensorNetConnectionFactory sensorNetConnectionFactory) {
-        this.sensorNetConnection = sensorNetConnectionFactory;
-    }
+    private OsirisConnectionFactory osirisConnectionFactory;
 
     /**
      * Get an T object from SensorNet module based on a valid URI location
@@ -38,7 +35,9 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
      * @throws AbstractClientRuntimeException
      */
     public T doGet(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.sensorNetConnection.getConnection().doGet(uri);
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
+        Response omcpResponse = omcpClient.doGet(uri);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
         OmcpUtil.handleOmcpResponse(omcpResponse);
         T content = (T) omcpResponse.getContent();
         if(content == null) {
@@ -57,7 +56,9 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
      * @throws URISyntaxException
      */
     public URI doPost(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
-        Response omcpResponse = this.sensorNetConnection.getConnection().doPost(uri, t);
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
+        Response omcpResponse = omcpClient.doPost(uri, t);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
         OmcpUtil.handleOmcpResponse(omcpResponse);
         return new URI(omcpResponse.getLocation());
     }
@@ -70,7 +71,9 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
      * @throws AbstractClientRuntimeException
      */
     public void doPut(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.sensorNetConnection.getConnection().doPut(uri, t);
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
+        Response omcpResponse = omcpClient.doPut(uri, t);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
         OmcpUtil.handleOmcpResponse(omcpResponse);
     }
 
@@ -81,7 +84,9 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
      * @throws AbstractClientRuntimeException
      */
     public void doDelete(String uri) throws AbstractRequestException, AbstractClientRuntimeException {
-        Response omcpResponse = this.sensorNetConnection.getConnection().doDelete(uri);
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
+        Response omcpResponse = omcpClient.doDelete(uri);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
         OmcpUtil.handleOmcpResponse(omcpResponse);
     }
 
@@ -93,6 +98,8 @@ public class GenericOmcpDao<T> implements OmcpRepository<T> {
      * @throws AbstractClientRuntimeException
      */
     public void doNotify(String uri, T t) throws AbstractRequestException, AbstractClientRuntimeException {
-        this.sensorNetConnection.getConnection().doNofity(uri, t);
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
+        omcpClient.doNofity(uri, t);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
     }
 }

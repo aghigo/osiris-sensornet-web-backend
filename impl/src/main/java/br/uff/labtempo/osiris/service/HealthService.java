@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.osiris.configuration.*;
 import br.uff.labtempo.osiris.factory.connection.*;
 import br.uff.labtempo.osiris.model.health.HealthDependency;
+import br.uff.labtempo.osiris.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HealthService {
+    @Autowired
+    private ApplicationDatabaseConfig applicationDatabaseConfig;
+
+    @Autowired
+    private ApplicationDatabaseConnectionFactory applicationDatabaseConnectionFactory;
 
     @Autowired
     private SensorNetModuleConfig sensorNetModuleConfig;
@@ -30,22 +36,7 @@ public class HealthService {
     private FunctionModuleConfig functionModuleConfig;
 
     @Autowired
-    private ApplicationDatabaseConfig applicationDatabaseConfig;
-
-    private SensorNetConnectionFactory sensorNetConnectionFactory;
-    private VirtualSensorNetConnectionFactory virtualSensorNetConnectionFactory;
-    private FunctionConnectionFactory functionConnectionFactory;
-    private CommunicationLayerConnectionFactory communicationLayerConnectionFactory;
-    private ApplicationDatabaseConnectionFactory applicationDatabaseConnectionFactory;
-
-    @Autowired
-    public HealthService(ApplicationDatabaseConnectionFactory applicationDatabaseConnectionFactory, CommunicationLayerConnectionFactory communicationLayerConnectionFactory, SensorNetConnectionFactory sensorNetConnectionFactory, VirtualSensorNetConnectionFactory virtualSensorNetConnectionFactory, FunctionConnectionFactory functionConnectionFactory) {
-        this.applicationDatabaseConnectionFactory = applicationDatabaseConnectionFactory;
-        this.communicationLayerConnectionFactory = communicationLayerConnectionFactory;
-        this.functionConnectionFactory = functionConnectionFactory;
-        this.sensorNetConnectionFactory = sensorNetConnectionFactory;
-        this.virtualSensorNetConnectionFactory = virtualSensorNetConnectionFactory;
-    }
+    private OsirisConnectionFactory osirisConnectionFactory;
 
     /**
      * Test connection to RabbitMQ Queue
@@ -53,14 +44,15 @@ public class HealthService {
      * @return HealthDependency with RabbitMQ status
      */
     public HealthDependency testRabbitMQ() {
-        String moduleName = this.communicationLayerConnectionFactory.getModuleName();
-        String uri = this.communicationLayerConnectionFactory.getModuleUri();
-        String ip = this.communicationLayerConnectionFactory.getIp();
-        int port = this.communicationLayerConnectionFactory.getPort();
+        String moduleName = this.osirisConnectionFactory.getModuleName();
+        String uri = this.osirisConnectionFactory.getModuleUri();
+        String ip = this.osirisConnectionFactory.getIp();
+        int port = this.osirisConnectionFactory.getPort();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.communicationLayerConnectionFactory.getConnection();
+            OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
             Response response = omcpClient.doGet(this.sensorNetModuleConfig.getModuleUri());
+            this.osirisConnectionFactory.closeConnection(omcpClient);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
             }
@@ -73,20 +65,20 @@ public class HealthService {
     /**
      * Test connection to SensorNet module
      * @see HealthDependency
-     * @see SensorNetConnectionFactory
      * @see SensorNetModuleConfig
      * @return HealthDependency with SensorNet status
      */
     public HealthDependency testSensorNetConnection() {
         String moduleName = this.sensorNetModuleConfig.getModuleName();
-        String ip = this.sensorNetConnectionFactory.getIp();
-        int port = this.sensorNetConnectionFactory.getPort();
+        String ip = this.osirisConnectionFactory.getIp();
+        int port = this.osirisConnectionFactory.getPort();
         String moduleLocation = this.sensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.sensorNetConnectionFactory.getConnection();
+            OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
             String uri = this.sensorNetModuleConfig.getNetworksUri();
             Response response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
             }
@@ -98,21 +90,21 @@ public class HealthService {
 
     /**
      * Test connection to VirtualSensorNet module
-     * @see VirtualSensorNetConnectionFactory
      * @see VirtualSensorNetModuleConfig
      * @see HealthDependency
      * @return HealthDependency with VirtualSensorNet status
      */
     public HealthDependency testVirtualSensorNet() {
         String moduleName = this.virtualSensorNetModuleConfig.getModuleName();
-        String ip = this.virtualSensorNetConnectionFactory.getIp();
-        int port = this.virtualSensorNetConnectionFactory.getPort();
+        String ip = this.osirisConnectionFactory.getIp();
+        int port = this.osirisConnectionFactory.getPort();
         String moduleLocation = this.virtualSensorNetModuleConfig.getModuleUri();
         boolean isActive = false;
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnectionFactory.getConnection();
+            OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
             String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
             Response response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
             if(response.getStatusCode().equals(StatusCode.OK)) {
                 isActive = true;
             }
@@ -126,7 +118,7 @@ public class HealthService {
      * Test connection to the Application main relational database
      * @see ApplicationDatabaseConnectionFactory
      * @see ApplicationDatabaseConfig
-     * @see br.uff.labtempo.osiris.security.WebSecurityConfig
+     * @see WebSecurityConfig
      * @return HealthDependency with the dependency connection status
      */
     public HealthDependency testApplicationDatabase() {

@@ -1,11 +1,12 @@
 package br.uff.labtempo.osiris.factory.function;
 
+import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.omcp.server.OmcpServer;
 import br.uff.labtempo.omcp.server.rabbitmq.RabbitServer;
 import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.FunctionConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.model.domain.function.FunctionData;
 import br.uff.labtempo.osiris.model.domain.function.FunctionModule;
 import br.uff.labtempo.osiris.model.domain.function.FunctionModuleDefaultImpl;
@@ -38,7 +39,7 @@ public class FunctionModuleFactory {
     private FunctionModuleConfig functionModuleConfig;
 
     @Autowired
-    private FunctionConnectionFactory functionConnectionFactory;
+    private OsirisConnectionFactory osirisConnectionFactory;
 
     @Autowired
     private DataTypeRepository dataTypeRepository;
@@ -91,11 +92,11 @@ public class FunctionModuleFactory {
 
         InterfaceFnTo interfaceFnTo = new InterfaceFnTo(functionData.getName(), description, String.format(this.functionModuleConfig.getOmcpUriTemplate(), functionData.getName()), functionOperationList, requestParams, responseParams);
 
-        FunctionModuleDefaultImpl functionModuleDefaultImpl = new FunctionModuleDefaultImpl((RabbitClient) this.functionConnectionFactory.getConnection(), interfaceFnTo, implementation);
+        String host = this.osirisConnectionFactory.getIp();
+        String username = this.osirisConnectionFactory.getUsername();
+        String password = this.osirisConnectionFactory.getPassword();
 
-        String host = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getIp();
-        String username = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getUsername();
-        String password = this.functionConnectionFactory.getCommunicationLayerConnectionFactory().getPassword();
+        FunctionModuleDefaultImpl functionModuleDefaultImpl = new FunctionModuleDefaultImpl(new RabbitClient(host, username, password), interfaceFnTo, implementation);
 
         OmcpServer omcpServer = new RabbitServer(functionData.getName() + ".function", host, username, password);
         omcpServer.setHandler(functionModuleDefaultImpl);

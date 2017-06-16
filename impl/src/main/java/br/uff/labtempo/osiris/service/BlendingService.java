@@ -93,7 +93,7 @@ public class BlendingService {
      * @throws URISyntaxException
      * @throws AbstractRequestException
      */
-    public URI create(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
+    public URI create(BlendingRequest blendingRequest) throws Exception {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
         if(functionDataList.isEmpty()) {
             throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));
@@ -161,7 +161,7 @@ public class BlendingService {
      * @throws URISyntaxException
      * @throws AbstractRequestException
      */
-    public URI createByComposite(BlendingRequest blendingRequest) throws URISyntaxException, AbstractRequestException {
+    public URI createByComposite(BlendingRequest blendingRequest) throws Exception {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
         if(functionDataList.isEmpty()) {
             throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));
@@ -226,7 +226,7 @@ public class BlendingService {
      * @param blendingRequest
      * @throws AbstractRequestException
      */
-    public void update(long blendingId, BlendingRequest blendingRequest) throws AbstractRequestException, URISyntaxException {
+    public void update(long blendingId, BlendingRequest blendingRequest) throws Exception {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(blendingRequest.getFunctionName());
         if(functionDataList.isEmpty()) {
             throw new BadRequestException(String.format("Could not create Blending sensor: Function module with name '%s' doest no exist.", blendingRequest.getFunctionName()));

@@ -2,7 +2,7 @@ package br.uff.labtempo.osiris.dao;
 
 import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.SensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SampleOmcpDao implements SampleRepository {
     private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
-    private SensorNetConnectionFactory connection;
+    private OsirisConnectionFactory connection;
 
     /**
      * Creates a new Sample on SensorNet module
@@ -34,5 +34,14 @@ public class SampleOmcpDao implements SampleRepository {
         String uri = sensorNetModuleConfig.getCollectorMessageGroupUri();
         OmcpClient omcpClient = this.connection.getConnection();
         omcpClient.doNofity(uri, sample);
+        this.connection.closeConnection(omcpClient);
+    }
+
+    @Override
+    public void update(SampleCoTo sample) {
+        String uri = sensorNetModuleConfig.getUpdateMessageGroupUri();
+        OmcpClient omcpClient = this.connection.getConnection();
+        omcpClient.doNofity(uri, sample);
+        this.connection.closeConnection(omcpClient);
     }
 }

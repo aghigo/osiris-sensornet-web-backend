@@ -50,7 +50,7 @@ public class FunctionService {
      * @return List<InterfaceFnTo>
      * @throws AbstractRequestException
      */
-    public List<InterfaceFnTo> getAllInterfaces() throws AbstractRequestException {
+    public List<InterfaceFnTo> getAllInterfaces() throws Exception {
         Iterable<FunctionData> functionDataIterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataIterable.iterator();
         List<InterfaceFnTo> interfaceFnToList = new ArrayList<>();
@@ -68,7 +68,7 @@ public class FunctionService {
      * @return InterfaceFnTo
      * @throws AbstractRequestException
      */
-    public InterfaceFnTo getInterfaceByName(String functionName) throws AbstractRequestException {
+    public InterfaceFnTo getInterfaceByName(String functionName) throws Exception {
         List<FunctionData> functionDataList = this.functionDataRepository.findByName(functionName);
         if(functionDataList.isEmpty()) {
             throw new NotFoundException(String.format("No function interface found for name %s", functionName));

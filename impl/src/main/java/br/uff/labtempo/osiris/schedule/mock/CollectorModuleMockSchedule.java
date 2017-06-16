@@ -11,6 +11,7 @@ import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.common.data.ConsumableRuleTo;
 import br.uff.labtempo.osiris.to.common.data.ConsumableTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
+import br.uff.labtempo.osiris.to.common.definitions.State;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -19,7 +20,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Simulates a Collector module with Mock Sensors, Collectors and Networks
@@ -32,7 +35,7 @@ import java.util.List;
 @Profile("collector_mock_schedule")
 @EnableScheduling
 public class CollectorModuleMockSchedule {
-    private final long MAX_SENSORS = 25;
+    private final long MAX_SENSORS = 8;
     private List<SampleCoTo> sampleCoToList = new ArrayList<>();
     private NetworkCoTo networkCoTo = new NetworkGenerator().getNetworkCoto();
     private CollectorCoTo collectorCoTo = new CollectorGenerator().getCollectorCoTo();
@@ -44,15 +47,14 @@ public class CollectorModuleMockSchedule {
     @Autowired
     private SampleRepository sampleRepository;
 
-    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/2 * * * * ?}")
+    private Random random = new Random();
+
+    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/1 * * * * ?}")
     public void collectMockSensors() {
         if(this.sampleCoToList.size() < MAX_SENSORS) {
             SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
             SampleCoTo sampleCoTo = new SampleCoTo(this.networkCoTo, this.collectorCoTo, sensorCoTo);
             this.sampleCoToList.add(sampleCoTo);
-            if(this.sampleCoToList.size() == 1) {
-                return;
-            }
         }
         for(int i = 0; i < this.sampleCoToList.size(); i++) {
             SampleCoTo sample = this.sampleCoToList.get(i);
@@ -65,9 +67,15 @@ public class CollectorModuleMockSchedule {
     }
 
     private SensorCoTo cloneWithDifferentValues(SensorCoTo currentSensor) {
+        long nowInMillis = new Date().getTime();
+        State sensorState = State.UPDATED;
+        long captureTimestampInMillis = nowInMillis;
+        int capturePrecisionInNano = (int) nowInMillis;
+        long acquisitionTimestampInMillis = nowInMillis + 1000;
+
         SensorCoTo newSensor = new SensorCoTo(currentSensor.getId(),
-                currentSensor.getState(), currentSensor.getCaptureTimestampInMillis(),
-                currentSensor.getCapturePrecisionInNano(), currentSensor.getAcquisitionTimestampInMillis());
+                sensorState, captureTimestampInMillis,
+                capturePrecisionInNano, acquisitionTimestampInMillis);
 
         newSensor.addInfo(currentSensor.getInfo());
 
@@ -81,13 +89,14 @@ public class CollectorModuleMockSchedule {
         }
 
         for(ValueTo valueTo : currentSensor.getValuesTo()) {
-            newSensor.addValue(valueTo.getName(), this.getRandomValue(),
+            newSensor.addValue(valueTo.getName(), this.randomNumber(),
                     valueTo.getUnit(), valueTo.getSymbol());
         }
         return newSensor;
     }
 
-    private long getRandomValue() {
-        return (long) (Math.random() * 99999) + 1;
+    private long randomNumber() {
+        return (long) Math.abs(this.random.nextInt(99999) + 1);
     }
+
 }

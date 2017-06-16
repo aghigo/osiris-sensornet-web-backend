@@ -27,7 +27,10 @@ public class SensorNetModuleConfig {
     @Value("${sensornet.uri:omcp://sensornet.osiris/}")
     private String moduleUri;
 
-    @Value("${sensornet.messgegroup.collector:omcp://collector.messagegroup/}")
+    @Value("${sensornet.messagegroup.update:omcp://update.messagegroup.osiris/}")
+    private String updateMessageGroupUri;
+
+    @Value("${sensornet.messagegroup.collector:omcp://collector.messagegroup.osiris/}")
     private String collectorMessageGroupUri;
 
     @Value("${sensornet.uri.networks:omcp://sensornet.osiris/}")

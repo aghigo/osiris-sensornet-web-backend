@@ -4,9 +4,14 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.client.rabbitmq.RabbitClient;
 import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
 import lombok.*;
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Class responsible for the connection to the RabbitMQ queue
@@ -24,7 +29,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 @PropertySource(value = "classpath:application.properties")
-public class CommunicationLayerConnectionFactory {
+public class OsirisConnectionFactory {
     @Value("${rabbitmq.moduleName:rabbitmq}")
     private String moduleName;
 
@@ -43,14 +48,42 @@ public class CommunicationLayerConnectionFactory {
     @Value("${rabbitmq.password:guest}")
     private String password;
 
+    private ObjectPool<OmcpClient> pool;
+
+    @PostConstruct
+    public void createPool() {
+        this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password));
+    }
+
     /**
      * Get a OMCP connection to the RabbitMQ
+     * Borrow a OmcpClient from the Connection Pool
      * @see OmcpClient
      * @see RabbitClient
      * @return OmcpClient connection
      * @throws ConnectionException
      */
     public OmcpClient getConnection() throws ConnectionException {
-        return new RabbitClient(ip, username, password);
+        try {
+            OmcpClient omcpClient = this.pool.borrowObject();
+            return omcpClient;
+        } catch (Exception e) {
+            throw new ConnectionException(e.getMessage());
+        }
+
+    }
+
+    /**
+     * Close an OMCP connection from RabbitMQ
+     * Return the OmcpClient to the Connection Pool
+     * @param omcpClient
+     * @throws Exception
+     */
+    public void closeConnection(OmcpClient omcpClient) throws ConnectionException {
+        try {
+            this.pool.returnObject(omcpClient);
+        } catch (Exception e) {
+            throw new ConnectionException(e.getMessage());
+        }
     }
 }

@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
@@ -33,7 +33,7 @@ public class LinkOmcpDao implements LinkRepository {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
+    private OsirisConnectionFactory osirisConnectionFactory;
 
     /**
      * Get a specific Link sensor from VirtualSensorNet module by its unique Id
@@ -46,8 +46,9 @@ public class LinkOmcpDao implements LinkRepository {
     public LinkVsnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
             Response response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
             OmcpUtil.handleOmcpResponse(response);
             LinkVsnTo linkVsnTo = response.getContent(LinkVsnTo.class);
             return linkVsnTo;
@@ -66,8 +67,9 @@ public class LinkOmcpDao implements LinkRepository {
     public List<LinkVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException {
         String uri = this.virtualSensorNetModuleConfig.getLinksUri();
         try {
-            OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+            OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
             Response response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
             if(response.getStatusCode().equals(StatusCode.NOT_FOUND)) {
                 return new ArrayList<>();
             }
@@ -90,11 +92,12 @@ public class LinkOmcpDao implements LinkRepository {
      */
     @Override
     public URI save(LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = this.virtualSensorNetModuleConfig.getLinksUri();
         Response response;
         try {
             response = omcpClient.doPost(uri, linkVsnTo);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -111,11 +114,12 @@ public class LinkOmcpDao implements LinkRepository {
      */
     @Override
     public void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
         try {
             response = omcpClient.doPut(uri, linkVsnTo);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -130,11 +134,12 @@ public class LinkOmcpDao implements LinkRepository {
      */
     @Override
     public void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
         try {
             response = omcpClient.doDelete(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }

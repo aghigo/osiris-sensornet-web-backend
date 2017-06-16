@@ -4,9 +4,10 @@ import br.uff.labtempo.omcp.client.OmcpClient;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
+import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
 import br.uff.labtempo.osiris.configuration.FunctionModuleConfig;
 
-import br.uff.labtempo.osiris.factory.connection.CommunicationLayerConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.FunctionModuleRepository;
 import br.uff.labtempo.osiris.to.function.InterfaceFnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -29,7 +30,7 @@ public class FunctionModuleOmcpDao implements FunctionModuleRepository {
     FunctionModuleConfig functionModuleConfig;
 
     @Autowired
-    CommunicationLayerConnectionFactory communicationLayerConnectionFactory;
+    OsirisConnectionFactory osirisConnectionFactory;
 
     /**
      * Get a function Interface based on the function name
@@ -39,10 +40,11 @@ public class FunctionModuleOmcpDao implements FunctionModuleRepository {
      * @throws AbstractRequestException
      */
     @Override
-    public InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.communicationLayerConnectionFactory.getConnection();
+    public InterfaceFnTo getInterface(String functionName) throws ConnectionException, AbstractRequestException {
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.functionModuleConfig.getOmcpInterfaceUriTemplate(), functionName);
         Response response = omcpClient.doGet(uri);
+        this.osirisConnectionFactory.closeConnection(omcpClient);
         OmcpUtil.handleOmcpResponse(response);
         InterfaceFnTo interfaceFnTo = response.getContent(InterfaceFnTo.class);
         return interfaceFnTo;

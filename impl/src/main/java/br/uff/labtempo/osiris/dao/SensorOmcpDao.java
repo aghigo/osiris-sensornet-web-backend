@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.SensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -24,7 +24,7 @@ public class SensorOmcpDao implements SensorRepository {
     private SensorNetModuleConfig sensorNetModuleConfig;
 
     @Autowired
-    private SensorNetConnectionFactory connection;
+    private OsirisConnectionFactory connection;
 
     @Override
     public SensorSnTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) throws AbstractRequestException, AbstractClientRuntimeException {

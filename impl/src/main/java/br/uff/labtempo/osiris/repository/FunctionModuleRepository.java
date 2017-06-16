@@ -16,5 +16,5 @@ import java.util.List;
  * @version 1.0
  */
 public interface FunctionModuleRepository {
-    InterfaceFnTo getInterface(String functionName) throws AbstractClientRuntimeException, AbstractRequestException;
+    InterfaceFnTo getInterface(String functionName) throws Exception;
 }

@@ -6,7 +6,7 @@ import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
 import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeException;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
-import br.uff.labtempo.osiris.factory.connection.VirtualSensorNetConnectionFactory;
+import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.DataTypeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.DataTypeVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
@@ -26,15 +26,16 @@ public class DataTypeOmcpDao implements DataTypeRepository {
     private VirtualSensorNetModuleConfig virtualSensorNetModuleConfig;
 
     @Autowired
-    private VirtualSensorNetConnectionFactory virtualSensorNetConnection;
+    private OsirisConnectionFactory osirisConnectionFactory;
 
     @Override
     public DataTypeVsnTo getById(long id) throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -45,11 +46,12 @@ public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Override
     public List<DataTypeVsnTo> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
         Response response;
         try {
             response = omcpClient.doGet(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -64,11 +66,12 @@ public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Override
     public URI insert(DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException, URISyntaxException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = this.virtualSensorNetModuleConfig.getDataTypesUri();
         Response response;
         try {
             response = omcpClient.doPost(uri, dataTypeVsnTo);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -78,11 +81,12 @@ public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Override
     public void update(String id, DataTypeVsnTo dataTypeVsnTo) throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doPut(uri, dataTypeVsnTo);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
@@ -91,11 +95,12 @@ public class DataTypeOmcpDao implements DataTypeRepository {
 
     @Override
     public void delete(String id) throws AbstractClientRuntimeException, AbstractRequestException {
-        OmcpClient omcpClient = this.virtualSensorNetConnection.getConnection();
+        OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getDataTypeIdUri(), id);
         Response response;
         try {
             response = omcpClient.doDelete(uri);
+            this.osirisConnectionFactory.closeConnection(omcpClient);
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }

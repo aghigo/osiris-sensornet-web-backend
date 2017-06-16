@@ -83,6 +83,14 @@ public class SampleService {
     }
 
     /**
+     * Updates a Sample on update messagegroup
+     * @param sampleCoTo
+     */
+    public void update(SampleCoTo sampleCoTo) {
+        this.sampleRepository.update(sampleCoTo);
+    }
+
+    /**
      * Get a Sample from SensorNet module by given a valid (networkId + collectorId + sensorId) association
      * @param sensorId
      * @param collectorId
