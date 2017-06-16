@@ -6,6 +6,7 @@ import br.uff.labtempo.omcp.common.exceptions.client.ConnectionException;
 import lombok.*;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -52,7 +53,11 @@ public class OsirisConnectionFactory {
 
     @PostConstruct
     public void createPool() {
-        this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password));
+        GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
+        genericObjectPoolConfig.setMaxIdle(10);
+        genericObjectPoolConfig.setMaxTotal(40);
+        genericObjectPoolConfig.setMinIdle(1);
+        this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password), genericObjectPoolConfig);
     }
 
     /**
@@ -81,6 +86,7 @@ public class OsirisConnectionFactory {
      */
     public void closeConnection(OmcpClient omcpClient) throws ConnectionException {
         try {
+            omcpClient.close();
             this.pool.returnObject(omcpClient);
         } catch (Exception e) {
             throw new ConnectionException(e.getMessage());
