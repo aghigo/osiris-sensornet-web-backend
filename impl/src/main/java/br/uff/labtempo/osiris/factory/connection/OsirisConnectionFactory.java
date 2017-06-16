@@ -86,6 +86,7 @@ public class OsirisConnectionFactory {
      */
     public void closeConnection(OmcpClient omcpClient) throws ConnectionException {
         try {
+            omcpClient.close();
             this.pool.returnObject(omcpClient);
         } catch (Exception e) {
             throw new ConnectionException(e.getMessage());
