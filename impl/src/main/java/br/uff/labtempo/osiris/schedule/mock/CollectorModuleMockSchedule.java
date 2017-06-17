@@ -4,8 +4,12 @@ import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.generator.collector.CollectorGenerator;
 import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
+import br.uff.labtempo.osiris.mapper.CollectorMapper;
+import br.uff.labtempo.osiris.mapper.NetworkMapper;
 import br.uff.labtempo.osiris.mapper.SensorMapper;
 import br.uff.labtempo.osiris.model.response.SensorResponse;
+import br.uff.labtempo.osiris.repository.CollectorRepository;
+import br.uff.labtempo.osiris.repository.NetworkRepository;
 import br.uff.labtempo.osiris.repository.SampleRepository;
 import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.service.SensorService;
@@ -17,7 +21,10 @@ import br.uff.labtempo.osiris.to.common.data.ConsumableRuleTo;
 import br.uff.labtempo.osiris.to.common.data.ConsumableTo;
 import br.uff.labtempo.osiris.to.common.data.ValueTo;
 import br.uff.labtempo.osiris.to.common.definitions.State;
+import br.uff.labtempo.osiris.to.sensornet.CollectorSnTo;
+import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
+import javassist.tools.rmi.Sample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -45,8 +52,8 @@ import java.util.concurrent.TimeUnit;
 public class CollectorModuleMockSchedule {
     private final long MAX_SENSORS = 3;
     private List<SampleCoTo> sampleCoToList = new ArrayList<>();
-    private NetworkCoTo networkCoTo = new NetworkGenerator().getNetworkCoto();
-    private CollectorCoTo collectorCoTo = new CollectorGenerator().getCollectorCoTo();
+    private NetworkCoTo networkCoTo;
+    private CollectorCoTo collectorCoTo;
 
     @Autowired
     private SensorGenerator sensorGenerator;
@@ -55,21 +62,40 @@ public class CollectorModuleMockSchedule {
     private SampleRepository sampleRepository;
 
     @Autowired
-    private SensorRepository sensorRepository;
+    private NetworkRepository networkRepository;
 
-    private boolean firstTime = true;
+    @Autowired
+    private CollectorRepository collectorRepository;
+
+    @Autowired
+    private SensorRepository sensorRepository;
 
     private Random random = new Random();
 
     @PostConstruct
-    public void populateSensors() throws AbstractRequestException {
-        List<SensorCoTo> sensorCoToList = this.getExistingSensors();
-        for(int i = 0; i < MAX_SENSORS && i < sensorCoToList.size(); i++) {
-            this.sampleCoToList.add(new SampleCoTo(this.networkCoTo, this.collectorCoTo, sensorCoToList.get(i)));
+    public void initializeCollectorModuleMock() throws AbstractRequestException {
+        List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
+        if(networkSnToList.isEmpty()) {
+            this.networkCoTo = new NetworkGenerator().getNetworkCoto();
+        } else {
+            this.networkCoTo = NetworkMapper.snToToCoTo(networkSnToList.get(0));
         }
-        for(int i = sensorCoToList.size(); i < MAX_SENSORS; i++) {
+        List<CollectorSnTo> collectorSnToList = this.collectorRepository.getAllByNetworkId(this.networkCoTo.getId());
+        if(collectorSnToList.isEmpty()) {
+            this.collectorCoTo = new CollectorGenerator().getCollectorCoTo();
+        } else {
+            this.collectorCoTo = CollectorMapper.snToToCoTo(collectorSnToList.get(0));
+        }
+        List<SensorCoTo> sensorCoToList = SensorMapper.snToToCoTo(this.sensorRepository.getAllByCollectorIdAndNetworkId(this.networkCoTo.getId(), this.collectorCoTo.getId()));
+        for(int i = 0; i < this.MAX_SENSORS && i < sensorCoToList.size(); i++) {
+            SampleCoTo sampleCoTo = new SampleCoTo(this.networkCoTo, this.collectorCoTo, sensorCoToList.get(i));
+            this.sampleRepository.update(sampleCoTo);
+            this.sampleCoToList.add(sampleCoTo);
+        }
+        for(int i = sampleCoToList.size(); i < this.MAX_SENSORS; i++) {
             SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
             SampleCoTo sampleCoTo = new SampleCoTo(this.networkCoTo, this.collectorCoTo, sensorCoTo);
+            this.sampleRepository.save(sampleCoTo);
             this.sampleCoToList.add(sampleCoTo);
         }
     }

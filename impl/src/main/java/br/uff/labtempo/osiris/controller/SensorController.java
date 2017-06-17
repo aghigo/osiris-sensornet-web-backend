@@ -230,11 +230,32 @@ public class SensorController {
     }
 
     /**
+     * Removes a sensor from SensorNet by
+     * its NetworkId, CollectorId and SensorId
+     * @param networkId
+     * @param collectorId
+     * @param sensorId
+     * @return HTTP ResponseEntity with Status 200 OK and empty body, if removed sucessully
+     */
+    @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}/sensors/{sensorId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteByCollectorIdAndNetworkIdAndSensorId(@PathVariable String networkId, @PathVariable String collectorId, @PathVariable String sensorId) {
+        SensorResponse sensorResponse;
+        try {
+            this.sensorService.deleteByCollectorIdAndNetworkIdAndSensorId(networkId, collectorId, sensorId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (AbstractRequestException e) {
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+    }
+
+    /**
      * Get a list of all available HTTP methods of the /networks/{networkId}/collectors/{collectorId}/sensors/{sensorId} endpoint
      * @return List of HTTP methods
      */
     @RequestMapping(value = "/networks/{networkId}/collectors/{collectorId}/sensors/{sensorId}", method = RequestMethod.OPTIONS)
     public ResponseEntity<?> optionsNetworkIdCollectorIdSensorId() {
-        return allows(HttpMethod.GET, HttpMethod.OPTIONS);
+        return allows(HttpMethod.GET, HttpMethod.DELETE, HttpMethod.OPTIONS);
     }
 }

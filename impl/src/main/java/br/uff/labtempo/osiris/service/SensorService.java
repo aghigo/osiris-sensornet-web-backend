@@ -172,4 +172,8 @@ public class SensorService {
         }
         throw new NotFoundException(String.format("Error: Sensor [%s] does not exist on SensorNet module.", sensorId));
     }
+
+    public void deleteByCollectorIdAndNetworkIdAndSensorId(String networkId, String collectorId, String sensorId) throws AbstractRequestException {
+        this.sensorRepository.deleteByCollectorIdAndNetworkIdAndSensorId(networkId, collectorId, sensorId);
+    }
 }

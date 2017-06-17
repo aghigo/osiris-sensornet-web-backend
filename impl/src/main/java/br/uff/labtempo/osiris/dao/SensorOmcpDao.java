@@ -76,4 +76,12 @@ public class SensorOmcpDao implements SensorRepository {
         List<SensorSnTo> sensorSnToList = Arrays.asList(sensorSnToArray);
         return sensorSnToList;
     }
+
+    @Override
+    public void deleteByCollectorIdAndNetworkIdAndSensorId(String networkId, String collectorId, String sensorId) throws AbstractRequestException {
+        OmcpClient omcpClient = this.connection.getConnection();
+        String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
+        Response response = omcpClient.doDelete(uri);
+        OmcpUtil.handleOmcpResponse(response);
+    }
 }

@@ -16,4 +16,5 @@ public interface SensorRepository {
     SensorSnTo getByCollectorIdAndNetworkId(String networkId, String collectorId, String sensorId) throws AbstractRequestException, AbstractClientRuntimeException;
     List<SensorSnTo> getAllByCollectorIdAndNetworkId(String networkId, String collectorId) throws AbstractRequestException, AbstractClientRuntimeException;
     List<SensorSnTo> getAllByNetworkId(String networkId) throws AbstractRequestException, AbstractClientRuntimeException;
+    void deleteByCollectorIdAndNetworkIdAndSensorId(String networkId, String collectorId, String sensorId) throws AbstractRequestException;
 }
