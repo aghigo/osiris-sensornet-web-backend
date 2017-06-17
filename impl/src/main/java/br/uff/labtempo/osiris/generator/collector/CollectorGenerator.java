@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class CollectorGenerator {
 
     private Map<String, List<String>> collectorInfos;
-    private final TimeUnit[] timeUnits = {TimeUnit.SECONDS, TimeUnit.MILLISECONDS, TimeUnit.MINUTES};
+    private final TimeUnit defaultCaptureTimeUnit = TimeUnit.SECONDS;
+    private final long defaultCaptureInterval = 5;
 
     public CollectorGenerator() {
         this.collectorInfos = new LinkedHashMap<>();
@@ -30,7 +31,7 @@ public class CollectorGenerator {
      * @return CollectorCoTo
      */
     public CollectorCoTo getCollectorCoTo() {
-        CollectorCoTo collectorCoTo = new CollectorCoTo(getId(), getCaptureInterval(), getCaptureIntervalTimeUnit());
+        CollectorCoTo collectorCoTo = new CollectorCoTo(getId(), this.defaultCaptureInterval, this.defaultCaptureTimeUnit);
         collectorCoTo.addInfo(getRandomCollectorInfos());
         return collectorCoTo;
     }
@@ -65,23 +66,5 @@ public class CollectorGenerator {
      */
     public String getId() {
         return "collectorId-" + UUID.randomUUID().toString();
-    }
-
-    /**
-     * Generate an Capture Interval in milliseconds
-     * Default is now
-     * @return
-     */
-    public long getCaptureInterval() {
-        return 5000;
-    }
-
-    /**
-     * Get a random TimeUnit (Second, Minute, etc)
-     * @see TimeUnit
-     * @return TimeUnit
-     */
-    public TimeUnit getCaptureIntervalTimeUnit() {
-        return TimeUnit.MILLISECONDS;
     }
 }

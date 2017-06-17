@@ -54,12 +54,12 @@ public class OsirisConnectionFactory {
     @PostConstruct
     public void createPool() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxTotal(5);
-        genericObjectPoolConfig.setMaxIdle(5);
-        genericObjectPoolConfig.setMinIdle(5);
-        genericObjectPoolConfig.setTestOnBorrow(true);
-        genericObjectPoolConfig.setMaxWaitMillis(TimeUnit.SECONDS.toMillis(10L));
-        genericObjectPoolConfig.setFairness(true);
+        genericObjectPoolConfig.setMaxTotal(100);
+        genericObjectPoolConfig.setMaxIdle(1);
+        genericObjectPoolConfig.setMinIdle(100);
+        //genericObjectPoolConfig.setTestOnBorrow(true);
+        //genericObjectPoolConfig.setMaxWaitMillis(TimeUnit.SECONDS.toMillis(10L));
+        //genericObjectPoolConfig.setFairness(true);
         this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password), genericObjectPoolConfig);
     }
 
