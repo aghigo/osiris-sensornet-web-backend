@@ -44,8 +44,8 @@ public class SensorGenerator {
     public SensorCoTo getSensorCoTo(String id) {
         State state = State.NEW;
         long captureDateInMillis = new Date().getTime();
-        int captureDateInNano = (int) TimeUnit.MILLISECONDS.convert(captureDateInMillis, TimeUnit.NANOSECONDS);
-        long acquisitionDateInMillis = captureDateInMillis + randomLong(99999) + 1;
+        int captureDateInNano = 0;
+        long acquisitionDateInMillis = captureDateInMillis;
 
         SensorCoTo sensorCoTo = new SensorCoTo(id, state, captureDateInMillis, captureDateInNano, acquisitionDateInMillis);
 

@@ -7,12 +7,12 @@ import lombok.*;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class responsible for the connection to the RabbitMQ queue
@@ -49,12 +49,17 @@ public class OsirisConnectionFactory {
     @Value("${rabbitmq.password:guest}")
     private String password;
 
-    private ObjectPool<OmcpClient> pool;
+    private static ObjectPool<OmcpClient> pool;
 
     @PostConstruct
     public void createPool() {
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxTotal(100);
+        genericObjectPoolConfig.setMaxTotal(5);
+        genericObjectPoolConfig.setMaxIdle(5);
+        genericObjectPoolConfig.setMinIdle(5);
+        genericObjectPoolConfig.setTestOnBorrow(true);
+        genericObjectPoolConfig.setMaxWaitMillis(TimeUnit.SECONDS.toMillis(10L));
+        genericObjectPoolConfig.setFairness(true);
         this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password), genericObjectPoolConfig);
     }
 
@@ -68,6 +73,7 @@ public class OsirisConnectionFactory {
      */
     public OmcpClient getConnection() throws ConnectionException {
         try {
+            this.pool.addObject();
             OmcpClient omcpClient = this.pool.borrowObject();
             return omcpClient;
         } catch (Exception e) {

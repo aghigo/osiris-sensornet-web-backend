@@ -42,6 +42,6 @@ public class VirtualSensorNetSyncSchedule {
         this.linkFromSensorSyncSchedule.createLinkSensorsFromSensorNetSensors();
         this.compositeFromLinkSyncSchedule.createCompositeSensorsFromLinkSensors();
         this.functionModuleFromDataTypeSyncSchedule.createFunctionModulesFromDataTypes();
-        this.blendingFromFunctionSyncSchedule.createBlendingSensorsFromFunctionModules();
+        //this.blendingFromFunctionSyncSchedule.createBlendingSensorsFromFunctionModules();
     }
 }

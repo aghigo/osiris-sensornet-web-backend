@@ -73,7 +73,7 @@ public class CollectorGenerator {
      * @return
      */
     public long getCaptureInterval() {
-        return 200;
+        return 5000;
     }
 
     /**

@@ -4,6 +4,7 @@ import br.uff.labtempo.osiris.generator.collector.CollectorGenerator;
 import br.uff.labtempo.osiris.generator.network.NetworkGenerator;
 import br.uff.labtempo.osiris.generator.sensor.SensorGenerator;
 import br.uff.labtempo.osiris.repository.SampleRepository;
+import br.uff.labtempo.osiris.repository.SensorRepository;
 import br.uff.labtempo.osiris.to.collector.CollectorCoTo;
 import br.uff.labtempo.osiris.to.collector.NetworkCoTo;
 import br.uff.labtempo.osiris.to.collector.SampleCoTo;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Simulates a Collector module with Mock Sensors, Collectors and Networks
@@ -35,11 +37,10 @@ import java.util.Random;
 @Profile("collector_mock_schedule")
 @EnableScheduling
 public class CollectorModuleMockSchedule {
-    private final long MAX_SENSORS = 8;
+    private final long MAX_SENSORS = 1;
     private List<SampleCoTo> sampleCoToList = new ArrayList<>();
     private NetworkCoTo networkCoTo = new NetworkGenerator().getNetworkCoto();
     private CollectorCoTo collectorCoTo = new CollectorGenerator().getCollectorCoTo();
-    private long generatedId = 0;
 
     @Autowired
     private SensorGenerator sensorGenerator;
@@ -49,7 +50,7 @@ public class CollectorModuleMockSchedule {
 
     private Random random = new Random();
 
-    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/1 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/3 * * * * ?}")
     public void collectMockSensors() {
         if(this.sampleCoToList.size() < MAX_SENSORS) {
             SensorCoTo sensorCoTo = this.sensorGenerator.getSensorCoTo();
@@ -69,8 +70,9 @@ public class CollectorModuleMockSchedule {
     private SensorCoTo cloneWithDifferentValues(SensorCoTo currentSensor) {
         long nowInMillis = new Date().getTime();
         State sensorState = State.UPDATED;
+
+        int capturePrecisionInNano = Math.toIntExact(this.collectorCoTo.getCaptureInterval()) / 2;
         long captureTimestampInMillis = nowInMillis;
-        int capturePrecisionInNano = (int) nowInMillis;
         long acquisitionTimestampInMillis = nowInMillis + 1000;
 
         SensorCoTo newSensor = new SensorCoTo(currentSensor.getId(),
