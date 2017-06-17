@@ -40,6 +40,6 @@ public class FunctionModuleConfig {
     @Value("${function.uri.interface:omcp://%1$s.function/interface/}")
     private String omcpInterfaceUriTemplate;
 
-    private final String restDataUriTemplate = "/function/data/%s";
-    private final String restInterfaceUriTemplate = "/function/interface/%s";
+    private final String restDataUriTemplate = "/function/data/%s/";
+    private final String restInterfaceUriTemplate = "/function/interface/%s/";
 }

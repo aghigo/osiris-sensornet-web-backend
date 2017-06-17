@@ -36,7 +36,7 @@ public class VirtualSensorNetSyncSchedule {
     @Autowired
     private BlendingFromFunctionSyncSchedule blendingFromFunctionSyncSchedule;
 
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/5 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/10 * * * * ?}")
     public void createLinkSensorsFromSensorNetSensors() throws Exception {
         this.dataTypeFromSensorValueSyncSchedule.createDataTypesFromSensorValues();
         this.linkFromSensorSyncSchedule.createLinkSensorsFromSensorNetSensors();

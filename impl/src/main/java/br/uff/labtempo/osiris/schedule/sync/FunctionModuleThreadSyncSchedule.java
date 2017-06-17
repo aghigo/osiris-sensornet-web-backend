@@ -43,7 +43,7 @@ public class FunctionModuleThreadSyncSchedule {
      * because it was removed by another service.
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.function.thread.cron:*/5 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.function.thread.cron:*/1 * * * * ?}")
     public void handleFunctionModuleThreadsFromFunctionData() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();
@@ -57,11 +57,11 @@ public class FunctionModuleThreadSyncSchedule {
                 }
             }
             if(!found) {
-                FunctionModule newModule = this.functionModuleFactory.getInstance(functionData.getOperationName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
-                Thread functionThread = new Thread(newModule, newModule.getFunctionData().getName());
-                this.functionModuleThreadMap.put(newModule, functionThread);
-                this.functionModuleThreadMap.get(newModule).start();
-                log.info(String.format("New thread started for function module with name '%s'", newModule.getFunctionData().getName()));
+                FunctionModule functionModule = this.functionModuleFactory.getInstance(functionData.getOperationName(), functionData.getDescription(), functionData.getImplementation(), functionData.getDataTypeId());
+                Thread functionThread = new Thread(functionModule, functionModule.getFunctionData().getName());
+                this.functionModuleThreadMap.put(functionModule, functionThread);
+                functionThread.start();
+                log.info(String.format("New thread started for function module with name '%s'", functionModule.getFunctionData().getName()));
             }
         }
     }

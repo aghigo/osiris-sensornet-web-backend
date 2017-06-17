@@ -58,7 +58,7 @@ public class OsirisConnectionFactory {
         genericObjectPoolConfig.setMaxIdle(1);
         genericObjectPoolConfig.setMinIdle(100);
         //genericObjectPoolConfig.setTestOnBorrow(true);
-        //genericObjectPoolConfig.setMaxWaitMillis(TimeUnit.SECONDS.toMillis(10L));
+        genericObjectPoolConfig.setMaxWaitMillis(TimeUnit.SECONDS.toMillis(10L));
         //genericObjectPoolConfig.setFairness(true);
         this.pool = new GenericObjectPool<>(new OmcpClientFactory(ip, username, password), genericObjectPoolConfig);
     }
@@ -71,15 +71,13 @@ public class OsirisConnectionFactory {
      * @return OmcpClient connection
      * @throws ConnectionException
      */
-    public OmcpClient getConnection() throws ConnectionException {
+    public synchronized OmcpClient getConnection() throws ConnectionException {
         try {
-            this.pool.addObject();
             OmcpClient omcpClient = this.pool.borrowObject();
             return omcpClient;
         } catch (Exception e) {
             throw new ConnectionException(e.getMessage());
         }
-
     }
 
     /**
@@ -88,7 +86,7 @@ public class OsirisConnectionFactory {
      * @param omcpClient
      * @throws Exception
      */
-    public void closeConnection(OmcpClient omcpClient) throws ConnectionException {
+    public synchronized void closeConnection(OmcpClient omcpClient) throws ConnectionException {
         try {
             this.pool.returnObject(omcpClient);
         } catch (Exception e) {

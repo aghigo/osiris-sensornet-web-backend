@@ -48,12 +48,12 @@ public class FunctionModuleFactory {
         if(operationName == null || operationName.trim().isEmpty()) {
             throw new IllegalArgumentException("Empty name.");
         }
-        operationName = operationName.trim().toLowerCase();
+        operationName = operationName.trim().toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "").split(" ")[0];
 
         if(description == null || description.trim().isEmpty()) {
             throw new IllegalArgumentException("No description provided.");
         }
-        description = description.trim().toLowerCase();
+        description = description.trim().toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
 
         if(implementation == null || implementation.trim().isEmpty()) {
             throw new IllegalArgumentException("No formula implementation provided.");
@@ -129,6 +129,12 @@ public class FunctionModuleFactory {
     }
 
     private String getCompleteName(String operationName, DataTypeVsnTo dataTypeVsnTo) {
-        return operationName + "." + dataTypeVsnTo.getDisplayName() + "." + dataTypeVsnTo.getUnit();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(operationName.trim().toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "").split(" ")[0]).append(".");
+        for(String namePart : dataTypeVsnTo.getDisplayName().trim().toLowerCase().split(" ")) {
+            stringBuilder.append(namePart.replaceAll("[^a-zA-Z0-9 ]", "")).append(".");
+        }
+        stringBuilder.append(dataTypeVsnTo.getUnit().trim().replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase().split(" ")[0]);
+        return stringBuilder.toString();
     }
 }
