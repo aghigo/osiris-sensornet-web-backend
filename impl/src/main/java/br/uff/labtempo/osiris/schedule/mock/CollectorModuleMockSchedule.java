@@ -50,7 +50,7 @@ import java.util.concurrent.TimeUnit;
 @Profile("collector_mock_schedule")
 @EnableScheduling
 public class CollectorModuleMockSchedule {
-    private final long MAX_SENSORS = 3;
+    private final long MAX_SENSORS = 5;
     private List<SampleCoTo> sampleCoToList = new ArrayList<>();
     private NetworkCoTo networkCoTo;
     private CollectorCoTo collectorCoTo;
@@ -100,7 +100,7 @@ public class CollectorModuleMockSchedule {
         }
     }
 
-    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/3 * * * * ?}")
+    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/1 * * * * ?}")
     public void collectMockSensors() throws AbstractRequestException {
         for(int i = 0; i < this.sampleCoToList.size(); i++) {
             SampleCoTo sample = this.sampleCoToList.get(i);
