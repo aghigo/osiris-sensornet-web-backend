@@ -36,12 +36,16 @@ public class VirtualSensorNetSyncSchedule {
     @Autowired
     private BlendingFromFunctionSyncSchedule blendingFromFunctionSyncSchedule;
 
+    @Autowired
+    private FunctionModuleThreadSyncSchedule functionModuleThreadSyncSchedule;
+
     @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/10 * * * * ?}")
-    public void createLinkSensorsFromSensorNetSensors() throws Exception {
+    public void synchronizeVirtualSensorNet() throws Exception {
         this.dataTypeFromSensorValueSyncSchedule.createDataTypesFromSensorValues();
         this.linkFromSensorSyncSchedule.createLinkSensorsFromSensorNetSensors();
         this.compositeFromLinkSyncSchedule.createCompositeSensorsFromLinkSensors();
         this.functionModuleFromDataTypeSyncSchedule.createFunctionModulesFromDataTypes();
-        //this.blendingFromFunctionSyncSchedule.createBlendingSensorsFromFunctionModules();
+        this.functionModuleThreadSyncSchedule.handleFunctionModuleThreadsFromFunctionData();
+        this.blendingFromFunctionSyncSchedule.createBlendingSensorsFromFunctionModules();
     }
 }

@@ -25,7 +25,7 @@ import java.util.Set;
 @Data
 public class SensorValueGenerator {
 
-    private final int VALUE_RANGE = 99999;
+    private final int VALUE_RANGE = 9999;
     private List<SensorValue> sensorValues;
 
     public SensorValueGenerator(){
@@ -35,11 +35,9 @@ public class SensorValueGenerator {
         this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "kelvin", "K"));
         this.sensorValues.add(new SensorValue("luminosity", ValueType.NUMBER, randomLong(VALUE_RANGE), "candela", "C"));
         this.sensorValues.add(new SensorValue("pressure", ValueType.NUMBER, randomLong(VALUE_RANGE), "pascal", "P"));
-        this.sensorValues.add(new SensorValue("boolean", ValueType.LOGIC, randomLong(VALUE_RANGE), "boolean", "(boolean)"));
         this.sensorValues.add(new SensorValue("length", ValueType.NUMBER, randomLong(VALUE_RANGE), "meter", "m"));
         this.sensorValues.add(new SensorValue("mass", ValueType.NUMBER, randomLong(VALUE_RANGE), "kilogram", "kg"));
         this.sensorValues.add(new SensorValue("time", ValueType.NUMBER, randomLong(VALUE_RANGE), "second", "s"));
-        this.sensorValues.add(new SensorValue("electric current", ValueType.NUMBER, randomLong(VALUE_RANGE), "ampere", "A"));
         this.sensorValues.add(new SensorValue("frequency", ValueType.NUMBER, randomLong(VALUE_RANGE), "hertz", "Hz"));
         this.sensorValues.add(new SensorValue("energy", ValueType.NUMBER, randomLong(VALUE_RANGE), "energy", "J"));
         this.sensorValues.add(new SensorValue("power", ValueType.NUMBER, randomLong(VALUE_RANGE), "watt", "W"));

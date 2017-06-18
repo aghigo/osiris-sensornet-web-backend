@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 public class BlendingFromFunctionSyncSchedule {
 
-    private final long defaultCallIntervalInMillis = 2000;
+    private final long defaultCallIntervalInMillis = 500;
 
     @Autowired
     private CompositeRepository compositeRepository;
@@ -82,13 +82,15 @@ public class BlendingFromFunctionSyncSchedule {
                 Iterator<FunctionData> functionDataIterator = functionDataIterable.iterator();
                 while(functionDataIterator.hasNext()) {
                     FunctionData functionData = functionDataIterator.next();
-                    BlendingRequest blendingRequest = BlendingRequest.builder()
-                            .functionName(functionData.getName())
-                            .dataTypeId(compositeVsnTo.getBoundFields().get(0).getDataTypeId())
-                            .callIntervalInMillis(this.defaultCallIntervalInMillis)
-                            .build();
-                    URI uri = this.blendingService.createByComposite(blendingRequest);
-                    log.info(String.format("Blending sensor created [%s].", uri.getPath()));
+                    if(functionData.getDataTypeId() == compositeVsnTo.getBoundFields().get(0).getDataTypeId()) {
+                        BlendingRequest blendingRequest = BlendingRequest.builder()
+                                .functionName(functionData.getName())
+                                .dataTypeId(functionData.getDataTypeId())
+                                .callIntervalInMillis(this.defaultCallIntervalInMillis)
+                                .build();
+                        URI uri = this.blendingService.createByComposite(blendingRequest);
+                        log.info(String.format("Blending sensor created [%s] based on composite %s with datatype %s.", uri.getPath(), compositeVsnTo.getId(), functionData.getDataTypeId()));
+                    }
                 }
             }
         }

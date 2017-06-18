@@ -187,13 +187,12 @@ public class BlendingService {
             blendingVsnTo.setCallMode(FunctionOperation.SYNCHRONOUS);
             blendingVsnTo.setCallIntervalInMillis(blendingRequest.getCallIntervalInMillis());
 
-            List<VirtualSensorVsnTo> virtualSensorVsnToList = this.virtualSensorRepository.getAll();
-            for(VirtualSensorVsnTo virtualSensorVsnTo : virtualSensorVsnToList) {
+            List<VirtualSensorVsnTo> VirtualSensorVsnTo =  this.virtualSensorRepository.getAll();
+            for(VirtualSensorVsnTo virtualSensorVsnTo : VirtualSensorVsnTo) {
                 if(virtualSensorVsnTo.getSensorType().equals(VirtualSensorType.COMPOSITE)) {
                     for(ValueVsnTo valueVsnTo : virtualSensorVsnTo.getValuesTo()) {
-                        if(valueVsnTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueVsnTo.getUnit().equals(interfaceFnTo.getRequestParams().get(0).getUnit())) {
+                        if(interfaceFnTo.getResponseParams().get(0).getUnit().equals(valueVsnTo.getUnit())) {
                             blendingVsnTo.addRequestParam(valueVsnTo.getId(), interfaceFnTo.getRequestParams().get(0).getName());
-                            break;
                         }
                     }
                 }
@@ -207,16 +206,11 @@ public class BlendingService {
             blendingVsnTo.addResponseParam(fieldTo.getId(), interfaceFnTo.getResponseParams().get(0).getName());
 
             this.blendingRepository.update(blendingVsnTo.getId(), blendingVsnTo);
-
             return blendingUri;
         } catch (Exception exc) {
-            try {
-                this.blendingRepository.delete(blendingId);
-                this.vsnFunctionRepository.delete(blendingVsnTo.getFunctionId());
-                throw new InternalServerErrorException("Failed to create blending sensor. rollback performed.");
-            } catch (Exception e) {
-                throw new InternalServerErrorException("Failed to create blending sensor. Failed to perform rollback.");
-            }
+            this.blendingRepository.delete(blendingId);
+            this.vsnFunctionRepository.delete(blendingVsnTo.getFunctionId());
+            throw new InternalServerErrorException("Failed to create blending sensor. Failed to perform rollback.");
         }
     }
 
