@@ -38,7 +38,7 @@
 					},
 					"response": [
 						{
-							"id": "64d10a95-9001-4123-8e5e-0261aba56eda",
+							"id": "8a6ffbe2-a6fd-4007-ba5a-55d2a5ffb719",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users",
@@ -122,7 +122,7 @@
 							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
 						},
 						{
-							"id": "850c9459-31f9-43db-b760-1beb932c4a33",
+							"id": "e3ccd791-2bad-40fe-936b-5b26f38d3ca1",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users",
@@ -238,7 +238,7 @@
 					},
 					"response": [
 						{
-							"id": "d28e2eee-57d1-4f4c-b363-524623b9dffb",
+							"id": "b7b101c5-14ee-400c-92b1-54d9279bf8dd",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users/3",
@@ -422,7 +422,7 @@
 					},
 					"response": [
 						{
-							"id": "2b91d297-2a8c-4656-a6bd-3d7e3d02bc3c",
+							"id": "f40fd228-b4a3-4238-8731-565c20f64908",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/health",
@@ -613,7 +613,7 @@
 					},
 					"response": [
 						{
-							"id": "69df01e7-f9b3-4d40-bc79-a59cfa75a3a2",
+							"id": "f09fb320-49f9-40c3-bfdb-a883413d2a21",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
@@ -715,7 +715,7 @@
 					},
 					"response": [
 						{
-							"id": "85ead18c-46a4-4d86-9808-6f405a53b1b3",
+							"id": "360118c8-6421-49c4-9211-5026e51f8de8",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
@@ -828,7 +828,7 @@
 					},
 					"response": [
 						{
-							"id": "e494b78f-2ee0-466e-8bc2-d2643bf4737a",
+							"id": "43a83ede-2cca-4ec1-a683-8c59f9e27d50",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -903,7 +903,7 @@
 					},
 					"response": [
 						{
-							"id": "fb12c9b9-ef8d-4513-9793-b8bd00c2e982",
+							"id": "853b01b5-0cf6-4856-895a-7536bcb5e56d",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -981,7 +981,7 @@
 					},
 					"response": [
 						{
-							"id": "e20eb4ee-61f3-4383-944f-675c656feaa3",
+							"id": "817e6fd3-4b56-4702-8203-cde73986c14a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -1059,7 +1059,7 @@
 					},
 					"response": [
 						{
-							"id": "5abccfe7-1db9-41a3-bd22-aa8fc1eb598c",
+							"id": "3d4be247-bbc2-44f9-a5b1-567e8292c38f",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -1137,7 +1137,7 @@
 					},
 					"response": [
 						{
-							"id": "e4926b45-159a-4c79-bc61-0d0ee968ae10",
+							"id": "6db0f924-7bc0-4044-bd51-0c3819397e79",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -1220,7 +1220,7 @@
 					},
 					"response": [
 						{
-							"id": "3dcc4f04-a8b6-4482-842b-94719c8450f9",
+							"id": "6168e7da-bf19-410e-bdef-458e22d6dc5e",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -1388,7 +1388,7 @@
 					},
 					"response": [
 						{
-							"id": "e5b2cd15-a8f5-4be0-906b-2939d2defd5d",
+							"id": "d8205d38-6c69-4d39-acd0-e3ad4127b896",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -1466,7 +1466,7 @@
 					},
 					"response": [
 						{
-							"id": "5d0cb99f-bd0a-403f-b88a-4239c38426e0",
+							"id": "497fb454-1715-4d32-97ea-7a5cc21cce11",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -1544,7 +1544,7 @@
 					},
 					"response": [
 						{
-							"id": "a3865f2c-cc39-4092-bb72-4187cb47f360",
+							"id": "70599e21-b9d8-4c38-af96-c0b352fe500b",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1622,7 +1622,7 @@
 					},
 					"response": [
 						{
-							"id": "4a5ca85e-5fce-4c66-9d7c-99a5d2abb4f3",
+							"id": "f8b59fed-6510-4cf6-a481-698767cb9b4c",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1700,7 +1700,7 @@
 					},
 					"response": [
 						{
-							"id": "ae623ddf-adae-42dd-8906-07b25d51576d",
+							"id": "2bbc9c88-957d-444c-a427-65d8fada59bb",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1778,7 +1778,7 @@
 					},
 					"response": [
 						{
-							"id": "f36bd1d4-642a-46b8-9399-ca692bb321f1",
+							"id": "e72002d9-ab48-4127-a344-9ef645717ab4",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1856,7 +1856,7 @@
 					},
 					"response": [
 						{
-							"id": "d95b79c7-fa7a-4ba1-b104-2ba5dae1e5cf",
+							"id": "4e10007f-c340-452e-894c-30d114ad7ab8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1908,6 +1908,23 @@
 							"body": "{\"id\":\"sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7\",\"captureDateInMillis\":1490728242002,\"captureDateInNano\":1490728,\"acquisitionDateInMillis\":1490728329746,\"info\":{\"parent\":\"parent sensor\",\"sendCount\":\"quantity of sent values\",\"metric\":\"environment climate\"},\"values\":[{\"name\":\"temperature\",\"value\":57096,\"unit\":\"57096\",\"symbol\":\"Cº\"}],\"consumables\":{\"Good Signal\":88,\"Low Signal\":95,\"Normal Signal\":5},\"rules\":null}"
 						}
 					]
+				},
+				{
+					"name": "/dashboard/sensornet",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/dashboard/sensornet",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "SensorNet dashboard data for analytics"
+					},
+					"response": []
 				}
 			]
 		},
@@ -1937,7 +1954,7 @@
 					},
 					"response": [
 						{
-							"id": "05423c33-e548-480b-a2b3-382f791cb572",
+							"id": "30f85f17-10cb-4b12-9f08-1c84a7a71d36",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/virtualsensors",
@@ -2066,7 +2083,7 @@
 					},
 					"response": [
 						{
-							"id": "f822b78b-32a0-4f3b-93b0-132a554bf10e",
+							"id": "71698043-7ca1-4607-a545-a8a10faae2b8",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
@@ -2138,7 +2155,7 @@
 					},
 					"response": [
 						{
-							"id": "de045524-46eb-4a24-a796-523e13b121a1",
+							"id": "f4a8702e-2571-40b9-86fe-a38f2017e931",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2210,7 +2227,7 @@
 					},
 					"response": [
 						{
-							"id": "6d0edbb6-6e26-4869-8013-6a9b3efa61e4",
+							"id": "0490f2a8-fc69-49a1-9b36-b5a0ab0b0059",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2359,7 +2376,7 @@
 					},
 					"response": [
 						{
-							"id": "f77767de-1c22-4a03-ba91-304d2174e00d",
+							"id": "a14ce746-b861-449c-bc86-ac62de0a6cd5",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
@@ -2461,7 +2478,7 @@
 					},
 					"response": [
 						{
-							"id": "c7cb9e86-a6da-4cfa-a2a0-e6f1419bdddd",
+							"id": "6375c6f2-da40-4029-a58f-792f0c262ac3",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock/sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e",
@@ -2620,7 +2637,7 @@
 					},
 					"response": [
 						{
-							"id": "cc9517ef-23e5-411f-8579-26ae28026570",
+							"id": "d79cae75-7ac4-4a51-814b-e73ff2c089a1",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -2739,7 +2756,7 @@
 					},
 					"response": [
 						{
-							"id": "dcce4166-1e65-4c7e-b8ba-3b6518294a60",
+							"id": "1001e90a-f09c-4f0d-9f8a-082215b32e75",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -3204,6 +3221,23 @@
 						],
 						"body": {},
 						"description": "Get a function from VirtualSensorNet"
+					},
+					"response": []
+				},
+				{
+					"name": "/dashboard/virtualsensornet",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/dashboard/virtualsensornet",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "VirtualSensorNet dashboard data for analytics"
 					},
 					"response": []
 				}
