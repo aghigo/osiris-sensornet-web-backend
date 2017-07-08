@@ -2,8 +2,10 @@ package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.UserAccountRequest;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.model.response.UserAccountResponse;
 import br.uff.labtempo.osiris.service.UserAccountService;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +51,8 @@ public class UserAccountController {
                 return ResponseEntity.ok(userAccountResponseList);
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -63,7 +66,8 @@ public class UserAccountController {
         try {
             return ResponseEntity.ok(this.userAccountService.create(userAccountRequest));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -77,7 +81,8 @@ public class UserAccountController {
         try {
             return ResponseEntity.ok(this.userAccountService.getById(userId));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -93,7 +98,8 @@ public class UserAccountController {
             this.userAccountService.update(userId, userAccountRequest);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -108,7 +114,8 @@ public class UserAccountController {
             this.userAccountService.delete(userId);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 }

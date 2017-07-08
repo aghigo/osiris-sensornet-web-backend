@@ -1,8 +1,10 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.service.VirtualSensorService;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -45,9 +47,11 @@ public class VirtualSensorController {
                 return ResponseEntity.ok(virtualSensorVsnToList);
             }
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -71,9 +75,11 @@ public class VirtualSensorController {
             VirtualSensorVsnTo virtualSensorVsnTo = this.virtualSensorService.getById(virtualSensorId);
             return ResponseEntity.ok(virtualSensorVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

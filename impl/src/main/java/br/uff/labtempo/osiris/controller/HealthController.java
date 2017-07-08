@@ -3,8 +3,10 @@ package br.uff.labtempo.osiris.controller;
 import br.uff.labtempo.osiris.configuration.SensorNetModuleConfig;
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.model.health.HealthDependency;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.service.HealthService;
 
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +53,8 @@ public class HealthController {
             healthDependencyList.add(this.healthService.testApplicationDatabase());
             return ResponseEntity.ok(healthDependencyList);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -67,7 +70,8 @@ public class HealthController {
             HealthDependency healthDependency = this.healthService.testSensorNetConnection();
             return ResponseEntity.ok(healthDependency);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -83,7 +87,8 @@ public class HealthController {
             HealthDependency healthDependency = this.healthService.testVirtualSensorNet();
             return ResponseEntity.ok(healthDependency);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -97,7 +102,8 @@ public class HealthController {
             HealthDependency healthDependency = this.healthService.testApplicationDatabase();
             return ResponseEntity.ok(healthDependency);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 }

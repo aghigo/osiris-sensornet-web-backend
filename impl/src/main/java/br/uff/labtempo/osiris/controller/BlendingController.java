@@ -3,8 +3,10 @@ package br.uff.labtempo.osiris.controller;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.BlendingRequest;
 import br.uff.labtempo.osiris.model.response.BlendingResponse;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.service.BlendingService;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -48,9 +50,11 @@ public class BlendingController {
                 return ResponseEntity.ok(blendingResponseList);
             }
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -65,9 +69,11 @@ public class BlendingController {
             BlendingResponse blendingResponse = this.blendingService.getById(blendingId);
             return ResponseEntity.ok(blendingResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -82,9 +88,11 @@ public class BlendingController {
             URI uri = this.blendingService.create(blendingRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -108,9 +116,11 @@ public class BlendingController {
             BlendingVsnTo blendingVsnTo = this.blendingService.getRandom();
             return ResponseEntity.ok(blendingVsnTo);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -135,9 +145,11 @@ public class BlendingController {
             this.blendingService.update(blendingId, blendingRequest);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -152,9 +164,11 @@ public class BlendingController {
             this.blendingService.delete(blendingId);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

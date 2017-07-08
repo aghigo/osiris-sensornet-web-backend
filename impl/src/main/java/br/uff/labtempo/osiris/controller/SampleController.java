@@ -1,8 +1,10 @@
 package br.uff.labtempo.osiris.controller;
 
 import br.uff.labtempo.osiris.model.request.SampleRequest;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.model.response.SampleResponse;
 import br.uff.labtempo.osiris.service.SampleService;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -33,7 +35,8 @@ public class SampleController {
             SampleResponse sampleResponse = this.sampleService.getRandom();
             return ResponseEntity.ok(sampleResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -48,7 +51,8 @@ public class SampleController {
             URI uri = this.sampleService.create(sampleRequest);
             return ResponseEntity.created(uri).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

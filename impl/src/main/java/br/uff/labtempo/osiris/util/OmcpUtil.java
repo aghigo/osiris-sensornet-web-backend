@@ -3,6 +3,7 @@ package br.uff.labtempo.osiris.util;
 import br.uff.labtempo.omcp.common.Response;
 import br.uff.labtempo.omcp.common.StatusCode;
 import br.uff.labtempo.omcp.common.exceptions.*;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 
 import java.net.URI;
@@ -74,5 +75,18 @@ public class OmcpUtil {
      */
     public static long getIdFromUri(URI uri) {
         return Long.parseLong(uri.getPath().substring(uri.getPath().lastIndexOf('/') + 1));
+    }
+
+    public static ErrorResponse formatErrorResponse(AbstractRequestException exception) {
+        return ErrorResponse.builder()
+                .statusCode(exception.getStatusCode())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    public static ErrorResponse formatErrorResponse(Exception exception) {
+        return ErrorResponse.builder()
+                .message(exception.getMessage())
+                .build();
     }
 }

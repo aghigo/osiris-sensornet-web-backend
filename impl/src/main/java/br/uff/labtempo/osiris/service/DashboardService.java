@@ -10,7 +10,6 @@ import br.uff.labtempo.osiris.to.sensornet.NetworkSnTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorType;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by osiris on 25/06/17.
+ * Service class with busniness rules to provide
+ * SensorNet and VirtualSensorNet general data for dashboard presentation
  */
 @Service
 public class DashboardService {
@@ -39,6 +39,9 @@ public class DashboardService {
 
     @Autowired
     private VirtualSensorRepository virtualSensorRepository;
+
+    @Autowired
+    private FunctionDataRepository functionDataRepository;
 
     public SensorNetDashboardResponse getSensornetDashboard() throws AbstractRequestException {
         List<NetworkSnTo> networkSnToList = this.networkRepository.getAll();
