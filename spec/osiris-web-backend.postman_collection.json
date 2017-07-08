@@ -38,7 +38,7 @@
 					},
 					"response": [
 						{
-							"id": "8a6ffbe2-a6fd-4007-ba5a-55d2a5ffb719",
+							"id": "0d1e35f1-e6ae-4d98-aaa5-877d0906b7c4",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users",
@@ -122,7 +122,7 @@
 							"body": "[{\"id\":1,\"firstName\":\"andre\",\"middleName\":\"mendes\",\"lastName\":\"ghigo\",\"email\":\"andreghigo@id.uff.br\",\"username\":\"andre.ghigo\",\"password\":\"1234\",\"birthDate\":586062000000},{\"id\":2,\"firstName\":\"felippe\",\"middleName\":\"mauricio\",\"lastName\":\"vieira\",\"email\":\"felippemauriciov@gmail.com\",\"username\":\"felippe.mauricio\",\"password\":\"1234\",\"birthDate\":647406000000},{\"id\":3,\"firstName\":\"raphael\",\"middleName\":\"pereira de olveira\",\"lastName\":\"guerra\",\"email\":\"guerra@ic.uff.br\",\"username\":\"raphael.guerra\",\"password\":\"1234\",\"birthDate\":30942000000}]"
 						},
 						{
-							"id": "e3ccd791-2bad-40fe-936b-5b26f38d3ca1",
+							"id": "5342a998-b3ef-463a-98da-9e1ea0d581ed",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users",
@@ -238,7 +238,7 @@
 					},
 					"response": [
 						{
-							"id": "b7b101c5-14ee-400c-92b1-54d9279bf8dd",
+							"id": "e24924bc-0a40-424a-9b15-7cd2e31a9559",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/users/3",
@@ -422,7 +422,7 @@
 					},
 					"response": [
 						{
-							"id": "f40fd228-b4a3-4238-8731-565c20f64908",
+							"id": "5806338d-827b-444f-89db-4d7779535860",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/health",
@@ -613,7 +613,7 @@
 					},
 					"response": [
 						{
-							"id": "f09fb320-49f9-40c3-bfdb-a883413d2a21",
+							"id": "de2f179e-39fc-4a5b-b44b-d6826c1d5d51",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
@@ -715,7 +715,7 @@
 					},
 					"response": [
 						{
-							"id": "360118c8-6421-49c4-9211-5026e51f8de8",
+							"id": "1028d5b8-92f7-4315-a3bc-2eddc1842049",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/functions/sum/interface",
@@ -828,7 +828,7 @@
 					},
 					"response": [
 						{
-							"id": "43a83ede-2cca-4ec1-a683-8c59f9e27d50",
+							"id": "1699e09d-95fd-4dc6-b60c-720594e2f4de",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples/mock",
@@ -903,7 +903,7 @@
 					},
 					"response": [
 						{
-							"id": "853b01b5-0cf6-4856-895a-7536bcb5e56d",
+							"id": "7924a3d9-5bd0-4069-aac7-acb81beddab1",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/samples",
@@ -981,7 +981,7 @@
 					},
 					"response": [
 						{
-							"id": "817e6fd3-4b56-4702-8203-cde73986c14a",
+							"id": "4a143a1a-9286-420f-9e77-bf7b9a1e2c7b",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors/mock",
@@ -1059,7 +1059,7 @@
 					},
 					"response": [
 						{
-							"id": "3d4be247-bbc2-44f9-a5b1-567e8292c38f",
+							"id": "9e2f5663-dc01-4173-83d2-933f421bfae0",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/collectors",
@@ -1137,7 +1137,7 @@
 					},
 					"response": [
 						{
-							"id": "6db0f924-7bc0-4044-bd51-0c3819397e79",
+							"id": "6471f495-d029-462b-95af-5a698d9a26c2",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors/mock",
@@ -1220,7 +1220,7 @@
 					},
 					"response": [
 						{
-							"id": "6168e7da-bf19-410e-bdef-458e22d6dc5e",
+							"id": "79b5c65d-d8b4-4e55-ad6d-ed7081419eda",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/sensors",
@@ -1388,7 +1388,7 @@
 					},
 					"response": [
 						{
-							"id": "d8205d38-6c69-4d39-acd0-e3ad4127b896",
+							"id": "4d41590e-19e6-4185-8da6-9f9e27f7f21a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks",
@@ -1466,7 +1466,7 @@
 					},
 					"response": [
 						{
-							"id": "497fb454-1715-4d32-97ea-7a5cc21cce11",
+							"id": "60145a19-d02b-468f-8bbb-1e357f5ec12a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d",
@@ -1544,7 +1544,7 @@
 					},
 					"response": [
 						{
-							"id": "70599e21-b9d8-4c38-af96-c0b352fe500b",
+							"id": "6825993b-9ad7-4069-a3cd-67943963edf0",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/sensors",
@@ -1622,7 +1622,7 @@
 					},
 					"response": [
 						{
-							"id": "f8b59fed-6510-4cf6-a481-698767cb9b4c",
+							"id": "0272f9d8-6ee4-463c-9acf-b60b7b3bf3e3",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors",
@@ -1700,7 +1700,7 @@
 					},
 					"response": [
 						{
-							"id": "2bbc9c88-957d-444c-a427-65d8fada59bb",
+							"id": "c6b4c798-df0f-49ee-b28d-2c33c9ee5273",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999",
@@ -1778,7 +1778,7 @@
 					},
 					"response": [
 						{
-							"id": "e72002d9-ab48-4127-a344-9ef645717ab4",
+							"id": "75375c09-f80e-49eb-bb0c-ef916e05990a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors",
@@ -1856,7 +1856,7 @@
 					},
 					"response": [
 						{
-							"id": "4e10007f-c340-452e-894c-30d114ad7ab8",
+							"id": "af187136-353a-4d8d-9d67-6424c87bc080",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-sensornet-backend.endpoint}}/sensornet/networks/networkId-52ee10f8-cf5a-4ef8-92c2-bfee7e45b61d/collectors/collectorId-d378ddec-3e55-4f2f-8c67-95e9361eb999/sensors/sensorId-3fae4f0e-1eb1-4717-88da-ec9bcc5b5ec7",
@@ -1924,7 +1924,81 @@
 						"body": {},
 						"description": "SensorNet dashboard data for analytics"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "6a7f50dd-0294-4de9-88c5-7b50b65b1e58",
+							"name": "example 1",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/dashboard/sensornet",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 25 Jun 2017 19:19:50 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 169,
+							"body": "{\"totalSensors\":5,\"totalNetworks\":1,\"totalCollectors\":1,\"totalSensorsByStateMap\":{\"INACTIVE\":5,\"REACTIVATED\":0,\"UPDATED\":0,\"NEW\":0,\"MALFUNCTION\":0}}"
+						}
+					]
 				}
 			]
 		},
@@ -1954,7 +2028,7 @@
 					},
 					"response": [
 						{
-							"id": "30f85f17-10cb-4b12-9f08-1c84a7a71d36",
+							"id": "b99577fc-0869-47b0-9958-20a3641ed823",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/virtualsensors",
@@ -2083,7 +2157,7 @@
 					},
 					"response": [
 						{
-							"id": "71698043-7ca1-4607-a545-a8a10faae2b8",
+							"id": "2bb00e89-2c80-4e91-aa3b-b51c8c035cc5",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes/mock",
@@ -2155,7 +2229,7 @@
 					},
 					"response": [
 						{
-							"id": "f4a8702e-2571-40b9-86fe-a38f2017e931",
+							"id": "6e871306-df74-4455-ba7b-9cc500e5d78a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2227,7 +2301,7 @@
 					},
 					"response": [
 						{
-							"id": "0490f2a8-fc69-49a1-9b36-b5a0ab0b0059",
+							"id": "7a2cf536-8ae9-4e05-898a-aa4bfcd12b1a",
 							"name": "response_example_1",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/datatypes",
@@ -2376,7 +2450,7 @@
 					},
 					"response": [
 						{
-							"id": "a14ce746-b861-449c-bc86-ac62de0a6cd5",
+							"id": "13ef5808-d163-4864-a344-85b7d0f2ee1c",
 							"name": "response_example_01",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock",
@@ -2478,7 +2552,7 @@
 					},
 					"response": [
 						{
-							"id": "6375c6f2-da40-4029-a58f-792f0c262ac3",
+							"id": "12252cbc-a07c-47e4-8a22-1f8a8cab7a87",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/mock/sensorId-4ebc31e6-8098-4d3c-b8e8-01bf3d79d83e",
@@ -2578,7 +2652,86 @@
 						"body": {},
 						"description": "Get All Link Sensors from VirtualSensorNet"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "91dc1fd1-2f76-4df3-a9fd-b20a7a7c36eb",
+							"name": "link list",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:49:13 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": 76,
+							"body": "[{\"id\":1,\"label\":\"link-Sun, 18 Jun 2017 02:41:41 GMT\",\"sensorId\":\"sensorId-ffa35337-c0f2-4bbf-baa6-8d10d9abd427\",\"collectorId\":\"collectorId-765a5fe7-bb82-47fa-bde7-3d476f9dd6d9\",\"networkId\":\"networkId-8a5a16ea-80e3-43e2-89eb-e09de620ab4e\",\"fields\":[{\"id\":1,\"name\":\"length\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":true,\"sourceId\":1,\"aggregates\":1,\"dependents\":4}]},{\"id\":2,\"label\":\"link-Sun, 18 Jun 2017 02:41:41 GMT\",\"sensorId\":\"sensorId-66963047-17d4-43ac-8526-918a0fee9b0e\",\"collectorId\":\"collectorId-765a5fe7-bb82-47fa-bde7-3d476f9dd6d9\",\"networkId\":\"networkId-8a5a16ea-80e3-43e2-89eb-e09de620ab4e\",\"fields\":[{\"id\":2,\"name\":\"time\",\"dataTypeId\":7,\"converterId\":0,\"initialized\":true,\"sourceId\":2,\"aggregates\":1,\"dependents\":1}]}]"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/links/{linkId}",
@@ -2605,7 +2758,91 @@
 						"body": {},
 						"description": "Get a specific Link Sensor from VirtualSensorNet"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "148f8ff6-fc4d-47c2-b59e-48734b74ee03",
+							"name": "id 1",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links/1",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:49:04 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": 69,
+							"body": "{\"id\":1,\"label\":\"link-Sun, 18 Jun 2017 02:41:41 GMT\",\"sensorId\":\"sensorId-ffa35337-c0f2-4bbf-baa6-8d10d9abd427\",\"collectorId\":\"collectorId-765a5fe7-bb82-47fa-bde7-3d476f9dd6d9\",\"networkId\":\"networkId-8a5a16ea-80e3-43e2-89eb-e09de620ab4e\",\"fields\":[{\"id\":1,\"name\":\"length\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":true,\"sourceId\":1,\"aggregates\":1,\"dependents\":4}]}"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/links",
@@ -2637,7 +2874,7 @@
 					},
 					"response": [
 						{
-							"id": "d79cae75-7ac4-4a51-814b-e73ff2c089a1",
+							"id": "b6be4854-ba6c-48d8-a2aa-4e757cad2a82",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -2756,7 +2993,7 @@
 					},
 					"response": [
 						{
-							"id": "1001e90a-f09c-4f0d-9f8a-082215b32e75",
+							"id": "1bc7124e-dc32-4c20-84a0-243436a2aeaf",
 							"name": "response_example",
 							"originalRequest": {
 								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/links",
@@ -2897,7 +3134,91 @@
 						"body": {},
 						"description": "Get a random mocked Composite virtual sensor object"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "2dadc3fd-79d7-4974-82a6-13dfb3f31017",
+							"name": "mock example",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/mock",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:48:10 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 69,
+							"body": "{\"id\":3254181183683969142,\"label\":\"compositeId-3254181183683969142\",\"boundFields\":[{\"id\":1,\"name\":null,\"dataTypeId\":0,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0},{\"id\":2,\"name\":null,\"dataTypeId\":0,\"converterId\":0,\"initialized\":false,\"sourceId\":0,\"aggregates\":0,\"dependents\":0}]}"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/composites",
@@ -2919,12 +3240,91 @@
 						"body": {},
 						"description": "Get a list of all Composite sensors from VirtualSensorNet Module"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "b3960daa-58fb-44e8-9532-504c6db02711",
+							"name": "composite list",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:48:23 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 75,
+							"body": "[{\"id\":4,\"label\":\"composite-Sun, 18 Jun 2017 02:41:42 GMT\",\"fields\":[{\"id\":2,\"name\":\"time\",\"dataTypeId\":7,\"converterId\":0,\"initialized\":true,\"sourceId\":2,\"aggregates\":1,\"dependents\":1}]},{\"id\":3,\"label\":\"composite-Sun, 18 Jun 2017 02:41:41 GMT\",\"fields\":[{\"id\":1,\"name\":\"length\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":true,\"sourceId\":1,\"aggregates\":1,\"dependents\":4}]}]"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/composites/{compositeId}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/6",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/4",
 						"method": "GET",
 						"header": [
 							{
@@ -2946,7 +3346,91 @@
 						"body": {},
 						"description": "Get a specific Composite sensor from VirtualSensorNet Module"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "140c0a70-091e-4faf-a095-99621f318f85",
+							"name": "id 4",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/composites/4",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:48:42 GMT",
+									"description": ""
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": ""
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": ""
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": ""
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": ""
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": 78,
+							"body": "{\"id\":4,\"label\":\"composite-Sun, 18 Jun 2017 02:41:42 GMT\",\"fields\":[{\"id\":2,\"name\":\"time\",\"dataTypeId\":7,\"converterId\":0,\"initialized\":true,\"sourceId\":2,\"aggregates\":1,\"dependents\":1}]}"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/composites",
@@ -3055,34 +3539,91 @@
 						"body": {},
 						"description": "Get a list of all Blending sensors from VirtualSensorNet module."
 					},
-					"response": []
-				},
-				{
-					"name": "/virtualsensornet/blendings/mock",
-					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/mock",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": ""
+					"response": [
+						{
+							"id": "dd075948-c4c1-4f00-a63c-06b4f306ac3c",
+							"name": "all blendings",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
 							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {},
-						"description": "Get a random mocked Blending Virtual Sensor Object."
-					},
-					"response": []
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:46:48 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 251,
+							"body": "[{\"id\":5,\"label\":\"blending-Sun, 18 Jun 2017 02:41:46 GMT\",\"functionId\":1,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":3,\"name\":\"sum\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":false,\"sourceId\":5,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":1,\"paramName\":\"length\"}],\"responseParams\":[{\"fieldId\":3,\"paramName\":\"sum\"}]},{\"id\":6,\"label\":\"blending-Sun, 18 Jun 2017 02:41:47 GMT\",\"functionId\":2,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":4,\"name\":\"average\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":false,\"sourceId\":6,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":1,\"paramName\":\"length\"}],\"responseParams\":[{\"fieldId\":4,\"paramName\":\"average\"}]},{\"id\":7,\"label\":\"blending-Sun, 18 Jun 2017 02:41:47 GMT\",\"functionId\":3,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":5,\"name\":\"min\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":false,\"sourceId\":7,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":1,\"paramName\":\"length\"}],\"responseParams\":[{\"fieldId\":5,\"paramName\":\"min\"}]},{\"id\":8,\"label\":\"blending-Sun, 18 Jun 2017 02:41:47 GMT\",\"functionId\":4,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":6,\"name\":\"max\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":false,\"sourceId\":8,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":1,\"paramName\":\"length\"}],\"responseParams\":[{\"fieldId\":6,\"paramName\":\"max\"}]},{\"id\":9,\"label\":\"blending-Sun, 18 Jun 2017 02:41:48 GMT\",\"functionId\":5,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":7,\"name\":\"sum\",\"dataTypeId\":7,\"converterId\":0,\"initialized\":true,\"sourceId\":9,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":2,\"paramName\":\"time\"}],\"responseParams\":[{\"fieldId\":7,\"paramName\":\"sum\"}]},{\"id\":10,\"label\":\"blending-Sun, 18 Jun 2017 02:41:48 GMT\",\"functionId\":0,\"callIntervalInMillis\":0,\"fields\":[{\"id\":8,\"name\":\"average\",\"dataTypeId\":7,\"converterId\":0,\"initialized\":false,\"sourceId\":10,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[],\"responseParams\":[]}]"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/blendings/{blendingId}",
 					"request": {
-						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/88",
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/5",
 						"method": "GET",
 						"header": [
 							{
@@ -3099,7 +3640,86 @@
 						"body": {},
 						"description": "Get a specific blending sensor from VirtualSensorNet module."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "f9bf0f41-fa2f-448d-b1d3-c3de901e5f84",
+							"name": "id 5",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/5",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:47:15 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 89,
+							"body": "{\"id\":5,\"label\":\"blending-Sun, 18 Jun 2017 02:41:46 GMT\",\"functionId\":1,\"callIntervalInMillis\":2000,\"fields\":[{\"id\":3,\"name\":\"sum\",\"dataTypeId\":3,\"converterId\":0,\"initialized\":false,\"sourceId\":5,\"aggregates\":0,\"dependents\":0}],\"requestParams\":[{\"fieldId\":1,\"paramName\":\"length\"}],\"responseParams\":[{\"fieldId\":3,\"paramName\":\"sum\"}]}"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/blendings",
@@ -3195,7 +3815,91 @@
 						"body": {},
 						"description": "Get all functions from VirtualSensorNet"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "9c311feb-9602-46ab-a09b-e7233a81a94d",
+							"name": "functions",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/functions",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:46:05 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 165,
+							"body": "[{\"name\":\"sum.length.meter\",\"description\":\"function that calculates the sum of length in meter\",\"address\":\"omcp://sum.length.meter.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"length\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":true}],\"responseParams\":[{\"name\":\"sum\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":false}],\"id\":1},{\"name\":\"average.length.meter\",\"description\":\"function that calculates the average of length in meter\",\"address\":\"omcp://average.length.meter.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"length\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":true}],\"responseParams\":[{\"name\":\"average\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":false}],\"id\":2},{\"name\":\"min.length.meter\",\"description\":\"function that calculates the min of length in meter\",\"address\":\"omcp://min.length.meter.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"length\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":true}],\"responseParams\":[{\"name\":\"min\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":false}],\"id\":3},{\"name\":\"max.length.meter\",\"description\":\"function that calculates the max of length in meter\",\"address\":\"omcp://max.length.meter.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"length\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":true}],\"responseParams\":[{\"name\":\"max\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":false}],\"id\":4},{\"name\":\"sum.time.second\",\"description\":\"function that calculates the sum of time in second\",\"address\":\"omcp://sum.time.second.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"time\",\"type\":\"NUMBER\",\"unit\":\"second\",\"collection\":true}],\"responseParams\":[{\"name\":\"sum\",\"type\":\"NUMBER\",\"unit\":\"second\",\"collection\":false}],\"id\":5}]"
+						}
+					]
 				},
 				{
 					"name": "/virtualsensornet/functions/{functionId}",
@@ -3222,7 +3926,91 @@
 						"body": {},
 						"description": "Get a function from VirtualSensorNet"
 					},
-					"response": []
+					"response": [
+						{
+							"id": "084f6c92-c258-40ec-9ad4-5e2b6d6cf7c8",
+							"name": "id 1",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/functions/1",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YW5kcmUuZ2hpZ286MTIzNA==",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 28 Jun 2017 03:46:24 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 102,
+							"body": "{\"name\":\"sum.length.meter\",\"description\":\"function that calculates the sum of length in meter\",\"address\":\"omcp://sum.length.meter.function/\",\"operations\":[\"SYNCHRONOUS\"],\"requestParams\":[{\"name\":\"length\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":true}],\"responseParams\":[{\"name\":\"sum\",\"type\":\"NUMBER\",\"unit\":\"meter\",\"collection\":false}],\"id\":1}"
+						}
+					]
 				},
 				{
 					"name": "/dashboard/virtualsensornet",
@@ -3238,6 +4026,102 @@
 						],
 						"body": {},
 						"description": "VirtualSensorNet dashboard data for analytics"
+					},
+					"response": [
+						{
+							"id": "eb1de0e0-8e70-41ed-87f9-62ec122c9d17",
+							"name": "example 1",
+							"originalRequest": {
+								"url": "{{osiris-web-backend.endpoint}}/dashboard/virtualsensornet",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Sun, 25 Jun 2017 19:19:32 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "0",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Content-Type-Options",
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"name": "X-XSS-Protection",
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"responseTime": 160,
+							"body": "{\"totalDataTypes\":11,\"totalVirtualSensors\":10,\"totalByTypeAndState\":{\"LINK\":{\"INACTIVE\":2},\"BLENDING\":{\"INACTIVE\":1,\"UPDATED\":4,\"NEW\":1},\"COMPOSITE\":{\"INACTIVE\":2}}}"
+						}
+					]
+				},
+				{
+					"name": "/virtualsensornet/blendings/mock",
+					"request": {
+						"url": "{{osiris-web-backend.endpoint}}/virtualsensornet/blendings/mock",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get a random mocked Blending Virtual Sensor Object."
 					},
 					"response": []
 				}
