@@ -17,7 +17,7 @@ public class CollectorGenerator {
 
     private Map<String, List<String>> collectorInfos;
     private final TimeUnit defaultCaptureTimeUnit = TimeUnit.SECONDS;
-    private final long defaultCaptureInterval = 8;
+    private final long defaultCaptureInterval = 6;
 
     public CollectorGenerator() {
         this.collectorInfos = new LinkedHashMap<>();

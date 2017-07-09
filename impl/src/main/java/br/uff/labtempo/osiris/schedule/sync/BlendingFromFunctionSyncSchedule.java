@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 public class BlendingFromFunctionSyncSchedule {
 
-    private final long defaultCallIntervalInMillis = 2000;
+    private final long defaultCallIntervalInMillis = 990;
 
     @Autowired
     private CompositeRepository compositeRepository;

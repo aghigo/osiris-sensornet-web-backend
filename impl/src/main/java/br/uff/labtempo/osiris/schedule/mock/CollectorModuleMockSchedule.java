@@ -100,7 +100,8 @@ public class CollectorModuleMockSchedule {
         }
     }
 
-    @Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/1 * * * * ?}")
+    //@Scheduled(cron="${virtualsensornet.schedule.mock.collector.cron:*/1 * * * * ?}")
+    @Scheduled(fixedDelay = 1000)
     public void collectMockSensors() throws AbstractRequestException {
         for(int i = 0; i < this.sampleCoToList.size(); i++) {
             SampleCoTo sample = this.sampleCoToList.get(i);
@@ -149,7 +150,7 @@ public class CollectorModuleMockSchedule {
     }
 
     private long randomNumber() {
-        return (long) Math.abs(this.random.nextInt(9999) + 1);
+        return (long) Math.abs(this.random.nextInt(999) + 1);
     }
 
 }

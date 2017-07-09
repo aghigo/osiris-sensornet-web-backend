@@ -83,10 +83,10 @@
 
 
 		<!-- H2 in-memory relational database (local development/test purposes only) -->
-		<!--<dependency>-->
-			<!--<groupId>com.h2database</groupId>-->
-			<!--<artifactId>h2</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 
 		<!-- PostgreSQL database -->
 		<dependency>

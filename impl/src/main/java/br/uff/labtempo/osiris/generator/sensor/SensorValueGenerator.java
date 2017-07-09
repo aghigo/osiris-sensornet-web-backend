@@ -31,17 +31,17 @@ public class SensorValueGenerator {
     public SensorValueGenerator(){
         this.sensorValues = new ArrayList<>();
         this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE),"celsius", "ºC"));
-        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "fahrenheit", "ºF"));
-        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "kelvin", "K"));
-        this.sensorValues.add(new SensorValue("luminosity", ValueType.NUMBER, randomLong(VALUE_RANGE), "candela", "C"));
-        this.sensorValues.add(new SensorValue("pressure", ValueType.NUMBER, randomLong(VALUE_RANGE), "pascal", "P"));
-        this.sensorValues.add(new SensorValue("length", ValueType.NUMBER, randomLong(VALUE_RANGE), "meter", "m"));
-        this.sensorValues.add(new SensorValue("mass", ValueType.NUMBER, randomLong(VALUE_RANGE), "kilogram", "kg"));
-        this.sensorValues.add(new SensorValue("time", ValueType.NUMBER, randomLong(VALUE_RANGE), "second", "s"));
-        this.sensorValues.add(new SensorValue("frequency", ValueType.NUMBER, randomLong(VALUE_RANGE), "hertz", "Hz"));
-        this.sensorValues.add(new SensorValue("energy", ValueType.NUMBER, randomLong(VALUE_RANGE), "energy", "J"));
-        this.sensorValues.add(new SensorValue("power", ValueType.NUMBER, randomLong(VALUE_RANGE), "watt", "W"));
-        this.sensorValues.add(new SensorValue("voltage", ValueType.NUMBER, randomLong(VALUE_RANGE),"volt", "V"));
+//        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "fahrenheit", "ºF"));
+//        this.sensorValues.add(new SensorValue("temperature", ValueType.NUMBER, randomLong(VALUE_RANGE), "kelvin", "K"));
+//        this.sensorValues.add(new SensorValue("luminosity", ValueType.NUMBER, randomLong(VALUE_RANGE), "candela", "C"));
+//        this.sensorValues.add(new SensorValue("pressure", ValueType.NUMBER, randomLong(VALUE_RANGE), "pascal", "P"));
+//        this.sensorValues.add(new SensorValue("length", ValueType.NUMBER, randomLong(VALUE_RANGE), "meter", "m"));
+//        this.sensorValues.add(new SensorValue("mass", ValueType.NUMBER, randomLong(VALUE_RANGE), "kilogram", "kg"));
+//        this.sensorValues.add(new SensorValue("time", ValueType.NUMBER, randomLong(VALUE_RANGE), "second", "s"));
+//        this.sensorValues.add(new SensorValue("frequency", ValueType.NUMBER, randomLong(VALUE_RANGE), "hertz", "Hz"));
+//        this.sensorValues.add(new SensorValue("energy", ValueType.NUMBER, randomLong(VALUE_RANGE), "energy", "J"));
+//        this.sensorValues.add(new SensorValue("power", ValueType.NUMBER, randomLong(VALUE_RANGE), "watt", "W"));
+//        this.sensorValues.add(new SensorValue("voltage", ValueType.NUMBER, randomLong(VALUE_RANGE),"volt", "V"));
     }
 
     /**
