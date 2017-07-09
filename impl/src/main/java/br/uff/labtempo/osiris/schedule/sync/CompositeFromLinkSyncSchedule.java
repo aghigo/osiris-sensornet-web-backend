@@ -63,6 +63,7 @@ public class CompositeFromLinkSyncSchedule {
                 if(!compositeVsnTo.getBoundFields().isEmpty()) {
                     URI uri = this.compositeRepository.create(compositeVsnTo);
                     log.info(String.format("Composite sensor created [%s]", uri.getPath()));
+                    compositeVsnToList = this.compositeRepository.getAll();
                 }
             }
         }

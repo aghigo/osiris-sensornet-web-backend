@@ -43,7 +43,7 @@ public class FunctionModuleThreadSyncSchedule {
      * because it was removed by another service.
      * @throws Exception
      */
-    @Scheduled(cron = "${sensornet.schedule.sync.function.thread.cron:*/20 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.function.thread.cron:*/5 * * * * ?}")
     public void handleFunctionModuleThreadsFromFunctionData() throws Exception {
         Iterable<FunctionData> functionDataInterable = this.functionDataRepository.findAll();
         Iterator<FunctionData> functionDataIterator = functionDataInterable.iterator();

@@ -50,8 +50,9 @@ public class LinkFromSensorSyncSchedule {
         log.info("Beginning synchronization between SensorsNet sensors and VirtualSensorNet Link sensors...");
         for(NetworkSnTo networkSnTo : networkSnToList) {
             List<SensorSnTo> sensorSnToList = this.sensorRepository.getAllByNetworkId(networkSnTo.getId());
+            boolean found = false;
             for(SensorSnTo sensorSnTo : sensorSnToList) {
-                boolean found = false;
+                found = false;
                 for(LinkVsnTo linkVsnTo : linkVsnToList) {
                     if(linkVsnTo.getSensorId().equals(sensorSnTo.getId())) {
                         found = true;
@@ -63,6 +64,7 @@ public class LinkFromSensorSyncSchedule {
                        LinkVsnTo linkVsnTo = this.linkGenerator.generateVsnTo(sensorSnTo);
                        this.linkRepository.save(linkVsnTo);
                        log.info(String.format("Link sensor [%s] created based on SensorNet sensor [%s]", linkVsnTo.getId(), sensorSnTo.getId()));
+                       linkVsnToList = this.linkRepository.getAll();
                    } catch (Exception e) {
                        log.info(e.getMessage());
                    }

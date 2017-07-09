@@ -113,8 +113,8 @@ public class DataTypeService {
         List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
         for(ValueTo valueTo : sensorSnTo.getValuesTo()) {
             for(DataTypeVsnTo dataTypeVsnTo : dataTypeVsnToList) {
-                if(valueTo.getName().equals(dataTypeVsnTo.getDisplayName()) && valueTo.getSymbol().equals(dataTypeVsnTo.getSymbol())
-                        && valueTo.getUnit().equals(dataTypeVsnTo.getUnit()) && valueTo.getType().equals(dataTypeVsnTo.getType()) ) {
+                if(valueTo.getName().trim().toLowerCase().equals(dataTypeVsnTo.getDisplayName().trim().toLowerCase()) && valueTo.getSymbol().trim().toLowerCase().equals(dataTypeVsnTo.getSymbol().trim().toLowerCase())
+                        && valueTo.getUnit().trim().toLowerCase().equals(dataTypeVsnTo.getUnit().trim().toLowerCase()) && valueTo.getType().equals(dataTypeVsnTo.getType()) ) {
                     appropiateDataTypeList.add(dataTypeVsnTo);
                     break;
                 }

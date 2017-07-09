@@ -64,6 +64,7 @@ public class DataTypeFromSensorValueSyncSchedule {
                         dataTypeVsnTo.setUsedBy(0);
                         this.dataTypeRepository.insert(dataTypeVsnTo);
                         log.info(String.format("DataType created (%s, %s, %s, %s)", dataTypeVsnTo.getDisplayName(), dataTypeVsnTo.getType(), dataTypeVsnTo.getUnit(), dataTypeVsnTo.getSymbol()));
+                        dataTypeVsnToList = this.dataTypeRepository.getAll();
                     } else {
                         found = false;
                     }

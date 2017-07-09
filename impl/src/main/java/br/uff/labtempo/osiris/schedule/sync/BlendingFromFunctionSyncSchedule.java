@@ -90,6 +90,7 @@ public class BlendingFromFunctionSyncSchedule {
                                 .build();
                         URI uri = this.blendingService.createByComposite(blendingRequest);
                         log.info(String.format("Blending sensor created [%s] based on composite %s with datatype %s.", uri.getPath(), compositeVsnTo.getId(), functionData.getDataTypeId()));
+                        blendingVsnToList = this.blendingRepository.getAll();
                     }
                 }
             }

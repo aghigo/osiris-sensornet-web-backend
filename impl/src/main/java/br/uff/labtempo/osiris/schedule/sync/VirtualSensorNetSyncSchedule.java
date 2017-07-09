@@ -39,7 +39,7 @@ public class VirtualSensorNetSyncSchedule {
     @Autowired
     private FunctionModuleThreadSyncSchedule functionModuleThreadSyncSchedule;
 
-    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/20 * * * * ?}")
+    @Scheduled(cron = "${sensornet.schedule.sync.link.cron:*/3 * * * * ?}")
     public void synchronizeVirtualSensorNet() throws Exception {
         this.dataTypeFromSensorValueSyncSchedule.createDataTypesFromSensorValues();
         this.linkFromSensorSyncSchedule.createLinkSensorsFromSensorNetSensors();
