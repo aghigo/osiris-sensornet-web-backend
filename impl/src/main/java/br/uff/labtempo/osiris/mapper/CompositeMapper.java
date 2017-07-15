@@ -6,6 +6,7 @@ import br.uff.labtempo.osiris.to.common.data.FieldTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +34,11 @@ public class CompositeMapper {
         for(Long fieldId : compositeRequest.getFieldIds()) {
             compositeVsnTo.bindToField(fieldId);
         }
-        compositeVsnTo.setLabel(compositeRequest.getLabel());
+        if(compositeRequest.getLabel() == null) {
+            compositeVsnTo.setLabel("composite " + new Date());
+        } else {
+            compositeVsnTo.setLabel(compositeRequest.getLabel());
+        }
         return compositeVsnTo;
     }
 

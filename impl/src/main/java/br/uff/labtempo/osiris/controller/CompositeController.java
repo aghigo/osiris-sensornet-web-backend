@@ -3,7 +3,9 @@ package br.uff.labtempo.osiris.controller;
 import br.uff.labtempo.omcp.common.exceptions.AbstractRequestException;
 import br.uff.labtempo.osiris.model.request.CompositeRequest;
 import br.uff.labtempo.osiris.model.response.CompositeResponse;
+import br.uff.labtempo.osiris.model.response.ErrorResponse;
 import br.uff.labtempo.osiris.service.CompositeService;
+import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -49,9 +51,11 @@ public class CompositeController {
                 return ResponseEntity.ok(compositeResponseList);
             }
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -66,9 +70,11 @@ public class CompositeController {
             URI uri = this.compositeService.create(compositeRequest);
             return ResponseEntity.created(uri).build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -92,9 +98,11 @@ public class CompositeController {
             CompositeResponse compositeResponse = this.compositeService.getById(compositeId);
             return ResponseEntity.ok(compositeResponse);
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -110,9 +118,11 @@ public class CompositeController {
             this.compositeService.update(compositeId, compositeRequest);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -127,9 +137,11 @@ public class CompositeController {
             this.compositeService.delete(compositeId);
             return ResponseEntity.ok().build();
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -152,9 +164,11 @@ public class CompositeController {
         try {
             return ResponseEntity.ok(this.compositeService.getRandom());
         } catch (AbstractRequestException e) {
-            return ResponseEntity.status(e.getStatusCode().toCode()).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(e.getStatusCode().toCode()).body(errorResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            ErrorResponse errorResponse = OmcpUtil.formatErrorResponse(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

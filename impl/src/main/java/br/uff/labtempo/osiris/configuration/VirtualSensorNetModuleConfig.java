@@ -36,7 +36,7 @@ public class VirtualSensorNetModuleConfig {
     @Value("${virtualsensornet.uri.links:omcp://virtualsensornet.osiris/link/}")
     private String linksUri;
 
-    @Value("${virtualsensornet.uri.linkId:omcp://virtualsensornet.osiris/link/%1$s/}")
+    @Value("${virtualsensornet.uri.linkId:omcp://virtualsensornet.osiris/link/%1$s}")
     private String linkIdUri;
 
     @Value("${virtualsensornet.uri.composites:omcp://virtualsensornet.osiris/composite}")

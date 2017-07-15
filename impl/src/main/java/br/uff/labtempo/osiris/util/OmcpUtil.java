@@ -50,19 +50,25 @@ public class OmcpUtil {
     public static void handleOmcpResponse(Response response) throws AbstractRequestException {
         switch(response.getStatusCode()) {
             case NOT_FOUND:
-                throw new NotFoundException();
+                throw new NotFoundException(response.getErrorMessage());
             case NOT_IMPLEMENTED:
-                throw new NotImplementedException();
+                throw new NotImplementedException(response.getErrorMessage());
             case REQUEST_TIMEOUT:
-                throw new RequestTimeoutException();
+                throw new RequestTimeoutException(response.getErrorMessage());
             case INTERNAL_SERVER_ERROR:
-                throw new InternalServerErrorException();
+                throw new InternalServerErrorException(response.getErrorMessage());
             case BAD_REQUEST:
-                throw new BadRequestException();
+                throw new BadRequestException(response.getErrorMessage());
             case FORBIDDEN:
-                throw new ForbiddenException();
+                throw new ForbiddenException(response.getErrorMessage());
             case METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException();
+                throw new MethodNotAllowedException(response.getErrorMessage());
+            case OK:
+                break;
+            case CREATED:
+                break;
+            default:
+                throw new InternalServerErrorException(response.getErrorMessage());
         }
     }
 

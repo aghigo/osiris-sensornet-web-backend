@@ -55,6 +55,8 @@ public class CollectorModuleMockSchedule {
     private NetworkCoTo networkCoTo;
     private CollectorCoTo collectorCoTo;
 
+    private long[] sensorValuesArray = new long[]{1, 2, 3};
+
     @Autowired
     private SensorGenerator sensorGenerator;
 
@@ -149,7 +151,8 @@ public class CollectorModuleMockSchedule {
     }
 
     private long randomNumber() {
-        return (long) Math.abs(this.random.nextInt(999) + 1);
+        int p = (int) (Math.random() * this.sensorValuesArray.length);
+        return this.sensorValuesArray[p];
     }
 
 }

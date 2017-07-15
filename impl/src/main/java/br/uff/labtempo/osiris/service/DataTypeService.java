@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -65,7 +67,10 @@ public class DataTypeService {
      * @throws AbstractRequestException
      */
     public List<DataTypeResponse> getAll() throws AbstractClientRuntimeException, AbstractRequestException {
-        return DataTypeMapper.vsnToToResponse(this.dataTypeRepository.getAll());
+        List<DataTypeVsnTo> dataTypeVsnToList = this.dataTypeRepository.getAll();
+        this.sortById(dataTypeVsnToList);
+        List<DataTypeResponse> dataTypeResponseList = DataTypeMapper.vsnToToResponse(dataTypeVsnToList);
+        return dataTypeResponseList;
     }
 
     /**
@@ -121,5 +126,20 @@ public class DataTypeService {
             }
         }
         return appropiateDataTypeList;
+    }
+
+    private void sortById(List<DataTypeVsnTo> unsortedList) {
+        Comparator<DataTypeVsnTo> comparator = (o1, o2) -> {
+            long id1 = o1.getId();
+            long id2 = o2.getId();
+            if(id1 < id2) {
+                return -1;
+            }
+            if(id2 > id1) {
+                return 1;
+            }
+            return 0;
+        };
+        Collections.sort(unsortedList, comparator);
     }
 }
