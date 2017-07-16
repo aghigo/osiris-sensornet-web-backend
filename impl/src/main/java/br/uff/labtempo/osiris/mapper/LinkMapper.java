@@ -40,6 +40,15 @@ public class LinkMapper {
         return linkVsnTo;
     }
 
+    public static LinkVsnTo requestToVsnTo(long id, LinkRequest linkRequest) {
+        LinkVsnTo linkVsnTo = new LinkVsnTo(id, linkRequest.getLabel(), linkRequest.getSensorId(), linkRequest.getCollectorId(), linkRequest.getNetworkId());
+        Map<String, Long> fields = linkRequest.getFields();
+        for(String fieldName : fields.keySet()) {
+            linkVsnTo.createField(fieldName, fields.get(fieldName));
+        }
+        return linkVsnTo;
+    }
+
     /**
      * Converts a List of LinkRequest to a List of LinkVsnTo
      * @see LinkRequest

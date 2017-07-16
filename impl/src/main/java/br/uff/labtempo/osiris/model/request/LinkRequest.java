@@ -15,6 +15,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class LinkRequest {
 
+    @NotNull @NotEmpty
     private String label;
 
     @NotNull @NotEmpty

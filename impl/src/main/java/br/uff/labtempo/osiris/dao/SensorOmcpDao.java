@@ -13,9 +13,7 @@ import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Component("sensorOmcpDao")
 public class SensorOmcpDao implements SensorRepository {
@@ -58,6 +56,7 @@ public class SensorOmcpDao implements SensorRepository {
         OmcpUtil.handleOmcpResponse(response);
         SensorSnTo[] sensorSnToArray = response.getContent(SensorSnTo[].class);
         List<SensorSnTo> sensorSnToList = Arrays.asList(sensorSnToArray);
+        this.sortById(sensorSnToList);
         return sensorSnToList;
     }
 
@@ -74,6 +73,7 @@ public class SensorOmcpDao implements SensorRepository {
         OmcpUtil.handleOmcpResponse(response);
         SensorSnTo[] sensorSnToArray = response.getContent(SensorSnTo[].class);
         List<SensorSnTo> sensorSnToList = Arrays.asList(sensorSnToArray);
+        this.sortById(sensorSnToList);
         return sensorSnToList;
     }
 
@@ -83,5 +83,15 @@ public class SensorOmcpDao implements SensorRepository {
         String uri = String.format(this.sensorNetModuleConfig.getNetworkIdCollectorIdSensorIdUri(), networkId, collectorId, sensorId);
         Response response = omcpClient.doDelete(uri);
         OmcpUtil.handleOmcpResponse(response);
+    }
+
+    public void sortById(List<SensorSnTo> sensorSnToList) {
+        Comparator<SensorSnTo> comparator = new Comparator<SensorSnTo>() {
+            @Override
+            public int compare(SensorSnTo o1, SensorSnTo o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        };
+        Collections.sort(sensorSnToList, comparator);
     }
 }

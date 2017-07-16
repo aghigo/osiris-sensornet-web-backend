@@ -66,7 +66,7 @@ public class LinkService {
      * @return LinkResponse
      * @throws AbstractRequestException
      */
-    public LinkResponse getById(String id) throws AbstractRequestException {
+    public LinkResponse getById(long id) throws AbstractRequestException {
         LinkVsnTo linkVsnTo = this.linkRepository.getById(id);
         LinkResponse linkResponse = LinkMapper.vsnToToResponse(linkVsnTo);
         return linkResponse;
@@ -110,7 +110,7 @@ public class LinkService {
      * @param linkRequest
      * @throws AbstractRequestException
      */
-    public void update(String id, LinkRequest linkRequest) throws AbstractRequestException {
+    public void update(long id, LinkRequest linkRequest) throws AbstractRequestException, URISyntaxException {
         String networkId = linkRequest.getNetworkId();
         String collectorId = linkRequest.getCollectorId();
         String sensorId = linkRequest.getSensorId();
@@ -119,8 +119,9 @@ public class LinkService {
             throw new BadRequestException("Failed to create Link sensor: Invalid (networkId, collectorId, sensorId) association.");
         }
 
-        LinkVsnTo linkVsnTo = LinkMapper.requestToVsnTo(linkRequest);
-        this.linkRepository.update(id, linkVsnTo);
+        this.delete(id);
+        LinkVsnTo linkVsnTo = LinkMapper.requestToVsnTo(id, linkRequest);
+        this.linkRepository.save(linkVsnTo);
     }
 
     /**
@@ -128,7 +129,7 @@ public class LinkService {
      * @param id
      * @throws AbstractRequestException
      */
-    public void delete(String id) throws AbstractRequestException {
+    public void delete(long id) throws AbstractRequestException {
         this.linkRepository.delete(id);
     }
 

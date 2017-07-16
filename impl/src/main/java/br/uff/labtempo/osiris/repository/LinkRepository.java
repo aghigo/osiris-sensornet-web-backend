@@ -18,10 +18,10 @@ import java.util.List;
  * @version 1.0
  */
 public interface LinkRepository {
-    LinkVsnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException;
+    LinkVsnTo getById(long id) throws AbstractRequestException, AbstractClientRuntimeException;
     List<LinkVsnTo> getAll() throws AbstractRequestException, AbstractClientRuntimeException;
     URI save(LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException, URISyntaxException;
-    void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException;
-    void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException;
+    void update(long id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException;
+    void delete(long id) throws AbstractRequestException, AbstractClientRuntimeException;
     List<FieldTo> getAllFields() throws AbstractRequestException, AbstractClientRuntimeException;
 }

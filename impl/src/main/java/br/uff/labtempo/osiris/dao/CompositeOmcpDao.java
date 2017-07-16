@@ -11,15 +11,14 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.CompositeRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * DAO class for Composite sensor CRUD on VirtualSensorNet module
@@ -73,6 +72,7 @@ public class CompositeOmcpDao implements CompositeRepository {
             OmcpUtil.handleOmcpResponse(response);
             CompositeVsnTo[] compositeVsnToArray = response.getContent(CompositeVsnTo[].class);
             List<CompositeVsnTo> compositeVsnToList = Arrays.asList(compositeVsnToArray);
+            this.sortById(compositeVsnToList);
             return compositeVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;
@@ -138,5 +138,22 @@ public class CompositeOmcpDao implements CompositeRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
+    }
+
+    public void sortById(List<CompositeVsnTo> compositeVsnToList) {
+        Comparator<CompositeVsnTo> comparator = new Comparator<CompositeVsnTo>() {
+            @Override
+            public int compare(CompositeVsnTo o1, CompositeVsnTo o2) {
+                long id1 = o1.getId();
+                long id2 = o2.getId();
+                if(id1 < id2) {
+                    return -1;
+                } else if(id1 > id2) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+        Collections.sort(compositeVsnToList, comparator);
     }
 }

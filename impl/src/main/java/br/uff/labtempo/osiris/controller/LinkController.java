@@ -140,7 +140,7 @@ public class LinkController {
     }
 
         @RequestMapping(value = "/links/{linkId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getById(@PathVariable String linkId) {
+    public ResponseEntity<?> getById(@PathVariable long linkId) {
         LinkResponse linkResponse;
         try {
             linkResponse = this.linkService.getById(linkId);
@@ -161,7 +161,7 @@ public class LinkController {
      * @return
      */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> put(@PathVariable String linkId, @RequestBody @Valid LinkRequest linkRequest) {
+    public ResponseEntity<?> put(@PathVariable long linkId, @RequestBody @Valid LinkRequest linkRequest) {
         try {
             this.linkService.update(linkId, linkRequest);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -180,7 +180,7 @@ public class LinkController {
      * @return
      */
     @RequestMapping(value = "/links/{linkId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable String linkId) {
+    public ResponseEntity<?> delete(@PathVariable long linkId) {
         try {
             this.linkService.delete(linkId);
             return ResponseEntity.status(HttpStatus.OK).build();

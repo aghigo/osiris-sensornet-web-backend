@@ -9,6 +9,7 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.LinkRepository;
 import br.uff.labtempo.osiris.to.common.data.FieldTo;
+import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.LinkVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * DAO class for Link sensor CRUD on VirtualSensorNet module
@@ -43,7 +42,7 @@ public class LinkOmcpDao implements LinkRepository {
      * @throws AbstractClientRuntimeException
      */
     @Override
-    public LinkVsnTo getById(String id) throws AbstractRequestException, AbstractClientRuntimeException {
+    public LinkVsnTo getById(long id) throws AbstractRequestException, AbstractClientRuntimeException {
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         try {
             OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
@@ -76,6 +75,7 @@ public class LinkOmcpDao implements LinkRepository {
             OmcpUtil.handleOmcpResponse(response);
             LinkVsnTo[] linkVsnToArray = response.getContent(LinkVsnTo[].class);
             List<LinkVsnTo> linkVsnToList = Arrays.asList(linkVsnToArray);
+            this.sortById(linkVsnToList);
             return linkVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;
@@ -113,7 +113,7 @@ public class LinkOmcpDao implements LinkRepository {
      * @throws AbstractClientRuntimeException
      */
     @Override
-    public void update(String id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
+    public void update(long id, LinkVsnTo linkVsnTo) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
@@ -133,7 +133,7 @@ public class LinkOmcpDao implements LinkRepository {
      * @throws AbstractClientRuntimeException
      */
     @Override
-    public void delete(String id) throws AbstractRequestException, AbstractClientRuntimeException {
+    public void delete(long id) throws AbstractRequestException, AbstractClientRuntimeException {
         OmcpClient omcpClient = this.osirisConnectionFactory.getConnection();
         String uri = String.format(this.virtualSensorNetModuleConfig.getLinkIdUri(), id);
         Response response;
@@ -162,5 +162,22 @@ public class LinkOmcpDao implements LinkRepository {
             fieldToList.addAll(linkVsnTo.getFields());
         }
         return fieldToList;
+    }
+
+    public void sortById(List<LinkVsnTo> linkVsnToList) {
+        Comparator<LinkVsnTo> comparator = new Comparator<LinkVsnTo>() {
+            @Override
+            public int compare(LinkVsnTo o1, LinkVsnTo o2) {
+                long id1 = o1.getId();
+                long id2 = o2.getId();
+                if(id1 < id2) {
+                    return -1;
+                } else if(id1 > id2) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+        Collections.sort(linkVsnToList, comparator);
     }
 }

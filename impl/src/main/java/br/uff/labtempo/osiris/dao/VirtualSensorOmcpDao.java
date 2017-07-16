@@ -8,14 +8,13 @@ import br.uff.labtempo.omcp.common.exceptions.client.AbstractClientRuntimeExcept
 import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.VirtualSensorRepository;
+import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
 import br.uff.labtempo.osiris.to.virtualsensornet.VirtualSensorVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * DAO class for VirtualSensor (vsensor) CRUD on VirtualSensorNet module
@@ -71,9 +70,28 @@ public class VirtualSensorOmcpDao implements VirtualSensorRepository {
             OmcpUtil.handleOmcpResponse(response);
             VirtualSensorVsnTo[] virtualSensorVsnToArray = response.getContent(VirtualSensorVsnTo[].class);
             List<VirtualSensorVsnTo> virtualSensorVsnToList = Arrays.asList(virtualSensorVsnToArray);
+            this.sortById(virtualSensorVsnToList);
             return virtualSensorVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
     }
+
+    public void sortById(List<VirtualSensorVsnTo> virtualSensorVsnToList) {
+        Comparator<VirtualSensorVsnTo> comparator = new Comparator<VirtualSensorVsnTo>() {
+            @Override
+            public int compare(VirtualSensorVsnTo o1, VirtualSensorVsnTo o2) {
+                long id1 = o1.getId();
+                long id2 = o2.getId();
+                if(id1 < id2) {
+                    return -1;
+                } else if(id1 > id2) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+        Collections.sort(virtualSensorVsnToList, comparator);
+    }
+
 }

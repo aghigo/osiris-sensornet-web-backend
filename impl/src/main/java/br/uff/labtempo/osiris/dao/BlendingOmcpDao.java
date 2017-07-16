@@ -9,15 +9,14 @@ import br.uff.labtempo.osiris.configuration.VirtualSensorNetModuleConfig;
 import br.uff.labtempo.osiris.factory.connection.OsirisConnectionFactory;
 import br.uff.labtempo.osiris.repository.BlendingRepository;
 import br.uff.labtempo.osiris.to.virtualsensornet.BlendingVsnTo;
+import br.uff.labtempo.osiris.to.virtualsensornet.CompositeVsnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * DAO class for VirtualSensorNet Blending Sensors CRUD with OMCP protocol using the OSIRIS API library
@@ -53,6 +52,7 @@ public class BlendingOmcpDao implements BlendingRepository {
             OmcpUtil.handleOmcpResponse(response);
             BlendingVsnTo[] blendingVsnToArray = response.getContent(BlendingVsnTo[].class);
             List<BlendingVsnTo> blendingVsnToList = Arrays.asList(blendingVsnToArray);
+            this.sortById(blendingVsnToList);
             return blendingVsnToList;
         } catch (AbstractClientRuntimeException e) {
             throw e;
@@ -141,5 +141,22 @@ public class BlendingOmcpDao implements BlendingRepository {
         } catch (AbstractClientRuntimeException e) {
             throw e;
         }
+    }
+
+    public void sortById(List<BlendingVsnTo> blendingVsnToList) {
+        Comparator<BlendingVsnTo> comparator = new Comparator<BlendingVsnTo>() {
+            @Override
+            public int compare(BlendingVsnTo o1, BlendingVsnTo o2) {
+                long id1 = o1.getId();
+                long id2 = o2.getId();
+                if(id1 < id2) {
+                    return -1;
+                } else if(id1 > id2) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+        Collections.sort(blendingVsnToList, comparator);
     }
 }
