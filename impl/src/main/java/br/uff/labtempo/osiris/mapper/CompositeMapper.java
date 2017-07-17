@@ -32,12 +32,7 @@ public class CompositeMapper {
     public static CompositeVsnTo requestToVsnTo(CompositeRequest compositeRequest) {
         CompositeVsnTo compositeVsnTo = new CompositeVsnTo();
         for(Long fieldId : compositeRequest.getFieldIds()) {
-            compositeVsnTo.bindToField(fieldId);
-        }
-        if(compositeRequest.getLabel() == null) {
-            compositeVsnTo.setLabel("composite " + new Date());
-        } else {
-            compositeVsnTo.setLabel(compositeRequest.getLabel());
+            compositeVsnTo.bindToField(fieldId.longValue());
         }
         return compositeVsnTo;
     }

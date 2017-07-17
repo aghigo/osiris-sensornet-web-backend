@@ -22,9 +22,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompositeRequest {
-
-    private String label;
-
     /**
      * List of Field ids to be binded with CompositeVsnTo.bindToField method
      * A field contains its unique long id and related DataType id
