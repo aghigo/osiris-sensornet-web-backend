@@ -27,8 +27,8 @@ This is part of a Undergraduate Thesis for the [Bachelor of Computer Information
 
 # Authors
 
-* [Andre Ghigo](https://github.com/aghigo)
-* [Felippe Mauricio](https://github.com/felippemauricio)
+* [Andre Ghigo](https://github.com/aghigo), back-end developer (contributed by developing the web-interface back-end API)
+* [Felippe Mauricio](https://github.com/felippemauricio), front-end developer (contributed by developing the web-interface front-end app)
 
 # Credits
 
