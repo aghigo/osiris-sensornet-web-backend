@@ -23,7 +23,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.soap.Addressing;
 import java.net.URI;
 import java.net.URISyntaxException;
 

@@ -8,7 +8,6 @@ import br.uff.labtempo.osiris.service.SensorService;
 import br.uff.labtempo.osiris.to.collector.SensorCoTo;
 import br.uff.labtempo.osiris.to.sensornet.SensorSnTo;
 import br.uff.labtempo.osiris.util.OmcpUtil;
-import com.sun.scenario.effect.impl.sw.java.JSWBlend_EXCLUSIONPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;

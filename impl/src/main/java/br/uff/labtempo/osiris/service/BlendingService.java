@@ -20,7 +20,6 @@ import br.uff.labtempo.osiris.to.virtualsensornet.*;
 import br.uff.labtempo.osiris.util.OmcpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.awt.image.ImageWatched;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -9,7 +9,6 @@ import br.uff.labtempo.osiris.to.virtualsensornet.FunctionVsnTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.ServiceMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
